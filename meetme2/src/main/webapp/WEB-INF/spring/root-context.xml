@@ -20,7 +20,7 @@
 		id="sqlSessionFactory">
 		<property ref="dataSource" name="dataSource" />
 		<property name="configLocation"
-			value="classpath:util/SqlMapConfig2.xml" />
+			value="classpath:util/SqlMapConfig.xml" />
 	</bean>
 
 	
