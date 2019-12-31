@@ -11,4 +11,4 @@
 		<mapper resource="sql/user.xml"/>
 		
 	</mappers>
-</configuration>
+</configuration> 

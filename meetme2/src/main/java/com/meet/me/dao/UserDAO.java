@@ -20,7 +20,7 @@ public class UserDAO {
 	
 	public User isId(String user_id) {
 		return sqlSession.selectOne("Users.idcheck", user_id);
-	}
+	} 
 
 	public List<User> getSearchList(Map<String, Object> map) {
 		return sqlSession.selectList("Users.getSearchList", map);

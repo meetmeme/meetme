@@ -30,7 +30,7 @@ public class UserController {
 	public String login() {
 		return "main/main";
 	}
-	
+	 
 	//로그인 폼이동
 	@RequestMapping(value = "/login.net", method = RequestMethod.GET)
 	public ModelAndView login(ModelAndView mv, @CookieValue(value="saveid", required=false) Cookie readCookie) {

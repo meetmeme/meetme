@@ -14,3 +14,4 @@ public interface UserService {
 	public List<User> getSearchList(int index, String search_word, int page, int limit);
 	public int getSearchListCount(int index, String search_word);
 }
+ 

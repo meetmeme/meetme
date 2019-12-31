@@ -148,7 +148,7 @@
 									<span class="number">14</span>
 									<span class="text">Jan</span>
 								</div>
-							</div>
+							</div> 
 							<h3 class="articleTitle"><a href="">sed do eiusmod tempor</a></h3>
 							<p class="articleDesc">
 								Adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.

@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int insert(User u) {
 		return dao.insert(u);
-	}
+	} 
 	
 	@Override
 	public int isId(String user_id, String user_pass) {

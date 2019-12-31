@@ -15,4 +15,4 @@ CREATE TABLE MM_USER(
 drop table mm_user CASCADE CONSTRAINTS;
 
 insert into mm_user values (1, 'admin', '1234','관리자','admin@meetme.com',
-'여','25','서울시','');
+'여','25','서울시',''); 
