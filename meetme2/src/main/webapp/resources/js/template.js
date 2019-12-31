@@ -53,6 +53,7 @@ jQuery(function($) {
 	$("a.nino-prettyPhoto").prettyPhoto();
 	
 	/* =============== SMOOTH SCROOL EFFECT =============== */
+	/*
 	$('#nino-navbar ul li a').on('click',function (e) {
 	    e.preventDefault();
 	    var target = this.hash,
@@ -64,6 +65,7 @@ jQuery(function($) {
 	        window.location.hash = target;
 	    });
 	});
+	*/
 	
 	/* =============== SHOW / HIDE GO TO TOP =============== */
 	/* Check to see if the window is top if not then display go top button */

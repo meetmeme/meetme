@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Users">
+	<select resultType="User" parameterType="String" id="idcheck">
+		select * from mm_user where user_id = #{user_id}
+	</select>
+	
+	<insert parameterType="user" id="insert">
+		insert into mm_user 
+		values(nvl(max(user_num),0)+1, #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_image})
+	</insert>
+	
+	<select id="getSearchList" parameterType="map" resultType="user">
+		select *
+		from (select rownum rnum, b.*
+			from (select * from mm_user
+				where user_id != 'admin'
+				<if test="search_field!=null">
+					and
+					<choose>
+						<when test="search_field=='user_id'">user_id</when>
+						<when test="search_field=='user_name'">user_name</when>
+						<when test="search_field=='user_age'">user_age</when>
+						<when test="search_field=='user_gender'">user_gender</when>
+						<when test="search_field=='user_city'">user_city</when>
+					</choose>
+					like #{search_word}
+				</if>
+				order by user_id)b
+		)
+		where rnum &gt;=#{start} and rnum &lt; = #{end}
+	</select>
+	
+	<select id="searchcount" parameterType="map" resultType="int">
+		select count(*) from mm_user
+		where user_id!='admin'
+		<if test="search_field!=null">
+			and
+			<choose>
+				<when test="search_field=='user_id'">user_id</when>
+				<when test="search_field=='user_name'">user_name</when>
+				<when test="search_field=='user_age'">user_age</when>
+				<when test="search_field=='user_gender'">user_gender</when>
+				<when test="search_field=='user_city'">user_city</when>
+			</choose>
+			like #{search_word}
+		</if>
+	</select>
+	
+	<update id="update" parameterType="user">
+		update mm_user
+		set 
+			user_pass=#{user_pass},
+			user_name=#{user_name},
+			user_age=#{user_age},
+			user_gender=#{user_gender},
+			user_email=#{user_email},
+			user_city=#{user_city},
+			user_image=#{user_image}
+		where user_id=#{user_id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from mm_user where user_id=#{user_id}
+	</delete>
+	
+</mapper>
+
+
