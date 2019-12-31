@@ -4,10 +4,11 @@
 
 <configuration>    
 	<typeAliases>
-		<typeAlias alias="test" type="com.meet.me.domain.Test"/>
+		<typeAlias alias="user" type="com.meet.me.domain.User"/>
 	</typeAliases>
 	
 	<mappers>
-		<mapper resource="sql/test.xml"/>
+		<mapper resource="sql/user.xml"/>
+		
 	</mappers>
-</configuration>
+</configuration> 
