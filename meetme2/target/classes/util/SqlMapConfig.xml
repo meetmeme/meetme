@@ -2,13 +2,16 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
  "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
-<configuration>    
+<configuration>
 	<typeAliases>
 		<typeAlias alias="user" type="com.meet.me.domain.User"/>
+		<typeAlias alias="hashtag" type="com.meet.me.domain.Hashtag"/>
+		<typeAlias alias="event" type="com.meet.me.domain.Event"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="sql/user.xml"/>
-		
+		<mapper resource="sql/hashtag.xml"/>
+		<mapper resource="sql/event.xml"/>
 	</mappers>
 </configuration> 
