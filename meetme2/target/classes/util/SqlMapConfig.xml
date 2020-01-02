@@ -5,10 +5,13 @@
 <configuration>    
 	<typeAliases>
 		<typeAlias alias="user" type="com.meet.me.domain.User"/>
+		<typeAlias alias="category" type="com.meet.me.domain.Category"/>
+		<typeAlias alias="user_interests" type="com.meet.me.domain.User_interests"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="sql/user.xml"/>
-		
+		<mapper resource="sql/category.xml"/>
+		<mapper resource="sql/user_interests.xml"/>
 	</mappers>
-</configuration> 
+</configuration>

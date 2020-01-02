@@ -17,10 +17,10 @@ $(document).ready(function(){
 			$("#message").text('');
 			return false;
 		}
-		if(!$.isNumeric($("input[name='age']").val())){
+		if(!$.isNumeric($("input[name='user_age']").val())){
 			alert('나이는 숫자를 입력하세요.');
-			$("input[name='age']").val('');
-			$("input[name='age']").focus();
+			$("input[name='user_age']").val('');
+			$("input[name='user_age']").focus();
 			return false;
 		}
 		
@@ -35,9 +35,9 @@ $(document).ready(function(){
 		
 		$("#message").empty();
 		var pattern = /^\w{5,12}$/;
-		var id= $("input[name='user_id']").val();
+		var user_id= $("input[name='user_id']").val();
 		
-		if(!pattern.test(id)){
+		if(!pattern.test(user_id)){
 			$("#message").html("영문자 숫자 _로 5~12자 가능합니다.");
 			$("#message").css('color','red');
 			checkid=false;
@@ -87,43 +87,73 @@ $(document).ready(function(){
 });
 </script>
 <title>회원가입</title>
+<style>
+	input[name='user_id']{
+		width : 40%;
+	}
+	input[name='user_age']{
+		width : 40%;
+	}
+</style>
 </head>
 <body>
+<div class="container">
 	<form name="joinform" action="joinProcess.net" method="post">
 		<h1>회원가입 페이지</h1>
 		<hr>
+		
+		<div class="form-group">
 		<b>아이디</b>
-   		<input type=text name=user_id  placeholder="Enter Id"  maxLength=12 required>
+   		<input class="form-control" type="text" name="user_id"  placeholder="Enter Id"  maxLength=12 required>
    		<span id="message"></span>
+   		</div>
    		
+   		<div class="form-group">
+   		<b>나이</b>
+   		<input class="form-control" type="text" name="user_age" maxlength=2 placeholder="Enter age" required>
+   		</div>
+   		
+   		<br>
+   		<div class="form-group">
  		<b>비밀번호</b>
-   		<input type=password name=user_pass placeholder="Enter password" required>
+   		<input class="form-control" type="password" name="user_pass" placeholder="Enter password" required>
+   		</div>
    		
+   		<div class="form-group">
+   		<b>지역</b>
+   		<input class="form-control" type="text" name="user_city" placeholder="Enter city" maxlength=30>
+   		</div>
+   		
+   		<br>
+   		<div class="form-group">
    		<b>이름</b>
-   		<input type=text name=user_name placeholder="Enter name" maxlength=15 required>
+   		<input class="form-control" type="text" name="user_name" placeholder="Enter name" maxlength=15 required>
+   		</div>
    		
+   		<div class="form-group">
+	   		<b>사진</b>
+	   		<input class="form-control" type="text" name="user_image">
+        </div>
+        
+   		<br>
+   		<div class="form-group">
    		<b>이메일 주소</b>
-         <input type=text name=user_email placeholder="Enter email" required><span id="email_message"></span>
-   		
+         <input class="form-control" type="text" name="user_email" placeholder="Enter email" required><span id="email_message"></span>
+   		</div>
+   		<br>
+   		<div class="form-group">
    		<b>성별</b>
    		<div>
-             <input type=radio name=user_gender value=남  checked><span>남자</span>
-             <input type=radio name=user_gender value=여 ><span>여자</span>
+             <input type="radio" name="user_gender" value="남 " checked><span>남자</span>
+             <input type="radio" name="user_gender" value="여" ><span>여자</span>
          </div>
-   		
-   		<b>나이</b>
-   		<input type=text name=user_age maxlength=2 placeholder="Enter age" required>
-   		
-   		<b>지역</b>
-   		<input type=text name=user_city placeholder="Enter city" maxlength=30>
-   		
-   		<b>사진</b>
-   		<input type=text name=user_image>
+   		</div>
          
-         <div class="clearfix">
-         	<button type=submit class=submitbtn>회원가입</button>
-         	<button type=reset class=cancelbtn>다시작성</button>
+         <div class="clearfix form-group">
+         	<button type="submit" class="btn btn-primary submitbtn">회원가입</button>
+         	<button type="reset" class="btn btn-danger cancelbtn">다시작성</button>
          </div>                
 	</form>
+	</div>
 </body>
 </html>
