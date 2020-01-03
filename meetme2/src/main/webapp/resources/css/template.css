@@ -957,18 +957,13 @@ footer .nino-copyright {
 	font-family: 'Montserrat', sans-serif;
 	}
 	
->>>>>>> Stashed changes
 #nino-searchForm {
 	position: fixed;
 	left: 0;
 	top: -100%;
 	width: 100%;
 	height: 100%;
-<<<<<<< Updated upstream
-	background: rgba(0,0,0,.9);
-=======
 	background: rgba(0,0,0,.8);
->>>>>>> Stashed changes
 	padding: 20px;
 	z-index: 10;
 	opacity: 1;

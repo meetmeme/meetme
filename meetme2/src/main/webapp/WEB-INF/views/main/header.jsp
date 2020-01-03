@@ -125,9 +125,6 @@
 
 		</section>
 	</div>
-</header>
-<!--/#header-->
-
 <!-- Search Form - Display when click magnify icon in menu
     ================================================== -->
 <div id="nino-searchForm">
@@ -170,6 +167,9 @@
 	<i class="mdi mdi-close nino-close"></i>
 </div>
 <!--/#nino-searchForm-->
+</header>
+<!--/#header-->
+
 
 <script>
 	$(function() {
