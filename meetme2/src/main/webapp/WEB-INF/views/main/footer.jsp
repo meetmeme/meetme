@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+
+<!DOCTYPE html>
+<html lang="en">
+
+
     <!-- Footer
     ================================================== -->
     <footer id="footer">
@@ -8,7 +13,7 @@
         		<div class="col-md-4">
         			<div class="colInfo">
 	        			<div class="footerLogo">
-	        				<a href="#" >Meet Me!</a>	
+	        				<a href="#" >MoGo</a>	
 	        			</div>
 	        			<p>
 	        				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -21,6 +26,13 @@
         </div>
     </footer><!--/#footer-->
 
+    <!-- Search Form - Display when click magnify icon in menu
+    ================================================== -->
+    <form action="" id="nino-searchForm">
+    	<input type="text" placeholder="Search..." class="form-control nino-searchInput">
+    	<i class="mdi mdi-close nino-close"></i>
+    </form><!--/#nino-searchForm-->
+	
     <!-- Scroll to top
     ================================================== -->
 	<a href="#" id="nino-scrollToTop">Go to Top</a>
@@ -34,3 +46,5 @@
 	<!--[if lt IE 9]>
 	    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
 	<![endif]-->
+		
+</html>

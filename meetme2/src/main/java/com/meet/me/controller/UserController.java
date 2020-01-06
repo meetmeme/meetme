@@ -122,5 +122,6 @@ public class UserController {
 	public String loginout(HttpSession session) {
 		session.invalidate();
 		return "redirect:main.net";
+
 	}
 }

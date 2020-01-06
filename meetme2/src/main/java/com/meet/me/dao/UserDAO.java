@@ -22,6 +22,25 @@ public class UserDAO {
 		return sqlSession.selectOne("Users.idcheck", user_id);
 	} 
 
+	public List<User> getSearchList(Map<String, Object> map) {
+		return sqlSession.selectList("Users.getSearchList", map);
+	}
+	
+	public int getSearchListCount(Map<String, String> map) {
+		return sqlSession.selectOne("Users.searchcount", map);
+	}
+
+	public User user_info(String user_id) {
+		return sqlSession.selectOne("Users.idcheck",user_id);
+	}
+	
+	public int update(User u) {
+		return sqlSession.update("Users.update",u);
+	}
+
+	public int delete(String user_id) {
+		return sqlSession.delete("Users.delete", user_id);
+	}
 	
 	
 }
