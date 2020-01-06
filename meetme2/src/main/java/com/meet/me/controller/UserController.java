@@ -26,11 +26,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(value = "/main.net", method = RequestMethod.GET)
-	public String login() {
-		return "main/main";
-	}
-	 
+	/*
 	//로그인 폼이동
 	@RequestMapping(value = "/login.net", method = RequestMethod.GET)
 	public ModelAndView login(ModelAndView mv, @CookieValue(value="saveid", required=false) Cookie readCookie) {
@@ -39,11 +35,13 @@ public class UserController {
 		}
 		return mv;
 	}
-	
+	*/
+	/*
 	@RequestMapping(value = "/join.net", method = RequestMethod.GET)
 	public String join() {
 		return "user/joinForm";
 	}
+	*/
 	
 	//회원가입폼에서 아이디 검사
 	@RequestMapping(value = "/idcheck.net", method = RequestMethod.GET)
@@ -65,7 +63,7 @@ public class UserController {
 		// 삽입이 된 경우
 		if(result == 1) {
 			out.println("alert('회원 가입을 축하합니다.');");
-			out.println("location.href='login.net';");
+			out.println("location.href='main.index';");
 		}else if(result == -1) {
 			out.println("alert('아이디가 중복되었습니다. 다시 입력하세요');");
 			out.println("history.back()");// 비밀번호를 제외한 다른 데이터는 유지 되어있음
@@ -76,8 +74,8 @@ public class UserController {
 	
 	//로그인 처리
 	@RequestMapping(value = "/loginProcess.net", method = RequestMethod.POST)
-	public String loginProcess(@RequestParam("user_id")String user_id,
-								@RequestParam("user_pass")String user_pass,
+	public String loginProcess(@RequestParam("user_id1")String user_id,
+								@RequestParam("user_pass1")String user_pass,
 								@RequestParam(value="u", defaultValue="") String u,
 								HttpServletRequest request,
 								HttpServletResponse response,
@@ -87,7 +85,7 @@ public class UserController {
 		
 		if(result == 1) {
 			//로그인 성공
-			session.setAttribute("user_id", user_id);
+			session.setAttribute("user_id1", user_id);
 			//"saveid"라는 이름의 쿠키에 id의 값을 저장한 쿠키를 생성합니다.
 			Cookie savecookie = new Cookie("saveid", user_id);
 			if(!u.equals("")) {
@@ -99,7 +97,7 @@ public class UserController {
 			}
 			response.addCookie(savecookie);
 			
-			return "redirect:main.net";
+			return "redirect:main.index";
 		}else {
 			String message = "비밀번호가 일치하지 않습니다.";
 			if(result == -1)
@@ -109,7 +107,7 @@ public class UserController {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");			
 			out.println("alert('" + message + "');");
-			out.println("location.href='login.net';");			
+			out.println("location.href='main.index';");			
 			out.println("</script>");
 			out.close();
 			return null;
@@ -121,7 +119,7 @@ public class UserController {
 	@RequestMapping(value="/logout.net", method=RequestMethod.GET)
 	public String loginout(HttpSession session) {
 		session.invalidate();
-		return "redirect:main.net";
+		return "redirect:main.index";
 
 	}
 }
