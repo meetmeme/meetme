@@ -70,6 +70,7 @@
 								<c:if test="${user_id=='admin'}">
 									<li><a href="#">admin</a></li>
 								</c:if>
+								
 								<c:if test="${!empty user_id}">
 									<li><a href="#" onClick="mh_popup('${user_id}')">myhome</a></li>
 									<li><a href="logout.net">logout</a></li>

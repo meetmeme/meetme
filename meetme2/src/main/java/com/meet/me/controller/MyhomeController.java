@@ -10,5 +10,6 @@ public class MyhomeController {
 	@RequestMapping(value = "/mmain.mh", method = RequestMethod.GET)
 	public String mmain() {
 		return "myhome/mmain";
+		
 	}
 }
