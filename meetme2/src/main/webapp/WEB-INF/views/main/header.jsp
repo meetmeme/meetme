@@ -36,6 +36,7 @@
 	<script type="text/javascript" src="resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script type="text/javascript" src="resources/js/unslider-min.js"></script>
 	<script type="text/javascript" src="resources/js/template.js"></script>
+	<script src="resources/js/myhome.js"></script>
 	
 </head>
 
@@ -70,7 +71,7 @@
 									<li><a href="#">admin</a></li>
 								</c:if>
 								<c:if test="${!empty user_id}">
-									<li><a href="#">myhome</a></li>
+									<li><a href="#" onClick="mh_popup('${user_id}')">myhome</a></li>
 									<li><a href="logout.net">logout</a></li>
 								</c:if>
 							</ul>
