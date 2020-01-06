@@ -51,6 +51,7 @@
 <!-- Header
     ================================================== -->
 <header id="nino-header">
+
 	<div id="nino-headerInner">
 		<nav id="nino-navbar" class="navbar navbar-default" role="navigation">
 			<div class="container">
@@ -72,7 +73,9 @@
 						id="nino-navbar-collapse">
 						<ul class="nav navbar-nav">
 							<c:if test="${empty user_id}">
-								<li><a href="login.net">login</a></li>
+								<li>
+									<a href="login.net"  data-target="#layerpop" data-toggle="modal">login</a><br/>
+								</li>
 								<li><a href="join.net">join</a></li>
 							</c:if>
 							<c:if test="${!empty user_id}">
@@ -104,15 +107,56 @@
 						<span class="nino-subHeading">The real world is calling</span>
 					</h2>
 				</div>
-
 			</div>
-
-
+			
 		</section>
 	</div>
 </header>
+
 <!--/#header-->
 
+<!-- 로그인 모달 -->
+	<div class="modal fade" id="layerpop" >
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <!-- header -->
+	      <div class="modal-header">
+	        <!-- 닫기(x) 버튼 -->
+	        <button type="button" class="close" data-dismiss="modal">×</button>
+	        <!-- header title -->
+	        <h4 class="modal-title">LOGIN</h4>
+	      </div>
+	      <!-- body -->
+	      <div class="modal-body">
+	            <form name="loginform" action="loginProcess.net" method="post">
+					<div class="form-group">
+						<b class="articleDesc">ID</b>
+						<input class="form-control" type="text" name="user_id" placeholder="Enter id" required
+						value="${saveid}">
+						<br>
+					</div>
+					<div class="form-group">
+						<b class="articleDesc">PASSWORD</b>
+						<input class="form-control" type="password" name="user_pass" placeholder="Enter password" required>
+					</div>
+					<div>
+						<input type="checkbox" name="u" class="articleDesc">Remember me
+					</div>
+					<br>
+					<div class="clearfix form-group">
+						<button type="submit" class="btn btn-primary submitbtn">로그인</button>
+						<button type="button" class="btn btn-danger join">회원가입</button>
+					</div>
+				</form>
+	      </div>
+	      <!-- Footer -->
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 <!-- Search Form - Display when click magnify icon in menu
     ================================================== -->
 <form action="" id="nino-searchForm">

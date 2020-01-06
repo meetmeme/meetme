@@ -37,7 +37,6 @@ public class UserController {
 		if(readCookie != null){
 			mv.addObject("saveid", readCookie.getValue());
 		}
-		mv.setViewName("user/loginForm");
 		return mv;
 	}
 	
@@ -122,6 +121,6 @@ public class UserController {
 	@RequestMapping(value="/logout.net", method=RequestMethod.GET)
 	public String loginout(HttpSession session) {
 		session.invalidate();
-		return "redirect:login.net";
+		return "redirect:main.net";
 	}
 }
