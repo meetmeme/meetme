@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -46,7 +47,7 @@
 	src="resources/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script type="text/javascript" src="resources/js/unslider-min.js"></script>
 <script type="text/javascript" src="resources/js/template.js"></script>
-
+<script src="resources/js/myhome.js"></script>
 
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -91,6 +92,10 @@
 							<c:if test="${user_id=='admin'}">
 								<li><a href="#">admin</a></li>
 							</c:if>
+              <c:if test="${!empty user_id}">
+									<li><a href="#" onClick="mh_popup('${user_id}')">myhome</a></li>
+									<li><a href="logout.net">logout</a></li>
+								</c:if>
 							<c:if test="${!empty user_id}">
 								<li><a href="#">Create New Group</a></li>
 								<li><a href="logout.net">logout</a></li>
