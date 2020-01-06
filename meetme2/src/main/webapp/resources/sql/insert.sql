@@ -9,7 +9,7 @@ into  MM_CATEGORY values(7, '사진촬영')
 into  MM_CATEGORY values(8, '음악')
 into  MM_CATEGORY values(9, '언어')
 into  MM_CATEGORY values(10, '춤')
-select * from MM_CATEGORY;
+select * from dual;
 
 insert all
 into  MM_HASHTAG values(1, '야외활동')
@@ -42,4 +42,4 @@ into  MM_HASHTAG values(27, '사진촬영2')
 into  MM_HASHTAG values(28, '음악2')
 into  MM_HASHTAG values(29, '언어2')
 into  MM_HASHTAG values(30, '춤2')
-select * from MM_HASHTAG;
+select * from dual;

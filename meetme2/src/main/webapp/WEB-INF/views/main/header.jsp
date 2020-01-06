@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -92,18 +92,13 @@
 							<c:if test="${user_id=='admin'}">
 								<li><a href="#">admin</a></li>
 							</c:if>
-              <c:if test="${!empty user_id}">
-									<li><a href="#" onClick="mh_popup('${user_id}')">myhome</a></li>
-									<li><a href="logout.net">logout</a></li>
-								</c:if>
-							<c:if test="${!empty user_id}">
+              			<c:if test="${!empty user_id}">
 								<li><a href="#">Create New Group</a></li>
-								<li><a href="logout.net">logout</a></li>
-								<li><img class="header_profilePic img-circle" alt=""
-									src="resources/images/our-blog/img-1.jpg" title="토글 넣을 예정">
+								<li><a id="userMenuBox"><img class="header_profilePic img-circle" alt=""
+									src="resources/images/our-blog/img-1.jpg"></a>
 								</li>
 							</c:if>
-						</ul>
+							</ul>
 					</div>
 					<!-- /.navbar-collapse -->
 					<ul class="nino-iconsGroup nav navbar-nav">
@@ -176,6 +171,17 @@
 <!--/#nino-searchForm-->
 </header>
 <!--/#header-->
+
+<!-- My Menu Box 모달 --> <!-- sohee_010620 -->
+	<div id="menubox" >
+	<ul class="nav navbar-nav">
+		<li><a href="#" class="dropdown-item">MY MINI HOME</a></li>
+		<li><a href="#"	class="dropdown-item">message</a></li>
+		<li><a href="#" class="dropdown-item">send message</a></li>
+		<li><a href="logout.net">logout</a></li>
+	</ul>
+	</div>
+
 <!-- 로그인 모달 -->
 	<div class="modal fade" id="layerpop" >
 	  <div class="modal-dialog">
