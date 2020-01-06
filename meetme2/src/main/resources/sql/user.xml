@@ -6,10 +6,11 @@
 		select * from mm_user where user_id = #{user_id}
 	</select>
 	
-	<insert parameterType="user" id="insert">
+	<insert parameterType="User" id="insert">
 		insert into mm_user 
-		values(nvl(max(user_num),0)+1, #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_image})
+		values((select nvl(max(user_num),0)+1 from mm_user), #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_image})
 	</insert>
+
 	
 	<select id="getSearchList" parameterType="map" resultType="user">
 		select *

@@ -36,11 +36,12 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public int isId(String id) {
-		User u = dao.isId(id);
+	public int isId(String user_id) {
+		User u = dao.isId(user_id);
 		return (u == null) ? -1 : 1; //-1은 아이디가 존재하지 않는 경우
 											//1은 아이디가 존재하는 경우
 	}
+
 
 	@Override
 	public User user_info(String user_id) {

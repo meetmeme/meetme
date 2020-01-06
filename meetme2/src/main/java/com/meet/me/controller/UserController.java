@@ -37,7 +37,6 @@ public class UserController {
 		if(readCookie != null){
 			mv.addObject("saveid", readCookie.getValue());
 		}
-		mv.setViewName("user/loginForm");
 		return mv;
 	}
 	
@@ -47,7 +46,7 @@ public class UserController {
 	}
 	
 	//회원가입폼에서 아이디 검사
-	@RequestMapping(value = "/idcheck.net", method = RequestMethod.POST)
+	@RequestMapping(value = "/idcheck.net", method = RequestMethod.GET)
 	public void idcheck(@RequestParam("user_id") String user_id, //파라미터로 받은 값을 String id 저장 
 					HttpServletResponse response) throws Exception {
 		int result = userService.isId(user_id);
@@ -117,104 +116,12 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value = "/user_list.net")
-	public ModelAndView userList(
-			@RequestParam(value="page", defaultValue="1", required=false) int page,
-			@RequestParam(value="limit", defaultValue="3", required=false) int limit,
-			ModelAndView mv,
-			@RequestParam(value="search_field", defaultValue="-1") int index,
-			@RequestParam(value="search_word", defaultValue="") String search_word)
-	throws Exception {
-		List<User> list = null;
-		int listcount = 0;
-		
-		list = userService.getSearchList(index, search_word, page, limit);
-		listcount = userService.getSearchListCount(index, search_word);
-		
-		//총 페이지수
-		int maxpage = (listcount + limit -1)/limit;
-		
-		//현재 페이지에 보여줄 시작 페이지 수
-		int startpage = ((page - 1)/10)*10 + 1;
-		
-		//현재 페이지에 보여줄 마지막 페이지 수
-		int endpage = startpage + 10 - 1;
-		
-		if(endpage > maxpage)
-			endpage = maxpage;
-		
-		mv.setViewName("user/user_list");
-		mv.addObject("page", page);
-		mv.addObject("maxpage", maxpage);
-		mv.addObject("startpage", startpage);
-		mv.addObject("endpage", endpage);
-		mv.addObject("listcount", listcount);
-		mv.addObject("userlist", list);
-		mv.addObject("limit", limit);
-		mv.addObject("search_field", index);
-		mv.addObject("search_word", search_word);
-		
-		return mv;
-	}
-	
-	//회원의 개인정보
-	@RequestMapping(value = "/user_info.net", method = RequestMethod.GET)
-	public ModelAndView user_info(@RequestParam("user_id") String user_id, ModelAndView mv) {
-		User u = userService.user_info(user_id);
-		mv.setViewName("user/user_info");
-		mv.addObject("userinfo", u);
-		
-		return mv;
-	}
-	
-	//수정 폼
-	@RequestMapping(value="/user_update.net", method=RequestMethod.GET)
-	public ModelAndView user_update(HttpSession session, ModelAndView mv) {
-		String user_id = (String) session.getAttribute("user_id");
-		User u = userService.user_info(user_id);
-		mv.setViewName("user/updateForm");
-		mv.addObject("userinfo", u);
-		return mv;
-	}
-	
-	//수정 처리
-	@RequestMapping(value="/updateProcess.net", method=RequestMethod.POST)
-	public void updateProcess(User u, HttpServletResponse response) throws Exception{
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		int result = userService.update(u);
-		out.println("<script>");
-		//삽입이 된 경우
-		if(result==1) {
-			out.println("alert('수정되었습니다.');");
-			out.println("location.href='main.net';");
-		} else {
-			out.println("alert('회원 정보 수정에 실패했습니다.');");
-			out.println("history.back();");
-		}
-		out.println("</script>");
-		out.close();
-	}
-	
-	@RequestMapping(value="/user_delete.net", method=RequestMethod.GET)
-	public String user_delete(String user_id, HttpServletResponse response) throws Exception{
-		int result = userService.delete(user_id);
-		if(result != 1) {
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('회원 정보 삭제에 실패했습니다.');");
-			out.println("history.back();");
-			out.println("</script>");
-			return null;
-		}
-		return "redirect:user_list.net";
-	}
 	
 	//로그아웃
 	@RequestMapping(value="/logout.net", method=RequestMethod.GET)
 	public String loginout(HttpSession session) {
 		session.invalidate();
-		return "redirect:login.net";
+		return "redirect:main.net";
+
 	}
 }
