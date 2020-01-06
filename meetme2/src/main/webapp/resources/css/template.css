@@ -361,6 +361,27 @@ img.img-full-width {
 #nino-navbar .navbar-toggle .icon-bar {
 	background: #fff;
 }
+
+/* 프로필 사진 클릭 시 나오는 메뉴 */ /* sohee_010620 */
+#menubox{
+	display: none;
+}
+
+#menubox > ul{
+	display: block;
+	position: fixed;
+	top: 0;
+	right: 0;
+    width: 50%;
+    background: rgba(241, 114, 114, 0.96);
+    z-index: 2;
+    -webkit-animation-duration: .5s;
+    		animation-duration: .5s;
+    -webkit-animation-fill-mode: both;
+    		animation-fill-mode: both;
+    -webkit-animation-name: fadeInDown;
+    		animation-name: fadeInDown; 
+}
 /* ----------- FIXED NAVBAR WITH ANIMATE ----------- */
 .nino-fixed-nav #nino-navbar {
 	position: fixed;

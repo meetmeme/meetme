@@ -38,6 +38,12 @@ jQuery(function($) {
 		}
 	});
 	
+	/* My Menu Box */	//sohee_010620
+	$('#userMenuBox').click(function(){
+		$('#menubox').toggle();
+	});
+	
+	
 	/* =============== ISOTOP =============== */	
 	$(window).load(function(){
 		$portfolio = $('.nino-portfolioItems');
