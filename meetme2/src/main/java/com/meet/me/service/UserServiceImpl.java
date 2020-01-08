@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.UserDAO;
+import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
 
 @Service
@@ -82,6 +83,14 @@ public class UserServiceImpl implements UserService{
 		}
 		
 		return dao.getSearchListCount(map);
+	}
+
+	@Override
+	public void categoryInsert(int user_num, int[] category_num) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("user_num", user_num);
+		map.put("category_num", category_num);
+		dao.categoryInsert(map);
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.meet.me.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class User {
 	private String user_id;
 	private String user_pass;
@@ -9,8 +11,29 @@ public class User {
 	private int user_age;
 	private String user_city;
 	private int user_num;
-	private String user_image;
+	private MultipartFile uploadfile;
+	private String savefile="/image/default.png";
+	private String originalfile="/image/default.png";
+	private int[] category_num;
 	
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
+	public String getSavefile() {
+		return savefile;
+	}
+	public void setSavefile(String savefile) {
+		this.savefile = savefile;
+	}
+	public String getOriginalfile() {
+		return originalfile;
+	}
+	public void setOriginalfile(String originalfile) {
+		this.originalfile = originalfile;
+	}	
 	public String getUser_id() {
 		return user_id;
 	} 
@@ -59,11 +82,11 @@ public class User {
 	public void setUser_num(int user_num) {
 		this.user_num = user_num;
 	}
-	public String getUser_image() {
-		return user_image;
+	public int[] getCategory_num() {
+		return category_num;
 	}
-	public void setUser_image(String user_image) {
-		this.user_image = user_image;
+	public void setCategory_num(int[] category_num) {
+		this.category_num = category_num;
 	}
 	
 }

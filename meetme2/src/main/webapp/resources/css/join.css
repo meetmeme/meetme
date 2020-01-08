@@ -1,0 +1,32 @@
+@charset "utf-8";
+input[name='user_id']{
+	width : 40%;
+}
+input[name='user_age']{
+	width : 40%;
+}
+
+.imgcontainer {
+	text-align: center;
+	margin: 24px 0 12px 0;
+	position: relative;
+}
+
+img.avatar {
+	width: 30%;
+	border-radius: 50%;
+}
+
+input.img-button{
+	background: url('resources/image/sports.jpg') no-repeat;
+	border : none;
+	border-radius : 10px;
+	background-size: 150px 150px;
+	cursor : pointer;
+	width : 150px;
+	height : 150px;
+}
+.category {
+	margin : 5px;
+	display : inline-block;
+}

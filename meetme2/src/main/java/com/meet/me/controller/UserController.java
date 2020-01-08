@@ -1,7 +1,10 @@
 package com.meet.me.controller;
 
+import java.io.File;
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
 import com.meet.me.service.UserService;
 
@@ -53,23 +58,53 @@ public class UserController {
 		out.print(result);
 	}//idcheck
 	
+	//회원가입 처리
 	@RequestMapping(value = "/joinProcess.net", method = RequestMethod.POST)
-	public void joinProcess(User u, //파라미터값을 VO클래스에서 set을 찾아서 알아서 담김. 컬럼명, 프로퍼티 이름, 폼의 네임속성의 이름 같게
+	public String joinProcess(User user, int[] category_num,
 					HttpServletResponse response) throws Exception{
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		int result = userService.insert(u);
-		out.println("<script>");
-		// 삽입이 된 경우
-		if(result == 1) {
-			out.println("alert('회원 가입을 축하합니다.');");
-			out.println("location.href='main.index';");
-		}else if(result == -1) {
-			out.println("alert('아이디가 중복되었습니다. 다시 입력하세요');");
-			out.println("history.back()");// 비밀번호를 제외한 다른 데이터는 유지 되어있음
-		}
-		out.println("</script>");
-		out.close();
+		  MultipartFile uploadfile = user.getUploadfile();
+		  if (!uploadfile.isEmpty()) {
+		     String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
+		 user.setOriginalfile(fileName); // 원래 파일명 저장
+		
+		 // 새로운 폴더 이름 : 오늘 년+월+일
+		 Calendar c = Calendar.getInstance();
+		 int year = c.get(Calendar.YEAR); // 오늘 년 구합니다.
+		 int month = c.get(Calendar.MONTH) + 1;// 오늘 월 구합니다.
+		 int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
+		 // String
+		 // saveFoler=request.getSession().getServletContext().getRealPath("resources") +
+		 // "/upload/";
+		 String saveFolder = "D:\\final\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+		 String homedir = saveFolder + year + "-" + month + "-" + date;
+		 System.out.println(homedir);
+		 File path1 = new File(homedir);
+		 if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
+		path1.mkdir(); // 없을 경우 경로 만들기
+		 }
+		
+		 Random r = new Random();
+		 int random = r.nextInt(100000000);
+		
+		 int index = fileName.lastIndexOf(".");
+		 System.out.println("index = " + index);
+		 String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
+		 System.out.println("fileExtension = " + fileExtension);
+		 String refileName = "bbs" + year + month + date + random + "." + fileExtension;
+		 System.out.println("refileName = " + refileName);
+		//오라클 디비에 저장될 파일명
+		 String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
+		 System.out.println("fileDBName = " + fileDBName);
+		 //transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+		 uploadfile.transferTo(new File(saveFolder + fileDBName));
+		//바뀐 파일명으로 저장
+		     user.setSavefile(fileDBName);
+		  }
+		  userService.insert(user); //저장 메서드 호출
+		  int user_num = user.getUser_num();
+		  userService.categoryInsert(user_num, category_num);
+		  return "main/main";
+		
 	}//joinProcess
 	
 	//로그인 처리

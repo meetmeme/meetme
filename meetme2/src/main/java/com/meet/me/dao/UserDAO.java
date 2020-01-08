@@ -1,5 +1,6 @@
 package com.meet.me.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
 
 @Repository
@@ -40,6 +42,10 @@ public class UserDAO {
 
 	public int delete(String user_id) {
 		return sqlSession.delete("Users.delete", user_id);
+	}
+
+	public int categoryInsert(HashMap<String, Integer> map) {
+		return sqlSession.insert("Users.categoryInsert", map);
 	}
 	
 	

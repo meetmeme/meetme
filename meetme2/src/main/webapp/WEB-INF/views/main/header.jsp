@@ -35,6 +35,9 @@
 <link rel="stylesheet" type="text/css" href="resources/css/unslider.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/template.css" />
 
+<link rel="stylesheet" type="text/css"
+	href="resources/css/join.css" />
+
 <!-- javascript -->
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/isotope.pkgd.min.js"></script>
@@ -59,6 +62,8 @@
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 
+<script src="resources/js/join.js"></script>
+<script src="resources/js/rememeber.js"></script>
 
 <!-- Header
     ================================================== -->
@@ -232,55 +237,88 @@
 	      <!-- body -->
 	      <div class="modal-body">
 	            <form id="join" name="joinform" action="joinProcess.net" method="post">
-			
-					<div class="form-group">
-					<b>아이디</b>
-			   		<input class="form-control" type="text" name="user_id"  placeholder="Enter Id"  maxLength=12 required>
-			   		<span id="message"></span>
-			   		</div>
-			   		
-			   		<div class="form-group">
-			 		<b>비밀번호</b>
-			   		<input class="form-control" type="password" name="user_pass" placeholder="Enter password" required>
-			   		</div>
-			   		
-			   		<div class="form-group">
-			   		<b>이름</b>
-			   		<input class="form-control" type="text" name="user_name" placeholder="Enter name" maxlength=15 required>
-			   		</div>
-			   		
-			   		<div class="form-group">
-			   		<b>나이</b>
-			   		<input class="form-control" type="text" name="user_age" maxlength=2 placeholder="Enter age" required>
-			   		</div>
-			   		
-			   		<div class="form-group">
-			   		<b>성별</b>
-			   		<div>
-			             <input type="radio" name="user_gender" value="남 " checked><span>남자</span>
-			             <input type="radio" name="user_gender" value="여" ><span>여자</span>
-			         </div>
-			   		</div>
-			   		
-			   		<div class="form-group">
-			   		<b>지역</b>
-			   		<input class="form-control" type="text" name="user_city" placeholder="Enter city" maxlength=30>
-			   		</div>
-			   		
-			   		<div class="form-group">
-			   		<b>이메일 주소</b>
-			         <input class="form-control" type="text" name="user_email" placeholder="Enter email" required><span id="email_message"></span>
-			   		</div>
-			   		
-			   		<div class="form-group">
-				   		<b>사진</b>
-				   		<input class="form-control" type="text" name="user_image">
+					<div id="join1">
+						<div class="form-group">
+						<b>아이디</b>
+				   		<input class="form-control" type="text" name="user_id"  placeholder="Enter Id"  maxLength=12 required>
+				   		<span id="message"></span>
+				   		</div>
+				   		
+				   		<div class="form-group">
+				 		<b>비밀번호</b>
+				   		<input class="form-control" type="password" name="user_pass" placeholder="Enter password" required>
+				   		</div>
+				   		
+				   		<div class="form-group">
+				   		<b>이름</b>
+				   		<input class="form-control" type="text" name="user_name" placeholder="Enter name" maxlength=15 required>
+				   		</div>
+				   		
+				   		<div class="form-group">
+				   		<b>나이</b>
+				   		<input class="form-control" type="text" name="user_age" maxlength=2 placeholder="Enter age" required>
+				   		</div>
+				   		
+				   		<div class="form-group">
+				   		<b>성별</b>
+				   		<div>
+				             <input type="radio" name="user_gender" value="남 " checked><span>남자</span>
+				             <input type="radio" name="user_gender" value="여" ><span>여자</span>
+				         </div>
+				   		</div>
+				   		
+				   		<div class="form-group">
+				   		<b>지역</b>
+				   		<input class="form-control" type="text" name="user_city" placeholder="Enter city" maxlength=30>
+				   		</div>
+				   		
+				   		<div class="form-group">
+				   		<b>이메일 주소</b>
+				         <input class="form-control" type="text" name="user_email" placeholder="Enter email" required><span id="email_message"></span>
+				   		</div>
+				   		
+				   		<div class="clearfix form-group">
+				         	<button type="button" class="btn btn-primary nextbtn1">다음</button>
+				        </div>
 			        </div>
-			        			         
-			         <div class="clearfix form-group">
-			         	<button type="submit" class="btn btn-primary submitbtn">회원가입</button>
-			         	<button type="reset" class="btn btn-danger cancelbtn">다시작성</button>
-			         </div>                
+			        
+			        <div id="join2">
+						<div class="imgcontainer">
+							<label>
+								<input type="file" name="uploadfile" accept="image/gif, image/jpeg, image/png"
+								style="display:none;">
+								<img src="resources/image/default.png" alt="Avatar" class="avatar">
+							</label>
+						</div>
+						<p>상단의 이미지를 클릭 해 회원님만의 특별한 이미지를 설정해주세요!</p>
+						<div class="clearfix form-group">
+				         	<button type="button" class="btn btn-primary nextbtn2">다음</button>
+				        </div>
+			        </div>
+			        
+			        <div id="join3">
+						<div>
+							<div class="category">
+								<input type="button" class="img-button">
+							</div>
+							<div class="category">
+								<input type="button" class="img-button">
+							</div>
+							<div class="category">
+								<input type="button" class="img-button">
+							</div>
+							<div class="category">
+								<input type="button" class="img-button">
+							</div>
+							<div class="category">
+								<input type="button" class="img-button">
+							</div>
+						</div>
+						<div class="clearfix form-group">
+			         		<button type="submit" class="btn btn-primary submitbtn">회원가입</button>
+			        	</div>		        
+					</div>		          
+			                        
 				</form>
 	      </div>
 	      <!-- Footer -->
@@ -320,148 +358,4 @@
 	
 	
 </script>
-<script>
-    $(document).ready(function(){
-	    var userInputId = getCookie("userInputId");//저장된 쿠기값 가져오기
-	    $("input[name='user_id1']").val(userInputId); 
-	     
-	    if($("input[name='user_id1']").val() != ""){ // 그 전에 ID를 저장해서 처음 페이지 로딩
-	                                           // 아이디 저장하기 체크되어있을 시,
-	        $("#idSaveCheck").attr("checked", true); // ID 저장하기를 체크 상태로 두기.
-	    }
-	     
-	    $("#idSaveCheck").change(function(){ // 체크박스에 변화가 발생시
-	        if($("#idSaveCheck").is(":checked")){ // ID 저장하기 체크했을 때,
-	            var userInputId = $("input[name='user_id1']").val();
-	            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
-	        }else{ // ID 저장하기 체크 해제 시,
-	            deleteCookie("userInputId");
-	        }
-	    });
-	     
-	    // ID 저장하기를 체크한 상태에서 ID를 입력하는 경우, 이럴 때도 쿠키 저장.
-	    $("input[name='user_id1']").keyup(function(){ // ID 입력 칸에 ID를 입력할 때,
-	        if($("#idSaveCheck").is(":checked")){ // ID 저장하기를 체크한 상태라면,
-	            var userInputId = $("input[name='user_id1']").val();
-	            setCookie("userInputId", userInputId, 7); // 7일 동안 쿠키 보관
-	        }
-	    });
-	});
-	 
-	function setCookie(cookieName, value, exdays){
-	    var exdate = new Date();
-	    exdate.setDate(exdate.getDate() + exdays);
-	    var cookieValue = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
-	    document.cookie = cookieName + "=" + cookieValue;
-	}
-	 
-	function deleteCookie(cookieName){
-	    var expireDate = new Date();
-	    expireDate.setDate(expireDate.getDate() - 1);
-	    document.cookie = cookieName + "= " + "; expires=" + expireDate.toGMTString();
-	}
-	 
-	function getCookie(cookieName) {
-	    cookieName = cookieName + '=';
-	    var cookieData = document.cookie;
-	    var start = cookieData.indexOf(cookieName);
-	    var cookieValue = '';
-	    if(start != -1){
-	        start += cookieName.length;
-	        var end = cookieData.indexOf(';', start);
-	        if(end == -1)end = cookieData.length;
-	        cookieValue = cookieData.substring(start, end);
-	    }
-	    return unescape(cookieValue);
-	}
-</script>
-<script>
-$(document).ready(function(){
-	var checkid = false;
-	var checkmail = false;
-	
-	$('#join').submit(function(){
-		if(!checkid){
-			alert('사용가능한 id로 입력하세요.');
-			$("input[name='user_id']").val('').focus();
-			$("#message").text('');
-			return false;
-		}
-		if(!$.isNumeric($("input[name='user_age']").val())){
-			alert('나이는 숫자를 입력하세요.');
-			$("input[name='user_age']").val('');
-			$("input[name='user_age']").focus();
-			return false;
-		}
-		
-		if(!checkmail){
-			alert("email 형식을 확인하세요.");
-			$("input[name='user_email']").focus();
-			return false;
-		}
-	})
-	
-	$("input[name='user_id']").on('keyup', function(){
-		
-		$("#message").empty();
-		var pattern = /^\w{5,12}$/;
-		var user_id= $("input[name='user_id']").val();
-		
-		if(!pattern.test(user_id)){
-			$("#message").html("영문자 숫자 _로 5~12자 가능합니다.");
-			$("#message").css('color','red');
-			checkid=false;
-			return;
-		}
-		
-		$.ajax({
-            url : "idcheck.net",
-            data : {"user_id" : user_id},
-            success : function(resp){
-               if(resp == -1) {
-                  $("#message").css('color','green').html("사용이 가능한 아이디입니다.");
-                  checkid=true;
-               } else {
-                  $("#message").css('color','blue').html("사용중인 아이디입니다.");
-                  checkid=false;
-               }//if
-            }//success
-         });//ajax
-	});//keyup
-	
-	$("input[name='user_age']").on('keyup', function(){
-		var age= $("input[name='user_age']").val();
-		
-		if(isNaN(age) == true){
-			alert('숫자만 입력 가능합니다.');
-			return;
-		}
-	});
-	
-	$("input[name='user_email']").on('keyup', function(){
-		
-		$("#email_message").empty();
-		var pattern = /\w+@\w+[.]\w{3}/;
-		//+ : 무조건 글자 1개 이상
-		var email = $("input[name='user_email']").val();
-		
-		if(!pattern.test(email)){
-			$("#email_message").css('color','red').html("이메일 형식이 맞지 않습니다.");
-			checkmail = false;
-		} else {
-			$("#email_message").css('color','green').html("이메일 형식에 맞습니다.");
-			checkmail = true;
-		}//if
-	});//keyup
-	
-});
-</script>
 
-<style>
-	input[name='user_id']{
-		width : 40%;
-	}
-	input[name='user_age']{
-		width : 40%;
-	}
-</style>

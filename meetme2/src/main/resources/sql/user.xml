@@ -8,7 +8,7 @@
 	
 	<insert parameterType="User" id="insert">
 		insert into mm_user 
-		values((select nvl(max(user_num),0)+1 from mm_user), #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_image})
+		values((select nvl(max(user_num),0)+1 from mm_user), #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_save}, #{user_original})
 	</insert>
 
 	
@@ -65,6 +65,14 @@
 	<delete id="delete" parameterType="String">
 		delete from mm_user where user_id=#{user_id}
 	</delete>
+	
+	<insert id="categoryInsert" parameterType="Map">
+		insert into user_user_interests
+		values(#{user_num}, 
+		<foreach item="item" index="index" collection="java.util.List">
+			#{item.category_num})
+		</foreach>
+	</insert>
 	
 </mapper>
 
