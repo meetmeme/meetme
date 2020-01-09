@@ -86,11 +86,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void categoryInsert(int user_num, int[] category_num) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("user_num", user_num);
-		map.put("category_num", category_num);
-		dao.categoryInsert(map);
+	public void userCategory(int user_num, int[] category_num) {
+		Map<Integer,int[]> map = new HashMap<Integer,int[]>();
+		map.put(user_num, category_num);
+		dao.userCategoryInsert(map);
 	}
+
 	
 }

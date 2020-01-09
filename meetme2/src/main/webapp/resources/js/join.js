@@ -1,15 +1,50 @@
 $(document).ready(function(){
+	
+	
+	$('.cat_num').each(function(index, item){
+		var ck = 0;
+		$(item).click(function(){
+			
+			if(ck==0){
+				$(this).css('background','red');
+				ck=1;
+			} else {
+				$(this).css('background','white');
+				ck=0;
+			}
+		})
+		
+	})
+	
 	var checkid = false;
 	var checkmail = false;
 	$('#join2').hide();
 	$('#join3').hide();
+	$('.backbtn2').hide();
+	$('.backbtn3').hide();
 
 	$('.nextbtn2').click(function(){
 		$('#join2').hide();
 		$('#join3').show();
+		$('.backbtn2').hide();
+		$('.backbtn3').show();
+	})
+	$('.backbtn3').click(function(){
+		$('#join3').hide();
+		$('#join2').show();
+		$('.backbtn2').show();
+		$('.backbtn3').hide();
+	})
+	$('.backbtn2').click(function(){
+		$('#join2').hide();
+		$('#join1').show();
+		$('.backbtn2').hide();
 	})
 	
+	
+	
 	$('.nextbtn1').click(function(){
+		/*
 		if(!checkid){
 			alert('사용가능한 id로 입력하세요.');
 			$("input[name='user_id']").val('').focus();
@@ -42,13 +77,14 @@ $(document).ready(function(){
 			$("input[name='user_email']").focus();
 			return false;
 		}
-		
+		*/
 		$('#join1').hide();
 		$('#join2').show();
+		$('.backbtn2').show();
 	})
 	
 	$("input[name='user_id']").on('keyup', function(){
-		
+		/*
 		$("#message").empty();
 		var pattern = /^\w{5,12}$/;
 		var user_id= $("input[name='user_id']").val();
@@ -59,7 +95,7 @@ $(document).ready(function(){
 			checkid=false;
 			return;
 		}
-		
+		*/
 		$.ajax({
             url : "idcheck.net",
             data : {"user_id" : user_id},
@@ -74,7 +110,7 @@ $(document).ready(function(){
             }//success
          });//ajax
 	});//keyup
-	
+	/*
 	$("input[name='user_age']").on('keyup', function(){
 		var age= $("input[name='user_age']").val();
 		
@@ -100,7 +136,7 @@ $(document).ready(function(){
 		}//if
 	});//keyup
 	
-	
+	*/
 	$('input[type=file]').on('change', preview);
     
     function preview(e){
@@ -127,5 +163,7 @@ $(document).ready(function(){
           $(".avatar").attr("src", e.target.result);
        }   // reader.onload end
     }   // function end
+    
+    
 	
 });

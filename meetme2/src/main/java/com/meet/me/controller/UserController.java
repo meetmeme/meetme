@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,12 +59,15 @@ public class UserController {
 		out.print(result);
 	}//idcheck
 	
+	
 	//회원가입 처리
 	@RequestMapping(value = "/joinProcess.net", method = RequestMethod.POST)
-	public String joinProcess(User user, int[] category_num,
+	public String joinProcess(User user, @RequestParam("category") int[] category_num,
 					HttpServletResponse response) throws Exception{
-		  MultipartFile uploadfile = user.getUploadfile();
-		  if (!uploadfile.isEmpty()) {
+		
+		
+		MultipartFile uploadfile = user.getUploadfile();
+		 if (!uploadfile.isEmpty()) {
 		     String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
 		 user.setOriginalfile(fileName); // 원래 파일명 저장
 		
@@ -102,7 +106,7 @@ public class UserController {
 		  }
 		  userService.insert(user); //저장 메서드 호출
 		  int user_num = user.getUser_num();
-		  userService.categoryInsert(user_num, category_num);
+		  userService.userCategory(user_num, category_num);
 		  return "main/main";
 		
 	}//joinProcess

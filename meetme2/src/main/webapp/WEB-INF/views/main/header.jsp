@@ -63,7 +63,7 @@
 </head>
 
 <script src="resources/js/join.js"></script>
-<script src="resources/js/rememeber.js"></script>
+<script src="resources/js/remember.js"></script>
 
 <!-- Header
     ================================================== -->
@@ -113,8 +113,7 @@
 					</div>
 					<!-- /.navbar-collapse -->
 					<ul class="nino-iconsGroup nav navbar-nav">
-						<li><a href="#" class="nino-search"><i
-								class="mdi mdi-magnify nino-icon"></i></a></li>
+						<li><a href="#" class="nino-search"><i class="mdi mdi-magnify nino-icon"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -233,6 +232,10 @@
 	        <button type="button" class="close" data-dismiss="modal">×</button>
 	        <!-- header title -->
 	        <h4 class="modal-title">JOIN</h4>
+	        <img src='resources/image/backicon.png' class="backbtn2">
+	        <img src='resources/image/backicon.png' class="backbtn3">
+	        <!-- <div>아이콘 제작자 <a href="https://www.flaticon.com/kr/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/kr/" title="Flaticon">www.flaticon.com</a></div>-->
+	        
 	      </div>
 	      <!-- body -->
 	      <div class="modal-body">
@@ -282,6 +285,7 @@
 				        </div>
 			        </div>
 			        
+			        <!-- 이미지 설정 -->
 			        <div id="join2">
 						<div class="imgcontainer">
 							<label>
@@ -296,22 +300,13 @@
 				        </div>
 			        </div>
 			        
+			        <!-- 흥미분야 선택 -->
 			        <div id="join3">
 						<div>
 							<div class="category">
-								<input type="button" class="img-button">
-							</div>
-							<div class="category">
-								<input type="button" class="img-button">
-							</div>
-							<div class="category">
-								<input type="button" class="img-button">
-							</div>
-							<div class="category">
-								<input type="button" class="img-button">
-							</div>
-							<div class="category">
-								<input type="button" class="img-button">
+								<c:forEach var="cat" items="${category}">
+									<input type="checkbox" value="${cat.CATEGORY_NUM}" name="category" class="cat_num">${cat.CATEGORY_NAME}
+								</c:forEach>
 							</div>
 						</div>
 						<div class="clearfix form-group">

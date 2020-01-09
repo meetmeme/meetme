@@ -66,11 +66,11 @@
 		delete from mm_user where user_id=#{user_id}
 	</delete>
 	
-	<insert id="categoryInsert" parameterType="Map">
-		insert into user_user_interests
-		values(#{user_num}, 
-		<foreach item="item" index="index" collection="java.util.List">
-			#{item.category_num})
+	<insert id="userCategoryInsert" parameterType="Map">
+		insert into mm_user_interests
+		values
+		<foreach item="item" collection="Integer">
+			(#{user_num}, #{item.category_num})
 		</foreach>
 	</insert>
 	

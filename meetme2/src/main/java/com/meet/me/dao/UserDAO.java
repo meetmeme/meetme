@@ -44,9 +44,10 @@ public class UserDAO {
 		return sqlSession.delete("Users.delete", user_id);
 	}
 
-	public int categoryInsert(HashMap<String, Integer> map) {
-		return sqlSession.insert("Users.categoryInsert", map);
+	public int userCategoryInsert(Map<Integer, int[]> map) {
+		return sqlSession.insert("Users.userCategoryInsert", map);
 	}
+
 	
 	
 }

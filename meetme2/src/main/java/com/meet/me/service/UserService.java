@@ -14,6 +14,6 @@ public interface UserService {
 	public int update(User user);
 	public List<User> getSearchList(int index, String search_word, int page, int limit);
 	public int getSearchListCount(int index, String search_word);
-	public void categoryInsert(int user_num,int[] category_num);
+	public void userCategory(int user_num, int[] category_num);
 }
  

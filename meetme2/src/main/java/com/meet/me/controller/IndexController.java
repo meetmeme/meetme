@@ -26,7 +26,7 @@ public class IndexController {
 	public ModelAndView index(ModelAndView mv, HttpServletResponse response) {
 	
 		List<String> category = eventService.getCategory();
-		System.out.println(category.size());
+		System.out.println("csize : " + category.size());
 		List<String> hashtag = hashtagService.getHashtag();
 		
 		mv.setViewName("main/main");

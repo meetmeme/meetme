@@ -14,7 +14,6 @@ public class User {
 	private MultipartFile uploadfile;
 	private String savefile="/image/default.png";
 	private String originalfile="/image/default.png";
-	private int[] category_num;
 	
 	public MultipartFile getUploadfile() {
 		return uploadfile;
@@ -82,11 +81,4 @@ public class User {
 	public void setUser_num(int user_num) {
 		this.user_num = user_num;
 	}
-	public int[] getCategory_num() {
-		return category_num;
-	}
-	public void setCategory_num(int[] category_num) {
-		this.category_num = category_num;
-	}
-	
 }
