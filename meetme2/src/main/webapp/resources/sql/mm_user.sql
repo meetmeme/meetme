@@ -17,5 +17,7 @@ drop table mm_user CASCADE CONSTRAINTS;
 
 insert into mm_user values (1, 'admin', '1234','관리자','admin@meetme.com',
 '여','25','서울시','',''); 
+insert into mm_user values (2, 'a', '1234','관리자','admin@meetme.com',
+'여','25','서울시','',''); 
 
 select * from mm_user;

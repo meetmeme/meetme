@@ -44,7 +44,7 @@ $(document).ready(function(){
 	
 	
 	$('.nextbtn1').click(function(){
-		/*
+		
 		if(!checkid){
 			alert('사용가능한 id로 입력하세요.');
 			$("input[name='user_id']").val('').focus();
@@ -77,14 +77,14 @@ $(document).ready(function(){
 			$("input[name='user_email']").focus();
 			return false;
 		}
-		*/
+		
 		$('#join1').hide();
 		$('#join2').show();
 		$('.backbtn2').show();
 	})
 	
 	$("input[name='user_id']").on('keyup', function(){
-		/*
+		
 		$("#message").empty();
 		var pattern = /^\w{5,12}$/;
 		var user_id= $("input[name='user_id']").val();
@@ -95,7 +95,7 @@ $(document).ready(function(){
 			checkid=false;
 			return;
 		}
-		*/
+		
 		$.ajax({
             url : "idcheck.net",
             data : {"user_id" : user_id},
@@ -110,7 +110,7 @@ $(document).ready(function(){
             }//success
          });//ajax
 	});//keyup
-	/*
+	
 	$("input[name='user_age']").on('keyup', function(){
 		var age= $("input[name='user_age']").val();
 		
@@ -136,11 +136,10 @@ $(document).ready(function(){
 		}//if
 	});//keyup
 	
-	*/
-	$('input[type=file]').on('change', preview);
+	/*
+	$('input[name="uploadfile"]').on('change', preview);
     
     function preview(e){
-       // 선택한 그림의 File 객체를 취득
        var file = e.target.files[0];   // File 객체 리스트에서 첫 번째 File 객체를 가져옵니다.
        
        // file.type : 파일의 형식(MIME타입 - 예)   text/html)
@@ -163,7 +162,15 @@ $(document).ready(function(){
           $(".avatar").attr("src", e.target.result);
        }   // reader.onload end
     }   // function end
-    
-    
+    */
+    $(".category_img").click(function() {
+		if($(this).next().val()==''){
+			$(this).next().val($(this).attr("alt"));
+			$(this).css('opacity','0.5');
+		} else{
+			$(this).next().val('');
+			$(this).css('opacity','1');
+		}
+	})
 	
 });

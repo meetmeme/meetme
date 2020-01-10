@@ -92,5 +92,6 @@ public class UserServiceImpl implements UserService{
 		dao.userCategoryInsert(map);
 	}
 
+
 	
 }

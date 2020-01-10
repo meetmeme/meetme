@@ -13,6 +13,15 @@
 			<h2 class="nino-sectionHeading">
 				<span class="nino-subHeading">category</span>
 				이벤트 카테고리
+				
+				<button id="bbb">bbb</button>
+				<script>
+					$(document).function(){
+						$("#bbb").click(function(){
+							alert($('input[name="user_num1"]').val());
+						})
+					}
+				</script>
 			</h2>
 			<p class="nino-sectionDesc">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 

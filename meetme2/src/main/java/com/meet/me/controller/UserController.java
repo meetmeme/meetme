@@ -1,6 +1,7 @@
 package com.meet.me.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
@@ -62,14 +63,20 @@ public class UserController {
 	
 	//회원가입 처리
 	@RequestMapping(value = "/joinProcess.net", method = RequestMethod.POST)
-	public String joinProcess(User user, @RequestParam("category") int[] category_num,
-					HttpServletResponse response) throws Exception{
-		
+	public String joinProcess(User user, HttpServletResponse response, 
+			@RequestParam("sel_category") String[] category_num) throws IOException{
+		/*
+		int [] cat = new int[category_num.length];
+		for(int i=0;i<category_num.length;i++) {
+			cat[i] = In
+		}
+		*/
+		/*
 		
 		MultipartFile uploadfile = user.getUploadfile();
 		 if (!uploadfile.isEmpty()) {
 		     String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
-		 user.setOriginalfile(fileName); // 원래 파일명 저장
+		     user.setOriginalfile(fileName); // 원래 파일명 저장
 		
 		 // 새로운 폴더 이름 : 오늘 년+월+일
 		 Calendar c = Calendar.getInstance();
@@ -104,27 +111,39 @@ public class UserController {
 		//바뀐 파일명으로 저장
 		     user.setSavefile(fileDBName);
 		  }
+		 */
+		 for(int i=0;i<category_num.length;i++) {
+				System.out.println(category_num[i]);
+			}
+			
+		 
 		  userService.insert(user); //저장 메서드 호출
 		  int user_num = user.getUser_num();
-		  userService.userCategory(user_num, category_num);
+		  //userService.userCategory(user_num, (int[]) category_num);
 		  return "main/main";
 		
 	}//joinProcess
 	
 	//로그인 처리
 	@RequestMapping(value = "/loginProcess.net", method = RequestMethod.POST)
-	public String loginProcess(@RequestParam("user_id1")String user_id,
-								@RequestParam("user_pass1")String user_pass,
+	public String loginProcess(@RequestParam("user_id1") String user_id,
+								@RequestParam("user_pass1") String user_pass,
+								@RequestParam("user_num1") String user_num,
 								@RequestParam(value="u", defaultValue="") String u,
 								HttpServletRequest request,
 								HttpServletResponse response,
 								HttpSession session)throws Exception{
+		User user = new User();
 		int result = userService.isId(user_id, user_pass);
 		System.out.println("결과는 " + result);
+		user = userService.user_info(user_id);
+		
+		System.out.println("num = "+ user.getUser_num());
 		
 		if(result == 1) {
 			//로그인 성공
 			session.setAttribute("user_id1", user_id);
+			session.setAttribute("user_num1", user_num);
 			//"saveid"라는 이름의 쿠키에 id의 값을 저장한 쿠키를 생성합니다.
 			Cookie savecookie = new Cookie("saveid", user_id);
 			if(!u.equals("")) {
