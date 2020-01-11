@@ -12,8 +12,8 @@ public class User {
 	private String user_city;
 	private int user_num;
 	private MultipartFile uploadfile;
-	private String savefile="/image/default.png";
-	private String originalfile="/image/default.png";
+	private String user_save="/image/default.png";
+	private String user_original="/image/default.png";
 	
 	public MultipartFile getUploadfile() {
 		return uploadfile;
@@ -21,18 +21,7 @@ public class User {
 	public void setUploadfile(MultipartFile uploadfile) {
 		this.uploadfile = uploadfile;
 	}
-	public String getSavefile() {
-		return savefile;
-	}
-	public void setSavefile(String savefile) {
-		this.savefile = savefile;
-	}
-	public String getOriginalfile() {
-		return originalfile;
-	}
-	public void setOriginalfile(String originalfile) {
-		this.originalfile = originalfile;
-	}	
+
 	public String getUser_id() {
 		return user_id;
 	} 
@@ -80,5 +69,17 @@ public class User {
 	}
 	public void setUser_num(int user_num) {
 		this.user_num = user_num;
+	}
+	public String getUser_save() {
+		return user_save;
+	}
+	public void setUser_save(String user_save) {
+		this.user_save = user_save;
+	}
+	public String getUser_original() {
+		return user_original;
+	}
+	public void setUser_original(String user_original) {
+		this.user_original = user_original;
 	}
 }

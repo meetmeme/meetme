@@ -213,7 +213,6 @@
 						<input type="checkbox" name="u" class="articleDesc" id="idSaveCheck">Remember me
 					</div>
 					<br>
-					<input type="hidden" name="user_num1">
 					<div class="clearfix form-group">
 						<button type="submit" class="btn btn-primary submitbtn">로그인</button>
 					</div>

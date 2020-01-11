@@ -1,8 +1,11 @@
 package com.meet.me.domain;
 
+import java.util.List;
+
 public class User_interests {
 	private int user_num;
 	private int category_num;
+	private List<Integer> cat_list;
 	
 	public int getUser_num() {
 		return user_num;
@@ -15,5 +18,11 @@ public class User_interests {
 	}
 	public void setCategory_num(int category_num) {
 		this.category_num = category_num;
+	}
+	public List<Integer> getCat_list() {
+		return cat_list;
+	}
+	public void setCat_list(List<Integer> cat_list) {
+		this.cat_list = cat_list;
 	}
 }

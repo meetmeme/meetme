@@ -66,14 +66,16 @@
 		delete from mm_user where user_id=#{user_id}
 	</delete>
 	
-	<insert id="userCategoryInsert" parameterType="Map">
-		insert into mm_user_interests
-		values
-		<foreach item="item" collection="Integer">
-			(#{user_num}, #{item.category_num})
-		</foreach>
-	</insert>
+	<select id="selectNum" parameterType="String" resultType="user">
+		select * from mm_user
+		where user_id = #{user_id}
+	</select>
 	
+	<insert id="insert_inter" parameterType="User_interests">
+	    INSERT INTO
+	        mm_user_interests
+	    VALUES(#{user_num}, #{category_num})
+	</insert>
 </mapper>
 
 

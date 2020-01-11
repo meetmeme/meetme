@@ -1,21 +1,5 @@
 $(document).ready(function(){
 	
-	
-	$('.cat_num').each(function(index, item){
-		var ck = 0;
-		$(item).click(function(){
-			
-			if(ck==0){
-				$(this).css('background','red');
-				ck=1;
-			} else {
-				$(this).css('background','white');
-				ck=0;
-			}
-		})
-		
-	})
-	
 	var checkid = false;
 	var checkmail = false;
 	$('#join2').hide();
@@ -136,7 +120,7 @@ $(document).ready(function(){
 		}//if
 	});//keyup
 	
-	/*
+	
 	$('input[name="uploadfile"]').on('change', preview);
     
     function preview(e){
@@ -162,7 +146,7 @@ $(document).ready(function(){
           $(".avatar").attr("src", e.target.result);
        }   // reader.onload end
     }   // function end
-    */
+    
     $(".category_img").click(function() {
 		if($(this).next().val()==''){
 			$(this).next().val($(this).attr("alt"));
@@ -171,6 +155,9 @@ $(document).ready(function(){
 			$(this).next().val('');
 			$(this).css('opacity','1');
 		}
+	})
+	
+	$("#join").submit(function(){
 	})
 	
 });

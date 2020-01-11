@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
+import com.meet.me.domain.User_interests;
 
 public interface UserService {
 	public int isId(String user_id, String user_pass);
@@ -14,6 +15,7 @@ public interface UserService {
 	public int update(User user);
 	public List<User> getSearchList(int index, String search_word, int page, int limit);
 	public int getSearchListCount(int index, String search_word);
-	public void userCategory(int user_num, int[] category_num);
+	public User getNum(String user_id);
+	public void category(User_interests user_inter);
 }
  

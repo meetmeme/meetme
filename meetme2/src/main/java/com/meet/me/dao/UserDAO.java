@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
+import com.meet.me.domain.User_interests;
 
 @Repository
 public class UserDAO {
@@ -44,8 +45,13 @@ public class UserDAO {
 		return sqlSession.delete("Users.delete", user_id);
 	}
 
-	public int userCategoryInsert(Map<Integer, int[]> map) {
-		return sqlSession.insert("Users.userCategoryInsert", map);
+	public User getUsernum(String user_id) {
+		return sqlSession.selectOne("Users.selectNum", user_id);
+		
+	}
+
+	public void insertCat(User_interests user_inter) {
+		sqlSession.insert("Users.insert_inter", user_inter);
 	}
 
 	

@@ -67,7 +67,6 @@
 			        <!-- 이미지 설정 -->
 			       
 			        <div id="join2">
-			         <!-- 
 						<div class="imgcontainer">
 							<div class="imgcontainer">
 								<label>
@@ -78,7 +77,6 @@
 							</div>
 						</div>
 						<p>상단의 이미지를 클릭 해 회원님만의 특별한 이미지를 설정해주세요!</p>
-						-->
 						<div class="clearfix form-group">
 				         	<button type="button" class="btn btn-primary nextbtn2">다음</button>
 				        </div>

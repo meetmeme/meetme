@@ -3,7 +3,9 @@ package com.meet.me.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -25,156 +27,143 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
+import com.meet.me.domain.User_interests;
 import com.meet.me.service.UserService;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
-	
-	/*
-	//로그인 폼이동
-	@RequestMapping(value = "/login.net", method = RequestMethod.GET)
-	public ModelAndView login(ModelAndView mv, @CookieValue(value="saveid", required=false) Cookie readCookie) {
-		if(readCookie != null){
-			mv.addObject("saveid", readCookie.getValue());
-		}
-		return mv;
-	}
-	*/
-	/*
-	@RequestMapping(value = "/join.net", method = RequestMethod.GET)
-	public String join() {
-		return "user/joinForm";
-	}
-	*/
-	
-	//회원가입폼에서 아이디 검사
+
+	// 회원가입폼에서 아이디 검사
 	@RequestMapping(value = "/idcheck.net", method = RequestMethod.GET)
-	public void idcheck(@RequestParam("user_id") String user_id, //파라미터로 받은 값을 String id 저장 
-					HttpServletResponse response) throws Exception {
+	public void idcheck(@RequestParam("user_id") String user_id, // 파라미터로 받은 값을 String id 저장
+			HttpServletResponse response) throws Exception {
 		int result = userService.isId(user_id);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);
-	}//idcheck
-	
-	
-	//회원가입 처리
+	}// idcheck
+
+	// 회원가입 처리
 	@RequestMapping(value = "/joinProcess.net", method = RequestMethod.POST)
-	public String joinProcess(User user, HttpServletResponse response, 
-			@RequestParam("sel_category") String[] category_num) throws IOException{
-		/*
-		int [] cat = new int[category_num.length];
-		for(int i=0;i<category_num.length;i++) {
-			cat[i] = In
-		}
-		*/
-		/*
+	public String joinProcess(User user, HttpServletResponse response,
+			@RequestParam("sel_category") String sel_category) throws IOException {
 		
-		MultipartFile uploadfile = user.getUploadfile();
-		 if (!uploadfile.isEmpty()) {
-		     String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
-		     user.setOriginalfile(fileName); // 원래 파일명 저장
-		
-		 // 새로운 폴더 이름 : 오늘 년+월+일
-		 Calendar c = Calendar.getInstance();
-		 int year = c.get(Calendar.YEAR); // 오늘 년 구합니다.
-		 int month = c.get(Calendar.MONTH) + 1;// 오늘 월 구합니다.
-		 int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
-		 // String
-		 // saveFoler=request.getSession().getServletContext().getRealPath("resources") +
-		 // "/upload/";
-		 String saveFolder = "D:\\final\\meetme2\\src\\main\\webapp\\resources\\upload\\";
-		 String homedir = saveFolder + year + "-" + month + "-" + date;
-		 System.out.println(homedir);
-		 File path1 = new File(homedir);
-		 if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
-		path1.mkdir(); // 없을 경우 경로 만들기
-		 }
-		
-		 Random r = new Random();
-		 int random = r.nextInt(100000000);
-		
-		 int index = fileName.lastIndexOf(".");
-		 System.out.println("index = " + index);
-		 String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
-		 System.out.println("fileExtension = " + fileExtension);
-		 String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-		 System.out.println("refileName = " + refileName);
-		//오라클 디비에 저장될 파일명
-		 String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-		 System.out.println("fileDBName = " + fileDBName);
-		 //transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-		 uploadfile.transferTo(new File(saveFolder + fileDBName));
-		//바뀐 파일명으로 저장
-		     user.setSavefile(fileDBName);
-		  }
-		 */
-		 for(int i=0;i<category_num.length;i++) {
-				System.out.println(category_num[i]);
+		String user_id = user.getUser_id();
+		String tmp[] = sel_category.split(",");
+		List<Integer> cat_list = new ArrayList<Integer>(); 
+		for (int i = 0; i < tmp.length; i++) {
+			if (tmp[i] != null && !tmp[i].equals("")) {
+				cat_list.add(Integer.parseInt(tmp[i]));
 			}
-			
-		 
-		  userService.insert(user); //저장 메서드 호출
-		  int user_num = user.getUser_num();
-		  //userService.userCategory(user_num, (int[]) category_num);
-		  return "main/main";
+		}
 		
-	}//joinProcess
-	
-	//로그인 처리
+
+		MultipartFile uploadfile = user.getUploadfile();
+		if (!uploadfile.isEmpty()) {
+			String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
+			user.setUser_original(fileName); // 원래 파일명 저장
+
+			// 새로운 폴더 이름 : 오늘 년+월+일
+			Calendar c = Calendar.getInstance();
+			int year = c.get(Calendar.YEAR); // 오늘 년 구합니다.
+			int month = c.get(Calendar.MONTH) + 1;// 오늘 월 구합니다.
+			int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
+			// String
+			// saveFoler=request.getSession().getServletContext().getRealPath("resources") +
+			// "/upload/";
+			String saveFolder = "C:\\Users\\김현윤\\Desktop\\final\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+			String homedir = saveFolder + year + "-" + month + "-" + date;
+			System.out.println(homedir);
+			File path1 = new File(homedir);
+			if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
+				path1.mkdir(); // 없을 경우 경로 만들기
+			}
+
+			Random r = new Random();
+			int random = r.nextInt(100000000);
+
+			int index = fileName.lastIndexOf(".");
+			System.out.println("index = " + index);
+			String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
+			System.out.println("fileExtension = " + fileExtension);
+			String refileName = "bbs" + year + month + date + random + "." + fileExtension;
+			System.out.println("refileName = " + refileName);
+			// 오라클 디비에 저장될 파일명
+			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
+			System.out.println("fileDBName = " + fileDBName);
+			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+			// 바뀐 파일명으로 저장
+			user.setUser_save(fileDBName);
+		}
+
+		userService.insert(user); // 저장 메서드 호출
+		
+		user = userService.getNum(user_id);
+		
+		int user_num = user.getUser_num();
+		
+		User_interests inter = new User_interests();
+		
+		inter.setUser_num(user_num);
+		
+		for(int i : cat_list) {
+			inter.setCategory_num(i);
+			userService.category(inter);
+		}
+
+		
+		return "main/main";
+
+	}// joinProcess
+
+	// 로그인 처리
 	@RequestMapping(value = "/loginProcess.net", method = RequestMethod.POST)
-	public String loginProcess(@RequestParam("user_id1") String user_id,
-								@RequestParam("user_pass1") String user_pass,
-								@RequestParam("user_num1") String user_num,
-								@RequestParam(value="u", defaultValue="") String u,
-								HttpServletRequest request,
-								HttpServletResponse response,
-								HttpSession session)throws Exception{
+	public String loginProcess(@RequestParam("user_id1") String user_id, @RequestParam("user_pass1") String user_pass,
+			@RequestParam(value = "u", defaultValue = "") String u, HttpServletRequest request,
+			HttpServletResponse response, HttpSession session) throws Exception {
 		User user = new User();
 		int result = userService.isId(user_id, user_pass);
-		System.out.println("결과는 " + result);
 		user = userService.user_info(user_id);
-		
-		System.out.println("num = "+ user.getUser_num());
-		
-		if(result == 1) {
-			//로그인 성공
+		int user_num = user.getUser_num();
+
+		if (result == 1) {
+			// 로그인 성공
 			session.setAttribute("user_id1", user_id);
 			session.setAttribute("user_num1", user_num);
-			//"saveid"라는 이름의 쿠키에 id의 값을 저장한 쿠키를 생성합니다.
+			// "saveid"라는 이름의 쿠키에 id의 값을 저장한 쿠키를 생성합니다.
 			Cookie savecookie = new Cookie("saveid", user_id);
-			if(!u.equals("")) {
-				savecookie.setMaxAge(60*60);
+			if (!u.equals("")) {
+				savecookie.setMaxAge(60 * 60);
 				System.out.println("쿠키저장 : 60*60초");
-			}else {
+			} else {
 				System.out.println("쿠키저장 : 0");
 				savecookie.setMaxAge(0);
 			}
 			response.addCookie(savecookie);
-			
+
 			return "redirect:main.index";
-		}else {
+		} else {
 			String message = "비밀번호가 일치하지 않습니다.";
-			if(result == -1)
+			if (result == -1)
 				message = "아이디가 존재하지 않습니다.";
-			
+
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>");			
+			out.println("<script>");
 			out.println("alert('" + message + "');");
-			out.println("location.href='main.index';");			
+			out.println("location.href='main.index';");
 			out.println("</script>");
 			out.close();
 			return null;
 		}
 	}
-	
-	
-	//로그아웃
-	@RequestMapping(value="/logout.net", method=RequestMethod.GET)
+
+	// 로그아웃
+	@RequestMapping(value = "/logout.net", method = RequestMethod.GET)
 	public String loginout(HttpSession session) {
 		session.invalidate();
 		return "redirect:main.index";

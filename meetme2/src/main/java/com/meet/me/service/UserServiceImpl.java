@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.meet.me.dao.UserDAO;
 import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
+import com.meet.me.domain.User_interests;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -86,12 +87,15 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void userCategory(int user_num, int[] category_num) {
-		Map<Integer,int[]> map = new HashMap<Integer,int[]>();
-		map.put(user_num, category_num);
-		dao.userCategoryInsert(map);
+	public User getNum(String user_id) {
+		return dao.getUsernum(user_id);
 	}
 
+	@Override
+	public void category(User_interests user_inter) {
+		dao.insertCat(user_inter);
+	}
 
 	
 }
+
