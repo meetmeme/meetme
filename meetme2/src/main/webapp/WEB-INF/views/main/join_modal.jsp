@@ -87,8 +87,11 @@
 						<div>
 							<div class="category">
 								<c:forEach var="cat" items="${category}">
-									<img class="category_img" src="resources/image/category/${cat.CATEGORY_NAME}.png" alt="${cat.CATEGORY_NUM}">
-									<input type="hidden" class="sel_category"  name="sel_category">
+									<p class="cat_p">
+										<img class="category_img" src="resources/image/category/${cat.CATEGORY_NAME}.png" alt="${cat.CATEGORY_NUM}">
+										<input type="hidden" class="sel_category"  name="sel_category"> 
+										<br><span class="cap1">${cat.CATEGORY_NAME}</span> 
+									</p>
 								</c:forEach>
 							</div>
 						</div>

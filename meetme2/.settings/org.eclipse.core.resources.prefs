@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/main/join_modal.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/user/emailConfirm.jsp=UTF-8
 encoding//src/main/webapp/resources/css/join.css=UTF-8
 encoding/<project>=UTF-8

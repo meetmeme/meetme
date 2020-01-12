@@ -1,4 +1,6 @@
 
+drop table mm_user CASCADE CONSTRAINTS;
+
 CREATE TABLE MM_USER(
 	USER_NUM		NUMBER PRIMARY KEY,
 	USER_ID			VARCHAR2(20),
@@ -9,15 +11,22 @@ CREATE TABLE MM_USER(
 	USER_AGE		NUMBER,
 	USER_CITY		VARCHAR2(30),
 	USER_ORIGINAL	VARCHAR2(100),
-	USER_SAVE		VARCHAR2(100)
+	USER_SAVE		VARCHAR2(100),
+	userCertification	number default 0
 );
 
 
-drop table mm_user CASCADE CONSTRAINTS;
 
 insert into mm_user values (1, 'admin', '1234','관리자','admin@meetme.com',
-'여','25','서울시','',''); 
-insert into mm_user values (2, 'a', '1234','관리자','admin@meetme.com',
-'여','25','서울시','',''); 
+'여','25','서울시','','',1); 
 
 select * from mm_user;
+
+drop table userAuth;
+
+create table userAuth (
+	user_email	varchar2(20),
+	authKey		varchar2(100)
+);
+
+select * from USERAUTH;

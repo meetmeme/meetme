@@ -2,6 +2,7 @@ $(document).ready(function(){
 	
 	var checkid = false;
 	var checkmail = false;
+	
 	$('#join2').hide();
 	$('#join3').hide();
 	$('.backbtn2').hide();
@@ -157,7 +158,5 @@ $(document).ready(function(){
 		}
 	})
 	
-	$("#join").submit(function(){
-	})
 	
 });

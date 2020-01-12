@@ -54,6 +54,20 @@ public class UserDAO {
 		sqlSession.insert("Users.insert_inter", user_inter);
 	}
 
+	public void createAuthKey(String user_email, String authKey) throws Exception { // 인증키 DB에 넣기
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		map.put("user_email", user_email);
+		map.put("authKey", authKey);
+
+		sqlSession.selectOne("Users.createAuthKey", map);
+	}
+
+	public void userAuth(String user_email) throws Exception { // 인증키 일치시 DB칼럼(인증여부) false->true 로 변경
+		sqlSession.update("Users.userAuth", user_email);
+	}
+
+	
 	
 	
 }

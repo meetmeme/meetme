@@ -14,6 +14,7 @@ public class User {
 	private MultipartFile uploadfile;
 	private String user_save="/image/default.png";
 	private String user_original="/image/default.png";
+	private int userCertification;
 	
 	public MultipartFile getUploadfile() {
 		return uploadfile;
@@ -81,5 +82,11 @@ public class User {
 	}
 	public void setUser_original(String user_original) {
 		this.user_original = user_original;
+	}
+	public int getUserCertification() {
+		return userCertification;
+	}
+	public void setUserCertification(int userCertification) {
+		this.userCertification = userCertification;
 	}
 }
