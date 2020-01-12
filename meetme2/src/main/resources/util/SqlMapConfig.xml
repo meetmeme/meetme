@@ -9,6 +9,7 @@
 		<typeAlias alias="user_interests" type="com.meet.me.domain.User_interests"/>
 		<typeAlias alias="hashtag" type="com.meet.me.domain.Hashtag"/>
 		<typeAlias alias="event" type="com.meet.me.domain.Event"/>
+		<typeAlias alias="myhome" type="com.meet.me.domain.MyHome"/>
 	</typeAliases>
 	
 	<mappers>
@@ -17,5 +18,6 @@
 		<mapper resource="sql/user_interests.xml"/>
 		<mapper resource="sql/hashtag.xml"/>
 		<mapper resource="sql/event.xml"/>
+		<mapper resource="sql/myhome.xml"/>
 	</mappers>
 </configuration> 

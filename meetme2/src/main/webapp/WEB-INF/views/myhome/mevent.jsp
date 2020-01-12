@@ -6,10 +6,10 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<jsp:include page="/WEB-INF/views/myhome/mnavi.jsp" />
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/myhome/mnavi.jsp" />
 	<div id="colorlib-page">
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 
@@ -708,23 +708,7 @@
 				stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" /></svg>
 	</div>
 
-	<script src="resources/js2/jquery.min.js"></script>
-	<script src="resources/js2/jquery-migrate-3.0.1.min.js"></script>
-	<script src="resources/js2/popper.min.js"></script>
-	<script src="resources/js2/bootstrap.min.js"></script>
-	<script src="resources/js2/jquery.easing.1.3.js"></script>
-	<script src="resources/js2/jquery.waypoints.min.js"></script>
-	<script src="resources/js2/jquery.stellar.min.js"></script>
-	<script src="resources/js2/owl.carousel.min.js"></script>
-	<script src="resources/js2/jquery.magnific-popup.min.js"></script>
-	<script src="resources/js2/aos.js"></script>
-	<script src="resources/js2/jquery.animateNumber.min.js"></script>
-	<script src="resources/js2/bootstrap-datepicker.js"></script>
-	<script src="resources/js2/jquery.timepicker.min.js"></script>
-	<script src="resources/js2/scrollax.min.js"></script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-	<script src="resources/js2/google-map.js"></script>
-	<script src="resources/js2/main.js"></script>
+	<jsp:include page="/WEB-INF/views/myhome/mscript.jsp" />
+
 </body>
 </html>

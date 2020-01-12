@@ -26,7 +26,28 @@
 <link rel="stylesheet" href="resources/css2/flaticon.css">
 <link rel="stylesheet" href="resources/css2/icomoon.css">
 <link rel="stylesheet" href="resources/css2/style.css">
+<script src="resources/js2/jquery-3.2.1.min.js"></script>
 
+<script>
+	$(document).ready(function() {
+		if (location.pathname == "/me/mmain.mh") {
+			$('li:nth-child(1)').addClass("colorlib-active");
+			$('li:nth-child(1)').siblings().removeClass("colorlib-active");
+		}
+		else if (location.pathname == "/me/mprofile.mh") {
+			$('li:nth-child(2)').addClass("colorlib-active");
+			$('li:nth-child(2)').siblings().removeClass("colorlib-active");
+		}
+		else if (location.pathname == "/me/mboard.mh") {
+			$('li:nth-child(3)').addClass("colorlib-active");
+			$('li:nth-child(3)').siblings().removeClass("colorlib-active");
+		}
+		else if (location.pathname == "/me/mevent.mh") {
+			$('li:nth-child(4)').addClass("colorlib-active");
+			$('li:nth-child(4)').siblings().removeClass("colorlib-active");
+		}
+	});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
@@ -37,11 +58,11 @@
 		</h1>
 		<nav id="colorlib-main-menu" role="navigation">
 			<ul>
-				<li class="colorlib-active"><a href="mmain.mh?${user_id}">홈</a></li>
-				<li><a href="mprofile.mh">프로필</a></li>
-				<li><a href="mboard.mh">게시판</a></li>
-				<li><a href="mevent.mh">이벤트</a></li>
-				<li><a href="mguestboot.mh">방명록</a></li>
+				<li><a href="mmain.mh?${user_id}">홈</a></li>
+				<li><a href="mprofile.mh?${user_id}">프로필</a></li>
+				<li><a href="mboard.mh?${user_id}">게시판</a></li>
+				<li><a href="mevent.mh?${user_id}">이벤트</a></li>
+				<li><a href="mguestbook.mh?${user_id}">방명록</a></li>
 			</ul>
 		</nav>
 
