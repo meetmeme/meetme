@@ -91,6 +91,12 @@ public class UserServiceImpl implements UserService{
 	public void userAuth(String user_email) throws Exception {
 		dao.userAuth(user_email);
 	}
+
+
+	@Override
+	public void setMyhome(int user_num) {
+		dao.setMyhome(user_num);
+	}
 	
 }
 

@@ -30,7 +30,6 @@
 							<h1 class="mb-4">${user_id1}</h1>
 							<h1 class="mb-4">${user_num1}</h1>
 							<p class="mb-4">${mhinfo.myhome_intro}</p>
-
 							<ul class="ftco-social mt-3">
 
 							</ul>

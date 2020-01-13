@@ -16,5 +16,6 @@ public interface UserService {
 	public void category(User_interests user_inter);
 	void insert(User user) throws Exception;
 	void userAuth(String user_email) throws Exception;
+	public void setMyhome(int user_num);
 }
  
