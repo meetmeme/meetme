@@ -11,7 +11,7 @@
 		values((select nvl(max(user_num),0)+1 from mm_user), #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_save}, #{user_original}, 0)
 	</insert>
 	
-	<select id="selectNum" parameterType="String" resultType="user">
+	<select id="selectNum" parameterType="String" resultType="User">
 		select * from mm_user
 		where user_id = #{user_id}
 	</select>

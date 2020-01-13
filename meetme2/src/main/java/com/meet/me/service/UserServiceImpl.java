@@ -88,8 +88,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void userAuth(String userEmail) throws Exception {
-		dao.userAuth(userEmail);
+	public void userAuth(String user_email) throws Exception {
+		dao.userAuth(user_email);
 	}
 	
 }

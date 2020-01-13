@@ -101,11 +101,12 @@
 								<li><a href="#">admin</a></li>
 							</c:if>
               				<c:if test="${!empty user_id1}">
-									<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
+								<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
 								<li><a href="#">Create New Group</a></li>
 								<li><a id="userMenuBox"><img class="header_profilePic img-circle" alt=""
 									src="resources/images/our-blog/img-1.jpg"></a>
 								</li>
+								<li><a href="logout.net">logout</a></li>
 							</c:if>
 							</ul>
 					</div>

@@ -15,6 +15,6 @@ public interface UserService {
 	public User getNum(String user_id);
 	public void category(User_interests user_inter);
 	void insert(User user) throws Exception;
-	void userAuth(String userEmail) throws Exception;
+	void userAuth(String user_email) throws Exception;
 }
  

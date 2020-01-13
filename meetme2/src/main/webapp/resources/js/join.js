@@ -26,8 +26,6 @@ $(document).ready(function(){
 		$('.backbtn2').hide();
 	})
 	
-	
-	
 	$('.nextbtn1').click(function(){
 		
 		if(!checkid){

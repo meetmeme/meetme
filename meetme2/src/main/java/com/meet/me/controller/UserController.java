@@ -80,14 +80,14 @@ public class UserController {
 			// String
 			// saveFoler=request.getSession().getServletContext().getRealPath("resources") +
 			// "/upload/";
-			String saveFolder = "C:\\Users\\김현윤\\Desktop\\final\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+			String saveFolder = "D:\\final\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 			System.out.println(homedir);
 			File path1 = new File(homedir);
 			if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
 				path1.mkdir(); // 없을 경우 경로 만들기
 			}
-
+	
 			Random r = new Random();
 			int random = r.nextInt(100000000);
 
@@ -105,34 +105,42 @@ public class UserController {
 			// 바뀐 파일명으로 저장
 			user.setUser_save(fileDBName);
 		}
-
-		userService.insert(user); // 저장 메서드 호출
-		rttr.addFlashAttribute("msg", "regSuccess");
-		
-		user = userService.getNum(user_id);
-		
-		int user_num = user.getUser_num();
-		
-		User_interests inter = new User_interests();
-		
-		inter.setUser_num(user_num);
-		
-		for(int i : cat_list) {
-			inter.setCategory_num(i);
-			userService.category(inter);
-		}
-
-		
-		return "main/main";
+	
+			userService.insert(user); // 저장 메서드 호출
+			rttr.addFlashAttribute("msg", "regSuccess");
+			
+			user = userService.getNum(user_id);
+			
+			int user_num = user.getUser_num();
+			
+			User_interests inter = new User_interests();
+			
+			inter.setUser_num(user_num);
+			
+			for(int i : cat_list) {
+				inter.setCategory_num(i);
+				userService.category(inter);
+			}
+	
+			
+			return "main/main";
 
 	}// joinProcess
 	
 	@RequestMapping(value = "/emailConfirm.net", method = RequestMethod.GET)
-	public String emailConfirm(String user_id, Model model) throws Exception { // 이메일 인증 확인창
-			userService.userAuth(user_id);
-			model.addAttribute("user_id", user_id);
+	public String emailConfirm(User user, String user_email, String user_id, Model model) throws Exception { // 이메일 인증 확인창
+		System.out.println("user_email : " + user_email);
+		System.out.println("user_id" + user_id);
+		
+		user = userService.getNum(user_id);
+		
+		user_email = user.getUser_email();
+		System.out.println("user_email2 : " + user_email);
+		
+		userService.userAuth(user_email);
+		model.addAttribute("user_email", user_email);
 
-			return "user/emailConfirm"; // emailConfirm.jsp
+		return "user/emailConfirm"; // emailConfirm.jsp
 	}
 
 	// 로그인 처리
@@ -143,36 +151,46 @@ public class UserController {
 		User user = new User();
 		int result = userService.isId(user_id, user_pass);
 		user = userService.user_info(user_id);
-		int user_num = user.getUser_num();
-		int certification = user.getUserCertification();
-		System.out.println("userCertification : "+ certification);
-
-		if (result == 1 && certification == 1) {
-			// 로그인 성공
-			session.setAttribute("user_id1", user_id);
-			session.setAttribute("user_num1", user_num);
-			// "saveid"라는 이름의 쿠키에 id의 값을 저장한 쿠키를 생성합니다.
-			Cookie savecookie = new Cookie("saveid", user_id);
-			if (!u.equals("")) {
-				savecookie.setMaxAge(60 * 60);
-				System.out.println("쿠키저장 : 60*60초");
+	
+		if (result == 1) {
+			int user_num = user.getUser_num();
+			int certification = user.getUserCertification();
+			
+			if(certification == 1) {
+				// 로그인 성공
+				session.setAttribute("user_id1", user_id);
+				session.setAttribute("user_num1", user_num);
+				// "saveid"라는 이름의 쿠키에 id의 값을 저장한 쿠키를 생성합니다.
+				Cookie savecookie = new Cookie("saveid", user_id);
+				if (!u.equals("")) {
+					savecookie.setMaxAge(60 * 60);
+					System.out.println("쿠키저장 : 60*60초");
+				} else {
+					System.out.println("쿠키저장 : 0");
+					savecookie.setMaxAge(0);
+				}
+				response.addCookie(savecookie);
 			} else {
-				System.out.println("쿠키저장 : 0");
-				savecookie.setMaxAge(0);
+				String message = null;
+				message = "이메일 인증을 해주세요.";
+				response.setContentType("text/html;charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('" + message + "');");
+				out.println("location.href='main.index';");
+				out.println("</script>");
+				out.close();
+				return null;
 			}
-			response.addCookie(savecookie);
-
 			return "redirect:main.index";
 		} else {
 			String message = null;
+			
 			if(result == 0) {
 				message = "비밀번호가 일치하지 않습니다.";
 			}else if (result == -1) {
 				message = "아이디가 존재하지 않습니다.";
-			}else if(certification == 0) {
-				message = "이메일 인증을 해주세요.";
 			}
-
 			response.setContentType("text/html;charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");

@@ -30,3 +30,5 @@ create table userAuth (
 );
 
 select * from USERAUTH;
+
+update mm_user set userCertification = 1 where (select count(*) from userAuth inner join mm_user on userAuth.user_email = mm_user.user_email where mm_user.user_id = 'aaaaa') > 0;
