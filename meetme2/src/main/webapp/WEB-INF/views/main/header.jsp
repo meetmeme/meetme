@@ -1,6 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,8 @@
 	href="resources/css/prettyPhoto.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/unslider.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/template.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/join.css" />
 
 <!-- javascript -->
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
@@ -55,10 +58,11 @@
 	src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 </head>
 
+<script src="resources/js/join.js"></script>
+<script src="resources/js/remember.js"></script>
 
 <!-- Header
     ================================================== -->
@@ -66,7 +70,9 @@
 	<div id="nino-headerInner">
 		<nav id="nino-navbar" class="navbar navbar-default" role="navigation">
 			<div class="container">
-
+			
+				
+				
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
@@ -83,16 +89,19 @@
 					<div class="collapse navbar-collapse pull-left"
 						id="nino-navbar-collapse">
 						<ul class="nav navbar-nav">
-							<c:if test="${empty user_id}">
+							<c:if test="${empty user_id1}">
 								<li>
-									<a href="login.net"  data-target="#layerpop" data-toggle="modal">login</a><br/>
+									<a href="#"  data-target="#layerpop" data-toggle="modal">login</a><br/>
 								</li>
-								<li><a href="join.net">join</a></li>
+								<li>
+									<a href="#"  data-target="#layerpop2" data-toggle="modal">join</a>
+								</li>
 							</c:if>
-							<c:if test="${user_id=='admin'}">
+							<c:if test="${user_id1=='admin'}">
 								<li><a href="#">admin</a></li>
 							</c:if>
-              			<c:if test="${!empty user_id}">
+              				<c:if test="${!empty user_id1}">
+									<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
 								<li><a href="#">Create New Group</a></li>
 								<li><a id="userMenuBox"><img class="header_profilePic img-circle" alt=""
 									src="resources/images/our-blog/img-1.jpg"></a>
@@ -102,8 +111,7 @@
 					</div>
 					<!-- /.navbar-collapse -->
 					<ul class="nino-iconsGroup nav navbar-nav">
-						<li><a href="#" class="nino-search"><i
-								class="mdi mdi-magnify nino-icon"></i></a></li>
+						<li><a href="#" class="nino-search"><i class="mdi mdi-magnify nino-icon"></i></a></li>
 					</ul>
 				</div>
 			</div>
@@ -172,57 +180,10 @@
 </header>
 <!--/#header-->
 
-<!-- My Menu Box 모달 --> <!-- sohee_010620 -->
-	<div id="menubox" >
-	<ul class="nav navbar-nav">
-		<li><a href="#" class="dropdown-item">MY MINI HOME</a></li>
-		<li><a href="#"	class="dropdown-item">message</a></li>
-		<li><a href="#" class="dropdown-item">send message</a></li>
-		<li><a href="logout.net">logout</a></li>
-	</ul>
-	</div>
+<!-- 모달 -->
+<jsp:include page="login_modal.jsp"/>
+<jsp:include page="join_modal.jsp"/>
 
-<!-- 로그인 모달 -->
-	<div class="modal fade" id="layerpop" >
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <!-- header -->
-	      <div class="modal-header">
-	        <!-- 닫기(x) 버튼 -->
-	        <button type="button" class="close" data-dismiss="modal">×</button>
-	        <!-- header title -->
-	        <h4 class="modal-title">LOGIN</h4>
-	      </div>
-	      <!-- body -->
-	      <div class="modal-body">
-	            <form name="loginform" action="loginProcess.net" method="post">
-					<div class="form-group">
-						<b class="articleDesc">ID</b>
-						<input class="form-control" type="text" name="user_id" placeholder="Enter id" required
-						value="${saveid}">
-						<br>
-					</div>
-					<div class="form-group">
-						<b class="articleDesc">PASSWORD</b>
-						<input class="form-control" type="password" name="user_pass" placeholder="Enter password" required>
-					</div>
-					<div>
-						<input type="checkbox" name="u" class="articleDesc">Remember me
-					</div>
-					<br>
-					<div class="clearfix form-group">
-						<button type="submit" class="btn btn-primary submitbtn">로그인</button>
-						<button type="button" class="btn btn-danger join">회원가입</button>
-					</div>
-				</form>
-	      </div>
-	      <!-- Footer -->
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
 
 <script>
 	$(function() {
@@ -250,4 +211,7 @@
 		$('#search-event').show();
 		$('#search-minihome').hide();
 	});
+	
+	
 </script>
+

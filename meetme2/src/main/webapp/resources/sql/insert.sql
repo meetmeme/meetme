@@ -1,15 +1,19 @@
+drop table mm_category CASCADE CONSTRAINTS;
+
 insert all
-into  MM_CATEGORY values(1, '야외활동')
-into  MM_CATEGORY values(2, '기술')
-into  MM_CATEGORY values(3, '가족')
-into  MM_CATEGORY values(4, '건강')
-into  MM_CATEGORY values(5, '스포츠')
-into  MM_CATEGORY values(6, '학습')
-into  MM_CATEGORY values(7, '사진촬영')
-into  MM_CATEGORY values(8, '음악')
-into  MM_CATEGORY values(9, '언어')
-into  MM_CATEGORY values(10, '춤')
+into  MM_CATEGORY values(1, 'outdoor')
+into  MM_CATEGORY values(2, 'technology')
+into  MM_CATEGORY values(3, 'family')
+into  MM_CATEGORY values(4, 'healty')
+into  MM_CATEGORY values(5, 'sports')
+into  MM_CATEGORY values(6, 'study')
+into  MM_CATEGORY values(7, 'photo')
+into  MM_CATEGORY values(8, 'music')
+into  MM_CATEGORY values(9, 'language')
+into  MM_CATEGORY values(10, 'dance')
 select * from dual;
+
+select * from MM_CATEGORY;
 
 insert all
 into  MM_HASHTAG values(1, '야외활동')

@@ -1,7 +1,9 @@
 package com.meet.me.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,9 @@ public class IndexController {
 	
 	//메인 화면 -카테고리, 해시태그 값을 가져감
 	@GetMapping(value="/main.index")
-	public ModelAndView index(ModelAndView mv, HttpServletResponse response) {
-	
+	public ModelAndView index(ModelAndView mv, HttpServletResponse response,HttpServletRequest request) {
+		response.setContentType("text/html;charset=UTF-8");
 		List<String> category = eventService.getCategory();
-		System.out.println(category.size());
 		List<String> hashtag = hashtagService.getHashtag();
 		
 		mv.setViewName("main/main");

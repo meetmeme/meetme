@@ -1,0 +1,39 @@
+@charset "utf-8";
+input[name='user_id']{
+	width : 40%;
+}
+input[name='user_age']{
+	width : 40%;
+}
+
+.imgcontainer {
+	text-align: center;
+	margin: 24px 0 12px 0;
+	position: relative;
+}
+
+img.avatar {
+	width: 200px;
+	height : 200px;
+	border-radius: 50%;
+}
+
+.category_img{
+	border-radius : 10px;
+	cursor : pointer;
+	width : 150px;
+	height : 150px;
+}
+
+.modal-title{
+	text-align: right;
+	margin-right : 10px;
+}
+
+.backbtn2, .backbtn3 {
+	display : inline-block;
+	width : 30px;
+	height : 30px;
+	cursor : pointer;
+}
+

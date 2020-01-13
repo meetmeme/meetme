@@ -1,5 +1,7 @@
 package com.meet.me.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class User {
 	private String user_id;
 	private String user_pass;
@@ -9,8 +11,18 @@ public class User {
 	private int user_age;
 	private String user_city;
 	private int user_num;
-	private String user_image;
+	private MultipartFile uploadfile;
+	private String user_save="/image/default.png";
+	private String user_original="/image/default.png";
+	private int userCertification;
 	
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
+
 	public String getUser_id() {
 		return user_id;
 	} 
@@ -59,11 +71,22 @@ public class User {
 	public void setUser_num(int user_num) {
 		this.user_num = user_num;
 	}
-	public String getUser_image() {
-		return user_image;
+	public String getUser_save() {
+		return user_save;
 	}
-	public void setUser_image(String user_image) {
-		this.user_image = user_image;
+	public void setUser_save(String user_save) {
+		this.user_save = user_save;
 	}
-	
+	public String getUser_original() {
+		return user_original;
+	}
+	public void setUser_original(String user_original) {
+		this.user_original = user_original;
+	}
+	public int getUserCertification() {
+		return userCertification;
+	}
+	public void setUserCertification(int userCertification) {
+		this.userCertification = userCertification;
+	}
 }

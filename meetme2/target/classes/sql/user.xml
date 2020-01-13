@@ -8,63 +8,34 @@
 	
 	<insert parameterType="User" id="insert">
 		insert into mm_user 
-		values((select nvl(max(user_num),0)+1 from mm_user), #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_image})
+		values((select nvl(max(user_num),0)+1 from mm_user), #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_save}, #{user_original}, 0)
 	</insert>
-
 	
-	<select id="getSearchList" parameterType="map" resultType="user">
-		select *
-		from (select rownum rnum, b.*
-			from (select * from mm_user
-				where user_id != 'admin' 
-				<if test="search_field!=null">
-					and
-					<choose>
-						<when test="search_field=='user_id'">user_id</when>
-						<when test="search_field=='user_name'">user_name</when>
-						<when test="search_field=='user_age'">user_age</when>
-						<when test="search_field=='user_gender'">user_gender</when>
-						<when test="search_field=='user_city'">user_city</when>
-					</choose>
-					like #{search_word}
-				</if>
-				order by user_id)b
-		)
-		where rnum &gt;=#{start} and rnum &lt; = #{end}
+	<select id="selectNum" parameterType="String" resultType="user">
+		select * from mm_user
+		where user_id = #{user_id}
 	</select>
 	
-	<select id="searchcount" parameterType="map" resultType="int">
-		select count(*) from mm_user
-		where user_id!='admin'
-		<if test="search_field!=null">
-			and
-			<choose>
-				<when test="search_field=='user_id'">user_id</when>
-				<when test="search_field=='user_name'">user_name</when>
-				<when test="search_field=='user_age'">user_age</when>
-				<when test="search_field=='user_gender'">user_gender</when>
-				<when test="search_field=='user_city'">user_city</when>
-			</choose>
-			like #{search_word}
-		</if>
-	</select>
+	<insert id="insert_inter" parameterType="User_interests">
+	    INSERT INTO
+	        mm_user_interests
+	    VALUES(#{user_num}, #{category_num})
+	</insert>
 	
-	<update id="update" parameterType="user">
-		update mm_user
-		set 
-			user_pass=#{user_pass},
-			user_name=#{user_name},
-			user_age=#{user_age},
-			user_gender=#{user_gender},
-			user_email=#{user_email},
-			user_city=#{user_city},
-			user_image=#{user_image}
-		where user_id=#{user_id}
+	
+	<insert id="createAuthKey">
+		insert into userAuth values(#{user_email}, #{authKey})
+	</insert>
+	
+	<update id="userAuth">
+		<![CDATA[
+			update mm_user 
+			set userCertification = 1 
+			where (select count(*) 
+					from userAuth 
+					where user_email = #{user_email}) > 0
+		]]>
 	</update>
-	
-	<delete id="delete" parameterType="String">
-		delete from mm_user where user_id=#{user_id}
-	</delete>
 	
 </mapper>
 
