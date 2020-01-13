@@ -102,15 +102,12 @@
 							</c:if>
               				<c:if test="${!empty user_id1}">
 									<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
-								</c:if>
-							<c:if test="${!empty user_id1}">
 								<li><a href="#">Create New Group</a></li>
-								<li><a href="logout.net">logout</a></li>
-								<li><img class="header_profilePic img-circle" alt=""
-									src="resources/images/our-blog/img-1.jpg" title="토글 넣을 예정">
+								<li><a id="userMenuBox"><img class="header_profilePic img-circle" alt=""
+									src="resources/images/our-blog/img-1.jpg"></a>
 								</li>
 							</c:if>
-						</ul>
+							</ul>
 					</div>
 					<!-- /.navbar-collapse -->
 					<ul class="nino-iconsGroup nav navbar-nav">
@@ -186,6 +183,7 @@
 <!-- 모달 -->
 <jsp:include page="login_modal.jsp"/>
 <jsp:include page="join_modal.jsp"/>
+
 
 <script>
 	$(function() {
