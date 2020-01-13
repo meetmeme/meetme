@@ -1,29 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<title>회원관리 시스템 관리자모드(회원 목록 보기)</title>
-<style>
-	div{
-		text-align: center;
-	}
-	.center-block {
-		display: flex;
-		justify-content: center; /*가운데정렬*/
-	}
-	table caption {
-		caption-side : top;
-		text-align: center;
-	}
-	li .current {
-		background: #faf7f7;
-	}
-</style>
+
+</head>
+<body data-target="#nino-navbar" data-spy="scroll">
+<jsp:include page="header.jsp" />
 <script>
 	$(document).ready(function(){
 		$("#delete").click(function(){
@@ -37,34 +20,25 @@
 		if(selectedValue != '-1')
 			$("#viewcount").val(selectedValue);
 		
+		console.log(selectedValue);
+		
 		$("button").click(function(){
 			if($("input").val()==''){
 				alert("검색어를 입력하세요");
 				return false;
 			}
-		})
+		});
 		
-		//성별의 경우 placeholder 나타나도록합니다.
-		$("#viewcount").change(function(){
-			selectedValue = $(this).val();
-			$("input").val('');
-			if(selectedValue == '3'){
-				$("input").attr("placeholder","여 또는 남을 입력하세요");
-			}
-		})
-	})
+		
+	});
 </script>
-</head>
-<body>
-
 	<div class="container">
-	<form action = "member_list.net">
+	<form action = "user_list.ad">
 		<div class="input-group">
 			<select id="viewcount" name="search_field">
-				<option value="0" selected>아이디</option>
-				<option value="1">이름</option>
-				<option value="2">나이</option>
-				<option value="3">성별</option>
+				<option value="0" selected>회원번호</option>
+				<option value="1">아이디</option>
+				<option value="2">이름</option>
 			</select>
 			<input name="search_word" type="text" class="form-control" placeholder="Search" value="${search_word }">
 			<button class="btn btn-primary" type="submit">검색</button>
@@ -74,20 +48,22 @@
 			<table class="table table-striped">
 			<caption>회원목록</caption>
 				<tr>
-					<th colspan="2">MVC 게시판 - 회원 정보 list</th>
-					<th colspan="1"><font size="3">회원 수 : ${listcount}</font></th>
+					<th colspan="2">회원 리스트</th>
+					<th colspan="2"><font size="3">회원 수 : ${listcount}</font></th>
 				<tr>
 				<tr>
-					<td width="33.3%"><div>아이디</div></td>
-					<td width="33.3%"><div>이름</div></td>
-					<td width="33.3%"><div>삭제</div></td>
+					<td width="25%"><div>회원번호</div></td>
+					<td width="25%"><div>아이디</div></td>
+					<td width="25%"><div>이름</div></td>
+					<td width="25%"><div>삭제</div></td>
 				</tr>
 				<c:set var="num"  value="${listcount-(page-1)*5}" />
-				<c:forEach var="m"  items="${memberlist}">
+				<c:forEach var="u"  items="${userlist}">
 					<tr>
-						<td><a href="member_info.net?id=${m.id}">${m.id }</a></td>
-						<td>${m.name }</td>
-						<td><a href="member_delete.net?id=${m.id}" id="delete">삭제</a></td>
+						<td>${u.user_num}</td>
+						<td><a href="user_info.ad?user_id=${u.user_id}">${u.user_id}</a></td>
+						<td>${u.user_name}</td>
+						<td><a href="user_delete.ad?user_id=${u.user_id}" id="delete">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -104,7 +80,7 @@
 					</c:if>
 					<c:if test="${page > 1}">
 						<li class="page-item">
-							<a href="member_list.net?page=${page-1}&search_field=${search_field}&search_word=${search_word}" class="page-link">이전</a>&nbsp;
+							<a href="user_list.ad?page=${page-1}&search_field=${search_field}&search_word=${search_word}" class="page-link">이전</a>&nbsp;
 						</li>
 					</c:if>
 					
@@ -116,7 +92,7 @@
 						</c:if>
 						<c:if test="${a != page}">
 							<li class="page-item">
-								<a href="member_list.net?page=${a }&search_field=${search_field}&search_word=${search_word}" class="page-link">${a}</a>
+								<a href="user_list.ad?page=${a}&search_field=${search_field}&search_word=${search_word}" class="page-link">${a}</a>
 							</li>
 						</c:if>
 					</c:forEach>
@@ -128,7 +104,7 @@
 					</c:if>
 					<c:if test="${page<maxpage}">
 						<li class="page-item">
-							<a href="member_list.net?page=${page+1}&search_field=${search_field}&search_word=${search_word}"  class="page-link"> &nbsp;다음</a>
+							<a href="user_list.ad?page=${page+1}&search_field=${search_field}&search_word=${search_word}"  class="page-link"> &nbsp;다음</a>
 						</li>
 					</c:if>
 				</ul>
