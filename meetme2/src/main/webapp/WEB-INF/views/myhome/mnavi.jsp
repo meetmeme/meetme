@@ -58,11 +58,11 @@
 		</h1>
 		<nav id="colorlib-main-menu" role="navigation">
 			<ul>
-				<li><a href="mmain.mh?${user_id}">홈</a></li>
-				<li><a href="mprofile.mh?${user_id}">프로필</a></li>
-				<li><a href="mboard.mh?${user_id}">게시판</a></li>
-				<li><a href="mevent.mh?${user_id}">이벤트</a></li>
-				<li><a href="mguestbook.mh?${user_id}">방명록</a></li>
+				<li><a href="mmain.mh?${user_id1}">홈</a></li>
+				<li><a href="mprofile.mh?${user_id1}">프로필</a></li>
+				<li><a href="mboard.mh?${user_id1}">게시판</a></li>
+				<li><a href="mevent.mh?${user_id1}">이벤트</a></li>
+				<li><a href="mguestbook.mh?${user_id1}">방명록</a></li>
 			</ul>
 		</nav>
 

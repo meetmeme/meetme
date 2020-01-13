@@ -25,7 +25,7 @@ public class MyhomeController {
 			ModelAndView mv, 
 			HttpServletRequest request) throws Exception{
 		
-		String user_id = (String)session.getAttribute("user_id");
+		String user_id = (String)session.getAttribute("user_id1");
 		System.out.println("userid : " + user_id);
 		MyHome mhinfo = mhservice.getinfo(user_id);
 		if(mhinfo==null) {

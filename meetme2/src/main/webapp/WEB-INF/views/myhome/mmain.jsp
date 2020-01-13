@@ -27,7 +27,7 @@
 							style="background-image: url(resources/images2/author.jpg);"></div>
 						<div class="desc">
 							<h2 class="subheading">Hello I'm</h2>
-							<h1 class="mb-4">${user_id}</h1>
+							<h1 class="mb-4">${user_id1}</h1>
 							<h1 class="mb-4">${user_num1}</h1>
 							<p class="mb-4">${mhinfo.myhome_intro}</p>
 
