@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.meet.me.domain.Category;
+import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 import com.meet.me.service.UserService;
@@ -121,6 +122,8 @@ public class UserController {
 				inter.setCategory_num(i);
 				userService.category(inter);
 			}
+			
+			userService.setMyhome(user_num);
 	
 			
 			return "main/main";

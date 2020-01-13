@@ -13,7 +13,9 @@ DROP TABLE MM_USER_INTERESTS;
 DROP TABLE MM_CATEGORY;
 DROP TABLE MM_USER;
  
+select * from mm_myhome;
 
+insert into MM_MYHOME(user_num, myhome_num) values (1,1); 
 
 CREATE TABLE MM_CATEGORY(
 	CATEGORY_NUM	NUMBER PRIMARY KEY,

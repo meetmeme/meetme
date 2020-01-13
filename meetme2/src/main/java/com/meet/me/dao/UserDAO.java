@@ -67,6 +67,10 @@ public class UserDAO {
 		sqlSession.update("Users.userAuth", user_email);
 	}
 
+	public void setMyhome(int user_num) {
+		sqlSession.insert("Users.myhome", user_num);
+	}
+
 	
 	
 	

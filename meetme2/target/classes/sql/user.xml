@@ -37,6 +37,11 @@
 		]]>
 	</update>
 	
+	<insert id="myhome" parameterType="int">
+		insert into mm_myhome(user_num, myhome_num)
+		values(#{user_num}, #{user_num})
+	</insert>
+	
 </mapper>
 
 
