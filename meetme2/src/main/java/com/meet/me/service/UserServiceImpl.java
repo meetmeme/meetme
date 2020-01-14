@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService{
 				"<a href='localhost:8088/me/emailConfirm.net?user_id=" + user.getUser_id() +
 				"&key=" + key +
 				"' target='_blank'>이메일 인증 확인</a>");
-		sendMail.setFrom("tpaem0103@gmail.com", "MeetMe"); // 보낸이
+		sendMail.setFrom("foradsohee@gmail.com", "MeetMe"); // 보낸이
 		sendMail.setTo(user.getUser_email()); // 받는이
 		sendMail.send();
 	}
