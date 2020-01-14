@@ -1,7 +1,11 @@
 package com.meet.me.service;
 
+import com.meet.me.domain.Dash;
+
 public interface DashService {
 
-	void getInterests();
+	Dash dashInter(int category_num);
+
+	void allcatNum();
 
 }

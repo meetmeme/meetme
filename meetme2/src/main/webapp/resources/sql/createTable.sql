@@ -15,8 +15,6 @@ DROP TABLE MM_USER;
  
 select * from mm_myhome;
 
-insert into MM_MYHOME(user_num, myhome_num) values (1,1); 
-
 CREATE TABLE MM_CATEGORY(
 	CATEGORY_NUM	NUMBER PRIMARY KEY,
 	CATEGORY_NAME	VARCHAR2(20)
@@ -27,6 +25,10 @@ CREATE TABLE MM_USER_INTERESTS(
 	USER_NUM		NUMBER REFERENCES MM_USER(USER_NUM) ON DELETE CASCADE,
 	CATEGORY_NUM	NUMBER REFERENCES MM_CATEGORY(CATEGORY_NUM) ON DELETE CASCADE
 );
+
+select (mm_user_interests.category_num)count, mm_category.category_name 
+from mm_user_interests inner join mm_category
+on mm_user_interests.category_num=1 and mm_category.category_num=1;
 
 select * from mm_user_interests;
 

@@ -1,6 +1,7 @@
 package com.meet.me.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.meet.me.domain.Dash;
 import com.meet.me.domain.User;
+import com.meet.me.domain.User_interests;
 import com.meet.me.service.DashService;
 import com.meet.me.service.UserService;
 
@@ -29,9 +32,25 @@ public class AdminController {
 	
 	
 	@RequestMapping(value = "/dash.ad", method = RequestMethod.GET)
-	public ModelAndView dash(ModelAndView mv) {
-		dashService.getInterests();
-		return "admin/dash";
+	public ModelAndView dashInter(ModelAndView mv) {
+		Dash dash = new Dash();
+		
+		List<Integer> cat_nums = new ArrayList<Integer>();
+		
+		cat_nums = dash
+		
+		List<Dash> interList = new ArrayList<Dash>();
+		/*
+		 * dashService.allcatNum(); int[] category_num = dash.getCat_nums(); int[]
+		 * count_list = dash.getInterests_count_list();
+		 * 
+		 * for(int i=0;i<category_num.length;i++) { interList =
+		 * dashService.dashInter(category_num[i]); }
+		 */
+		mv.setViewName("admin/dash");
+		mv.addObject("interlist", interList);
+		
+		return mv;
 	}
 	@RequestMapping(value = "/report.ad", method = RequestMethod.GET)
 	public String report() {
