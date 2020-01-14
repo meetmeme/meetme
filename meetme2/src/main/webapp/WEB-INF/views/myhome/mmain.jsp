@@ -13,11 +13,10 @@
 </head>
 <body>
 	<div id="colorlib-page">
-		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 
 		<div id="colorlib-main">
 			<div class="hero-wrap hero-wrap-2 js-fullheight"
-				style="background-image: url(resources/images2/bg_4.jpg);"
+				style="background-image: url(resources/images2/wooden-floor.jpg);"
 				data-stellar-background-ratio="0.5">
 				<div class="overlay"></div>
 				<div
