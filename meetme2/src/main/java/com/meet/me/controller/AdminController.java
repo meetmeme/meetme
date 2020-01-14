@@ -1,7 +1,10 @@
 package com.meet.me.controller;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.meet.me.domain.Dash;
 import com.meet.me.domain.User;
+import com.meet.me.domain.User_interests;
 import com.meet.me.service.DashService;
+import com.meet.me.service.EventService;
 import com.meet.me.service.UserService;
 
 @Controller
@@ -23,16 +29,39 @@ public class AdminController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private EventService eventService;
 	
 	@Autowired
 	private DashService dashService;
 	
 	
 	@RequestMapping(value = "/dash.ad", method = RequestMethod.GET)
-	public ModelAndView dash(ModelAndView mv) {
-		dashService.getInterests();
-		return "admin/dash";
+	public ModelAndView dashInter(ModelAndView mv) {
+		
+		//카테고리 리스트 가져오기
+		Map<String,List<String>> map = new HashMap<String,List<String>>(); 
+		List<String> categoryList = new ArrayList<String>();
+		categoryList = dashService.getCategory();
+		map.put("categoryList",categoryList);
+		
+		//사용자 카테고리 별 카운트
+		List<Integer> categoryCount = new ArrayList<Integer>(); 
+		int count = 0;
+		for(int category_num=1; category_num<=categoryList.size();category_num++) {
+			count = dashService.interCount(category_num);
+			categoryCount.add(category_num-1, count);
+		}
+		
+		
+		mv.setViewName("admin/dash");
+		mv.addObject("categoryList", categoryList);
+		mv.addObject("categoryCount", categoryCount);
+		
+		return mv;
 	}
+	
 	@RequestMapping(value = "/report.ad", method = RequestMethod.GET)
 	public String report() {
 		return "admin/report";

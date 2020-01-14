@@ -2,10 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="User_interests">
-	<select id="getInter">
-		select (inter)count
-		from mm_user_interest
-	</select>
+	<select id="interCount" resultType="int" parameterType="int">
+		select count(*) 
+		from mm_user_interests 
+		where category_num = #{category_num}
+	</select> 
 </mapper>
 
 

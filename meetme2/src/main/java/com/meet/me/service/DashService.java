@@ -1,7 +1,12 @@
 package com.meet.me.service;
 
+import java.util.List;
+
 public interface DashService {
 
-	void getInterests();
+
+	List<String> getCategory();
+
+	int interCount(int category_num);
 
 }

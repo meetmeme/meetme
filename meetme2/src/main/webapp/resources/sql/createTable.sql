@@ -17,8 +17,6 @@ drop table mm_message;
  
 select * from mm_myhome;
 
-insert into MM_MYHOME(user_num, myhome_num) values (1,1); 
-
 CREATE TABLE MM_CATEGORY(
 	CATEGORY_NUM	NUMBER PRIMARY KEY,
 	CATEGORY_NAME	VARCHAR2(20)
