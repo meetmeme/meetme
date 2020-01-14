@@ -1,0 +1,12 @@
+@charset "UTF-8";
+.admin_out{
+	background: grey;
+	width : 100%;
+}
+.admin_nav{
+	width : 800px;
+    margin:0 auto;
+}
+#admin_ul a{
+	width : 200px;
+}

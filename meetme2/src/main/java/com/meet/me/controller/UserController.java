@@ -110,9 +110,9 @@ public class UserController {
 			userService.insert(user); // 저장 메서드 호출
 			rttr.addFlashAttribute("msg", "regSuccess");
 			
-			user = userService.getNum(user_id);
+			User user1 = userService.getNum(user_id);
 			
-			int user_num = user.getUser_num();
+			int user_num = user1.getUser_num();
 			
 			User_interests inter = new User_interests();
 			

@@ -36,7 +36,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/unslider.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/template.css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<link rel="stylesheet" type="text/css" href="resources/css/join.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/admin.css" />
 
 <!-- javascript -->
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
@@ -60,12 +60,6 @@
 	src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 </head>
-
-<script src="resources/js/join.js"></script>
-<script src="resources/js/remember.js"></script>
-
-<!-- Header
-    ================================================== -->
 <header id="nino-header">
 	<div id="nino-headerInner">
 		<nav id="nino-navbar" class="navbar navbar-default" role="navigation">
@@ -126,7 +120,7 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<h2 class="nino-sectionHeading">
-						<span class="nino-subHeading">The real world is calling</span>
+						<span class="nino-subHeading">관리자 페이지</span>
 					</h2>
 				</div>
 
@@ -179,12 +173,16 @@
 </div>
 <!--/#nino-searchForm-->
 </header>
+<div class="container admin_out">
+	<nav class="admin_nav" id="nino-navbar" class="navbar navbar-default" role="navigation">
+		<ul id="admin_ul" class="nav navbar-nav">
+			<li><a href="dash.ad">대시보드</a></li>
+			<li><a href="user_list.ad">회원관리</a></li>
+			<li><a href="report.ad">신고관리</a></li>
+		</ul>
+	</nav>
+</div>
 <!--/#header-->
-
-<!-- 모달 -->
-<jsp:include page="login_modal.jsp"/>
-<jsp:include page="join_modal.jsp"/>
-
 
 <script>
 	$(function() {
@@ -215,4 +213,3 @@
 	
 	
 </script>
-
