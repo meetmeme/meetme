@@ -23,7 +23,7 @@
 					class="js-fullheight d-flex justify-content-center align-items-center">
 					<div class="col-md-8 text text-center">
 						<div class="img mb-4"
-							style="background-image: url(resources/images2/author.jpg);"></div>
+							style="background-image: url(resources/upload/${userinfo.user_original};"></div>
 						<div class="desc">
 							<h2 class="subheading">Hello I'm</h2>
 							<h1 class="mb-4">${user_id1}</h1>
