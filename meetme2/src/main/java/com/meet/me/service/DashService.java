@@ -1,11 +1,12 @@
 package com.meet.me.service;
 
-import com.meet.me.domain.Dash;
+import java.util.List;
 
 public interface DashService {
 
-	Dash dashInter(int category_num);
 
-	void allcatNum();
+	List<String> getCategory();
+
+	int interCount(int category_num);
 
 }

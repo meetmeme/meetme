@@ -2,7 +2,9 @@ package com.meet.me.controller;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +21,7 @@ import com.meet.me.domain.Dash;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 import com.meet.me.service.DashService;
+import com.meet.me.service.EventService;
 import com.meet.me.service.UserService;
 
 @Controller
@@ -26,6 +29,9 @@ public class AdminController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private EventService eventService;
 	
 	@Autowired
 	private DashService dashService;
@@ -33,25 +39,29 @@ public class AdminController {
 	
 	@RequestMapping(value = "/dash.ad", method = RequestMethod.GET)
 	public ModelAndView dashInter(ModelAndView mv) {
-		Dash dash = new Dash();
 		
-		List<Integer> cat_nums = new ArrayList<Integer>();
+		//카테고리 리스트 가져오기
+		Map<String,List<String>> map = new HashMap<String,List<String>>(); 
+		List<String> categoryList = new ArrayList<String>();
+		categoryList = dashService.getCategory();
+		map.put("categoryList",categoryList);
 		
-		cat_nums = dash
+		//사용자 카테고리 별 카운트
+		List<Integer> categoryCount = new ArrayList<Integer>(); 
+		int count = 0;
+		for(int category_num=1; category_num<=categoryList.size();category_num++) {
+			count = dashService.interCount(category_num);
+			categoryCount.add(category_num-1, count);
+		}
 		
-		List<Dash> interList = new ArrayList<Dash>();
-		/*
-		 * dashService.allcatNum(); int[] category_num = dash.getCat_nums(); int[]
-		 * count_list = dash.getInterests_count_list();
-		 * 
-		 * for(int i=0;i<category_num.length;i++) { interList =
-		 * dashService.dashInter(category_num[i]); }
-		 */
+		
 		mv.setViewName("admin/dash");
-		mv.addObject("interlist", interList);
+		mv.addObject("categoryList", categoryList);
+		mv.addObject("categoryCount", categoryCount);
 		
 		return mv;
 	}
+	
 	@RequestMapping(value = "/report.ad", method = RequestMethod.GET)
 	public String report() {
 		return "admin/report";
