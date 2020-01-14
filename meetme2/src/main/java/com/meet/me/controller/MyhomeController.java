@@ -45,8 +45,23 @@ public class MyhomeController {
 	}
 
 	@RequestMapping(value = "/mprofile.mh", method = RequestMethod.GET)
-	public String mprofile() {
-		return "myhome/mprofile";
+	public ModelAndView mprofile(
+			HttpSession session, 
+			ModelAndView mv, 
+			HttpServletRequest request) throws Exception{
+		
+		String user_id = (String)session.getAttribute("user_id1");
+		MyHome mhinfo = mhservice.getinfo(user_id);
+		User userinfo = userservice.user_info(user_id);
+		if(mhinfo==null||userinfo==null) {
+			System.out.println("정보 수집 실패");
+		}else {
+			System.out.println("정보 수집 성공");
+			mv.setViewName("myhome/mprofile");
+			mv.addObject("mhinfo", mhinfo);
+			mv.addObject("userinfo", userinfo);
+		}
+		return mv;
 	}
 	
 	@RequestMapping(value = "/mevent.mh", method = RequestMethod.GET)
