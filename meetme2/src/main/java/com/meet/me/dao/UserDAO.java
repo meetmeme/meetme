@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 
@@ -69,6 +68,11 @@ public class UserDAO {
 
 	public void setMyhome(int user_num) {
 		sqlSession.insert("Users.myhome", user_num);
+	}
+
+	public List<User> getFriends(Map<String, String> map) {
+		System.out.println(map);
+		return sqlSession.selectList("Users.getFriends", map);
 	}
 
 	

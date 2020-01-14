@@ -13,10 +13,12 @@
         		<div class="col-md-4">
         			<div class="colInfo">
 	        			<div class="footerLogo">
-	        				<a href="#" >MoGo</a>	
+	        				<a href="#" >Meet Me</a>	
 	        			</div>
 	        			<p>
-	        				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+	        				<strong>M&M</strong><br>
+	        				Call : 000) 000-0000<br>
+	        				Email: email@khemail.com
 	        			</p>
 	        			
         			</div> 

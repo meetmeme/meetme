@@ -363,25 +363,42 @@ img.img-full-width {
 }
 
 /* 프로필 사진 클릭 시 나오는 메뉴 */ /* sohee_010620 */
-#menubox{
+#userPopupmenu{
 	display: none;
 }
 
-#menubox > ul{
+#userPopupmenu > ul{
 	display: block;
-	position: fixed;
-	top: 0;
-	right: 0;
-    width: 50%;
-    background: rgba(241, 114, 114, 0.96);
+	position: absolute;
+	top: 55px;
+	left: 10px;
+    width: auto;
+    height: auto;
+    background: rgba(241, 114, 114, 0.7);
     z-index: 2;
-    -webkit-animation-duration: .5s;
-    		animation-duration: .5s;
-    -webkit-animation-fill-mode: both;
-    		animation-fill-mode: both;
-    -webkit-animation-name: fadeInDown;
-    		animation-name: fadeInDown; 
+	text-align: center;
 }
+
+#userPopupmenu > ul > li {
+	margin: 10px;	
+}
+#userPopupmenu > ul > li > a{
+	color: #fff;
+	font-weight: 500;
+	text-transform: uppercase;
+	border-bottom: 3px solid transparent;
+	padding: 15px 5px 5px;
+	margin: 12px;
+}
+
+#userPopupmenu > ul > li > a:hover{
+	color: #fce38a;
+	border-color: #fce38a;
+	background: none;
+	font-weight: 600;
+}
+
+
 /* ----------- FIXED NAVBAR WITH ANIMATE ----------- */
 .nino-fixed-nav #nino-navbar {
 	position: fixed;

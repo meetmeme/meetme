@@ -132,5 +132,14 @@ public class UserServiceImpl implements UserService{
 		return dao.delete(user_id);
 	}
 	
+
+	@Override
+	public List<User> getFriends(String title, String userId) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("title","%"+title+"%");
+		map.put("userId",userId);
+		return dao.getFriends(map);
+	}
+	
 }
 

@@ -81,7 +81,7 @@ public class UserController {
 			// String
 			// saveFoler=request.getSession().getServletContext().getRealPath("resources") +
 			// "/upload/";
-			String saveFolder = "D:\\final\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+			String saveFolder = "C:\\Users\\user1\\git\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 			System.out.println(homedir);
 			File path1 = new File(homedir);
