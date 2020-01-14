@@ -106,7 +106,7 @@
 									<div id=userPopupmenu>
 										<ul>
 											<c:if test="${user_id1=='admin'}">
-												<li><a href="#">admin</a></li>
+												<li><a href="dash.ad">admin</a></li>
 											</c:if>
 											<c:if test="${!empty user_id1}">
 												<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>

@@ -35,7 +35,8 @@
 	href="resources/css/prettyPhoto.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/unslider.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/template.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/admin.css" />
 
 <!-- javascript -->
@@ -91,16 +92,25 @@
 									<a href="#"  data-target="#layerpop2" data-toggle="modal">join</a>
 								</li>
 							</c:if>
-							<c:if test="${user_id1=='admin'}">
-								<li><a href="dash.ad">admin</a></li>
-							</c:if>
-              				<c:if test="${!empty user_id1}">
-								<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
+							<c:if test="${!empty user_id1}">
 								<li><a href="#">Create New Group</a></li>
-								<li><a id="userMenuBox"><img class="header_profilePic img-circle" alt=""
-									src="resources/images/our-blog/img-1.jpg"></a>
-								</li>
-								<li><a href="logout.net">logout</a></li>
+								<li><a id="userMenuBox"><img
+										class="header_profilePic img-circle" alt=""
+										src="resources/images/profile.png"></a> <!-- 사용자 팝업 메뉴 -->
+									<div id=userPopupmenu>
+										<ul>
+											<c:if test="${user_id1=='admin'}">
+												<li><a href="dash.ad">admin</a></li>
+											</c:if>
+											<c:if test="${!empty user_id1}">
+												<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
+												<li><a href="#">notification</a></li>
+												<li><a href="#" data-target="#layerpop3"
+													data-toggle="modal">message</a></li>
+												<li><a href="logout.net">logout</a></li>
+											</c:if>
+										</ul>
+									</div></li>
 							</c:if>
 							</ul>
 					</div>
@@ -183,9 +193,17 @@
 	</nav>
 </div>
 <!--/#header-->
+<jsp:include page="../main/message_modal.jsp" />
+
+
+<!-- 자동완성 script -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script>
 	$(function() {
+
 		$('input[id="search-dateRange"]').daterangepicker(
 				{
 					locale : {
@@ -200,7 +218,105 @@
 							+ start.format('YYYY-MM-DD') + ' to '
 							+ end.format('YYYY-MM-DD'));
 				});
+		/* 검색 자동완성 */
+		$('#searchHashtag').autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					type : 'get',
+					url : 'getHashtag.wd',
+					dataType : 'json',
+					data : {
+						'param' : $('#searchHashtag').val()
+					},
+					success : function(data) {
+						response($.map(data, function(item) {
+							return {
+								label : item,
+								value : item,
+								test : item
+							}
+						}) //end map
+						)
+					} //end success
+				}); //end ajax
+			}, //end source
+			select : function(event, ui) {
+				/* console.log('2 : ' + ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+				console.log('3 : ' + ui.item.label); //김치 볶음밥label
+				console.log('4 : ' + ui.item.value); //김치 볶음밥
+				console.log('5 : ' + ui.item.test); //김치 볶음밥test */
+			},//end select
+			focus : function(event, ui) {
+				return false; //한글 에러 방지
+			},
+			minLength : 1,
+			autoFocus : true,
+			classes : {
+				"ui-autocomplete" : "highlight"
+			},
+			delay : 500,
+			position : {
+				my : "right top",
+				at : "right bottom"
+			},
+			close : function(event) { //자동완성창 닫아질때 호출
+				console.log(event);
+			}
+		});
 	});
+
+	//MESSAGE 친구 자동완성
+	$('#receiver').autocomplete({
+		source : function(request, response) {
+			$.ajax({
+				type : 'get',
+				url : 'getFriends.cm',
+				dataType : 'json',
+				data : {
+					'param' : $('#receiver').val()
+				},
+				success : function(data) {
+					response($.map(data, function(item) {
+						return {
+							label : item.user_id,
+							value : item.user_id,
+							test : item.user_num
+						}
+					}) //end map
+					)
+				} //end success
+			}); //end ajax
+		}, //end source
+		select : function(event, ui) {
+			$('#receiver_num').val(ui.item.test);
+			/*  console.log('2 : ' + ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+			console.log('3 : ' + ui.item.label); //김치 볶음밥label
+			console.log('4 : ' + ui.item.value); //김치 볶음밥
+			console.log('5 : ' + ui.item.test); //김치 볶음밥test  */
+		},//end select
+		focus : function(event, ui) {
+			return false; //한글 에러 방지
+		},
+		minLength : 1,
+		autoFocus : true,
+		classes : {
+			"ui-autocomplete" : "highlight"
+		},
+		delay : 500,
+		position : {
+			my : "right top",
+			at : "right bottom"
+		},
+		close : function(event) { //자동완성창 닫아질때 호출
+			console.log(event);
+		}
+	});
+
+	$('#userPopupmenu').hide();
+	$('#userMenuBox').click(function() {
+		$('#userPopupmenu').toggle();
+	});
+
 	$('#search-minihome').hide();
 	$('#searchType-minihome').click(function() {
 		$('#search-minihome').show();
@@ -210,6 +326,10 @@
 		$('#search-event').show();
 		$('#search-minihome').hide();
 	});
-	
-	
+
+	$(window).scroll(function() {
+		if ($('#userPopupmenu').attr("style").indexOf('none') < 0) {
+			$('#userPopupmenu').hide();
+		}
+	})
 </script>
