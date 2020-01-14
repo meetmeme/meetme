@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.MyhomeDAO;
 import com.meet.me.domain.MyHome;
+import com.meet.me.domain.User;
 
 @Service
 public class MyHomeServiceImpl  implements MyHomeService{
