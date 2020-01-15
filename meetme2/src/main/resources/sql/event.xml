@@ -16,5 +16,9 @@
 		resultType="event">
 		select * from MM_EVENT order by EVENT_DATE
 	</select>
+	
+	<select id="getDetail" resultType="Event">
+		select * from MM_EVENT where EVENT_NUM = #{event_num}
+	</select>
 
 </mapper>

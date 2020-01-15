@@ -3,7 +3,7 @@
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
-        <title>Flex - Responsive HTML Template</title>
+        <title>EVENT Detail</title>
     	<meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 
@@ -18,6 +18,7 @@ http://www.templatemo.com/tm-406-flex
         <link rel="stylesheet" href="resources/css/animate.css">
         <link rel="stylesheet" href="resources/css/templatemo_misc.css">
         <link rel="stylesheet" href="resources/css/templatemo_style.css">
+        <link rel="stylesheet" href="resources/css/event.css">
 
         <script src="resources/js/event/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
@@ -44,7 +45,7 @@ http://www.templatemo.com/tm-406-flex
                             <div class="row">
                                 <div class="logo-wrapper col-md-2 col-sm-2">
                                     <h1>
-                                        <a href="#">Flex</a>
+                                        <a href="#">MM</a>
                                     </h1>
                                 </div> <!-- /.logo-wrapper -->
                                 <div class="col-md-10 col-sm-10 main-menu text-right">
@@ -71,27 +72,9 @@ http://www.templatemo.com/tm-406-flex
                                 <div class="overlay"></div>
                                 <img src="resources/images/event/slide1.jpg" alt="">
                                 <div class="slider-caption visible-md visible-lg">
-                                    <h2>Digital Marketing</h2>
-                                    <p>more visitors to your website</p>
-                                    <a href="#" class="slider-btn">Let us design!</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="overlay"></div>
-                                <img src="resources/images/event/slide2.jpg" alt="">
-                                <div class="slider-caption visible-md visible-lg">
-                                    <h2>Responsive HTML CSS</h2>
-                                    <p>Download and use it for your site</p>
-                                    <a href="#" class="slider-btn">Go to Portfolio</a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="overlay"></div>
-                                <img src="resources/images/event/slide3.jpg" alt="">
-                                <div class="slider-caption visible-md visible-lg">
-                                    <h2>Pro Level Design</h2>
-                                    <p>High standard work</p>
-                                    <a href="#" class="slider-btn">Mobile Website</a>
+                                    <h2>${event.EVENT_TITLE}</h2><br>
+                                    <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
+                                    <p>#해시태그 #검색되게</p>                                    
                                 </div>
                             </li>
                         </ul>
@@ -105,187 +88,18 @@ http://www.templatemo.com/tm-406-flex
             <div class="container">
                 <div class="row">
                     <div class="heading-section col-md-12 text-center">
-                        <h2>Our Services</h2>
-                        <p>We design mobile-first websites for you</p>
+                        <h2>이벤트 세부사항</h2>
+                        <p>${event.EVENT_CONTENT }</p>
                     </div> <!-- /.heading-section -->
-                </div> <!-- /.row -->
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="service-item" id="service-1">
-                            <div class="service-icon">
-                                <i class="fa fa-file-code-o"></i>
-                            </div> <!-- /.service-icon -->
-                            <div class="service-content">
-                                <div class="inner-service">
-                                   <h3>HTML5 Coding</h3>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, assumenda, eveniet, consectetur, ex doloribus veniam asperiores incidunt mollitia placeat aniet.</p> 
-                                </div>
-                            </div> <!-- /.service-content -->
-                        </div> <!-- /#service-1 -->
-                    </div> <!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6">
-                        <div class="service-item" id="service-2">
-                            <div class="service-icon">
-                                <i class="fa fa-paper-plane-o"></i>
-                            </div> <!-- /.service-icon -->
-                            <div class="service-content">
-                                <div class="inner-service">
-                                   <h3>Our Support</h3>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, assumenda, eveniet, consectetur, ex doloribus veniam asperiores incidunt mollitia placeat aniet.</p> 
-                                </div>
-                            </div> <!-- /.service-content -->
-                        </div> <!-- /#service-1 -->
-                    </div> <!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6">
-                        <div class="service-item" id="service-3">
-                            <div class="service-icon">
-                                <i class="fa fa-institution"></i>
-                            </div> <!-- /.service-icon -->
-                            <div class="service-content">
-                                <div class="inner-service">
-                                   <h3>Our Design</h3>
-                                   <p>We make HTML CSS templates that are responsive for any screen size on any device. Feel free to download and use our templates without restrictions.</p> 
-                                </div>
-                            </div> <!-- /.service-content -->
-                        </div> <!-- /#service-1 -->
-                    </div> <!-- /.col-md-3 -->
-                    <div class="col-md-3 col-sm-6">
-                        <div class="service-item" id="service-4">
-                            <div class="service-icon">
-                                <i class="fa fa-flask"></i>
-                            </div> <!-- /.service-icon -->
-                            <div class="service-content">
-                                <div class="inner-service">
-                                   <h3>Go for mobile</h3>
-                                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, assumenda, eveniet, consectetur, ex doloribus veniam asperiores incidunt mollitia placeat aniet.</p> 
-                                </div>
-                            </div> <!-- /.service-content -->
-                        </div> <!-- /#service-1 -->
-                    </div> <!-- /.col-md-3 -->
-                </div> <!-- /.row -->
+                </div> <!-- /.row -->               
             </div> <!-- /.container -->
         </div> <!-- /#services -->
 
-
-
-        <div class="content-section" id="portfolio">
+		<div class="content-section" id="our-team">
             <div class="container">
                 <div class="row">
                     <div class="heading-section col-md-12 text-center">
-                        <h2>Our Portfolio</h2>
-                        <p>Amazing work for our clients</p>
-                    </div> <!-- /.heading-section -->
-                </div> <!-- /.row -->
-                <div class="row">
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="resources/images/event/gallery/p1.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>New Walk</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="resources/images/event/gallery/p1.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="resources/images/event/gallery/p2.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Boat</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="resources/images/event/gallery/p2.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="resources/images/event/gallery/p7.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Urban</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="resources/images/event/gallery/p7.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="resources/images/event/gallery/p8.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Cycling</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="resources/images/event/gallery/p8.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="resources/images/event/gallery/p3.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Digital Era</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="resources/images/event/gallery/p3.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="resources/images/event/gallery/p4.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Horizon</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="resources/images/event/gallery/p4.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="resources/images/event/gallery/p5.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>Aquatic City</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="resources/images/event/gallery/p5.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                    <div class="portfolio-item col-md-3 col-sm-6">
-                        <div class="portfolio-thumb">
-                            <img src="resources/images/event/gallery/p6.jpg" alt="">
-                            <div class="portfolio-overlay">
-                                <h3>New Path</h3>
-                                <p>Asperiores commodi illo fuga perferendis dolore repellendus sapiente ipsum.</p>
-                                <a href="resources/images/event/gallery/p6.jpg" data-rel="lightbox" class="expand">
-                                    <i class="fa fa-search"></i>
-                                </a>
-                            </div> <!-- /.portfolio-overlay -->
-                        </div> <!-- /.portfolio-thumb -->
-                    </div> <!-- /.portfolio-item -->
-                </div> <!-- /.row -->
-            </div> <!-- /.container -->
-        </div> <!-- /#portfolio -->
-
-
-
-
-        <div class="content-section" id="our-team">
-            <div class="container">
-                <div class="row">
-                    <div class="heading-section col-md-12 text-center">
-                        <h2>Our Team</h2>
-                        <p>Our people are very united for your success</p>
+                       <h2>참석자(인원 가져오기)</h2>
                     </div> <!-- /.heading-section -->
                 </div> <!-- /.row -->
                 <div class="row">
@@ -296,95 +110,12 @@ http://www.templatemo.com/tm-406-flex
                                 <h3>Tracy</h3>
                                 <span>Designer</span>
                                 <ul class="social">
-                                    <li><a href="#" class="fa fa-facebook"></a></li>
-                                    <li><a href="#" class="fa fa-twitter"></a></li>
-                                    <li><a href="#" class="fa fa-linkedin"></a></li>
+                                	<li><a href="#" onclick="mh_popup('')" class="fa fa-linkedin"></a></li>
                                 </ul>
                             </div> <!-- /.team-overlay -->
                         </div> <!-- /.member-thumb -->
                     </div> <!-- /.team-member -->
-                    <div class="team-member col-md-3 col-sm-6">
-                        <div class="member-thumb">
-                            <img src="resources/images/event/member2.jpg" alt="">
-                            <div class="team-overlay">
-                                <h3>Cindy</h3>
-                                <span>Developer</span>
-                                <ul class="social">
-                                    <li><a href="#" class="fa fa-facebook"></a></li>
-                                    <li><a href="#" class="fa fa-twitter"></a></li>
-                                    <li><a href="#" class="fa fa-linkedin"></a></li>
-                                </ul>
-                            </div> <!-- /.team-overlay -->
-                        </div> <!-- /.member-thumb -->
-                    </div> <!-- /.team-member -->
-                    <div class="team-member col-md-3 col-sm-6">
-                        <div class="member-thumb">
-                            <img src="resources/images/event/member3.jpg" alt="">
-                            <div class="team-overlay">
-                                <h3>Mary</h3>
-                                <span>Director</span>
-                                <ul class="social">
-                                    <li><a href="#" class="fa fa-facebook"></a></li>
-                                    <li><a href="#" class="fa fa-twitter"></a></li>
-                                    <li><a href="#" class="fa fa-linkedin"></a></li>
-                                </ul>
-                            </div> <!-- /.team-overlay -->
-                        </div> <!-- /.member-thumb -->
-                    </div> <!-- /.team-member -->
-                    <div class="team-member col-md-3 col-sm-6">
-                        <div class="member-thumb">
-                            <img src="resources/images/event/member4.jpg" alt="">
-                            <div class="team-overlay">
-                                <h3>Linda</h3>
-                                <span>Chief Executive</span>
-                                <ul class="social">
-                                    <li><a href="#" class="fa fa-facebook"></a></li>
-                                    <li><a href="#" class="fa fa-twitter"></a></li>
-                                    <li><a href="#" class="fa fa-linkedin"></a></li>
-                                </ul>
-                            </div> <!-- /.team-overlay -->
-                        </div> <!-- /.member-thumb -->
-                    </div> <!-- /.team-member -->
-                </div> <!-- /.row -->
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <div class="skills-heading">
-                            <h3 class="skills-title">Design Skills</h3>
-                            <p class="small-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        </div>
-                    </div> <!-- /.col-md-12 -->
-                </div> <!-- /.row -->
-                <div class="row">
-                    <div class="col-md-8 col-sm-6">
-                        <p>Aliquam faucibus in dolor sed vestibulum. Sed adipiscing malesuada luctus. Morbi tincidunt, tellus scelerisque scelerisque scelerisque, sapien dui pretium augue, at consectetur sapien tellus vitae nunc. Ut vitae metus quis nulla cursus adipiscing pretium vel dolor. Fusce lacinia accumsan arcu, quis porttitor nisi tincidunt ut. Nunc malesuada nunc eget nunc sollicitudin posuere. Maecenas vitae tortor quis odio hendrerit sagittis.<br><br>
-						Etiam tincidunt, magna eu elementum tristique, sapien nisl venenatis lacus, nec sagittis lectus dui eget lorem. Donec in tempus mi. Aenean egestas interdum dolor, et mollis lectus consequat. Mauris ullamcorper, felis sit amet gravida malesuada, nisi sem rhoncus massa, non tempor est erat sit amet diam.<!-- spacing for mobile viewing --><br><br>
-						</p>
-                    </div> <!-- /.col-md-8 -->
-                    <div class="col-md-4 col-sm-6">
-                        <ul class="progess-bars">
-                            <li>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">Photoshop 90%</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">HTML CSS 80%</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">Development 70%</div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">Marketing 80%</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div> <!-- /.col-md-4 -->
-                </div> <!-- /.row -->
+                </div> <!-- /.row -->     
             </div> <!-- /.container -->
         </div> <!-- /#our-team -->
 
@@ -438,19 +169,27 @@ http://www.templatemo.com/tm-406-flex
                 </div> <!-- /.row -->
             </div> <!-- /.container -->
         </div> <!-- /#contact -->
-            
-        <div id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-xs-12 text-left">
-                        <span>Copyright &copy; 2014 Company Name</span>
-                  </div> <!-- /.text-center -->
-                    <div class="col-md-4 hidden-xs text-right">
-                        <a href="#top" id="go-top">Back to top</a>
-                    </div> <!-- /.text-center -->
-                </div> <!-- /.row -->
-            </div> <!-- /.container -->
-        </div> <!-- /#footer -->
+      <div id="foot">        	
+   			<div id="footText" class="footcon">
+   				<span id="date">
+   					날짜
+   				</span>
+   				<span id="time">
+   					시간
+   				</span>
+   				<br>
+   				<span id="title">
+   					제목
+   				</span>
+   			</div>
+   			<div id="footPrice" class="footcon">
+   				 가격
+   			</div>
+   			<div id="footBtn" class="footcon">
+				<button class="attend" type="submit">참석</button>
+   			</div>
+  	 		<a href="#" id="nino-scrollToTop">Go to Top</a>     
+        </div>
         
         <script src="resources/js/event/vendor/jquery-1.11.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="resources/js/event/vendor/jquery-1.11.0.min.js"><\/script>')</script>
