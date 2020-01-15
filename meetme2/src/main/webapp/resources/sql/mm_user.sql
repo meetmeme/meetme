@@ -1,4 +1,3 @@
-
 drop table mm_user CASCADE CONSTRAINTS;
 
 CREATE TABLE MM_USER(
