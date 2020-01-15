@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="resources/js/main.js"></script>
 <body data-target="#nino-navbar" data-spy="scroll">
 <jsp:include page="header.jsp" />
 
@@ -21,7 +22,7 @@
 					<div class="col-md-4 col-sm-4">
 						<article>
 							<div class="articleThumb">
-								<a href="#"><img src="resources/images/our-blog/img-1.jpg" alt=""></a>
+								<img src="resources/images/our-blog/img-1.jpg" alt="">
 								<div class="date">
 									<span class="number">12</span>
 									<span class="text">Jan</span>
