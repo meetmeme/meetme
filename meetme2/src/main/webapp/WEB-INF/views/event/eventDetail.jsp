@@ -3,7 +3,7 @@
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
-        <title>Flex - Responsive HTML Template</title>
+        <title>EVENT Detail</title>
     	<meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 
@@ -18,7 +18,7 @@ http://www.templatemo.com/tm-406-flex
         <link rel="stylesheet" href="resources/css/animate.css">
         <link rel="stylesheet" href="resources/css/templatemo_misc.css">
         <link rel="stylesheet" href="resources/css/templatemo_style.css">
-
+		<link rel="stylesheet" href="resources/css/event.css?after">
         <script src="resources/js/event/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
     </head>
     <body>
@@ -438,19 +438,29 @@ http://www.templatemo.com/tm-406-flex
                 </div> <!-- /.row -->
             </div> <!-- /.container -->
         </div> <!-- /#contact -->
-            
-        <div id="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-xs-12 text-left">
-                        <span>Copyright &copy; 2014 Company Name</span>
-                  </div> <!-- /.text-center -->
-                    <div class="col-md-4 hidden-xs text-right">
-                        <a href="#top" id="go-top">Back to top</a>
-                    </div> <!-- /.text-center -->
-                </div> <!-- /.row -->
-            </div> <!-- /.container -->
-        </div> <!-- /#footer -->
+        
+        <div id="foot">        	
+   			<div id="footText" class="footcon">
+   				<span id="date">
+   					날짜
+   				</span>
+   				<span id="time">
+   					시간
+   				</span>
+   				<br>
+   				<span id="title">
+   					제목
+   				</span>
+   			</div>
+   			<div id="footPrice" class="footcon">
+   				 가격
+   			</div>
+   			<div id="footBtn" class="footcon">
+   				<button class="star" type="button"><img class="btn-img" src="resources/images/event/star_empty.png"></button>
+   				<button class="attend" type="submit">참석</button>
+   			</div>
+  	 		<a href="#" id="nino-scrollToTop">Go to Top</a>     
+        </div>
         
         <script src="resources/js/event/vendor/jquery-1.11.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="resources/js/event/vendor/jquery-1.11.0.min.js"><\/script>')</script>
