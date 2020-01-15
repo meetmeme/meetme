@@ -140,6 +140,13 @@ public class UserServiceImpl implements UserService{
 		map.put("userId",userId);
 		return dao.getFriends(map);
 	}
+
+
+	@Override
+	public int isEmail(String user_email) {
+		User u = dao.isEmail(user_email);
+		return (u == null) ? -1 : 1; 
+	}
 	
 }
 

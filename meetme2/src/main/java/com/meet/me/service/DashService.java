@@ -9,4 +9,6 @@ public interface DashService {
 
 	int interCount(int category_num);
 
+	int boardCount(String month);
+
 }

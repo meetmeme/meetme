@@ -6,6 +6,10 @@
 		select * from mm_user where user_id = #{user_id}
 	</select>
 	
+	<select resultType="User" parameterType="String" id="emailcheck">
+		select * from mm_user where user_email = #{user_email}
+	</select>
+	
 	<insert parameterType="User" id="insert">
 		insert into mm_user 
 		values((select nvl(max(user_num),0)+1 from mm_user), #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_save}, #{user_original}, 0)
@@ -50,9 +54,9 @@
 				<if test="search_field!=null">
 					and
 					<choose>
-						<when test="search_field='user_num'">user_num</when>
-						<when test="search_field='user_id'">user_id</when>
-						<when test="search_field='user_name'">user_name</when>
+						<when test="search_field=='user_num'">user_num</when>
+						<when test="search_field=='user_id'">user_id</when>
+						<when test="search_field=='user_name'">user_name</when>
 					</choose>
 					like #{search_word}
 				</if>
@@ -67,9 +71,9 @@
 		<if test="search_field!=null">
 			and
 			<choose>
-				<when test="search_field='user_num'">user_num</when>
-				<when test="search_field='user_id'">user_id</when>
-				<when test="search_field='user_name'">user_name</when>
+				<when test="search_field=='user_num'">user_num</when>
+				<when test="search_field=='user_id'">user_id</when>
+				<when test="search_field=='user_name'">user_name</when>
 			</choose>
 			like #{search_word}
 		</if>

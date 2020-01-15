@@ -20,4 +20,8 @@ public class DashDAO {
 		return sqlSession.selectOne("User_interests.interCount", category_num);
 	}
 
+	public int boardCount(String month) {
+		return sqlSession.selectOne("Myhomes.AllboardCount", month);
+	}
+
 }

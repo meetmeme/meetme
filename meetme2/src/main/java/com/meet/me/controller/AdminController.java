@@ -54,11 +54,20 @@ public class AdminController {
 			categoryCount.add(category_num-1, count);
 		}
 		
+		String[] month = {"01","02","03","04","05","06","07","08","09","10","11","12"};
+		
+		//월별 게시글 카운트
+		List<Integer> boardCount = new ArrayList<Integer>();
+		int count2 = 0;
+		for(int i=0; i<month.length;i++) {
+			count2 = dashService.boardCount(month[i]);
+			boardCount.add(i,count2);
+		}
 		
 		mv.setViewName("admin/dash");
 		mv.addObject("categoryList", categoryList);
 		mv.addObject("categoryCount", categoryCount);
-		
+		mv.addObject("boardCount", boardCount);
 		return mv;
 	}
 	
@@ -76,16 +85,11 @@ public class AdminController {
 			@RequestParam(value="search_word", defaultValue="") String search_word)
 	throws Exception {
 		
-		System.out.println("index : "+index);
-		System.out.println("search_word : "+search_word);
 		List<User> list = null;
 		int listcount = 0;
 		
 		list = userService.getSearchList(index, search_word, page, limit);
 
-		for(User a : list) {
-			System.out.println("list:"+a.getUser_id());
-		}
 		listcount = userService.getSearchListCount(index, search_word);
 		
 		//총 페이지수

@@ -37,7 +37,8 @@
 <link rel="stylesheet" type="text/css" href="resources/css/template.css" />
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<link rel="stylesheet" type="text/css" href="resources/css/admin.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/dash.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/user_list.css" />
 
 <!-- javascript -->
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
@@ -130,11 +131,9 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<h2 class="nino-sectionHeading">
-						<span class="nino-subHeading">관리자 페이지</span>
+						<span class="nino-subHeading">admin page</span>
 					</h2>
 				</div>
-
-
 			</div>
 
 
@@ -183,15 +182,7 @@
 </div>
 <!--/#nino-searchForm-->
 </header>
-<div class="container admin_out">
-	<nav class="admin_nav" id="nino-navbar" class="navbar navbar-default" role="navigation">
-		<ul id="admin_ul" class="nav navbar-nav">
-			<li><a href="dash.ad">대시보드</a></li>
-			<li><a href="user_list.ad">회원관리</a></li>
-			<li><a href="report.ad">신고관리</a></li>
-		</ul>
-	</nav>
-</div>
+
 <!--/#header-->
 <jsp:include page="../main/message_modal.jsp" />
 

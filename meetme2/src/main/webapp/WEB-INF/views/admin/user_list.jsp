@@ -6,50 +6,35 @@
 
 </head>
 <body data-target="#nino-navbar" data-spy="scroll">
-<jsp:include page="header.jsp" />
-<script>
-	$(document).ready(function(){
-		$("#delete").click(function(){
-			var answer = confirm('정말 삭제하시겠습니까?');
-			console.log(answer); //취소를 클릭한 경우 - false
-			if(!answer){	//취소를 클릭한 경우
-				event.preventDefault();
-			}
-		})
-		var selectedValue = '${search_field}';
-		if(selectedValue != '-1')
-			$("#viewcount").val(selectedValue);
-		
-		console.log(selectedValue);
-		
-		$("button").click(function(){
-			if($("input").val()==''){
-				alert("검색어를 입력하세요");
-				return false;
-			}
-		});
-		
-		
-	});
-</script>
-	<div class="container">
-	<form action = "user_list.ad">
-		<div class="input-group">
-			<select id="viewcount" name="search_field">
+<jsp:include page="admin_header.jsp" />
+
+	<div class="container admin_out">
+		<nav class="admin_nav" id="nino-navbar" class="navbar navbar-default" role="navigation">
+			<ul id="admin_ul" class="nav navbar-nav">
+				<li><a href="dash.ad">대시보드</a></li>
+				<li><a href="user_list.ad">회원관리</a></li>
+				<li><a href="report.ad">신고관리</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="container userdiv">
+	<form action = "user_list.ad" class="search_form">
+		<div class="search">
+			<select class="search_field" name="search_field">
 				<option value="0" selected>회원번호</option>
 				<option value="1">아이디</option>
 				<option value="2">이름</option>
 			</select>
-			<input name="search_word" type="text" class="form-control" placeholder="Search" value="${search_word }">
-			<button class="btn btn-primary" type="submit">검색</button>
+			<input name="search_word" type="text" class="searchbox" placeholder="Search" value="${search_word }">
+			<button class="searchbtn" type="submit">검색</button>
 		</div>
 	</form>
 	<c:if test="${listcount > 0}">
-			<table class="table table-striped">
-			<caption>회원목록</caption>
+			<table class="table table-striped user_table">
+			<caption class="user_caption">회원목록</caption>
 				<tr>
-					<th colspan="2">회원 리스트</th>
-					<th colspan="2"><font size="3">회원 수 : ${listcount}</font></th>
+					<th colspan="4"><font size="3">회원 수 : ${listcount}</font></th>
 				<tr>
 				<tr>
 					<td width="25%"><div>회원번호</div></td>
@@ -112,5 +97,30 @@
 		</div>
 	</div>
 	
+	<script>
+		$(document).ready(function(){
+			$("#delete").click(function(){
+				var answer = confirm('정말 삭제하시겠습니까?');
+				console.log(answer); //취소를 클릭한 경우 - false
+				if(!answer){	//취소를 클릭한 경우
+					event.preventDefault();
+				}
+			})
+			var selectedValue = '${search_field}';
+			if(selectedValue != '-1')
+				$("#viewcount").val(selectedValue);
+			
+			console.log(selectedValue);
+			
+			$("button").click(function(){
+				if($("input").val()==''){
+					alert("검색어를 입력하세요");
+					return false;
+				}
+			});
+			
+			
+		});
+	</script>
 </body>
 </html>
