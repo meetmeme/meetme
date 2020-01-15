@@ -10,6 +10,7 @@
 		<typeAlias alias="hashtag" type="com.meet.me.domain.Hashtag"/>
 		<typeAlias alias="event" type="com.meet.me.domain.Event"/>
 		<typeAlias alias="myhome" type="com.meet.me.domain.MyHome"/>
+		<typeAlias alias="message" type="com.meet.me.domain.Message"/>
 	</typeAliases>
 	
 	<mappers>
@@ -19,5 +20,6 @@
 		<mapper resource="sql/hashtag.xml"/>
 		<mapper resource="sql/event.xml"/>
 		<mapper resource="sql/myhome.xml"/>
+		<mapper resource="sql/community.xml"/>
 	</mappers>
 </configuration> 

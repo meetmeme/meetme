@@ -4,9 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<meta charset="utf-8">
 <style>
 	.table {
 		width : 100%;
@@ -16,37 +13,36 @@
 		text-align: center;
 	}
 </style>
-<title>회원관리 시스템 관리자모드(회원정보))</title>
-</head>
+<body data-target="#nino-navbar" data-spy="scroll">
+<jsp:include page="header.jsp" />
 <body>
 	<div class="container">
 		<table class="table table-striped">
 			<tr>
 				<td>아이디</td>
-				<td>${memberinfo.id }</td>
+				<td>${userinfo.user_id }</td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td>${memberinfo.password }</td>
+				<td>${userinfo.user_pass }</td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td>${memberinfo.name }</td>
+				<td>${userinfo.user_name }</td>
 			</tr>
 			<tr>
 				<td>나이</td>
-				<td>${memberinfo.age }</td>
+				<td>${userinfo.user_age }</td>
 			</tr>
 			<tr>
 				<td>성별</td>
-				<td>${memberinfo.gender}</td>
+				<td>${userinfo.user_gender}</td>
 			</tr>
 			<tr>
 				<td>이메일 주소</td>
-				<td>${memberinfo.email }</td>
+				<td>${userinfo.user_email }</td>
 			</tr>
 		</table>
-		<div id="back"><a href='member_list.net' >리스트로 돌아가기</a></div>
 	</div>
 </body>
 </html>

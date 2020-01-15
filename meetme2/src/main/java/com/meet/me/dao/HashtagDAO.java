@@ -15,4 +15,9 @@ public class HashtagDAO {
 		return null;
 	}
 
+	public List<String> gethashtag(String title) {
+		title = "%"+title+"%";
+		return sqlSession.selectList("Hashtags.getHashtag", title);
+	}
+
 }

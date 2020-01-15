@@ -17,5 +17,9 @@ public interface UserService {
 	void insert(User user) throws Exception;
 	void userAuth(String user_email) throws Exception;
 	public void setMyhome(int user_num);
+	public List<User> getSearchList(int index, String search_word, int page, int limit);
+	public int getSearchListCount(int index, String search_word);
+	public int delete(String user_id);
+	public List<User> getFriends(String title, String userId);
 }
  

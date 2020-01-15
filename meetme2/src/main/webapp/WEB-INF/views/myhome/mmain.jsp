@@ -13,18 +13,17 @@
 </head>
 <body>
 	<div id="colorlib-page">
-		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 
 		<div id="colorlib-main">
 			<div class="hero-wrap hero-wrap-2 js-fullheight"
-				style="background-image: url(resources/images2/bg_4.jpg);"
+				style="background-image: url(resources/images2/wooden-floor.jpg);"
 				data-stellar-background-ratio="0.5">
 				<div class="overlay"></div>
 				<div
 					class="js-fullheight d-flex justify-content-center align-items-center">
 					<div class="col-md-8 text text-center">
 						<div class="img mb-4"
-							style="background-image: url(resources/images2/author.jpg);"></div>
+							style="background-image: url(resources/upload/${userinfo.user_original};"></div>
 						<div class="desc">
 							<h2 class="subheading">Hello I'm</h2>
 							<h1 class="mb-4">${user_id1}</h1>
@@ -38,7 +37,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- END COLORLIB-MAIN -->
 	</div>
 	<!-- END COLORLIB-PAGE -->
 

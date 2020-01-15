@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService{
 				"<a href='localhost:8088/me/emailConfirm.net?user_id=" + user.getUser_id() +
 				"&key=" + key +
 				"' target='_blank'>이메일 인증 확인</a>");
-		sendMail.setFrom("tpaem0103@gmail.com", "MeetMe"); // 보낸이
+		sendMail.setFrom("foradsohee@gmail.com", "MeetMe"); // 보낸이
 		sendMail.setTo(user.getUser_email()); // 받는이
 		sendMail.send();
 	}
@@ -96,6 +96,49 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void setMyhome(int user_num) {
 		dao.setMyhome(user_num);
+	}
+
+
+	@Override
+	public List<User> getSearchList(int index, String search_word, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(index != -1) {
+			String[] search_field = new String[] {"user_num", "user_id", "user_name"};
+			map.put("search_field", search_field[index]);
+			map.put("search_word", "%"+search_word+"%");
+		}
+		int startrow = (page-1)*limit+1;
+		int endrow = startrow + limit -1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getSearchList(map);
+	}
+
+
+	@Override
+	public int getSearchListCount(int index, String search_word) {
+		Map<String, String> map = new HashMap<String, String>();
+		
+		if(index != -1) {
+			map.put("search_word", "%"+search_word+"%");
+		}
+		
+		return dao.getSearchListCount(map);
+	}
+
+
+	@Override
+	public int delete(String user_id) {
+		return dao.delete(user_id);
+	}
+	
+
+	@Override
+	public List<User> getFriends(String title, String userId) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("title","%"+title+"%");
+		map.put("userId",userId);
+		return dao.getFriends(map);
 	}
 	
 }

@@ -1,16 +1,20 @@
-drop table mm_category CASCADE CONSTRAINTS;
+delete table mm_category CASCADE CONSTRAINTS;
+select * from mm_category
 
 insert all
 into  MM_CATEGORY values(1, 'outdoor')
 into  MM_CATEGORY values(2, 'technology')
 into  MM_CATEGORY values(3, 'family')
-into  MM_CATEGORY values(4, 'healty')
+into  MM_CATEGORY values(4, 'healthy')
 into  MM_CATEGORY values(5, 'sports')
 into  MM_CATEGORY values(6, 'study')
-into  MM_CATEGORY values(7, 'photo')
-into  MM_CATEGORY values(8, 'music')
-into  MM_CATEGORY values(9, 'language')
+into  MM_CATEGORY values(7, 'language')
+into  MM_CATEGORY values(8, 'photo')
+into  MM_CATEGORY values(9, 'music')
 into  MM_CATEGORY values(10, 'dance')
+into  MM_CATEGORY values(11, 'game')
+into  MM_CATEGORY values(12, 'pet')
+into  MM_CATEGORY values(13, 'DIY')
 select * from dual;
 
 select * from MM_CATEGORY;
@@ -47,3 +51,24 @@ into  MM_HASHTAG values(28, '음악2')
 into  MM_HASHTAG values(29, '언어2')
 into  MM_HASHTAG values(30, '춤2')
 select * from dual;
+
+
+INSERT  ALL
+ INTO MM_FRIENDS VALUES(1,2,1)
+ INTO MM_FRIENDS VALUES(1,3,1)
+ INTO MM_FRIENDS VALUES(2,1,1)
+ INTO MM_FRIENDS VALUES(2,3,1)
+ INTO MM_FRIENDS VALUES(3,1,1)
+ INTO MM_FRIENDS VALUES(3,2,1)
+select * from dual;
+
+		SELECT DISTINCT *
+		FROM
+		(SELECT  *
+		FROM MM_FRIENDS 
+		OUTER JOIN MM_USER
+		USING(USER_NUM)
+		WHERE (USER_ID LIKE '%a%' OR USER_NAME LIKE '%a%')) A
+		LEFT OUTER JOIN (SELECT USER_ID AS REQ_ID, REQUESTER_NUM FROM MM_USER U JOIN MM_FRIENDS F ON U.USER_NUM = F.REQUESTER_NUM WHERE USER_ID='user2') S
+		USING(REQUESTER_NUM)
+		WHERE REQ_ID IS NOT NULL

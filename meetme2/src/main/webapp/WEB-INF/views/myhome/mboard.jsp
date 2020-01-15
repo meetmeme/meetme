@@ -15,47 +15,7 @@
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
 
 		<div id="colorlib-main">
-			<section class="home-slider js-fullheight owl-carousel">
-				<div class="slider-item js-fullheight"
-					style="background-image: url(resources/images2/bg_2.jpg);">
-					<div class="overlay"></div>
-					<div class="container-fluid">
-						<div
-							class="row no-gutters slider-text slider-text-2 js-fullheight align-items-center justify-content-center"
-							data-scrollax-parent="true">
-							<div class="col-md-10 text-center ftco-animate"
-								data-scrollax=" properties: { translateY: '70%' }">
-								<h1 class="mb-4"
-									data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Discover
-									the Place</h1>
-								<p
-									data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find
-									great places to stay, eat, shop, or visit from local experts</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="slider-item js-fullheight"
-					style="background-image: url(resources/images2/bg_3.jpg);">
-					<div class="overlay"></div>
-					<div class="container-fluid">
-						<div
-							class="row no-gutters slider-text slider-text-2 js-fullheight align-items-center justify-content-center"
-							data-scrollax-parent="true">
-							<div class="col-md-10 text-center ftco-animate"
-								data-scrollax=" properties: { translateY: '70%' }">
-								<h1 class="mb-4"
-									data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Explore
-									and travel</h1>
-								<p
-									data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find
-									great places to stay, eat, shop, or visit from local experts</p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+			
 			<section class="ftco-section">
 				<div class="container">
 					<div class="row">
