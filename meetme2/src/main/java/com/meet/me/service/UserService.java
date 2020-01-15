@@ -2,9 +2,6 @@ package com.meet.me.service;
 
 import java.util.List;
 
-import javax.mail.MessagingException;
-
-import com.meet.me.domain.Category;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 
@@ -21,5 +18,6 @@ public interface UserService {
 	public int getSearchListCount(int index, String search_word);
 	public int delete(String user_id);
 	public List<User> getFriends(String title, String userId);
+	public List<User> getRandomUser();
 }
  

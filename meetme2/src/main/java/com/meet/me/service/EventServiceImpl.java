@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.EventDAO;
+import com.meet.me.domain.Event;
 
 @Service
 public class EventServiceImpl implements EventService{
@@ -15,6 +16,11 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public List<String> getCategory() {
 		return dao.getCategory();
+	}
+
+	@Override
+	public List<Event> getIntrestingEvent(String id) {
+		return dao.getIntrestingEvent(id);
 	}
 	
 }

@@ -75,6 +75,10 @@ public class UserDAO {
 		return sqlSession.selectList("Users.getFriends", map);
 	}
 
+	public List<User> getRandomUser() {
+		return sqlSession.selectList("Users.getRandomUser");
+	}
+
 	
 	
 	

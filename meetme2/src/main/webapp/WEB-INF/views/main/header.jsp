@@ -102,7 +102,8 @@
 								<li><a href="#">Create New Group</a></li>
 								<li><a id="userMenuBox"><img
 										class="header_profilePic img-circle" alt=""
-										src="resources/images/profile.png"></a> <!-- 사용자 팝업 메뉴 -->
+										src="resources/images/profile.png"></a> 
+										<!-- 사용자 팝업 메뉴 -->
 									<div id=userPopupmenu>
 										<ul>
 											<c:if test="${user_id1=='admin'}">
