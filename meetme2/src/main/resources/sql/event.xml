@@ -7,6 +7,12 @@
 select * from MM_CATEGORY
 </select>
 
+<select id="getDetail" resultType="Event">
+	select * from MM_EVENT where EVENT_NUM = #{event_num}
+</select>
+
+
+
 <resultMap type="map" id="getCat">
 <result column="CATEGORY_NUM" property="CATEGORY_NUM"/>
 <result column="CATEGORY_NAME" property="CATEGORY_NAME"/>

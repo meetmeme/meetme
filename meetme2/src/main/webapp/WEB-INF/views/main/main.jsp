@@ -20,6 +20,7 @@
 				<div class="row">
 				<c:forEach var="i" begin="0" end="2">
 					<div class="col-md-4 col-sm-4">
+						<a href="event.main?event=1">
 						<article>
 							<div class="articleThumb">
 								<img src="resources/images/our-blog/img-1.jpg" alt="">
@@ -28,7 +29,7 @@
 									<span class="text">Jan</span>
 								</div>
 							</div>
-							<h3 class="articleTitle"><a href="">event name</a></h3>
+							<h3 class="articleTitle">event name</a></h3>
 							<p class="articleDesc">
 								흥미 분야 이벤트를 임박한 순서로 출력 흥미분야 없을 시 그냥 임박한 순서대로 출력
 							</p>
@@ -37,6 +38,7 @@
 								<a href="#"><i class="mdi mdi-comment-multiple-outline nino-icon"></i> 69</a>
 							</div>
 						</article>
+						</a>
 					</div>
 				</c:forEach>
 				</div>
