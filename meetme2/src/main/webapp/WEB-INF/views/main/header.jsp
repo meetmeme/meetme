@@ -103,8 +103,7 @@
 								<li><a href="#">Create New Group</a></li>
 								<li><a id="userMenuBox"><img
 										class="header_profilePic img-circle" alt=""
-										src="resources/images/profile.png"></a> 
-										<!-- 사용자 팝업 메뉴 -->
+										src="resources/images/profile.png"></a> <!-- 사용자 팝업 메뉴 -->
 									<div id=userPopupmenu>
 										<ul>
 											<c:if test="${user_id1=='admin'}">
@@ -112,7 +111,8 @@
 											</c:if>
 											<c:if test="${!empty user_id1}">
 												<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
-												<li><a href="#" data-target="#darkModalForm" data-toggle="modal">notification</a></li>
+												<li><a href="#" data-target="#darkModalForm"
+													data-toggle="modal" id='noticeModal'>notification</a></li>
 												<li><a href="#" data-target="#layerpop3"
 													data-toggle="modal">message</a></li>
 												<li><a href="logout.net">logout</a></li>
@@ -132,19 +132,19 @@
 			<!-- /.container-fluid -->
 		</nav>
 
-		<c:if test="${main}">
-		<section id="nino-slider" class="carousel slide container"
-			data-ride="carousel">
+		<c:if test="${!empty HeaderComment}">
+			<section id="nino-slider" class="carousel slide container"
+				data-ride="carousel">
 
-			<!-- Wrapper for slides -->
-			<div class="carousel-inner" role="listbox">
-				<div class="item active">
-					<h2 class="nino-sectionHeading">
-						<span class="nino-subHeading">The real world is calling</span>
-					</h2>
+				<!-- Wrapper for slides -->
+				<div class="carousel-inner" role="listbox">
+					<div class="item active">
+						<h2 class="nino-sectionHeading">
+							<span class="nino-subHeading">${HeaderComment}</span>
+						</h2>
+					</div>
 				</div>
-			</div>
-		</section>
+			</section>
 		</c:if>
 	</div>
 	<!-- Search Form - Display when click magnify icon in menu
@@ -158,28 +158,31 @@
 		</div>
 		<br> <br> <br>
 		<div id="search-event" class="search-Div">
-			<form action="searchEvent.sc" method="post">
-				<input type="text" autocomplete="off" placeholder="검색어를 입력해주세요" id="searchEventKeyword"
-					class="form-control nino-searchInput"> <input type="text"
-					placeholder="해시태그" 	class="form-control nino-searchInput searchHashtag"> <select
+			<!-- <form action="#" method="get"> -->
+ 			<form action="searchEvent.sc" method="post">
+				<input type="text" autocomplete="off" placeholder="검색어" name="searchKeyword"
+					id="searchEventKeyword" class="form-control nino-searchInput">
+				<input type="text" placeholder="해시태그"
+					class="form-control nino-searchInput searchHashtag" name="searchHashtag"> <select
 					name="searchCategory" id="search-category" class="form-control">
 					<option value="all">ALL</option>
 					<c:forEach var="cat" items="${category}">
 						<option value="${cat.CATEGORY_NUM}">${cat.CATEGORY_NAME}</option>
 					</c:forEach>
-				</select> <br> <br> <input type="text" id="search-dateRange"
-					class="form-control" value="2020/01/01 - 2020/01/10" /> <input
-					type=hidden name="search-dateStart" id="search-dateStart">
-				<input type=hidden name="search-dateEnd" id="search-dateEnd">
+				</select> <br> <br> 
+				<input type="text" id="search-dateRange" class="form-control" value="2020/01/01 - 2020/01/10" />
+				<input type=hidden name="search-dateStart" id="search-dateStart" value="2020-01-01">
+				<input type=hidden name="search-dateEnd" id="search-dateEnd" value="2020-01-10">
 				<br> <br> <input type=submit value="search"
 					class="form-control btn_submit">
 			</form>
 		</div>
 		<div id="search-minihome" class="search-Div">
 			<form action="searchMinihome.sc" method="post">
-				<input type="text" autocomplete="off" placeholder="검색어" id="searchMinihomeKeyword"
-					class="form-control nino-searchInput"> <input type="text"
-					placeholder="해시태그" 	class="form-control nino-searchInput searchHashtag"> <input
+				<input type="text" autocomplete="off" placeholder="검색어"
+					id="searchMinihomeKeyword" class="form-control nino-searchInput">
+				<input type="text" placeholder="해시태그"
+					class="form-control nino-searchInput searchHashtag"> <input
 					type="text" autocomplete="off" placeholder="닉네임" id="searchUser"
 					class="form-control nino-searchInput"> <br> <br>
 				<input type=submit value="search" class="form-control btn_submit">
@@ -188,6 +191,7 @@
 		<i class="mdi mdi-close nino-close"></i>
 	</div>
 	<!--/#nino-searchForm-->
+	<input type="hidden" value="${note}" id=note>
 </header>
 <!--/#header-->
 
@@ -205,6 +209,10 @@
 
 <script>
 	$(function() {
+	$(window).on('load', function() {
+		if($('#note').val())
+			$('#darkModalForm').modal('show');
+	});
 
 		$('input[id="search-dateRange"]').daterangepicker(
 				{
@@ -214,8 +222,9 @@
 					opens : 'left'
 				},
 				function(start, end, label) {
-					$('#search-dateStart').val(start.format('YYYY/MM/DD'));
-					$('#search-dateEnd').val(end.format('YYYY/MM/DD'));
+					console.log(start +" - "+end);
+					$('#search-dateStart').val(start.format('YYYY-MM-DD'));
+					$('#search-dateEnd').val(end.format('YYYY-MM-DD'));
 					console.log("A new date selection was made: "
 							+ start.format('YYYY-MM-DD') + ' to '
 							+ end.format('YYYY-MM-DD'));

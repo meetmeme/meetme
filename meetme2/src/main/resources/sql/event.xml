@@ -16,9 +16,25 @@
 		resultType="event">
 		select * from MM_EVENT order by EVENT_DATE
 	</select>
-	
+
 	<select id="getDetail" resultType="Event">
-		select * from MM_EVENT where EVENT_NUM = #{event_num}
+		select * from MM_EVENT where
+		EVENT_NUM = #{event_num}
 	</select>
 
+	<select id="search" parameterType="map" resultType="event">
+		select * from MM_EVENT
+		<where>
+			<if test="keyword!='%null%'">
+				EVENT_TITLE like #{keyword} OR EVENT_CONTENT like #{keyword} 
+				OR EVENT_LOCATION like #{keyword}
+			</if>
+			<if test="category!='all'">
+				CATEGORY_NUM= #{category}
+			</if>
+			<if test="dateStart!=null">
+				AND EVENT_DATE between #{dateStart,jdbcType=DATE} and #{dateEnd,jdbcType=DATE}
+			</if>
+		</where>
+	</select>
 </mapper>
