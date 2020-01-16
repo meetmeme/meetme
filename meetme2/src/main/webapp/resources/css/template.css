@@ -362,7 +362,7 @@ img.img-full-width {
 	background: #fff;
 }
 
-/* 프로필 사진 클릭 시 나오는 메뉴 */ /* sohee_010620 */
+/* �봽濡쒗븘 �궗吏� �겢由� �떆 �굹�삤�뒗 硫붾돱 */ /* sohee_010620 */
 #userPopupmenu{
 	display: none;
 }
@@ -630,6 +630,9 @@ section {
 .nino-testimonialSlider {
 	margin: 0 80px;
 }
+.cursor{
+	cursor: pointer;
+}
 .nino-testimonialSlider .nino-avatar {
 	width: 190px;
 	margin-right: 35px;
@@ -747,7 +750,6 @@ section {
 	display: inline-block;
 	font-size: 25px;
 	color: #f38181;
-	background: #fce38a;
 	padding: 10px;
 	margin: 0 -1px;
 	line-height: 100%;

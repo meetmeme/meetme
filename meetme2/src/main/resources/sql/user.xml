@@ -3,34 +3,40 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Users">
 	<select resultType="User" parameterType="String" id="idcheck">
-		select * from mm_user where user_id = #{user_id}
+		select *
+		from mm_user where user_id = #{user_id}
 	</select>
 	
 	<select resultType="User" parameterType="String" id="emailcheck">
 		select * from mm_user where user_email = #{user_email}
 	</select>
 	
+
 	<insert parameterType="User" id="insert">
-		insert into mm_user 
-		values((select nvl(max(user_num),0)+1 from mm_user), #{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city}, #{user_save}, #{user_original}, 0)
+		insert into mm_user
+		values((select nvl(max(user_num),0)+1 from mm_user),
+		#{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city},
+		#{user_save}, #{user_original}, 0)
 	</insert>
-	
+
 	<select id="selectNum" parameterType="String" resultType="User">
-		select * from mm_user
+		select
+		* from mm_user
 		where user_id = #{user_id}
 	</select>
-	
+
 	<insert id="insert_inter" parameterType="User_interests">
-	    INSERT INTO
-	        mm_user_interests
-	    VALUES(#{user_num}, #{category_num})
+		INSERT INTO
+		mm_user_interests
+		VALUES(#{user_num}, #{category_num})
 	</insert>
-	
-	
+
+
 	<insert id="createAuthKey">
-		insert into userAuth values(#{user_email}, #{authKey})
+		insert into userAuth values(#{user_email},
+		#{authKey})
 	</insert>
-	
+
 	<update id="userAuth">
 		<![CDATA[
 			update mm_user 
@@ -40,12 +46,13 @@
 					where user_email = #{user_email}) > 0
 		]]>
 	</update>
-	
+
 	<insert id="myhome" parameterType="int">
-		insert into mm_myhome(user_num, myhome_num)
+		insert into
+		mm_myhome(user_num, myhome_num)
 		values(#{user_num}, #{user_num})
 	</insert>
-	
+
 	<select id="getSearchList" parameterType="map" resultType="user">
 		select *
 		from (select rownum rnum, b.*
@@ -62,9 +69,10 @@
 				</if>
 				order by user_num desc)b
 		)
-		where rnum &gt;=#{start} and rnum &lt;= #{end}
+		where rnum &gt;=#{start} and rnum &lt;=
+		#{end}
 	</select>
-	
+
 	<select id="searchcount" parameterType="map" resultType="int">
 		select count(*) from mm_user
 		where user_id!='admin'
@@ -78,24 +86,34 @@
 			like #{search_word}
 		</if>
 	</select>
-	
+
 	<delete id="delete" parameterType="String">
-		delete from mm_user where user_id=#{user_id}
+		delete from mm_user where
+		user_id=#{user_id}
 	</delete>
-	
+
 	<select id="getFriends" parameterType="map" resultType="user">
-		SELECT DISTINCT *
+		SELECT
+		DISTINCT *
 		FROM
-		(SELECT  *
-		FROM MM_FRIENDS 
+		(SELECT *
+		FROM MM_FRIENDS
 		OUTER JOIN MM_USER
 		USING(USER_NUM)
-		WHERE (USER_ID LIKE #{title} OR USER_NAME LIKE #{title})) A
-		LEFT OUTER JOIN (SELECT USER_ID AS REQ_ID, REQUESTER_NUM FROM MM_USER U JOIN MM_FRIENDS F ON U.USER_NUM = F.REQUESTER_NUM WHERE USER_ID=#{userId}) S
+		WHERE (USER_ID LIKE #{title} OR USER_NAME
+		LIKE #{title})) A
+		LEFT OUTER JOIN (SELECT USER_ID AS REQ_ID,
+		REQUESTER_NUM FROM MM_USER U JOIN MM_FRIENDS F ON U.USER_NUM =
+		F.REQUESTER_NUM WHERE USER_ID=#{userId}) S
 		USING(REQUESTER_NUM)
-		WHERE REQ_ID IS NOT NULL
+		WHERE
+		REQ_ID IS NOT NULL
 	</select>
-	
+
+	<select id="getRandomUser" resultType="user">
+		SELECT * FROM MM_USER SAMPLE(20)
+	</select>
+	<!-- sample(##) 테이블이 가지고 있는 수의 ##% -->
 </mapper>
 
 

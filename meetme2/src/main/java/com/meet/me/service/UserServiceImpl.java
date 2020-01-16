@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.mail.MessagingException;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -15,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.meet.me.MailHandler;
 import com.meet.me.TempKey;
 import com.meet.me.dao.UserDAO;
-import com.meet.me.domain.Category;
-import com.meet.me.domain.MailUtils;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 
@@ -142,10 +137,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 
-	@Override
 	public int isEmail(String user_email) {
 		User u = dao.isEmail(user_email);
 		return (u == null) ? -1 : 1; 
+	}
+	public List<User> getRandomUser() {
+		return dao.getRandomUser();
 	}
 	
 }

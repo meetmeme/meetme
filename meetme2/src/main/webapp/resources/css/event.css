@@ -1,0 +1,53 @@
+@charset "utf-8";
+#foot{
+	width: 100%;
+	border-top : 1px solid #d8d7d7;
+	background-color : #f9f9f9;
+	position: fixed;
+	height: 6em;
+	bottom : 0px;
+	right : 0px;
+	cursor: default;
+	padding : 1rem;
+	color : #565454;
+}
+
+.footcon{
+	float : left;		
+}
+
+#footText{
+	width: 60%;
+	line-height: 3rem;	
+}
+
+#date, #time{
+	font-size : 2rem;
+}
+
+#footPrice{
+	width : 10%;
+	font-size : 2rem;
+	text-align: center;
+	line-height: 5rem;
+}
+
+#footBtn{
+	width : 30%;
+	text-align : center;
+}
+
+#title{
+	font-size : 4rem;
+	margin-bottom : 1rem;
+}
+
+.attend{
+	width : 8rem;
+ 	height : 4rem;
+ 	border: 1px solid rgba(241, 114, 114, 0.96); 
+ 	background-color: rgba(241, 114, 114, 0.96); 
+ 	border-radius: 5px;
+ 	color: white; 
+ 	font-size : 2rem;
+}
