@@ -55,7 +55,6 @@
 			$('li:nth-child(5)').siblings().removeClass("colorlib-active");
 		}
 
-
 	});
 </script>
 <title>Insert title here</title>

@@ -149,5 +149,6 @@ public class UserServiceImpl implements UserService{
 	public List<User_interests> getInterestsNums(int num) {
 		return dao.getInterestsNums(num);
 	}
+	
 }
 

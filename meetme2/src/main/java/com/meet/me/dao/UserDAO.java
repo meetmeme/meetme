@@ -86,5 +86,4 @@ public class UserDAO {
 		return sqlSession.selectList("User_interests.getNum", num);
 	}
 	
-	
 }

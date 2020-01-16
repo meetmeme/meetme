@@ -21,5 +21,6 @@ public interface UserService {
 	public int isEmail(String user_email);
 	public List<User> getRandomUser();
 	public List<User_interests> getInterestsNums(int num);
+	
 }
  

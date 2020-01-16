@@ -24,7 +24,6 @@
 	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="resources/js/myhomeinfo.js"></script>
 
-
 <style>
 #edit_label {
 	position: relative;

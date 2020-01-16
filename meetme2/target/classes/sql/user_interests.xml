@@ -13,6 +13,7 @@
 		category_num from mm_user_interests
 		where user_num = #{user_num}
 	</select>
+	
 </mapper>
 
 

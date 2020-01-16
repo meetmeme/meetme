@@ -49,5 +49,4 @@ $(function(){
 		})	//ajax end
 	}//function end
 	
-
 })

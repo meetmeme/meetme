@@ -83,4 +83,5 @@ public class MyhomeController {
 	public String mboard() {
 		return "myhome/mboard";
 	}
+	
 }
