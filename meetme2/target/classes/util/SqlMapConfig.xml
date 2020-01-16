@@ -11,6 +11,7 @@
 		<typeAlias alias="event" type="com.meet.me.domain.Event"/>
 		<typeAlias alias="myhome" type="com.meet.me.domain.MyHome"/>
 		<typeAlias alias="message" type="com.meet.me.domain.Message"/>
+		<typeAlias alias="notice" type="com.meet.me.domain.Notice"/>
 	</typeAliases>
 	
 	<mappers>

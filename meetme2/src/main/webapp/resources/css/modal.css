@@ -18,24 +18,7 @@
 	color: #fff;
 }
 
-.form-dark
-
- 
-
-input
-
-
-[
-type
-=
-email
-]
-
-
-:focus
-
-
-:not
+.form-dark input[type=email]:focus:not
 
  
 
@@ -296,4 +279,9 @@ px
 	color: black;
 	line-height: 50%;
 	padding: 3%;
+}
+
+.modal-subtitle > span{
+	color:gray;
+	font-size: small;
 }

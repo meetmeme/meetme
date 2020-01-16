@@ -8,6 +8,9 @@ insert into MM_EVENT values(1, 1,'[Pub Party Friday]', '▶️상세내용
 insert into MM_EVENT values(2, 4,'한강 러닝',
 '같이 한강 뛰어요!!' , sysdate, 'PM 4','뚝섬 유원지역',5,0);
 
+insert into MM_EVENT values(3, 4,'222한강 러닝',
+'같이 한강 뛰어요!!' , sysdate, 'PM 4','뚝섬 유원지역',5,0);
 
+select * from MM_EVENT    WHERE EVENT_TITLE like '%Pub%' or EVENT_CONTENT like '%Pub%' or EVENT_LOCATION     like '%Pub%'
 
 select * from MM_EVENT;

@@ -1,12 +1,12 @@
 package com.meet.me.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.meet.me.domain.Event;
 import com.meet.me.domain.Event;
 @Repository
 public class EventDAO {
@@ -23,6 +23,10 @@ public class EventDAO {
 	
 	public Event getDetail(int event_num) {
 		return sqlSession.selectOne("Events.getDetail", event_num);
+	}
+
+	public List<Event> search(Map<String, String> keywords) {
+		return sqlSession.selectList("Events.search", keywords);
 	}
 
 }

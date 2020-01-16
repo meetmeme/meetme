@@ -46,53 +46,7 @@
 
 		<hr>
 
-		<!-- minihome result -->
-		<div class=bodySubMin>
-			<!-- Testimonial
-    ================================================== -->
-			<section class="nino-testimonial">
-				<div class="container">
-					<h2 class="nino-sectionHeading">
-						<span class="nino-subHeading">Minihome</span>
-					</h2>
-					<div class="nino-testimonialSlider">
-						<ul>
-							<li>
-								<div layout="row">
-									<div class="nino-symbol fsr">
-										<i class="mdi mdi-comment-multiple-outline nino-icon"></i>
-									</div>
-									<div>
-										<p class="quote">"Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit, sed do eiusmod tempor incididunt ut labore
-											et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-											exercitation."</p>
-										<span class="name">Jon Doe</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div layout="row">
-									<div class="nino-symbol fsr">
-										<i class="mdi mdi-comment-multiple-outline nino-icon"></i>
-									</div>
-									<div>
-										<p class="quote">"Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit, sed do eiusmod tempor incididunt ut labore
-											et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-											exercitation."</p>
-										<span class="name">Jon Doe</span>
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</section>
-			<!--/#nino-testimonial-->
-		</div>
 
-		<hr>
 
 		<!-- post result -->
 		<div class=bodySubMin>
