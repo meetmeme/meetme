@@ -28,5 +28,11 @@ public class DashServiceImpl implements DashService{
 		return dao.interCount(category_num);
 	}
 
+	@Override
+	public int boardCount(String month) {
+		month = "20/"+month+"%";
+		return dao.boardCount(month);
+	}
+
 	
 }

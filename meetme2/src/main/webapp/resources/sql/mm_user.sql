@@ -18,15 +18,15 @@ CREATE TABLE MM_USER(
 
 insert into mm_user values (1, 'admin', '1234','관리자','admin@meetme.com',
 '여','25','서울시','image/default.png','image/default.png',1); 
-insert into mm_user values (2, 'user1', '1234','user1','admin@meetme.com',
+insert into mm_user values (2, 'user1', '1234','user1','user1@meetme.com',
 '여','25','서울시','image/default.png','image/default.png',1); 
-insert into mm_user values (3, 'user2', '1234','user2','admin@meetme.com',
+insert into mm_user values (3, 'user2', '1234','user2','user2@meetme.com',
 '여','25','서울시','image/default.png','image/default.png',1); 
-insert into mm_user values (4, 'user3', '1234','user3','admin@meetme.com',
+insert into mm_user values (4, 'user3', '1234','user3','user3@meetme.com',
 '여','25','서울시','image/default.png','image/default.png',1); 
-insert into mm_user values (5, 'user4', '1234','user4','admin@meetme.com',
+insert into mm_user values (5, 'user4', '1234','user4','user4@meetme.com',
 '여','25','서울시','image/default.png','image/default.png',1); 
-insert into mm_user values (6, 'user5', '1234','user5','admin@meetme.com',
+insert into mm_user values (6, 'user5', '1234','user5','user5@meetme.com',
 '여','25','서울시','image/default.png','image/default.png',1); 
 
 

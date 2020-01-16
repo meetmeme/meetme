@@ -6,6 +6,11 @@
 		select *
 		from mm_user where user_id = #{user_id}
 	</select>
+	
+	<select resultType="User" parameterType="String" id="emailcheck">
+		select * from mm_user where user_email = #{user_email}
+	</select>
+	
 
 	<insert parameterType="User" id="insert">
 		insert into mm_user
@@ -51,18 +56,18 @@
 	<select id="getSearchList" parameterType="map" resultType="user">
 		select *
 		from (select rownum rnum, b.*
-		from (select * from mm_user
-		where user_id != 'admin'
-		<if test="search_field!=null">
-			and
-			<choose>
-				<when test="search_field='user_num'">user_num</when>
-				<when test="search_field='user_id'">user_id</when>
-				<when test="search_field='user_name'">user_name</when>
-			</choose>
-			like #{search_word}
-		</if>
-		order by user_num desc)b
+			from (select * from mm_user
+				where user_id != 'admin'
+				<if test="search_field!=null">
+					and
+					<choose>
+						<when test="search_field=='user_num'">user_num</when>
+						<when test="search_field=='user_id'">user_id</when>
+						<when test="search_field=='user_name'">user_name</when>
+					</choose>
+					like #{search_word}
+				</if>
+				order by user_num desc)b
 		)
 		where rnum &gt;=#{start} and rnum &lt;=
 		#{end}
@@ -74,9 +79,9 @@
 		<if test="search_field!=null">
 			and
 			<choose>
-				<when test="search_field='user_num'">user_num</when>
-				<when test="search_field='user_id'">user_id</when>
-				<when test="search_field='user_name'">user_name</when>
+				<when test="search_field=='user_num'">user_num</when>
+				<when test="search_field=='user_id'">user_id</when>
+				<when test="search_field=='user_name'">user_name</when>
 			</choose>
 			like #{search_word}
 		</if>

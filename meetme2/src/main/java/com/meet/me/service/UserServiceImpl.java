@@ -137,7 +137,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 
-	@Override
+	public int isEmail(String user_email) {
+		User u = dao.isEmail(user_email);
+		return (u == null) ? -1 : 1; 
+	}
 	public List<User> getRandomUser() {
 		return dao.getRandomUser();
 	}

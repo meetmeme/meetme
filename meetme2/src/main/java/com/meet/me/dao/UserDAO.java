@@ -75,6 +75,9 @@ public class UserDAO {
 		return sqlSession.selectList("Users.getFriends", map);
 	}
 
+	public User isEmail(String user_email) {
+		return sqlSession.selectOne("Users.emailcheck", user_email);
+	}
 	public List<User> getRandomUser() {
 		return sqlSession.selectList("Users.getRandomUser");
 	}

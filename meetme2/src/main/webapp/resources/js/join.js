@@ -24,6 +24,7 @@ $(document).ready(function(){
 		$('#join2').hide();
 		$('#join1').show();
 		$('.backbtn2').hide();
+		$("input[name='user_pass']").val('');
 	})
 	
 	$('.nextbtn1').click(function(){
@@ -94,11 +95,14 @@ $(document).ready(function(){
          });//ajax
 	});//keyup
 	
+	
+	
 	$("input[name='user_age']").on('keyup', function(){
 		var age= $("input[name='user_age']").val();
 		
 		if(isNaN(age) == true){
 			alert('숫자만 입력 가능합니다.');
+			$("input[name='user_age']").val('');
 			return;
 		}
 	});
@@ -108,15 +112,27 @@ $(document).ready(function(){
 		$("#email_message").empty();
 		var pattern = /\w+@\w+[.]\w{3}/;
 		//+ : 무조건 글자 1개 이상
-		var email = $("input[name='user_email']").val();
+		var user_email = $("input[name='user_email']").val();
 		
-		if(!pattern.test(email)){
+		if(!pattern.test(user_email)){
 			$("#email_message").css('color','red').html("이메일 형식이 맞지 않습니다.");
 			checkmail = false;
-		} else {
-			$("#email_message").css('color','green').html("이메일 형식에 맞습니다.");
-			checkmail = true;
-		}//if
+			return;
+		} 
+		
+		$.ajax({
+            url : "emailcheck.net",
+            data : {"user_email" : user_email},
+            success : function(resp){
+               if(resp == -1) {
+                  $("#email_message").css('color','green').html("사용이 가능한 이메일입니다.");
+                  checkmail=true;
+               } else {
+                  $("#email_message").css('color','blue').html("사용중인 이메일입니다.");
+                  checkmail=false;
+               }//if
+            }//success
+         });//ajax
 	});//keyup
 	
 	

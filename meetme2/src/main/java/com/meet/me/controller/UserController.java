@@ -51,6 +51,16 @@ public class UserController {
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}// idcheck
+	
+	// 회원가입폼에서 이메일 검사
+	@RequestMapping(value = "/emailcheck.net", method = RequestMethod.GET)
+	public void emailcheck(@RequestParam("user_email") String user_email, // 파라미터로 받은 값을 String email 저장
+			HttpServletResponse response) throws Exception {
+		int result = userService.isEmail(user_email);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}// emailcheck
 
 	
 	// 회원가입 처리

@@ -6,6 +6,12 @@
 		select * from mm_myhome where user_num = (select user_num from mm_user where user_id=#{user_id})
 	</select>
 	
+	<select id="AllboardCount" resultType="int" parameterType="String">
+		select count(*)
+		from mm_board
+		where to_date(board_date, 'yy/mm/dd') like #{month}
+	</select>
+	
 </mapper>
 
 

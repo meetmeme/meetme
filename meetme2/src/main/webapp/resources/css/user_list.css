@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+/* user_list.jsp */
+
+.userdiv {
+	margin-top : 30px;
+}
+.search_form{
+	float : right;
+}
+.searchbtn{
+	background: black;
+	color : white;
+	width : 50px;
+	border-radius: 5px;
+	border: none;
+}
+.search_field{
+	height : 25px;
+}
+.user_table{
+	margin : 50px;
+}
+.user_caption {
+	font-size : 30px;
+}
+.center-block{
+	text-align: center;
+}
+
+/* user_info */
+
+.userinfo_div{
+	margin-top : 30px;
+}
