@@ -24,4 +24,10 @@ public class DashDAO {
 		return sqlSession.selectOne("Myhomes.AllboardCount", month);
 	}
 
+	public int dayCount(String day) {
+		return sqlSession.selectOne("Myhomes.AlldayCount", day);
+	}
+	
+	
+
 }
