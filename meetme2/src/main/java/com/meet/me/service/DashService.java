@@ -11,4 +11,6 @@ public interface DashService {
 
 	int boardCount(String month);
 
+	int dayCount(String day);
+
 }

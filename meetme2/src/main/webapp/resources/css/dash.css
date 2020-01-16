@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .admin_out{
-	background: gray;
+	background: #F5BCA9;
 	width : 100%;
 }
 .admin_nav{
@@ -11,19 +11,23 @@
 #admin_ul a{
 	width : 200px;
 }
+#admin_ul>li{
+	font-size : 15px;
+	font-weight : bold;
+}
 
-.pie, .bar{
+.pie, .bar, .line{
 	padding-top : 50px;
 	display : inline-block;
 	margin : 0;
 	width : 45%;
 }
 
-.pie_title, .bar_title {
+.pie_title, .bar_title, .line_title {
 	padding-left : 10px;
 }
 
 .dashdiv{
-	height : 500px;
-	
+}
+.dashdiv2{
 }

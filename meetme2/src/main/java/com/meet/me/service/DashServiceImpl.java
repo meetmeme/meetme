@@ -34,5 +34,13 @@ public class DashServiceImpl implements DashService{
 		return dao.boardCount(month);
 	}
 
+	@Override
+	public int dayCount(String day) {
+		day = "20/01/"+day;
+		
+		
+		return dao.dayCount(day);
+	}
+
 	
 }

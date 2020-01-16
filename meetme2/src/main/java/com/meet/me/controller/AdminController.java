@@ -21,7 +21,7 @@ import com.meet.me.domain.Dash;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 import com.meet.me.service.DashService;
-import com.meet.me.service.EventService;
+import com.meet.me.service.ReportService;
 import com.meet.me.service.UserService;
 
 @Controller
@@ -31,14 +31,14 @@ public class AdminController {
 	private UserService userService;
 
 	@Autowired
-	private EventService eventService;
+	private ReportService reportService;
 	
 	@Autowired
 	private DashService dashService;
 	
 	
 	@RequestMapping(value = "/dash.ad", method = RequestMethod.GET)
-	public ModelAndView dashInter(ModelAndView mv) {
+	public ModelAndView dash(ModelAndView mv) {
 		
 		//카테고리 리스트 가져오기
 		Map<String,List<String>> map = new HashMap<String,List<String>>(); 
@@ -54,9 +54,10 @@ public class AdminController {
 			categoryCount.add(category_num-1, count);
 		}
 		
+		//월별 게시글 카운트
 		String[] month = {"01","02","03","04","05","06","07","08","09","10","11","12"};
 		
-		//월별 게시글 카운트
+		
 		List<Integer> boardCount = new ArrayList<Integer>();
 		int count2 = 0;
 		for(int i=0; i<month.length;i++) {
@@ -64,16 +65,30 @@ public class AdminController {
 			boardCount.add(i,count2);
 		}
 		
+		//일별 게시글 카운트
+		String[] day = new String[31];
+		for(int i=1;i<=31;i++) {
+			if(i>=1 && i<=9) {
+				day[i-1] = "0"+i;
+			}else {
+				day[i-1] = Integer.toString(i);
+			}
+		}
+		
+		List<Integer> dayCount = new ArrayList<Integer>();
+		int count3 = 0;
+		for(int i=0;i<day.length;i++) {
+			count3 = dashService.dayCount(day[i]);
+			dayCount.add(i, count3);
+		}
+		
+		
 		mv.setViewName("admin/dash");
 		mv.addObject("categoryList", categoryList);
 		mv.addObject("categoryCount", categoryCount);
 		mv.addObject("boardCount", boardCount);
+		mv.addObject("dayCount", dayCount);
 		return mv;
-	}
-	
-	@RequestMapping(value = "/report.ad", method = RequestMethod.GET)
-	public String report() {
-		return "admin/report";
 	}
 	
 	@RequestMapping(value = "/user_list.ad")
@@ -142,5 +157,30 @@ public class AdminController {
 		}
 		return "redirect:user_list.ad";
 	}
+	
+	@RequestMapping(value="/report.ad", method=RequestMethod.GET)
+	public ModelAndView report(ModelAndView mv) {
+		
+		//신고 수
+		int userCount = 0;
+		int eventCount = 0;
+		userCount = reportService.userCount();
+		eventCount = reportService.eventCount();
+		
+		//신고 디테일
+		List<String> userReport = new ArrayList<String>();
+		List<String> eventReport = new ArrayList<String>();
+		userReport = reportService.userReport();
+		eventReport = reportService.eventReport();
+		
+		
+		mv.addObject("userCount", userCount);
+		mv.addObject("eventCount", eventCount);
+		mv.addObject("userReport", userReport);
+		mv.addObject("eventReport", eventReport);
+		mv.setViewName("admin/report");
+		return mv;
+	}
+	
 		
 }

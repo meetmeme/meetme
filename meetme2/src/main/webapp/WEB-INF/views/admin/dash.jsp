@@ -27,6 +27,10 @@
 		<input type="hidden" value="${bo}" class="board_count">
 	</c:forEach>
 	
+	<c:forEach var="day" items="${dayCount}">
+		<input type="hidden" value="${day}" class="day_count">
+	</c:forEach>
+	
 	
 	<div class="container admin_out">
 		<nav class="admin_nav" id="nino-navbar" class="navbar navbar-default" role="navigation">
@@ -39,14 +43,28 @@
 	</div>
 	
 	<div class="dashdiv">
+		<div class="line">
+			<h2 class="line_title">일별 게시물 총 갯수</h2>
+			<canvas id="myLineChart"></canvas>
+		</div>
+		
 		<div class="pie">
 			<h2 class="pie_title">회원 흥미분야 통계</h2>
 			<canvas id="myChart"></canvas>
 		</div>
 		
+		
+	</div>
+	
+	<div class="dashdiv2">
+		
 		<div class="bar">
 			<h2 class="bar_title">월별 게시물 총 갯수</h2>
 			<canvas id="myBarChart"></canvas>
+		</div>
+		
+		<div class="">
+			
 		</div>
 	</div>
 	
