@@ -12,8 +12,8 @@ public class User {
 	private String user_city;
 	private int user_num;
 	private MultipartFile uploadfile;
-	private String user_save="/image/default.png";
-	private String user_original="/image/default.png";
+	private String user_save="image/default.png";
+	private String user_original="image/default.png";
 	private int userCertification;
 	
 	public MultipartFile getUploadfile() {

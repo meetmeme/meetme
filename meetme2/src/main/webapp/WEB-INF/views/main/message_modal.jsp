@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!-- 로그인 모달 -->
+<!-- 메세지 모달 -->
 <div class="modal fade" id="layerpop3">
 	<div class="modal-dialog">
 		<div class="modal-content">

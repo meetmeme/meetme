@@ -30,8 +30,8 @@ public class CommunityController {
 	@GetMapping(value="/getFriends.cm")
 	public void getFriends(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws IOException {
 		String title = request.getParameter("param");
-		String userId = session.getAttribute("user_id1").toString();
-		List<User> friends = userService.getFriends(title, userId);
+		int userNum = Integer.parseInt(session.getAttribute("user_num1").toString());
+		List<User> friends = userService.getFriends(title, userNum);
 		
 		Gson gson = new Gson();
 		String jsonList = gson.toJson(friends);

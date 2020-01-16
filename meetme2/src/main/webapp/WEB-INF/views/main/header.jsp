@@ -38,6 +38,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/join.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/modal.css" />
 
 <!-- javascript -->
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
@@ -111,7 +112,7 @@
 											</c:if>
 											<c:if test="${!empty user_id1}">
 												<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
-												<li><a href="#">notification</a></li>
+												<li><a href="#" data-target="#darkModalForm" data-toggle="modal">notification</a></li>
 												<li><a href="#" data-target="#layerpop3"
 													data-toggle="modal">message</a></li>
 												<li><a href="logout.net">logout</a></li>
@@ -131,6 +132,7 @@
 			<!-- /.container-fluid -->
 		</nav>
 
+		<c:if test="${main}">
 		<section id="nino-slider" class="carousel slide container"
 			data-ride="carousel">
 
@@ -141,12 +143,9 @@
 						<span class="nino-subHeading">The real world is calling</span>
 					</h2>
 				</div>
-
-
 			</div>
-
-
 		</section>
+		</c:if>
 	</div>
 	<!-- Search Form - Display when click magnify icon in menu
     ================================================== -->
@@ -159,9 +158,10 @@
 		</div>
 		<br> <br> <br>
 		<div id="search-event" class="search-Div">
-			<form action="">
-				<input type="text" placeholder="검색어를 입력해주세요" id="searchEventKeyword"
-					class="form-control nino-searchInput"> <select
+			<form action="searchEvent.sc" method="post">
+				<input type="text" autocomplete="off" placeholder="검색어를 입력해주세요" id="searchEventKeyword"
+					class="form-control nino-searchInput"> <input type="text"
+					placeholder="해시태그" 	class="form-control nino-searchInput searchHashtag"> <select
 					name="searchCategory" id="search-category" class="form-control">
 					<option value="all">ALL</option>
 					<c:forEach var="cat" items="${category}">
@@ -176,12 +176,11 @@
 			</form>
 		</div>
 		<div id="search-minihome" class="search-Div">
-			<form action="">
-				<input type="text" placeholder="검색어" id="searchMinihomeKeyword"
+			<form action="searchMinihome.sc" method="post">
+				<input type="text" autocomplete="off" placeholder="검색어" id="searchMinihomeKeyword"
 					class="form-control nino-searchInput"> <input type="text"
-					placeholder="해시태그" id="searchHashtag"
-					class="form-control nino-searchInput" title="자동완성 넣을 예정"> <input
-					type="text" placeholder="닉네임" id="searchUser"
+					placeholder="해시태그" 	class="form-control nino-searchInput searchHashtag"> <input
+					type="text" autocomplete="off" placeholder="닉네임" id="searchUser"
 					class="form-control nino-searchInput"> <br> <br>
 				<input type=submit value="search" class="form-control btn_submit">
 			</form>
@@ -196,6 +195,7 @@
 <jsp:include page="login_modal.jsp" />
 <jsp:include page="join_modal.jsp" />
 <jsp:include page="message_modal.jsp" />
+<jsp:include page="notice_modal.jsp" />
 
 
 <!-- 자동완성 script -->
@@ -221,14 +221,14 @@
 							+ end.format('YYYY-MM-DD'));
 				});
 		/* 검색 자동완성 */
-		$('#searchHashtag').autocomplete({
+		$('.searchHashtag').autocomplete({
 			source : function(request, response) {
 				$.ajax({
 					type : 'get',
 					url : 'getHashtag.wd',
 					dataType : 'json',
 					data : {
-						'param' : $('#searchHashtag').val()
+						'param' : $('.searchHashtag').val()
 					},
 					success : function(data) {
 						response($.map(data, function(item) {
@@ -280,7 +280,7 @@
 				success : function(data) {
 					response($.map(data, function(item) {
 						return {
-							label : item.user_id,
+							label : item.user_name + '<' + item.user_id + '>',
 							value : item.user_id,
 							test : item.user_num
 						}
