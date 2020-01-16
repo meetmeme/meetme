@@ -12,6 +12,12 @@
 		where to_date(board_date, 'yy/mm/dd') like #{month}
 	</select>
 	
+	<select id="AlldayCount" resultType="int" parameterType="String">
+		select count(*)
+		from mm_board
+		where to_date(board_date, 'yy/mm/dd') like #{day}
+	</select>
+	
 </mapper>
 
 

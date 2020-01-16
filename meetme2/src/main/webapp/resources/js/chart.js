@@ -67,9 +67,9 @@ var ctx = document.getElementById('myChart').getContext('2d');
 		new Chart(document.getElementById("myBarChart"), {
 		    type: 'bar',
 		    data: {
-		        labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월','12월'],
+		        labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11','12'],
 		        datasets: [{
-		            label: '마이홈피 총 게시글 수',
+		            label: '마이홈피 총 게시글 수(월별)',
 		            data: arr2,
 		            borderColor: "rgba(255, 201, 14, 1)",
 		            backgroundColor: "rgba(255, 201, 14, 0.5)",
@@ -91,7 +91,71 @@ var ctx = document.getElementById('myChart').getContext('2d');
 		                display: true,
 		                scaleLabel: {
 		                    display: true,
-		                    labelString: '2020년'
+		                    labelString: '2020년 (월)'
+		                },
+		                ticks: {
+		                    autoSkip: false
+		                }
+		            }],
+		            yAxes: [{
+		                display: true,
+		                ticks: {
+		                    suggestedMin: 0,
+		                },
+		                scaleLabel: {
+		                    display: true,
+		                    labelString: '(개)'
+		                }
+		            }]
+		        }
+		    }
+		});
+		
+var day_count = document.getElementsByClassName('day_count');
+		
+		var arr3 = new Array();
+		var day = new Array();
+		for(var i=0; i<31; i++){
+			arr3[i] = day_count[i].value;
+			day[i] = i+1;
+		}
+		
+		
+		
+		
+		new Chart(document.getElementById("myLineChart"), {
+		    type: 'line',
+		    data: {
+		        labels: day,
+		        datasets: [{
+		            label: '마이홈피 총 게시글 수(일별)',
+		            data: arr3,
+		            borderColor: "#F5A9A9",
+		            backgroundColor: "#F8E0E0",
+		            fill: true,
+		            lineTension : 0
+		        }]
+		    },
+		    options: {
+		        responsive: true,
+		        title: {
+		            display: true,
+		            text: ''
+		        },
+		        tooltips: {
+		            mode: 'index',
+		            intersect: false,
+		        },
+		        hover: {
+		            mode: 'nearest',
+		            intersect: true
+		        },
+		        scales: {
+		            xAxes: [{
+		                display: true,
+		                scaleLabel: {
+		                    display: true,
+		                    labelString: '2020년 1월 (일)'
 		                },
 		                ticks: {
 		                    autoSkip: false

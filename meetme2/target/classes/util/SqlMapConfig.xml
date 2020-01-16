@@ -12,6 +12,7 @@
 		<typeAlias alias="myhome" type="com.meet.me.domain.MyHome"/>
 		<typeAlias alias="message" type="com.meet.me.domain.Message"/>
 		<typeAlias alias="notice" type="com.meet.me.domain.Notice"/>
+		<typeAlias alias="report" type="com.meet.me.domain.Report"/>
 	</typeAliases>
 	
 	<mappers>
@@ -22,5 +23,6 @@
 		<mapper resource="sql/event.xml"/>
 		<mapper resource="sql/myhome.xml"/>
 		<mapper resource="sql/community.xml"/>
+		<mapper resource="sql/report.xml"/>
 	</mappers>
 </configuration> 

@@ -18,10 +18,6 @@ CREATE TABLE MM_BOARD(
 
 select * from mm_board;
 
-select count(*)
-		from mm_board
-		where to_date(board_date, 'yy/mm/dd') like '20/02%';
-
 insert into mm_board(myhome_num, board_num, board_id, board_pass, board_title, board_content, board_date) 
 values(2,1,'user1','1234','title1','content1','2020-01-01');
 insert into mm_board(myhome_num, board_num, board_id, board_pass, board_title, board_content, board_date) 
