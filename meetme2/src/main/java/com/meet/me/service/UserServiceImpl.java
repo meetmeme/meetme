@@ -145,5 +145,10 @@ public class UserServiceImpl implements UserService{
 		return dao.getRandomUser();
 	}
 	
+	@Override
+	public List<User_interests> getInterestsNums(int num) {
+		return dao.getInterestsNums(num);
+	}
+
 }
 
