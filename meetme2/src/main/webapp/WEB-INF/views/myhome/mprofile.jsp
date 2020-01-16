@@ -26,7 +26,7 @@
 
 
 <style>
-#edit_label{
+#edit_label {
 	position: relative;
 	top: -20px;
 	left: 230px;
@@ -45,6 +45,11 @@
 #edit_btn {
 	background: none;
 	text-align: right;
+}
+
+#edit_input {
+	float: right;
+	width: 200px;
 }
 
 #myModal {
@@ -73,8 +78,8 @@
 	vertical-align: middle;
 }
 
-input{
-	background : none;
+input, textarea {
+	background: none;
 }
 </style>
 </head>
@@ -89,12 +94,24 @@ input{
 
 				<section class="ftco-section contact-section">
 					<div class="container">
+						<form action="#">
 
-						<h2 class="h4 font-weight-bold">기본 프로필</h2>
+							<h2 class="h4 font-weight-bold">기본 프로필</h2>
 
-						<div class="row block-9">
-							<div class="col-md-6 order-md-last pr-md-5">
-								<form action="#">
+							<div class="row block-9">
+								<div class="col-md-4">
+									<img alt="my_img"
+										src="resources/upload/${userinfo.user_original}" id="image"
+										class="img-thumbnail img-responsive"
+										style="width: 100%; margin-top: 10px;"> <label
+										id="edit_label"><input type="file" name="uploadfile"
+										accept="image/gif, image/jpeg, image/png"
+										style="display: none;"> <a href="#" id="edit_img">
+											<span class="glyphicon glyphicon-camera"></span>
+									</a></label>
+								</div>
+								<div class="col-md-1 order-md-last pr-md-5"></div>
+								<div class="col-md-5 order-md-last pr-md-5">
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-4"></div>
 										<div class="col-md-12 mb-4">
@@ -102,61 +119,66 @@ input{
 												data-target="#myModal">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Name: <input type="text" name="name" id="name" value="${userinfo.user_name}">
+											Name: <input type="text" name="name" id="edit_input"
+												value="${userinfo.user_name}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Password: <input type="password" name="name" id="name" value="${userinfo.user_pass}">
+											Password: <input type="password" name="name" id="edit_input"
+												value="${userinfo.user_pass}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Gender: <input type="text" name="name" id="name" value="${userinfo.user_gender}">
+											Gender: <input type="text" name="name" id="edit_input"
+												value="${userinfo.user_gender}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Age: <input type="text" name="name" id="name" value="${userinfo.user_age}">
+											Age: <input type="text" name="name" id="edit_input"
+												value="${userinfo.user_age}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Address: <input type="text" name="name" id="name" value="${userinfo.user_city}">
+											Address: <input type="text" name="name" id="edit_input"
+												value="${userinfo.user_city}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Hobby: <input type="text" name="name" id="name" value="등산, 독서">
+											Interests: <label><input type=checkbox name=category
+												id=outdoor value=1>등산</label> <label><input
+												type=checkbox name=category id=technology value=2>기술</label>
+											<label><input type=checkbox name=category id=family
+												value=3>가족</label> <label><input type=checkbox
+												name=category id=healthy value=4>건강</label> <label><input
+												type=checkbox name=category id=sports value=5>운동</label> <label><input
+												type=checkbox name=category id=study value=6>학습</label> <label><input
+												type=checkbox name=category id=language value=7>언어</label> <label><input
+												type=checkbox name=category id=photo value=8>사진</label> <label><input
+												type=checkbox name=category id=music value=9>음악</label> <label><input
+												type=checkbox name=category id=dance value=10>춤</label> <label><input
+												type=checkbox name=category id=game value=11>게임</label> <label><input
+												type=checkbox name=category id=pet value=12>애완동물</label> <label><input
+												type=checkbox name=category id=DIY value=13>DIY</label>
 										</div>
 									</div>
-								</form>
-							</div>
 
-							<div class="col-md-4">
-								<img alt="my_img"
-									src="resources/upload/${userinfo.user_original}" id="image"
-									class="img-thumbnail img-responsive"
-									style="width: 100%; margin-top: 10px;"> <label id="edit_label"><input
-									type="file" name="uploadfile"
-									accept="image/gif, image/jpeg, image/png"
-									style="display: none;">
-									<a href="#" id="edit_img">
-										<span class="glyphicon glyphicon-camera"></span>
-									</a></label>
-							</div>
-						</div>
-						<hr>
-						<h2 class="h4 font-weight-bold">미니홈피 프로필</h2>
-						<br>
-						<div class="col-md-6 order-md-last pr-md-5">
-							<form action="#">
-								<div class="row d-flex mb-5 contact-info">
+
+
+								</div>
+
+								<div class="col-md-9 order-md-last pr-md-5">
+									<h2 class="h4 font-weight-bold">미니홈피 프로필</h2>
+									<br>
 									<div class="col-md-12 mb-3">
 										<button id="edit_btn">
 											<span class="glyphicon glyphicon-music"></span>
@@ -167,12 +189,17 @@ input{
 										<button id="edit_btn">
 											<span class="glyphicon glyphicon-pencil"></span>
 										</button>
-										Introduce: ${mhinfo.myhome_intro}
+										Introduce:
+										<textarea name="intro" rows="2" class="form-control">${mhinfo.myhome_intro}</textarea>
 									</div>
-								</div>
-							</form>
 
-						</div>
+								</div>
+							</div>
+							<div class="form-group" style="text-align: center;">
+								<button type=submit class="btn btn-primary">수정</button>
+								<button type=reset class="btn btn-info">취소</button>
+							</div>
+						</form>
 					</div>
 				</section>
 
@@ -213,5 +240,21 @@ input{
 		</div>
 	</div>
 	<jsp:include page="/WEB-INF/views/myhome/mscript.jsp" />
+	<script>
+	
+    var list = new Array();
+    <c:forEach items="${user_interests}" var="item">
+    list.push("${item.category_num}");
+    </c:forEach>
+    $('input:checkbox[name="category"]').each(function() {
+	    for(var i =0;i<list.length;i++){
+	    	console.log(list[i]);
+	    	if(this.value == list[i]){ //값 비교
+	    		
+	    		this.checked = true; //checked 처리
+	     	}
+	    }
+    })
+	</script>
 </body>
 </html>

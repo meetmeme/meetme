@@ -25,4 +25,11 @@ public class User_interests {
 	public void setCat_list(List<Integer> cat_list) {
 		this.cat_list = cat_list;
 	}
+	@Override
+	public String toString() {
+		return "User_interests [user_num=" + user_num + ", category_num=" + category_num + ", cat_list=" + cat_list
+				+ "]";
+	}
+	
+	
 }

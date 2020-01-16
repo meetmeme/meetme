@@ -30,22 +30,32 @@
 
 <script>
 	$(document).ready(function() {
+		var id_arr = new Array();
+		id_arr = document.location.href.split("?");
+		console.log("dd>>>" + id_arr[1]);
+		console.log("dd2>>>" + "${userinfo.user_id}");
+		if (id_arr[1]=="${userinfo.user_id}")
+			$("#navi").append("<li><a href='mprofile.mh?"+"${user_id1}"+"'>프로필</a></li>");
+
+		
 		if (location.pathname == "/me/mmain.mh") {
 			$('li:nth-child(1)').addClass("colorlib-active");
 			$('li:nth-child(1)').siblings().removeClass("colorlib-active");
-		}
-		else if (location.pathname == "/me/mprofile.mh") {
+		} else if (location.pathname == "/me/mboard.mh") {
 			$('li:nth-child(2)').addClass("colorlib-active");
 			$('li:nth-child(2)').siblings().removeClass("colorlib-active");
-		}
-		else if (location.pathname == "/me/mboard.mh") {
+		} else if (location.pathname == "/me/mevent.mh") {
 			$('li:nth-child(3)').addClass("colorlib-active");
 			$('li:nth-child(3)').siblings().removeClass("colorlib-active");
-		}
-		else if (location.pathname == "/me/mevent.mh") {
+		} else if (location.pathname == "/me/mguest.mh") {
 			$('li:nth-child(4)').addClass("colorlib-active");
 			$('li:nth-child(4)').siblings().removeClass("colorlib-active");
+		} else if (location.pathname == "/me/mprofile.mh") {
+			$('li:nth-child(5)').addClass("colorlib-active");
+			$('li:nth-child(5)').siblings().removeClass("colorlib-active");
 		}
+
+
 	});
 </script>
 <title>Insert title here</title>
@@ -54,15 +64,15 @@
 	<aside id="colorlib-aside" role="complementary"
 		class="js-fullheight text-center">
 		<h1 id="colorlib-logo">
-			<a href="index.html">Meet Me<span>.</span></a>
+			<a href="mmain.mh?${userinfo.user_id}">Meet Me<span>.</span></a>
 		</h1>
 		<nav id="colorlib-main-menu" role="navigation">
-			<ul>
-				<li><a href="mmain.mh?${user_id1}">홈</a></li>
-				<li><a href="mprofile.mh?${user_id1}">프로필</a></li>
-				<li><a href="mboard.mh?${user_id1}">게시판</a></li>
-				<li><a href="mevent.mh?${user_id1}">이벤트</a></li>
-				<li><a href="mguestbook.mh?${user_id1}">방명록</a></li>
+			<ul id="navi">
+				<li><a href="mmain.mh?${userinfo.user_id}">홈</a></li>
+
+				<li><a href="mboard.mh?${userinfo.user_id}">게시판</a></li>
+				<li><a href="mevent.mh?${userinfo.user_id}">이벤트</a></li>
+				<li><a href="mguestbook.mh?${userinfo.user_id}">방명록</a></li>
 			</ul>
 		</nav>
 

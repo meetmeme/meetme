@@ -82,7 +82,9 @@ public class UserDAO {
 		return sqlSession.selectList("Users.getRandomUser");
 	}
 
-	
+	public List<User_interests> getInterestsNums(int num) {
+		return sqlSession.selectList("User_interests.getNum", num);
+	}
 	
 	
 }
