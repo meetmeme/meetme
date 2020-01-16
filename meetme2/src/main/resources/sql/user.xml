@@ -93,23 +93,14 @@
 	</delete>
 
 	<select id="getFriends" parameterType="map" resultType="user">
-		SELECT
-		DISTINCT *
-		FROM
-		(SELECT *
-		FROM MM_FRIENDS
-		OUTER JOIN MM_USER
-		USING(USER_NUM)
-		WHERE (USER_ID LIKE #{title} OR USER_NAME
-		LIKE #{title})) A
-		LEFT OUTER JOIN (SELECT USER_ID AS REQ_ID,
-		REQUESTER_NUM FROM MM_USER U JOIN MM_FRIENDS F ON U.USER_NUM =
-		F.REQUESTER_NUM WHERE USER_ID=#{userId}) S
-		USING(REQUESTER_NUM)
-		WHERE
-		REQ_ID IS NOT NULL
+		SELECT DISTINCT *
+		FROM MM_FOLLOWS f
+		JOIN MM_USER u
+		on (u.USER_NUM = f.FOLLOWING_NUM)
+		WHERE (USER_ID LIKE #{title} OR USER_NAME LIKE #{title})
+		AND F.USER_NUM = #{userNum}
 	</select>
-
+	
 	<select id="getRandomUser" resultType="user">
 		SELECT * FROM MM_USER SAMPLE(20)
 	</select>

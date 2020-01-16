@@ -24,7 +24,7 @@
 								onclick="location.href='event.main?event=${event.EVENT_NUM}'">
 								<div class="nino-avatar fsr">
 									<img class="img-circle img-thumbnail"
-										src="resources/images/testimonial/img-2.jpg" alt="">
+										src="${event.EVENT_SAVE}" alt="">
 								</div>
 								<div>
 									<p class="quote"><strong>"</strong>${event.EVENT_CONTENT}<strong>"</strong></p>
@@ -88,13 +88,13 @@
 			<div class="sectionContent">
 				<div class="row nino-hoverEffect">
 					<c:forEach var="user" items="${RandomUser}">
-					<div class="col-md-4 col-sm-4" onClick="mh_popup('${user.user_id}')">
+					<div class="col-md-4 col-sm-4">
 						<div class="item">
-							<div class="overlay" href="#">
+							<div class="overlay" onClick="mh_popup('${user.user_id}')" title="go to ${user.user_id}'s minihome">
 								<div class="content">
-									<a href="#" class="nino-icon"><i class="mdi mdi-bookmark-plus-outline"></i></a>
+									<a href="#" class="nino-icon" title="follow ${user.user_id}!"><i class="mdi mdi-bookmark-plus-outline"></i></a>
 								</div>
-								<img src="resources/images/happy-client/img-1.jpg" alt="">
+								<img src="resources/${user.user_save}">
 							</div>
 						</div>
 						<div class="info">

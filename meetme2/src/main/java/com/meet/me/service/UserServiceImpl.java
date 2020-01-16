@@ -129,10 +129,10 @@ public class UserServiceImpl implements UserService{
 	
 
 	@Override
-	public List<User> getFriends(String title, String userId) {
+	public List<User> getFriends(String title, int userNum) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("title","%"+title+"%");
-		map.put("userId",userId);
+		map.put("userNum",userNum+"");
 		return dao.getFriends(map);
 	}
 

@@ -13,6 +13,8 @@ public class Event {
 	private String EVENT_LOCATION;
 	private int EVENT_MAX;
 	private int EVENT_PRICE;
+	private String EVENT_SAVE = "https://source.unsplash.com/random/130x130";
+	private String EVENT_ORIGINAL = "https://source.unsplash.com/random/130x130";
 
 	// ------DB에 없는 것
 	private List<String> categorys;
@@ -95,6 +97,22 @@ public class Event {
 
 	public void setCategorys(List<String> categorys) {
 		this.categorys = categorys;
+	}
+
+	public String getEVENT_SAVE() {
+		return EVENT_SAVE;
+	}
+
+	public void setEVENT_SAVE(String eVENT_SAVE) {
+		EVENT_SAVE = eVENT_SAVE;
+	}
+
+	public String getEVENT_ORIGINAL() {
+		return EVENT_ORIGINAL;
+	}
+
+	public void setEVENT_ORIGINAL(String eVENT_ORIGINAL) {
+		EVENT_ORIGINAL = eVENT_ORIGINAL;
 	}
 
 }

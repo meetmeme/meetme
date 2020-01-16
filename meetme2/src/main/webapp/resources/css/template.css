@@ -1,4 +1,4 @@
-
+@charset "utf-8";
 /**
 * @author    Ninodezign.com http://www.ninodezign.com
 * @copyright Copyright (C) 2016 Ninodezign.com. All rights reserved.
@@ -236,7 +236,7 @@ img.img-full-width {
 #nino-header {
 	position: relative;
 	font-family: 'Montserrat', sans-serif;
-	background: url(../images/bg-header.jpg) no-repeat center center / cover;
+	background: url(https://source.unsplash.com/random/800x300) no-repeat center center / cover;
 }
 #nino-header:after {
 	content: "";
@@ -245,10 +245,10 @@ img.img-full-width {
 	top: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(243,129,129,0.9); /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
-	background: -webkit-linear-gradient(top, rgba(243,129,129,0.9), rgba(252, 227, 138, 0.9));
-	background: -o-linear-gradient(top, rgba(243,129,129,0.9), rgba(252, 227, 138, 0.9));
-	background: linear-gradient(to bottom, rgba(243,129,129,0.9), rgba(252, 227, 138, 0.9)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	background: rgba(243,129,129,0.8); /* fallback for old browsers */ /* Chrome 10-25, Safari 5.1-6 */
+	background: -webkit-linear-gradient(top, rgba(243,129,129,0.8), rgba(252, 227, 138, 0.8));
+	background: -o-linear-gradient(top, rgba(243,129,129,0.8), rgba(252, 227, 138, 0.8));
+	background: linear-gradient(to bottom, rgba(243,129,129,0.8), rgba(252, 227, 138, 0.8)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 #nino-headerInner {
 	position: relative;
@@ -362,7 +362,7 @@ img.img-full-width {
 	background: #fff;
 }
 
-/* �봽濡쒗븘 �궗吏� �겢由� �떆 �굹�삤�뒗 硫붾돱 */ /* sohee_010620 */
+/* 占쎈늄嚥≪뮉釉� 占쎄텢筌욑옙 占쎄깻�뵳占� 占쎈뻻 占쎄돌占쎌궎占쎈뮉 筌롫뗀�뤀 */ /* sohee_010620 */
 #userPopupmenu{
 	display: none;
 }
@@ -1045,25 +1045,25 @@ footer .nino-copyright {
 }
 
 #search-category {
-    width: 100%; /* 원하는 너비설정 */
-    font-family: inherit;  /* 폰트 상속 */
-    background: url('이미지 경로') no-repeat 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
+    width: 100%; /* �썝�븯�뒗 �꼫鍮꾩꽕�젙 */
+    font-family: inherit;  /* �룿�듃 �긽�냽 */
+    background: url('�씠誘몄� 寃쎈줈') no-repeat 95% 50%; /* �꽕�씠�떚釉� �솕�궡�몴瑜� 而ㅼ뒪�� �솕�궡�몴濡� ��泥� */
     border: 1px solid #999;
-    border-radius: 0px; /* iOS 둥근모서리 제거 */
-    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    border-radius: 0px; /* iOS �뫁洹쇰え�꽌由� �젣嫄� */
+    -webkit-appearance: none; /* �꽕�씠�떚釉� �쇅�삎 媛먯텛湲� */
     -moz-appearance: none;
     appearance: none;
     color:#ccc;
 }
 
 #search-dateRange {
-    width: 100%; /* 원하는 너비설정 */
-    padding: .8em .5em; /* 여백으로 높이 설정 */
-    font-family: inherit;  /* 폰트 상속 */
-    background: 95% 50%; /* 네이티브 화살표를 커스텀 화살표로 대체 */
+    width: 100%; /* �썝�븯�뒗 �꼫鍮꾩꽕�젙 */
+    padding: .8em .5em; /* �뿬諛깆쑝濡� �넂�씠 �꽕�젙 */
+    font-family: inherit;  /* �룿�듃 �긽�냽 */
+    background: 95% 50%; /* �꽕�씠�떚釉� �솕�궡�몴瑜� 而ㅼ뒪�� �솕�궡�몴濡� ��泥� */
     border: 1px solid #999;
-    border-radius: 0px; /* iOS 둥근모서리 제거 */
-    -webkit-appearance: none; /* 네이티브 외형 감추기 */
+    border-radius: 0px; /* iOS �뫁洹쇰え�꽌由� �젣嫄� */
+    -webkit-appearance: none; /* �꽕�씠�떚釉� �쇅�삎 媛먯텛湲� */
     -moz-appearance: none;
     appearance: none;
     color:#ccc;

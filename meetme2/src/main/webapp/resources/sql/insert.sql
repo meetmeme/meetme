@@ -1,5 +1,48 @@
-delete table mm_category CASCADE CONSTRAINTS;
+delete mm_category CASCADE CONSTRAINTS;
 select * from mm_category
+
+INSERT ALL
+into MM_USER values(1,'admin','1234','관리자','admin@meetme.com','여',25,'서울시','','',1)
+into MM_USER values(2,'TooColdWinter','!important','브리트니 점례','britntney@google.com','여',10,'서울시','','',1)
+into MM_USER values(3,'SantaCross','toggledata','별빛로긔','starlight@naver.com','남',20,'서울시','','',1)
+into MM_USER values(4,'ModalHater','lime&&33','곽두팔','modalmodal@hanmail.net','남',30,'서울시','','',1)
+into MM_USER values(5,'BBangBBang','808@@@','이재용','samsunglover@hotmail.net','남',40,'서울시','','',1)
+into MM_USER values(6,'JavaLover','Samsung*','이건희','jjangjjang789@empas.com','남',50,'서울시','','',1)
+into MM_USER values(7,'Reasonable88','twinkle55','귀염둥이','prettywomen@hitel.net','여',60,'서울시','','',1)
+into MM_USER values(8,'OrakGrak','$fgas&*','뿌잉뿌잉','jeongsintong1@netian.com','여',10,'서울시','','',1)
+into MM_USER values(9,'Developer135','!@#$%^&','컨트롤즤','ctrlz135@nate.com','여',20,'서울시','','',1)
+into MM_USER values(10,'EclipseJJang','1@3$5^7','김유미','yumi309@hanmir.com','남',30,'서울시','','',1)
+into MM_USER values(11,'DBdb5678','parkinterpark','박막례','yurajjang12@dreamwiz.com','여',40,'서울시','','',1)
+into MM_USER values(12,'Hammer5880','dngltdnglt','우힛우힛','azummayeogi@korea.com','여',50,'서울시','','',1)
+into MM_USER values(13,'Elsa','skxmfkddmfhrkwk','빠담빠담','letitgoletitgo@nate.com','여',60,'서울시','','',1)
+into MM_USER values(14,'Olarph','%&(xlvksl','나트랑','doyouwanna@buildasnow.man','남',40,'서울시','','',1)
+into MM_USER values(15,'OhFrozen77','mamamomo','티파니','breakfast@tiffany.lov','여',40,'서울시','','',1)
+into MM_USER values(16,'CountryRock','rongrong22','나는야락스타','rockandroll@nate.com','남',10,'서울시','','',1)
+into MM_USER values(17,'TaylerSwift','popoqwqw','테일러','36ruralliving@hitel.net','남',20,'서울시','','',1)
+into MM_USER values(18,'bestdriver','almond^^','베스트드레서','bestdriver123@dreamwiz.com','남',30,'서울시','','',1)
+into MM_USER values(19,'LoveandHate','brainwasher','이중세뇌','maxminminus@kebi.com','여',40,'서울시','','',1)
+into MM_USER values(20,'Sunrise','goehedl','해돋이','sunandmoon28@hanmail.net','여',50,'서울시','','',1)
+select * from dual;
+
+INSERT ALL
+INTO MM_FOLLOWS VALUES(1, 2, 1)
+INTO MM_FOLLOWS VALUES(1, 3, 1)
+INTO MM_FOLLOWS VALUES(1, 4, 1)
+INTO MM_FOLLOWS VALUES(1, 5, 1)
+INTO MM_FOLLOWS VALUES(1, 6, 1)
+INTO MM_FOLLOWS VALUES(1, 7, 1)
+INTO MM_FOLLOWS VALUES(1, 8, 1)
+INTO MM_FOLLOWS VALUES(1, 9, 1)
+INTO MM_FOLLOWS VALUES(1, 10, 1)
+INTO MM_FOLLOWS VALUES(1, 11, 1)
+INTO MM_FOLLOWS VALUES(1, 12, 1)
+INTO MM_FOLLOWS VALUES(1, 13, 1)
+INTO MM_FOLLOWS VALUES(1, 14, 1)
+INTO MM_FOLLOWS VALUES(1, 15, 1)
+INTO MM_FOLLOWS VALUES(1, 16, 1)
+INTO MM_FOLLOWS VALUES(1, 17, 1)
+INTO MM_FOLLOWS VALUES(1, 18, 1)
+select * from dual;
 
 insert all
 into  MM_CATEGORY values(1, 'outdoor')
@@ -52,23 +95,9 @@ into  MM_HASHTAG values(29, '언어2')
 into  MM_HASHTAG values(30, '춤2')
 select * from dual;
 
-
-INSERT  ALL
- INTO MM_FRIENDS VALUES(1,2,1)
- INTO MM_FRIENDS VALUES(1,3,1)
- INTO MM_FRIENDS VALUES(2,1,1)
- INTO MM_FRIENDS VALUES(2,3,1)
- INTO MM_FRIENDS VALUES(3,1,1)
- INTO MM_FRIENDS VALUES(3,2,1)
-select * from dual;
-
 		SELECT DISTINCT *
-		FROM
-		(SELECT  *
-		FROM MM_FRIENDS 
-		OUTER JOIN MM_USER
-		USING(USER_NUM)
-		WHERE (USER_ID LIKE '%a%' OR USER_NAME LIKE '%a%')) A
-		LEFT OUTER JOIN (SELECT USER_ID AS REQ_ID, REQUESTER_NUM FROM MM_USER U JOIN MM_FRIENDS F ON U.USER_NUM = F.REQUESTER_NUM WHERE USER_ID='user2') S
-		USING(REQUESTER_NUM)
-		WHERE REQ_ID IS NOT NULL
+		FROM MM_FOLLOWS f
+		JOIN MM_USER u
+		on (u.USER_NUM = f.FOLLOWING_NUM)
+		WHERE (U.USER_ID LIKE '%a%' OR U.USER_NAME LIKE '%a%')
+		AND F.USER_NUM = '1'

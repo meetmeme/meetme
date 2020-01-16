@@ -52,6 +52,7 @@ public class IndexController {
 		mv.addObject("category", category);
 		mv.addObject("event", event);
 		mv.addObject("RandomUser", RandomUser);
+		mv.addObject("main", true);
 		
 		
 		return mv;
