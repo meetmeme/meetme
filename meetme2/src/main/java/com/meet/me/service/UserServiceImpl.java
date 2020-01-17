@@ -150,5 +150,11 @@ public class UserServiceImpl implements UserService{
 		return dao.getInterestsNums(num);
 	}
 
+
+	@Override
+	public int update(User user) {
+		return dao.update(user);
+	}
+
 }
 
