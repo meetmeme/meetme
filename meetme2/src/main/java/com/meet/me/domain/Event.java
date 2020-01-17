@@ -19,6 +19,13 @@ public class Event {
 	// ------DB에 없는 것
 	private List<String> categorys;
 
+	
+	
+	@Override
+	public String toString() {
+		return "Event [EVENT_NUM=" + EVENT_NUM + ", EVENT_TITLE=" + EVENT_TITLE + ", EVENT_DATE=" + EVENT_DATE + "]";
+	}
+
 	public int getEVENT_NUM() {
 		return EVENT_NUM;
 	}

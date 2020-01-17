@@ -97,7 +97,7 @@
 		FROM MM_FOLLOWS f
 		JOIN MM_USER u
 		on (u.USER_NUM = f.FOLLOWING_NUM)
-		WHERE (USER_ID LIKE #{title} OR USER_NAME LIKE #{title})
+		WHERE (upper(USER_ID) LIKE upper(#{title}) OR upper(USER_NAME) LIKE upper(#{title}))
 		AND F.USER_NUM = #{userNum}
 	</select>
 	

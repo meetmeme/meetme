@@ -6,6 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.meet.me.domain.Hashtag;
+
 @Repository
 public class HashtagDAO {
 	@Autowired
@@ -15,9 +17,15 @@ public class HashtagDAO {
 		return null;
 	}
 
-	public List<String> gethashtag(String title) {
-		title = "%"+title+"%";
+	public List<Hashtag> gethashtag(String title) {
+		title = "%" + title + "%";
 		return sqlSession.selectList("Hashtags.getHashtag", title);
+	}
+
+	public int searchHashtag(String hashtag) {
+		if (sqlSession.selectOne("Hashtags.searchHashtag", hashtag) != null)
+			return Integer.parseInt(sqlSession.selectOne("Hashtags.searchHashtag", hashtag));
+		return -1;
 	}
 
 }
