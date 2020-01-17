@@ -33,9 +33,9 @@
 		var id_arr = new Array();
 		id_arr = document.location.href.split("?");
 		console.log("dd>>>" + id_arr[1]);
-		console.log("dd2>>>" + "${userinfo.user_id}");
-		if (id_arr[1]=="${userinfo.user_id}")
-			$("#navi").append("<li><a href='mprofile.mh?"+"${user_id1}"+"'>프로필</a></li>");
+		console.log("dd2>>>" + "id=${user_id1}");
+		if (id_arr[1]=="id=${user_id1}")
+			$("#navi").append("<li><a href='mprofile.mh?id="+"${user_id1}"+"'>프로필</a></li>");
 		
 		if (location.pathname == "/me/mmain.mh") {
 			$('li:nth-child(1)').addClass("colorlib-active");
@@ -62,17 +62,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+String id = request.getParameter("id"); 
+%>
+
 	<aside id="colorlib-aside" role="complementary"
 		class="js-fullheight text-center">
 		<h1 id="colorlib-logo">
-			<a href="mmain.mh?${userinfo.user_id}">Meet Me<span>.</span></a>
+			<a href="mmain.mh?id=<%=id %>">Meet Me<span>.</span></a>
 		</h1>
 		<nav id="colorlib-main-menu" role="navigation">
 			<ul id="navi">
-				<li><a href="mmain.mh?${userinfo.user_id}">홈</a></li>
-				<li><a href="mboard.mh?${userinfo.user_id}">게시판</a></li>
-				<li><a href="mevent.mh?${userinfo.user_id}">이벤트</a></li>
-				<li><a href="mguestbook.mh?${userinfo.user_id}">방명록</a></li>
+				<li><a href="mmain.mh?id=<%=id %>">홈</a></li>
+				<li><a href="mboard.mh?id=<%=id %>">게시판</a></li>
+				<li><a href="mevent.mh?id=<%=id %>">이벤트</a></li>
+				<li><a href="mguestbook.mh?id=<%=id %>">방명록</a></li>
 			</ul>
 		</nav>
 

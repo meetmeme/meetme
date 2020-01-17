@@ -49,7 +49,7 @@
 
 #edit_input {
 	float: right;
-	width: 200px;
+	width: 220px;
 }
 
 #myModal {
@@ -92,14 +92,19 @@ input, textarea {
 				data-stellar-background-ratio="0.5">
 				<div class="overlay"></div>
 
-				<section class="ftco-section contact-section">
-					<div class="container">
-						<form action="#">
+				<section class="ftco-section contact-section"
+					style="padding-top: 30px;">
+					<form action="updateProfile.mh" method="post"
+						enctype="multipart/form-data">
+						<input type="hidden" name="user_id" value="${userinfo.user_id}">
+						<input type="hidden" name="user_num" value="${userinfo.user_num}">
+						<div class="container">
+
 							<h2 class="h4 font-weight-bold">기본 프로필</h2>
 							<div class="row block-9">
 								<div class="col-md-4">
 									<img alt="my_img"
-										src="resources/upload/${userinfo.user_original}" id="image"
+										src="resources/upload${userinfo.user_save}" id="image"
 										class="img-thumbnail img-responsive"
 										style="width: 100%; margin-top: 10px;"> <label
 										id="edit_label"><input type="file" name="uploadfile"
@@ -108,8 +113,8 @@ input, textarea {
 											<span class="glyphicon glyphicon-camera"></span>
 									</a></label>
 								</div>
-								<div class="col-md-1 order-md-last pr-md-5"></div>
-								<div class="col-md-5 order-md-last pr-md-5">
+								<div class="col-md-1 order-md-last pr-md-4"></div>
+								<div class="col-md-6 order-md-last pr-md-4">
 
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-4"></div>
@@ -118,35 +123,42 @@ input, textarea {
 												data-target="#myModal">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Name: <input type="text" name="name" id="edit_input"
+											Name: <input type="text" name="user_name" id="edit_input"
 												value="${userinfo.user_name}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Password: <input type="password" name="name" id="edit_input"
-												value="${userinfo.user_pass}">
+											Password: <input type="password" name="user_pass"
+												id="edit_input" value="${userinfo.user_pass}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Gender: <input type="text" name="name" id="name"
+											Email: <input type="text" name="user_email" id="edit_input"
+												value="${userinfo.user_email}">
+										</div>
+										<div class="col-md-12 mb-4">
+											<button id="edit_btn">
+												<span class="glyphicon glyphicon-pencil"></span>
+											</button>
+											Gender: <input type="text" name="user_gender" id="edit_input"
 												value="${userinfo.user_gender}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Age: <input type="text" name="name" id="name"
+											Age: <input type="text" name="user_age" id="edit_input"
 												value="${userinfo.user_age}">
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Address: <input type="text" name="name" id="name"
+											Address: <input type="text" name="user_city" id="edit_input"
 												value="${userinfo.user_city}">
 										</div>
 										<div class="col-md-12 mb-4">
@@ -172,10 +184,10 @@ input, textarea {
 									</div>
 
 								</div>
-								<hr>
-								<h2 class="h4 font-weight-bold">미니홈피 프로필</h2>
-								<br>
-								<div class="col-md-6 order-md-last pr-md-5">
+
+								<div class="col-md-9 order-md-last pr-md-5">
+									<h2 class="h4 font-weight-bold">미니홈피 프로필</h2>
+									<br>
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-3">
 											<button id="edit_btn">
@@ -192,40 +204,22 @@ input, textarea {
 										</div>
 									</div>
 								</div>
-						</form>
+							</div>
 
-					</div>
-			</div>
-			</section>
-
-		</div>
-		<!-- END COLORLIB-MAIN -->
-	</div>
-	<!-- END COLORLIB-PAGE -->
-
-	<!-- MODAL -->
-	<div class="modal" id="myModal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-
-				<!-- Modal body -->
-				<div class="modal-body">
-					<form name="ModiForm" action="NameUpdate.mh" method="post">
-						<div class="form-group">
-							<label for="name">Name 수정</label> <input type="text"
-								class="form-control" placeholder="수정할 이름을 입력하세요" name="name"
-								id="name">
+							<div class="form-group" style="text-align: center;">
+								<button type=submit class="btn btn-primary">수정</button>
+								<button type=reset class="btn btn-info">취소</button>
+							</div>
 						</div>
-				</div>
+					</form>
+
+				</section>
+
 			</div>
-			<div class="form-group" style="text-align: center;">
-				<button type=submit class="btn btn-primary">수정</button>
-				<button type=reset class="btn btn-info">취소</button>
-			</div>
-			</form>
+			<!-- END COLORLIB-MAIN -->
 		</div>
-		</section>
-	</div>
+		<!-- END COLORLIB-PAGE -->
+
 
 	</div>
 	<jsp:include page="/WEB-INF/views/myhome/mscript.jsp" />

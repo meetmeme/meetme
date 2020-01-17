@@ -12,6 +12,10 @@
 
 </head>
 <body>
+<%
+String id = request.getParameter("id"); 
+%>
+<input type="hidden" name="id" value="<%=id %>">
 	<div id="colorlib-page">
 
 		<div id="colorlib-main">
@@ -23,12 +27,12 @@
 					class="js-fullheight d-flex justify-content-center align-items-center">
 					<div class="col-md-8 text text-center">
 						<div class="img mb-4"
-							style="background-image: url(resources/upload/${userinfo.user_original};"></div>
+							style="background-image: url(resources/upload/${m_info.user_save};"></div>
 						<div class="desc">
 							<h2 class="subheading">Hello I'm</h2>
-							<h1 class="mb-4">${user_id1}</h1>
-							<h1 class="mb-4">${user_num1}</h1>
-							<p class="mb-4">${mhinfo.myhome_intro}</p>
+							<h1 class="mb-4">${m_info.user_id}</h1>
+							<h1 class="mb-4">${m_info.user_num}</h1>
+							<p class="mb-4">${mh_info.myhome_intro}</p>
 							<ul class="ftco-social mt-3">
 
 							</ul>
