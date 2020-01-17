@@ -82,12 +82,20 @@ public class AdminController {
 			dayCount.add(i, count3);
 		}
 		
+		//팔로워 많은 회원 5명
+		List<String> follows = new ArrayList<String>();
+		follows = dashService.follows();
+		
+		//5명의 각 팔로워 수 카운트
+		
 		
 		mv.setViewName("admin/dash");
 		mv.addObject("categoryList", categoryList);
 		mv.addObject("categoryCount", categoryCount);
 		mv.addObject("boardCount", boardCount);
 		mv.addObject("dayCount", dayCount);
+		mv.addObject("HeaderComment", "Admin Page");
+		mv.addObject("follows", follows);
 		return mv;
 	}
 	
@@ -129,6 +137,7 @@ public class AdminController {
 		mv.addObject("limit", limit);
 		mv.addObject("search_field", index);
 		mv.addObject("search_word", search_word);
+		mv.addObject("HeaderComment", "Admin Page");
 		
 		return mv;
 	}
@@ -139,6 +148,7 @@ public class AdminController {
 		User user = userService.user_info(user_id);
 		mv.setViewName("admin/user_info");
 		mv.addObject("userinfo", user);
+		mv.addObject("HeaderComment", "Admin Page");
 		
 		return mv;
 	}
@@ -179,6 +189,7 @@ public class AdminController {
 		mv.addObject("userReport", userReport);
 		mv.addObject("eventReport", eventReport);
 		mv.setViewName("admin/report");
+		mv.addObject("HeaderComment", "Admin Page");
 		return mv;
 	}
 	

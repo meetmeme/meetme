@@ -39,6 +39,8 @@
 	href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/join.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/modal.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/dash.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/user_list.css" />
 
 <!-- javascript -->
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>

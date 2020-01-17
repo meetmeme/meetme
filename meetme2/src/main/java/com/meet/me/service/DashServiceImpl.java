@@ -42,5 +42,10 @@ public class DashServiceImpl implements DashService{
 		return dao.dayCount(day);
 	}
 
+	@Override
+	public List<String> follows() {
+		return dao.follows();
+	}
+
 	
 }

@@ -5,7 +5,7 @@
 <html lang="en">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-<jsp:include page="admin_header.jsp" />
+<jsp:include page="../main/header.jsp" />
 
 <body data-target="#nino-navbar" data-spy="scroll">
 	
@@ -30,6 +30,12 @@
 	<c:forEach var="day" items="${dayCount}">
 		<input type="hidden" value="${day}" class="day_count">
 	</c:forEach>
+	
+	<c:forEach var="f" items="${follows}">
+		<input type="hidden" value="${f.user_id}" class="f_id">
+		<input type="hidden" value="${f.user_id}" class="f_count">
+	</c:forEach>
+	
 	
 	
 	<div class="container admin_out">
@@ -63,12 +69,13 @@
 			<canvas id="myBarChart"></canvas>
 		</div>
 		
-		<div class="">
-			
+		<div class="horizontal">
+			<h2 class="horizontal_title">팔로워 최다 회원 리스트</h2>
+			<canvas id="myHorizontalChart"></canvas>
 		</div>
 	</div>
 	
 	
-	<script type="text/javascript" src="resources/js/chart.js"></script>
+	<script type="text/javascript" src="resources/js/dash.js"></script>
 </body>
 </html>

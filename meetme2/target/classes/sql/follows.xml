@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Follows">
+	<select id="followCount" resultType="dash">
+		select a.*, u.user_id
+		from (select user_num, count(follower_ck) 
+				from mm_follows 
+				group by user_num
+				order by count(follower_ck) desc) a
+		inner join mm_user u
+		on a.user_num = u.user_num
+		where rownum &lt;=5
+	</select>
+</mapper>
+
+

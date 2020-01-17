@@ -6,6 +6,7 @@ public class Dash {
 	private String category_name;
 	private int[] interests_count_list;
 	
+	
 	public int getCategory_num() {
 		return category_num;
 	}
@@ -30,6 +31,7 @@ public class Dash {
 	public void setCat_nums(int[] cat_nums) {
 		this.cat_nums = cat_nums;
 	}
+
 	
 	
 }

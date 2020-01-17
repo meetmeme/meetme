@@ -13,4 +13,6 @@ public interface DashService {
 
 	int dayCount(String day);
 
+	List<String> follows();
+
 }

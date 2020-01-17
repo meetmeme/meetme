@@ -3,7 +3,7 @@
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
-<head>
+
 <style>
 	.table {
 		width : 100%;
@@ -13,8 +13,10 @@
 		text-align: center;
 	}
 </style>
+
+<jsp:include page="../main/header.jsp" />
+
 <body data-target="#nino-navbar" data-spy="scroll">
-<jsp:include page="admin_header.jsp" />
 <body>
 
 	<div class="container admin_out">

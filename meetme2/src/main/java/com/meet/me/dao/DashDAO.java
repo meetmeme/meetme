@@ -27,6 +27,10 @@ public class DashDAO {
 	public int dayCount(String day) {
 		return sqlSession.selectOne("Myhomes.AlldayCount", day);
 	}
+
+	public List<String> follows() {
+		return sqlSession.selectList("Follows.followCount");
+	}
 	
 	
 
