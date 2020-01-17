@@ -123,7 +123,7 @@
 						</ul>
 					</div>
 					<!-- /.navbar-collapse -->
-					<ul class="nino-iconsGroup nav navbar-nav">
+					<ul class="nino-iconsGroup nav navbar-nav" id=searchIcon>
 						<li><a href="#" class="nino-search"><i
 								class="mdi mdi-magnify nino-icon"></i></a></li>
 					</ul>
@@ -152,27 +152,31 @@
 	<div id="nino-searchForm">
 		<div class="search-Div">
 			<input type="radio" id="searchType-event" name="searchType"
-				value="event" checked="checked"> <label>Event | </label> <input
+				value="event" class="searchCheck" checked> <label
+				for="searchType-event" class=btn><span></span>Event</label> <input
 				type="radio" id="searchType-minihome" name="searchType"
-				value="minihome"> <label>Mini Home</label>
+				value="minihome" class="searchCheck"> <label
+				for="searchType-minihome" class=btn><span></span>Mini Home</label>
 		</div>
 		<br> <br> <br>
 		<div id="search-event" class="search-Div">
 			<!-- <form action="#" method="get"> -->
- 			<form action="searchEvent.sc" method="post">
-				<input type="text" autocomplete="off" placeholder="검색어" name="searchKeyword"
-					id="searchEventKeyword" class="form-control nino-searchInput">
-				<input type="text" placeholder="해시태그"
-					class="form-control nino-searchInput searchHashtag" name="searchHashtag"> <select
-					name="searchCategory" id="search-category" class="form-control">
-					<option value="all">ALL</option>
-					<c:forEach var="cat" items="${category}">
-						<option value="${cat.CATEGORY_NUM}">${cat.CATEGORY_NAME}</option>
-					</c:forEach>
-				</select> <br> <br> 
-				<input type="text" id="search-dateRange" class="form-control" value="2020/01/01 - 2020/01/10" />
-				<input type=hidden name="search-dateStart" id="search-dateStart" value="2020-01-01">
-				<input type=hidden name="search-dateEnd" id="search-dateEnd" value="2020-01-10">
+			<form action="searchEvent.sc" method="post" id=searchEvent>
+				<input type="text" autocomplete="off" placeholder="검색어"
+					name="searchKeyword" id="searchEventKeyword"
+					class="form-control nino-searchInput"> <input type="text"
+					placeholder="해시태그"
+					class="form-control nino-searchInput searchHashtag"
+					name="searchHashtag" id="searchEventHashtag"> <input type=hidden id=hashtagNum
+					name=searchHashtagNum> <select name="searchCategory"
+					id="search-category" class="form-control">
+					<option value="0_all">ALL</option>
+
+				</select> <br> <br> <input type="text" id="search-dateRange"
+					class="form-control" value="2020/01/01 - 2020/01/10" /> <input
+					type=hidden name="search-dateStart" id="search-dateStart"
+					value="2020-01-01"> <input type=hidden
+					name="search-dateEnd" id="search-dateEnd" value="2020-01-10">
 				<br> <br> <input type=submit value="search"
 					class="form-control btn_submit">
 			</form>
@@ -180,12 +184,16 @@
 		<div id="search-minihome" class="search-Div">
 			<form action="searchMinihome.sc" method="post">
 				<input type="text" autocomplete="off" placeholder="검색어"
-					id="searchMinihomeKeyword" class="form-control nino-searchInput">
-				<input type="text" placeholder="해시태그"
-					class="form-control nino-searchInput searchHashtag"> <input
-					type="text" autocomplete="off" placeholder="닉네임" id="searchUser"
-					class="form-control nino-searchInput"> <br> <br>
-				<input type=submit value="search" class="form-control btn_submit">
+					id="searchMinihomeKeyword"
+					class="form-control nino-searchInput searchHashtag"
+					name="searchKeyword"> <input type="text" placeholder="해시태그"
+					class="form-control nino-searchInput searchHashtag"
+					name="searchHashtag" id="searchMinihomeHashtag"> <input type=hidden id=hashtagNumMinihome
+					name=searchHashtagNum><input type="text" autocomplete="off"
+					placeholder="닉네임" id="searchUser"
+					class="form-control nino-searchInput" id=name> <br> <br>
+				<input type=submit value="search" class="form-control btn_submit"
+					name="searchName">
 			</form>
 		</div>
 		<i class="mdi mdi-close nino-close"></i>
@@ -209,10 +217,10 @@
 
 <script>
 	$(function() {
-	$(window).on('load', function() {
-		if($('#note').val())
-			$('#darkModalForm').modal('show');
-	});
+		$(window).on('load', function() {
+			if ($('#note').val())
+				$('#darkModalForm').modal('show');
+		});
 
 		$('input[id="search-dateRange"]').daterangepicker(
 				{
@@ -222,29 +230,29 @@
 					opens : 'left'
 				},
 				function(start, end, label) {
-					console.log(start +" - "+end);
+					console.log(start + " - " + end);
 					$('#search-dateStart').val(start.format('YYYY-MM-DD'));
 					$('#search-dateEnd').val(end.format('YYYY-MM-DD'));
 					console.log("A new date selection was made: "
 							+ start.format('YYYY-MM-DD') + ' to '
 							+ end.format('YYYY-MM-DD'));
 				});
-		/* 검색 자동완성 */
-		$('.searchHashtag').autocomplete({
+		/* 검색 자동완성 - event */
+		$('#searchEventHashtag').autocomplete({
 			source : function(request, response) {
 				$.ajax({
 					type : 'get',
 					url : 'getHashtag.wd',
 					dataType : 'json',
 					data : {
-						'param' : $('.searchHashtag').val()
+						'param' : $('#searchEventHashtag').val()
 					},
 					success : function(data) {
 						response($.map(data, function(item) {
 							return {
-								label : item,
-								value : item,
-								test : item
+								label : item.HASHTAG_TITLE,
+								value : item.HASHTAG_TITLE,
+								test : item.HASHTAG_NUM
 							}
 						}) //end map
 						)
@@ -252,6 +260,9 @@
 				}); //end ajax
 			}, //end source
 			select : function(event, ui) {
+				$('#hashtagNum').val(ui.item.test);
+				console.log($('#hashtagNum').val());
+				$('#search-category').focus();
 				/* console.log('2 : ' + ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
 				console.log('3 : ' + ui.item.label); //김치 볶음밥label
 				console.log('4 : ' + ui.item.value); //김치 볶음밥
@@ -274,7 +285,59 @@
 				console.log(event);
 			}
 		});
+		/* 검색 자동완성 - minihome */
+		 $('#searchMinihomeHashtag').autocomplete({
+			source : function(request, response) {
+				$.ajax({
+					type : 'get',
+					url : 'getHashtag.wd',
+					dataType : 'json',
+					data : {
+						'param' : $('#searchMinihomeHashtag').val()
+					},
+					success : function(data) {
+						response($.map(data, function(item) {
+							return {
+								label : item.HASHTAG_TITLE,
+								value : item.HASHTAG_TITLE,
+								test : item.HASHTAG_NUM
+							}
+						}) //end map
+						)
+					} //end success
+				}); //end ajax
+			}, //end source
+			select : function(event, ui) {
+				$('#hashtagNumMinihome').val(ui.item.test);
+				console.log($('#hashtagNum').val());
+				$('#name').focus();
+				console.log('2 : ' + ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+				console.log('3 : ' + ui.item.label); //김치 볶음밥label
+				console.log('4 : ' + ui.item.value); //김치 볶음밥
+				console.log('5 : ' + ui.item.test); //김치 볶음밥test
+			},//end select
+			focus : function(event, ui) {
+				return false; //한글 에러 방지
+			},
+			minLength : 1,
+			autoFocus : true,
+			classes : {
+				"ui-autocomplete" : "highlight"
+			},
+			delay : 500,
+			position : {
+				my : "right top",
+				at : "right bottom"
+			},
+			close : function(event) { //자동완성창 닫아질때 호출
+				console.log(event);
+			}
+		}); 
 	});
+	$('input[name=searchHashtag]').focus(function() {
+		$('input[name=searchHashtag]').val('');
+		$('#hashtagNum').val('');
+	})
 
 	//MESSAGE 친구 자동완성
 	$('#receiver').autocomplete({
@@ -288,6 +351,7 @@
 				},
 				success : function(data) {
 					response($.map(data, function(item) {
+						console.log(item);
 						return {
 							label : item.user_name + '<' + item.user_id + '>',
 							value : item.user_id,
@@ -343,4 +407,60 @@
 			$('#userPopupmenu').hide();
 		}
 	})
+
+	//검색 - 해시태그 관련
+	$('input[name=searchHashtag]').blur(function searchEvent() {
+		if ($('input[name=searchHashtag]').val() != '') {
+			if ($('#hashtagNum').val() == '') { //없는 해시태그 입력한 것
+				$.ajax({
+					type : 'get',
+					url : 'searchHashtag.wd',
+					data : {
+						'param' : $('input[name=searchHashtag]').val()
+					},
+					dataType : 'text',
+					success : function(data) {
+						if (data > 0) {
+							$('#hashtagNum').val(data);
+						} else {
+							$('input[name=searchHashtag]').focus();
+						}
+					} //end success
+				}); //end ajax
+			}
+		}
+	});
+
+	// 검색 창 누르면 카테고리 가져옴
+	$('#searchIcon')
+			.click(
+					function() {
+						if (!$('#nino-searchForm').attr(
+								'class:contains("open")')) {
+							$
+									.ajax({
+										type : 'get',
+										url : 'getCategory.wd',
+										data : {},
+										dataType : 'json',
+										success : function(data) {
+											var selectList = "";
+											$
+													.each(
+															data,
+															function(index,
+																	item) {
+																selectList = selectList
+																		+ '<option value="'+item.CATEGORY_NUM+'_'+item.CATEGORY_NAME+'">'
+																		+ item.CATEGORY_NAME
+																		+ '</option>';
+															})
+											console.log($('#search-category')
+													.next());
+											$('#search-category').append(
+													selectList);
+										} //end success
+									}); //end ajax
+						}
+					})
 </script>

@@ -6,6 +6,28 @@
 <body data-target="#nino-navbar" data-spy="scroll">
 	<jsp:include page="../main/header.jsp" />
 	<div class=bodyMin>
+	<hr>
+	  <!-- search keyword
+    ================================================== -->
+    <section id = searchKeywordShow>
+    	<div class="container center">
+    		<div layout="row">
+    			<div class="item">
+    				<div class="text">Keyword</div>
+    				<div class="number">${searchKey.keyword}</div>
+    			</div>
+    			<div class="item">
+    				<div class="text">Hashtag</div>
+    				<div class="number">${searchKey.searchHashtag}</div>
+    			</div>
+    			<div class="item">
+    				<div class="text">Name or ID</div>
+    				<div class="number">${searchKey.searchCategory}</div>
+    			</div>
+    		</div>
+    	</div>
+    </section><!--/#search keyword-->
+		<hr>
 		<!-- minihome result -->
 		<div class=bodySubMinMain>
 			<!-- Story About Us

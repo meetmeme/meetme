@@ -32,4 +32,14 @@ public class EventServiceImpl implements EventService{
 	public List<Event> search(Map<String, String> keywords) {
 		return dao.search(keywords);
 	}
+
+	@Override
+	public List<Event> searchHash(Map<String, String> keywords) {
+		return dao.searchHash(keywords);
+	}
+
+	@Override
+	public List<Event> searchDate(Map<String, String> keywords) {
+		return  dao.searchDate(keywords);
+	}
 }

@@ -26,15 +26,37 @@
 		select * from MM_EVENT
 		<where>
 			<if test="keyword!='%null%'">
-				EVENT_TITLE like #{keyword} OR EVENT_CONTENT like #{keyword} 
-				OR EVENT_LOCATION like #{keyword}
+				upper(EVENT_TITLE) like upper(#{keyword}) OR
+				upper(EVENT_CONTENT) like upper(#{keyword})
+				OR upper(EVENT_LOCATION) like upper(#{keyword})
 			</if>
-			<if test="category!='all'">
-				CATEGORY_NUM= #{category}
+			<if test="category!='0'">
+				AND CATEGORY_NUM= #{category}
 			</if>
-			<if test="dateStart!=null">
-				AND EVENT_DATE between #{dateStart,jdbcType=DATE} and #{dateEnd,jdbcType=DATE}
-			</if>
+			<![CDATA[
+			AND EVENT_DATE >= TO_DATE(#{dateStart,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
+			AND EVENT_DATE <= TO_DATE(#{dateEnd,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
+			]]>
 		</where>
+	</select>
+
+	<select id="searchHash" parameterType="map" resultType="event">
+		select DISTINCT e.* from MM_EVENT e join MM_HASHTAG_USE u
+		on(e.EVENT_NUM = u.EVENT_NUM)
+		WHERE U.HASHTAG_NUM = #{hashtag}
+		<![CDATA[
+		AND e.EVENT_DATE >= TO_DATE(#{dateStart,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
+		AND e.EVENT_DATE <= TO_DATE(#{dateEnd,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
+		]]>
+	</select>
+
+	<select id="searchDate" parameterType="map" resultType="event">
+		select DISTINCT e.* from MM_EVENT e join MM_HASHTAG_USE u
+		on(e.EVENT_NUM = u.EVENT_NUM)
+		WHERE
+		<![CDATA[
+		e.EVENT_DATE >= TO_DATE(#{dateStart,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
+		AND e.EVENT_DATE <= TO_DATE(#{dateEnd,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
+		]]>
 	</select>
 </mapper>

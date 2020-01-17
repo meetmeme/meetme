@@ -9,5 +9,7 @@ public interface EventService {
 	public List<Event> getIntrestingEvent(String id);
 	public Event getDetail(int event);
 	public List<Event> search(Map<String, String> keywords);
+	public List<Event> searchHash(Map<String, String> keywords);
+	public List<Event> searchDate(Map<String, String> keywords);
 }
  

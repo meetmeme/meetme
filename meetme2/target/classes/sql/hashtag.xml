@@ -3,8 +3,11 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Hashtags">
 
-<select id="getHashtag" parameterType="String" resultType="String">
-select HASHTAG_TITLE from MM_HASHTAG WHERE HASHTAG_TITLE like #{title}
+<select id="getHashtag" parameterType="String" resultType="hashtag">
+select * from MM_HASHTAG WHERE HASHTAG_TITLE like #{title}
 </select>
 
+<select id="searchHashtag" parameterType="String" resultType="String">
+select HASHTAG_NUM from MM_HASHTAG where HASHTAG_TITLE = #{hashtag}
+</select>
 </mapper>

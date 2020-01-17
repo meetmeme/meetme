@@ -83,7 +83,7 @@
 				<span class="nino-subHeading">M&Ms</span> Explore people
 			</h2>
 			<p class="nino-sectionDesc">
-				See who we are!<br>				 
+				See who will be your colleague!<br>				 
 			</p>
 			<div class="sectionContent">
 				<div class="row nino-hoverEffect">
