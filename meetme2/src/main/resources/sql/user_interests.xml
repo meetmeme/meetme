@@ -7,6 +7,12 @@
 		from mm_user_interests 
 		where category_num = #{category_num}
 	</select> 
+	
+	<select id="getNum" parameterType="int" resultType="user_interests">
+		select
+		category_num from mm_user_interests
+		where user_num = #{user_num}
+	</select>
 </mapper>
 
 
