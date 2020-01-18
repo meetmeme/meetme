@@ -32,8 +32,8 @@
 	</c:forEach>
 	
 	<c:forEach var="f" items="${follows}">
-		<input type="hidden" value="${f.user_id}" class="f_id">
-		<input type="hidden" value="${f.user_id}" class="f_count">
+		<input type="hidden" value="${f.user_id}" class="follow_id">
+		<input type="hidden" value="${f.c}" class="follow_count">
 	</c:forEach>
 	
 	

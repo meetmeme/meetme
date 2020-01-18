@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Dash;
+import com.meet.me.domain.Follows;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 import com.meet.me.service.DashService;
@@ -83,12 +84,9 @@ public class AdminController {
 		}
 		
 		//팔로워 많은 회원 5명
-		List<String> follows = new ArrayList<String>();
+		List<Follows> follows = new ArrayList<Follows>();
 		follows = dashService.follows();
-		
-		//5명의 각 팔로워 수 카운트
-		
-		
+
 		mv.setViewName("admin/dash");
 		mv.addObject("categoryList", categoryList);
 		mv.addObject("categoryCount", categoryCount);

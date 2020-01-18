@@ -16,7 +16,6 @@ var nameArr = new Array();
 for (var i = 0; i < n; i++) {
 	nameArr[i] = cat_name[i].value;
 }
-console.log(nameArr);
 
 // For a pie chart
 var myPieChart = new Chart(ctx, {
@@ -161,19 +160,28 @@ new Chart(document.getElementById("myLineChart"), {
 	}
 });
 
+var userId = document.getElementsByClassName('follow_id');
+var followerCount = document.getElementsByClassName('follow_count');
+
+var idArr = new Array();
+var cntArr = new Array();
+
+for (var i = 0; i < 5; i++) {
+	idArr[i] = userId[i].value;
+	cntArr[i] = followerCount[i].value;
+}
 
 
 new Chart(document.getElementById("myHorizontalChart"), {
 	type : 'horizontalBar',
 	data : {
-		labels : day,
+		labels : idArr,
 		datasets : [ {
-			label : '마이홈피 총 게시글 수(일별)',
-			data : arr3,
-			borderColor : "#F5A9A9",
-			backgroundColor : "#F8E0E0",
-			fill : true,
-			lineTension : 0
+			label : '팔로워 수',
+			data : cntArr,
+			borderColor : "#A9F5BC",
+			backgroundColor : "#E3F6CE",
+			fill : false,
 		} ]
 	},
 	options : {
@@ -195,7 +203,7 @@ new Chart(document.getElementById("myHorizontalChart"), {
 				display : true,
 				scaleLabel : {
 					display : true,
-					labelString : '2020년 1월 (일)'
+					labelString : '(명)'
 				},
 				ticks : {
 					autoSkip : false
@@ -204,11 +212,11 @@ new Chart(document.getElementById("myHorizontalChart"), {
 			yAxes : [ {
 				display : true,
 				ticks : {
-					suggestedMin : 0,
+					autoSkip: false,
 				},
 				scaleLabel : {
 					display : true,
-					labelString : '(개)'
+					labelString : 'top5'
 				}
 			} ]
 		}

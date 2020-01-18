@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.DashDAO;
+import com.meet.me.domain.Follows;
 
 
 @Service
@@ -43,7 +44,7 @@ public class DashServiceImpl implements DashService{
 	}
 
 	@Override
-	public List<String> follows() {
+	public List<Follows> follows() {
 		return dao.follows();
 	}
 

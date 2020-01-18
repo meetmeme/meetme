@@ -5,6 +5,8 @@ public class Follows {
 	private int following_num;
 	private String user_id;
 	private int follower_ck;
+	private int c;
+	
 	public int getUser_num() {
 		return user_num;
 	}
@@ -28,6 +30,12 @@ public class Follows {
 	}
 	public void setFollower_ck(int follower_ck) {
 		this.follower_ck = follower_ck;
+	}
+	public int getC() {
+		return c;
+	}
+	public void setC(int count) {
+		this.c = count;
 	}
 	
 }
