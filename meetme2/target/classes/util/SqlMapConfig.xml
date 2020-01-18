@@ -13,6 +13,7 @@
 		<typeAlias alias="message" type="com.meet.me.domain.Message"/>
 		<typeAlias alias="notice" type="com.meet.me.domain.Notice"/>
 		<typeAlias alias="report" type="com.meet.me.domain.Report"/>
+		<typeAlias alias="follows" type="com.meet.me.domain.Follows"/>
 	</typeAliases>
 	
 	<mappers>
@@ -24,5 +25,6 @@
 		<mapper resource="sql/myhome.xml"/>
 		<mapper resource="sql/community.xml"/>
 		<mapper resource="sql/report.xml"/>
+		<mapper resource="sql/follows.xml"/>
 	</mappers>
 </configuration> 

@@ -6,6 +6,8 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.meet.me.domain.Follows;
 @Repository
 public class DashDAO {
 
@@ -26,6 +28,10 @@ public class DashDAO {
 
 	public int dayCount(String day) {
 		return sqlSession.selectOne("Myhomes.AlldayCount", day);
+	}
+
+	public List<Follows> follows() {
+		return sqlSession.selectList("Follows.followCount");
 	}
 	
 	

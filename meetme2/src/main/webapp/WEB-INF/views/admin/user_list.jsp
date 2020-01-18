@@ -4,9 +4,9 @@
 <!DOCTYPE html>
 <html>
 
-</head>
+<jsp:include page="../main/header.jsp" />
+
 <body data-target="#nino-navbar" data-spy="scroll">
-<jsp:include page="admin_header.jsp" />
 
 	<div class="container admin_out">
 		<nav class="admin_nav" id="nino-navbar" class="navbar navbar-default" role="navigation">

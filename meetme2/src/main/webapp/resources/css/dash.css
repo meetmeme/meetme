@@ -16,14 +16,14 @@
 	font-weight : bold;
 }
 
-.pie, .bar, .line{
+.pie, .bar, .line,.horizontal{
 	padding-top : 50px;
 	display : inline-block;
 	margin : 0;
 	width : 45%;
 }
 
-.pie_title, .bar_title, .line_title {
+.pie_title, .bar_title, .line_title, .horizontal_title {
 	padding-left : 10px;
 }
 

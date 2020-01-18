@@ -2,6 +2,8 @@ package com.meet.me.service;
 
 import java.util.List;
 
+import com.meet.me.domain.Follows;
+
 public interface DashService {
 
 
@@ -12,5 +14,7 @@ public interface DashService {
 	int boardCount(String month);
 
 	int dayCount(String day);
+
+	List<Follows> follows();
 
 }

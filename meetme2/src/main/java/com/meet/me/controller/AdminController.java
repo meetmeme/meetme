@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Dash;
+import com.meet.me.domain.Follows;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 import com.meet.me.service.DashService;
@@ -82,12 +83,17 @@ public class AdminController {
 			dayCount.add(i, count3);
 		}
 		
-		
+		//팔로워 많은 회원 5명
+		List<Follows> follows = new ArrayList<Follows>();
+		follows = dashService.follows();
+
 		mv.setViewName("admin/dash");
 		mv.addObject("categoryList", categoryList);
 		mv.addObject("categoryCount", categoryCount);
 		mv.addObject("boardCount", boardCount);
 		mv.addObject("dayCount", dayCount);
+		mv.addObject("HeaderComment", "Admin Page");
+		mv.addObject("follows", follows);
 		return mv;
 	}
 	
@@ -129,6 +135,7 @@ public class AdminController {
 		mv.addObject("limit", limit);
 		mv.addObject("search_field", index);
 		mv.addObject("search_word", search_word);
+		mv.addObject("HeaderComment", "Admin Page");
 		
 		return mv;
 	}
@@ -139,6 +146,7 @@ public class AdminController {
 		User user = userService.user_info(user_id);
 		mv.setViewName("admin/user_info");
 		mv.addObject("userinfo", user);
+		mv.addObject("HeaderComment", "Admin Page");
 		
 		return mv;
 	}
@@ -179,6 +187,7 @@ public class AdminController {
 		mv.addObject("userReport", userReport);
 		mv.addObject("eventReport", eventReport);
 		mv.setViewName("admin/report");
+		mv.addObject("HeaderComment", "Admin Page");
 		return mv;
 	}
 	
