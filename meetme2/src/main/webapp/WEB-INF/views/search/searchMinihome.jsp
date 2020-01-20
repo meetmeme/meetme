@@ -6,27 +6,43 @@
 <body data-target="#nino-navbar" data-spy="scroll">
 	<jsp:include page="../main/header.jsp" />
 	<div class=bodyMin>
-	<hr>
-	  <!-- search keyword
+		<hr>
+		<!-- search keyword
     ================================================== -->
-    <section id = searchKeywordShow>
-    	<div class="container center">
-    		<div layout="row">
-    			<div class="item">
-    				<div class="text">Keyword</div>
-    				<div class="number">${searchKey.keyword}</div>
-    			</div>
-    			<div class="item">
-    				<div class="text">Hashtag</div>
-    				<div class="number">${searchKey.searchHashtag}</div>
-    			</div>
-    			<div class="item">
-    				<div class="text">Name or ID</div>
-    				<div class="number">${searchKey.searchCategory}</div>
-    			</div>
-    		</div>
-    	</div>
-    </section><!--/#search keyword-->
+		<section id=searchKeywordShow>
+			<div class="container center">
+				<div layout="row">
+					<div class="item">
+						<div class="text">Keyword</div>
+						<c:if test="${empty searchKey.keyword}">
+							<div class="number">-</div>
+						</c:if>
+						<c:if test="${!empty searchKey.keyword}">
+							<div class="number">${searchKey.keyword}</div>
+						</c:if>
+					</div>
+					<div class="item">
+						<div class="text">Hashtag</div>
+						<c:if test="${empty searchKey.searchHashtag}">
+							<div class="number">-</div>
+						</c:if>
+						<c:if test="${!empty searchKey.searchHashtag}">
+							<div class="number">${searchKey.searchHashtag}</div>
+						</c:if>
+					</div>
+					<div class="item">
+						<div class="text">Name or ID</div>
+						<c:if test="${empty searchKey.searchUser}">
+							<div class="number">-</div>
+						</c:if>
+						<c:if test="${!empty searchKey.searchUser}">
+							<div class="number">${searchKey.searchUser}</div>
+						</c:if>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/#search keyword-->
 		<hr>
 		<!-- minihome result -->
 		<div class=bodySubMinMain>
@@ -37,21 +53,25 @@
 					<h2 class="nino-sectionHeading">
 						<span class="nino-subHeading">Minihome</span>
 					</h2>
-					<p class="nino-sectionDesc">Lorem ipsum dolor sit amet,
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-						nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.</p>
+					<p class="nino-sectionDesc"></p>
 					<div class="sectionContent">
 						<div class="row nino-hoverEffect">
-							<div class="col-md-4 col-sm-4">
-								<div class="item">
-									<a class="overlay" href="#"> <span class="content">
-											<i class="mdi mdi-airplay nino-icon"></i> Digital
-									</span> <img src="resources/images/story/img-3.jpg" alt="">
-									</a>
-								</div>
-							</div>
+							<c:if test="${empty minihome}">
+								<p class=center>검색 결과가 없습니다.</p>
+							</c:if>
+							<c:if test="${!empty minihome}">
+								<c:forEach var="home" items="${minihome}">
+									<div class="col-md-4 col-sm-4">
+										<div class="item">
+											<a class="overlay"  onClick="mh_popup('${home.user_id}')" title="go to ${home.user_id}'s minihome"> <span class="content">
+													<i class="mdi mdi-airplay nino-icon"></i> ${home.user_name}
+													<br><span>(${home.user_id})</span>
+											</span> <img src="resources/upload${home.user_save}" alt="">
+											</a>
+										</div>
+									</div>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -69,36 +89,41 @@
 					<h2 class="nino-sectionHeading">
 						<span class="nino-subHeading">Posts</span>
 					</h2>
-					<p class="nino-sectionDesc">Lorem ipsum dolor sit amet,
-						consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-						labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-						nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat.</p>
+					<p class="nino-sectionDesc">Look who's talking about issue you
+						searched</p>
 					<div class="sectionContent">
 						<div class="row">
-							<div class="col-md-6">
-								<div class="panel-group" id="accordion" role="tablist"
-									aria-multiselectable="true">
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="headingThree">
-											<h4 class="panel-title">
-												<a class="collapsed" role="button" data-toggle="collapse"
-													data-parent="#accordion" href="#collapseThree"
-													aria-expanded="false" aria-controls="collapseThree"> <i
-													class="mdi mdi-chevron-up nino-icon arrow"></i> <i
-													class="mdi mdi-laptop-mac nino-icon"></i> web design
-												</a>
-											</h4>
-										</div>
-										<div id="collapseThree" class="panel-collapse collapse"
-											role="tabpanel" aria-labelledby="headingThree">
-											<div class="panel-body">context.</div>
+							<c:if test="${empty posts}">
+								<p class=center>검색 결과가 없습니다.</p>
+							</c:if>
+							<c:if test="${!empty posts}">
+								<c:forEach var="post" items="${posts}">
+									<div class="col-md-6">
+										<div class="panel-group" id="accordion" role="tablist"
+											aria-multiselectable="true">
+											<div class="panel panel-default">
+												<div class="panel-heading" role="tab" id="headingThree">
+													<h4 class="panel-title">
+														<a class="collapsed" role="button" data-toggle="collapse"
+															data-parent="#accordion" href="#collapseThree"
+															aria-expanded="false" aria-controls="collapseThree">
+															<i class="mdi mdi-chevron-up nino-icon arrow"></i> <i
+															class="mdi mdi-laptop-mac nino-icon"></i> web design
+														</a>
+													</h4>
+												</div>
+												<div id="collapseThree" class="panel-collapse collapse"
+													role="tabpanel" aria-labelledby="headingThree">
+													<div class="panel-body">context.</div>
+												</div>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
+				</div>
 			</section>
 			<!--/#nino-whatWeDo-->
 
@@ -116,36 +141,27 @@
 						<span class="nino-subHeading">Events</span>
 					</h2>
 					<div class="nino-testimonialSlider">
-						<ul>
-							<li>
-								<div layout="row">
-									<div class="nino-symbol fsr">
-										<i class="mdi mdi-comment-multiple-outline nino-icon"></i>
-									</div>
-									<div>
-										<p class="quote">"Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit, sed do eiusmod tempor incididunt ut labore
-											et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-											exercitation."</p>
-										<span class="name">Jon Doe</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div layout="row">
-									<div class="nino-symbol fsr">
-										<i class="mdi mdi-comment-multiple-outline nino-icon"></i>
-									</div>
-									<div>
-										<p class="quote">"Lorem ipsum dolor sit amet, consectetur
-											adipiscing elit, sed do eiusmod tempor incididunt ut labore
-											et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-											exercitation."</p>
-										<span class="name">Jon Doe</span>
-									</div>
-								</div>
-							</li>
-						</ul>
+						<c:if test="${empty events}">
+							<p class=center>검색 결과가 없습니다.</p>
+						</c:if>
+						<c:if test="${!empty events}">
+							<ul>
+								<c:forEach var="event" items="${events}">
+									<li href="event.main?event=${event.EVENT_NUM}">
+										<div layout="row">
+											<div class="nino-symbol fsr">
+												<i class="mdi mdi-comment-multiple-outline nino-icon"></i>
+											</div>
+											<div>
+												<p class="quote">${event.EVENT_CONTENT}</p>
+												<span class="number">${event.EVENT_DATE}</span><br> <span
+													class="name">${event.EVENT_TITLE}</span>
+											</div>
+										</div>
+									</li>
+								</c:forEach>
+							</ul>
+						</c:if>
 					</div>
 				</div>
 			</section>

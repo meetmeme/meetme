@@ -40,7 +40,8 @@
 <link rel="stylesheet" type="text/css" href="resources/css/join.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/modal.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/dash.css" />
-<link rel="stylesheet" type="text/css" href="resources/css/user_list.css" />
+<link rel="stylesheet" type="text/css"
+	href="resources/css/user_list.css" />
 
 <!-- javascript -->
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
@@ -169,9 +170,9 @@
 					class="form-control nino-searchInput"> <input type="text"
 					placeholder="해시태그"
 					class="form-control nino-searchInput searchHashtag"
-					name="searchHashtag" id="searchEventHashtag"> <input type=hidden id=hashtagNum
-					name=searchHashtagNum> <select name="searchCategory"
-					id="search-category" class="form-control">
+					name="searchHashtag" id="searchEventHashtag"> <input
+					type=hidden id=hashtagNum name=searchHashtagNum> <select
+					name="searchCategory" id="search-category" class="form-control">
 					<option value="0_all">ALL</option>
 
 				</select> <br> <br> <input type="text" id="search-dateRange"
@@ -190,12 +191,12 @@
 					class="form-control nino-searchInput searchHashtag"
 					name="searchKeyword"> <input type="text" placeholder="해시태그"
 					class="form-control nino-searchInput searchHashtag"
-					name="searchHashtag" id="searchMinihomeHashtag"> <input type=hidden id=hashtagNumMinihome
-					name=searchHashtagNum><input type="text" autocomplete="off"
-					placeholder="닉네임" id="searchUser"
-					class="form-control nino-searchInput" id=name> <br> <br>
-				<input type=submit value="search" class="form-control btn_submit"
-					name="searchName">
+					name="searchHashtag" id="searchMinihomeHashtag"> <input
+					type=hidden id=hashtagNumMinihome name=searchHashtagNum><input
+					type="text" autocomplete="off" placeholder="닉네임" id="searchUser"
+					name="searchUser" class="form-control nino-searchInput" id=name>
+				<br> <br> <input type=submit value="search"
+					class="form-control btn_submit" name="searchName">
 			</form>
 		</div>
 		<i class="mdi mdi-close nino-close"></i>
@@ -288,7 +289,7 @@
 			}
 		});
 		/* 검색 자동완성 - minihome */
-		 $('#searchMinihomeHashtag').autocomplete({
+		$('#searchMinihomeHashtag').autocomplete({
 			source : function(request, response) {
 				$.ajax({
 					type : 'get',
@@ -334,7 +335,7 @@
 			close : function(event) { //자동완성창 닫아질때 호출
 				console.log(event);
 			}
-		}); 
+		});
 	});
 	$('input[name=searchHashtag]').focus(function() {
 		$('input[name=searchHashtag]').val('');
@@ -405,9 +406,10 @@
 	});
 
 	$(window).scroll(function() {
-		if ($('#userPopupmenu').attr("style").indexOf('none') < 0) {
-			$('#userPopupmenu').hide();
-		}
+		if ($('#userPopupmenu').attr("style"))
+			if ($('#userPopupmenu').attr("style").indexOf('none') < 0) {
+				$('#userPopupmenu').hide();
+			}
 	})
 
 	//검색 - 해시태그 관련

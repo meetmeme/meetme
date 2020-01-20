@@ -13,25 +13,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Hashtag;
+import com.meet.me.domain.User;
 import com.meet.me.service.EventService;
 import com.meet.me.service.HashtagService;
+import com.meet.me.service.MyHomeService;
 
 @Controller
 public class SearchControlloer {
 
 	@Autowired
 	private EventService eventService;
-
+	
+	@Autowired
+	private MyHomeService mimihomeService;
+	
 	@Autowired
 	private HashtagService hashtagService;
-//	@Autowired
-//	private BoardService boardService;
 
 	@PostMapping(value = "/searchEvent.sc")
 	public ModelAndView searchEvent(ModelAndView mv, HttpServletRequest request) {
@@ -39,6 +43,8 @@ public class SearchControlloer {
 		String searchKeyword = request.getParameter("searchKeyword");
 		searchKeyword = searchKeyword == "" ? null : searchKeyword;
 		String searchHashtag = request.getParameter("searchHashtagNum");
+		String searchHashtagValue = request.getParameter("searchHashtag");
+		searchHashtag = searchHashtag == "" ? "null" : searchHashtag;
 		String searchCategoryValue = request.getParameter("searchCategory");
 		String categoryNum = searchCategoryValue.split("_")[0];
 		String categoryTitle = searchCategoryValue.split("_")[1];
@@ -48,52 +54,32 @@ public class SearchControlloer {
 
 		Map<String, String> searchKey = new HashMap<String, String>();
 		searchKey.put("keyword", searchKeyword);
-		searchKey.put("searchHashtag", searchHashtag);
+		searchKey.put("searchHashtag", searchHashtagValue);
 		searchKey.put("searchCategory", categoryTitle);
 		searchKey.put("search_dateStart", search_dateStart.substring(0, 10));
 		searchKey.put("search_dateEnd", search_dateEnd.substring(0, 10));
 
 		List<Event> searchResult = new ArrayList<Event>();
-		
-		
-		if (searchKeyword != null || !searchCategoryValue.equals("0")) {
+
+		if (searchKeyword != null || !searchCategoryValue.equals("0") || searchHashtag.length() > 0) {
 			Map<String, String> keywords = new HashMap<String, String>();
 			keywords.put("keyword", "%" + searchKeyword + "%");
 			keywords.put("category", searchCategoryValue);
+			keywords.put("hashtag", searchHashtag);
 			keywords.put("dateStart", search_dateStart);
 			keywords.put("dateEnd", search_dateEnd);
 			System.out.println("event : " + keywords);
 
-			List<Event> events = eventService.search(keywords);
-			searchResult.addAll(events);
+			searchResult = eventService.search(keywords);
 		}
 
-		if (searchHashtag.length() > 0) {
-			Map<String, String> keywords = new HashMap<String, String>();
-			keywords.put("hashtag", searchHashtag);
-			keywords.put("dateStart", search_dateStart);
-			keywords.put("dateEnd", search_dateEnd);
-			System.out.println("hasht : " + keywords);
-
-			List<Event> events = eventService.searchHash(keywords);
-			searchResult.addAll(events);
-		}
-
-		if (searchHashtag.length() <= 0 && searchKeyword == null && searchCategoryValue.equals("0")) {
+		else {
 			Map<String, String> keywords = new HashMap<String, String>();
 			keywords.put("dateStart", search_dateStart);
 			keywords.put("dateEnd", search_dateEnd);
 			System.out.println("dates : " + keywords);
 
-			List<Event> events = eventService.searchDate(keywords);
-			searchResult.addAll(events);
-		}
-
-		for (int i = 0; i < searchResult.size(); i++) {
-			for (int j = i + 1; j < searchResult.size(); j++) {
-				if (searchResult.get(j).getEVENT_NUM() == searchResult.get(i).getEVENT_NUM())
-					searchResult.remove(j);
-			}
+			searchResult = eventService.searchDate(keywords);
 		}
 
 		System.out.println("----");
@@ -112,10 +98,78 @@ public class SearchControlloer {
 
 	@PostMapping(value = "/searchMinihome.sc")
 	public ModelAndView searchMinihome(ModelAndView mv, HttpServletRequest request) {
+		String searchKeyword = request.getParameter("searchKeyword");
+		searchKeyword = searchKeyword == "" ? null : searchKeyword;
+		String searchHashtag = request.getParameter("searchHashtagNum");
+		searchHashtag = searchHashtag == "" ? "null" : searchHashtag;
+		String searchHashtagValue = request.getParameter("searchHashtag");
+		String searchUser = request.getParameter("searchUser");
+		searchUser = searchUser == "" ? null : searchUser;
 
+		Map<String, String> searchKey = new HashMap<String, String>();
+		searchKey.put("keyword", searchKeyword);
+		searchKey.put("searchHashtag", searchHashtagValue);
+		searchKey.put("searchUser", searchUser);
+
+		List<User> searchResultMinihome = new ArrayList<User>();
+//		List<Post> searchResultMiniPost = new ArrayList<Post>();
+		List<Event> searchResultMiniEvent = new ArrayList<Event>();
+
+		Map<String, String> keywords = new HashMap<String, String>();
+		keywords.put("keyword", "%" + searchKeyword + "%");
+		keywords.put("category", "0");
+		keywords.put("hashtag", searchHashtag);
+		keywords.put("dateStart", "0000-00-00 00:00:00");
+		keywords.put("searchUser", "%" + searchUser + "%");
+		System.out.println("event : " + keywords);
+		
+		//minihome 검색
+		searchResultMinihome = mimihomeService.search(keywords);
+		
+		// event 검색
+		searchResultMiniEvent = eventService.search(keywords);
+
+		System.out.println("----");
+		for (User e : searchResultMinihome) {
+			System.out.print(e.getUser_name() + "\t");
+		}
+		System.out.println("\n----");
+		
 		mv.setViewName("search/searchMinihome");
+		mv.addObject("minihome", searchResultMinihome);
+//		mv.addObject("posts", searchResultMiniPost);
+		mv.addObject("events", searchResultMiniEvent);
+		mv.addObject("searchKey", searchKey);
 		mv.addObject("HeaderComment", "Minihome Search Results");
 
+		return mv;
+	}
+	
+	@GetMapping(value = "/hashtag.sc")
+	public ModelAndView searchHashtag(ModelAndView mv, HttpServletRequest request, @RequestParam("hashtag") String hashtag) {
+		List<User> searchResultMinihome = new ArrayList<User>();
+//		List<Post> searchResultMiniPost = new ArrayList<Post>();
+		List<Event> searchResultMiniEvent = new ArrayList<Event>();
+		
+		//minihome 검색
+		searchResultMinihome = mimihomeService.searchHash("%" + hashtag + "%");
+		
+		// event 검색
+		searchResultMiniEvent = eventService.searchHash("%" + hashtag + "%");
+		
+		System.out.println("----");
+		for (User e : searchResultMinihome) {
+			System.out.print(e.getUser_name() + "\t");
+		}
+		System.out.println("\n----");
+		
+		mv.setViewName("search/searchHahtag");
+		mv.addObject("minihome", searchResultMinihome);
+//		mv.addObject("posts", searchResultMiniPost);
+		mv.addObject("events", searchResultMiniEvent);
+		mv.addObject("hashtag", hashtag);
+		mv.addObject("HeaderComment", "look who's use hashtag '#"+hashtag+"'!");
+		
 		return mv;
 	}
 
@@ -139,7 +193,7 @@ public class SearchControlloer {
 		response.getWriter().write(jsonList);
 
 	}
-	
+
 	@GetMapping(value = "/getCategory.wd")
 	public void getCategory(HttpServletResponse response) throws IOException {
 		List<String> category = eventService.getCategory();
@@ -147,7 +201,7 @@ public class SearchControlloer {
 		Gson gson = new Gson();
 		String jsonList = gson.toJson(category);
 		response.getWriter().write(jsonList);
-		
+
 	}
 
 }

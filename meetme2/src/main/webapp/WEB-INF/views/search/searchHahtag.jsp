@@ -7,43 +7,6 @@
 	<jsp:include page="../main/header.jsp" />
 	<div class=bodyMin>
 		<hr>
-		<!-- search keyword
-    ================================================== -->
-		<section id=searchKeywordShow>
-			<div class="container center">
-				<div layout="row">
-					<div class="item">
-						<div class="text">Keyword</div>
-						<c:if test="${empty searchKey.keyword}">
-							<div class="number">-</div>
-						</c:if>
-						<c:if test="${!empty searchKey.keyword}">
-							<div class="number">${searchKey.keyword}</div>
-						</c:if>
-					</div>
-					<div class="item">
-						<div class="text">Hashtag</div>
-						<c:if test="${empty searchKey.searchHashtag}">
-							<div class="number">-</div>
-						</c:if>
-						<c:if test="${!empty searchKey.searchHashtag}">
-							<div class="number">${searchKey.searchHashtag}</div>
-						</c:if>
-					</div>
-					<div class="item">
-						<div class="text">Category</div>
-						<div class="number">${searchKey.searchCategory}</div>
-					</div>
-					<div class="item">
-						<div class="text">Date</div>
-						<div class="number">${searchKey.search_dateStart}-
-							${searchKey.search_dateEnd}</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<!--/#search keyword-->
-		<hr>
 		<!-- event result -->
 		<div class=bodySubMinMain>
 			<!-- Latest Blog   ================================================== -->
@@ -90,10 +53,45 @@
 		</div>
 
 		<hr>
+		<!-- minihome result -->
+		<div class=bodySubMinMain>
+			<!-- Story About Us
+    ================================================== -->
+			<section id="nino-story">
+				<div class="container">
+					<h2 class="nino-sectionHeading">
+						<span class="nino-subHeading">Minihome</span>
+					</h2>
+					<p class="nino-sectionDesc"></p>
+					<div class="sectionContent">
+						<div class="row nino-hoverEffect">
+							<c:if test="${empty minihome}">
+								<p class=center>검색 결과가 없습니다.</p>
+							</c:if>
+							<c:if test="${!empty minihome}">
+								<c:forEach var="home" items="${minihome}">
+									<div class="col-md-4 col-sm-4">
+										<div class="item">
+											<a class="overlay" onClick="mh_popup('${home.user_id}')"
+												title="go to ${home.user_id}'s minihome"> <span
+												class="content"> <i class="mdi mdi-airplay nino-icon"></i>
+													${home.user_name} <br>
+												<span>(${home.user_id})</span>
+											</span> <img src="resources/upload${home.user_save}" alt="">
+											</a>
+										</div>
+									</div>
+								</c:forEach>
+							</c:if>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!--/#nino-story-->
+		</div>
 
 
-
-<%-- 		<!-- post result -->
+		<%-- 		<!-- post result -->
 		<div class=bodySubMin>
 			<!-- What We Do  ================================================== -->
 			<section id="nino-whatWeDo">
