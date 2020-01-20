@@ -59,4 +59,17 @@
 		AND e.EVENT_DATE <= TO_DATE(#{dateEnd,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
 		]]>
 	</select>
+	
+	<select id="attend" parameterType="int" resultType="int">
+		select count(*) from MM_EVENT_ATTENDEE
+		where EVENT_NUM = #{event_num}
+	</select>
+	
+	<select id="getUser" parameterType="int" resultType="user">
+		select USER_SAVE,USER_NAME,USER_ID from MM_USER
+		where USER_NUM in ( select USER_NUM 
+							from MM_EVENT_ATTENDEE 
+							where EVENT_NUM = #{event_num})
+	</select>
+	
 </mapper>

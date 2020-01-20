@@ -24,7 +24,7 @@
 								onclick="location.href='event.main?event=${event.EVENT_NUM}'">
 								<div class="nino-avatar fsr">
 									<img class="img-circle img-thumbnail"
-										src="${event.EVENT_SAVE}" alt="">
+										src="resources/${event.EVENT_SAVE}" alt="">
 								</div>
 								<div>
 									<p class="quote"><strong>"</strong>${event.EVENT_CONTENT}<strong>"</strong></p>

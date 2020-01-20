@@ -3,15 +3,18 @@
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
-        <title>EVENT Detail</title>
+        <title>Meet Me | ${event.EVENT_TITLE}</title>
     	<meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- 
 Flex Template 
 http://www.templatemo.com/tm-406-flex
 -->
+		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <script src="http://maps.googleapis.com/maps/api/js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwlNqAEil52XRPHmSVb4Luk18qQG9GqcM&sensor=false&language=ko"></script> 
         
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="resources/css/font-awesome.css"  type='text/css'>
@@ -20,11 +23,13 @@ http://www.templatemo.com/tm-406-flex
         <link rel="stylesheet" href="resources/css/templatemo_style.css">
         <link rel="stylesheet" href="resources/css/event.css">
 
+		<script src="resources/js/event/map.js"></script>
         <script src="resources/js/event/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
+        
     </head>
     <body>
     
-<jsp:include page="header_event.jsp" />
+<jsp:include page="../main/header.jsp" />
         <div class="site-main" id="sTop">
             <div class="site-header">
                 <div class="container">
@@ -39,44 +44,36 @@ http://www.templatemo.com/tm-406-flex
                         </div> <!-- /.col-md-12 -->
                     </div> <!-- /.row -->
                 </div> <!-- /.container -->
-                <div class="main-header">
-                    <div class="container">
-                        <div id="menu-wrapper">
-                            <div class="row">
-                                <div class="logo-wrapper col-md-2 col-sm-2">
-                                    <h1>
-                                        <a href="#">MM</a>
-                                    </h1>
-                                </div> <!-- /.logo-wrapper -->
-                                <div class="col-md-10 col-sm-10 main-menu text-right">
-                                    <div class="toggle-menu visible-sm visible-xs"><i class="fa fa-bars"></i></div>
-                                    <ul class="menu-first">
-                                        <li class="active"><a href="#">Home</a></li>
-                                        <li><a href="#services">Services</a></li>
-                                        <li><a href="#portfolio">Portfolio</a></li>
-                                        <li><a href="#our-team">Team</a></li>
-                                        <li><a href="http://plus.facebook.com/+templatemo" class="external" target="_parent" rel="nofollow">External</a></li> 
-                                        <li><a href="#contact">Contact</a></li>                                 
-                                    </ul>                                    
-                                </div> <!-- /.main-menu -->
-                            </div> <!-- /.row -->
-                        </div> <!-- /#menu-wrapper -->                        
-                    </div> <!-- /.container -->
-                </div> <!-- /.main-header -->
             </div> <!-- /.site-header -->
             <div class="site-slider">
                 <div class="slider">
                     <div class="flexslider">
-                        <ul class="slides">
+                        <ul class="slides">     
                             <li>
                                 <div class="overlay"></div>
-                                <img src="resources/images/event/slide1.jpg" alt="">
+                                <img src="resources/${event.EVENT_SAVE}" alt="">
                                 <div class="slider-caption visible-md visible-lg">
                                     <h2>${event.EVENT_TITLE}</h2><br>
                                     <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
                                     <p>#해시태그 #검색되게</p>                                    
                                 </div>
                             </li>
+                           
+                           <%-- 
+                           
+                           <c:forEach var="pic" items="${pic}">       
+                            <li>
+                                <div class="overlay"></div>
+                                <img src="resources/${pic.EVENT_PHOTO}" alt="">
+                                <div class="slider-caption visible-md visible-lg">
+                                    <h2>${event.EVENT_TITLE}</h2><br>
+                                    <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
+                                    <p>#해시태그 #검색되게</p>                                    
+                                </div>
+                            </li>
+                           </c:forEach> 
+                            --%>
+                           
                         </ul>
                     </div> <!-- /.flexslider -->
                 </div> <!-- /.slider -->
@@ -85,105 +82,108 @@ http://www.templatemo.com/tm-406-flex
 
 
         <div class="content-section" id="services">
-            <div class="container">
-                <div class="row">
+        	<div class="container">
+				<h2 class="nino-sectionHeading">
+					<span class="nino-subHeading">About</span> Details about Event
+				</h2>
+				<p class="nino-sectionDesc">Make sure it's the event you want.</p>
+				 <div class="row">
                     <div class="heading-section col-md-12 text-center">
-                        <h2>이벤트 세부사항</h2>
                         <p>${event.EVENT_CONTENT }</p>
                     </div> <!-- /.heading-section -->
-                </div> <!-- /.row -->               
-            </div> <!-- /.container -->
-        </div> <!-- /#services -->
-
-		<div class="content-section" id="our-team">
-            <div class="container">
-                <div class="row">
-                    <div class="heading-section col-md-12 text-center">
-                       <h2>참석자(인원 가져오기)</h2>
-                    </div> <!-- /.heading-section -->
-                </div> <!-- /.row -->
-                <div class="row">
-                    <div class="team-member col-md-3 col-sm-6">
-                        <div class="member-thumb">
-                            <img src="resources/images/event/member1.jpg" alt="">
-                            <div class="team-overlay">
-                                <h3>Tracy</h3>
-                                <span>Designer</span>
-                                <ul class="social">
-                                	<li><a href="#" onclick="mh_popup('')" class="fa fa-linkedin"></a></li>
-                                </ul>
-                            </div> <!-- /.team-overlay -->
-                        </div> <!-- /.member-thumb -->
-                    </div> <!-- /.team-member -->
-                </div> <!-- /.row -->     
-            </div> <!-- /.container -->
+                </div> <!-- /.row -->    
+			</div>
+        
+        
+		<div class="content-section" id="attendant">
+		<div class="container">
+			<h2 class="nino-sectionHeading">
+				<span class="nino-subHeading">Attendant</span> ${count} people will attended
+			</h2>
+			<p class="nino-sectionDesc">Check out who you're going to meet.</p>
+		</div>
+		<div class="row">
+           <c:forEach var="user" items="${user}">               
+               <div class="team-member col-md-3 col-sm-6">
+                   <div class="member-thumb">
+                    <img src="resources/${user.user_save}" alt="">
+                       <div class="team-overlay">
+                           <h3>${user.user_name }</h3>
+                           <ul class="social">
+                           	<li><a href="#" onclick="mh_popup('${user.user_id}')" class="fa fa-user"></a></li>
+                           </ul>
+                       </div> <!-- /.team-overlay -->
+                   </div> <!-- /.member-thumb -->
+               </div> <!-- /.team-member -->
+           </c:forEach>
+         </div> <!-- /.row -->  
         </div> <!-- /#our-team -->
+       
+        
 
-        <div class="content-section" id="contact">
-            <div class="container">
-                <div class="row">
-                    <div class="heading-section col-md-12 text-center">
-                        <h2>Contact</h2>
-                        <p>Send a message to us</p>
-                    </div> <!-- /.heading-section -->
-                </div> <!-- /.row -->
+        <div class="content-section" id="location">
+        	<div class="container">
+				<h2 class="nino-sectionHeading">
+					<span class="nino-subHeading">LOCATION</span> When & Where
+				</h2>
+				<p class="nino-sectionDesc">Be sure to keep track of time and place and have fun.</p>			
                 <div class="row">
                     <div class="col-md-12">
                        <div class="googlemap-wrapper">
                             <div id="map_canvas" class="map-canvas"></div>
-                        </div> <!-- /.googlemap-wrapper -->
+                     
+	                       <div class="ww">
+		                       	<div id="when">
+		                       		<span class="fa icon fa-clock" ></span>
+		                       		<span class="wtext">${event.EVENT_TIME}</span>
+		                       	</div>
+		                       	<div id="where">
+		                       		<span class="fa icon fa-map-marker" ></span>
+		                       		<span class="wtext">${event.EVENT_LOCATION}</span>
+		                       	</div>
+	                       </div>
+                      </div> <!-- /.googlemap-wrapper -->
                     </div> <!-- /.col-md-12 -->
-                </div> <!-- /.row -->
-                <div class="row">
-                    <div class="col-md-7 col-sm-6">
-                        <p>Flex is a Bootstrap v3.1.1 HTML CSS web template by <span class="blue">template</span><span class="green">mo</span>. Slider images and portfolio images are from <a rel="nofollow" href="http://unsplash.com" target="_parent">Unsplash</a> website. Thank you for visiting. Please tell your friends about templatemo.<br><br>
-                        Hic, suscipit, praesentium earum quod ea distinctio impedit ullam deserunt minus dolore quibusdam quis saepe aliquam doloribus voluptatibus eum excepturi. Aenean semper erat neque. Nunc et scelerisque nunc, in adipiscing magna.<br><br>
-				    Duis ullamcorper tortor tellus. Ut diam libero, ultricies non augue a, mollis congue risus. Fusce a quam eget nisi luctus imperdiet. Consectetur quod at aperiam corporis totam. Nesciunt minima laborum sapiente totam facere unde est cum quia. 
-                    	</p>
-                        <ul class="contact-info">
-                            <li>Phone: 033-033-0660</li>
-                            <li>Email: <a href="mailto:info@company.com">info@company.com</a></li>
-                            <li>Address: 880 De Best Studio, Fork Street, San Francisco</li>
-                        </ul>
-                        <!-- spacing for mobile viewing --><br><br>
-                    </div> <!-- /.col-md-7 -->
-                    <div class="col-md-5 col-sm-6">
-                        <div class="contact-form">
-                            <form method="post" name="contactform" id="contactform">
-                                <p>
-                                    <input name="name" type="text" id="name" placeholder="Your Name">
-                                </p>
-                                <p>
-                                    <input name="email" type="text" id="email" placeholder="Your Email"> 
-                                </p>
-                                <p>
-                                    <input name="subject" type="text" id="subject" placeholder="Subject"> 
-                                </p>
-                                <p>
-                                    <textarea name="comments" id="comments" placeholder="Message"></textarea>    
-                                </p>
-                                <input type="submit" class="mainBtn" id="submit" value="Send Message">
-                            </form>
-                        </div> <!-- /.contact-form -->
-                    </div> <!-- /.col-md-5 -->
-                </div> <!-- /.row -->
+                </div> <!-- /.row -->               
             </div> <!-- /.container -->
         </div> <!-- /#contact -->
+        
+        
+        
+       
+        <div class="content-section" id="comments">
+        	<div class="container">
+				<h2 class="nino-sectionHeading">
+					<span class="nino-subHeading">Comments</span> Talk in the comments
+				</h2>
+				<p class="nino-sectionDesc">Share your information with people you're with in advance through comments</p>
+				 <div class="row">
+                    <div class="col-md-12">
+                       <div class="googlemap-wrapper">
+                            
+                      </div> <!-- /.googlemap-wrapper -->
+                    </div> <!-- /.col-md-12 -->
+                </div> <!-- /.row -->  
+			
+			</div>
+		</div>
+        
+        
       <div id="foot">        	
    			<div id="footText" class="footcon">
    				<span id="date">
-   					날짜
+   					${event.EVENT_DATE}
    				</span>
    				<span id="time">
-   					시간
+   					${event.EVENT_TIME}
    				</span>
    				<br>
    				<span id="title">
-   					제목
+   					${event.EVENT_TITLE}
    				</span>
    			</div>
    			<div id="footPrice" class="footcon">
-   				 가격
+   				 ${event.EVENT_PRICE}
    			</div>
    			<div id="footBtn" class="footcon">
 				<button class="attend" type="submit">참석</button>

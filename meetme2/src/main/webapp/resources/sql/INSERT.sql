@@ -20,6 +20,7 @@ into MM_USER values(17,'TaylerSwift','popoqwqw','테일러','36ruralliving@hitel
 into MM_USER values(18,'bestdriver','almond^^','베스트드레서','bestdriver123@dreamwiz.com','남',30,'서울시','/image/default.png','/image/default.png',1)
 into MM_USER values(19,'LoveandHate','brainwasher','이중세뇌','maxminminus@kebi.com','여',40,'서울시','/image/default.png','/image/default.png',1)
 into MM_USER values(20,'Sunrise','goehedl','해돋이','sunandmoon28@hanmail.net','여',50,'서울시','/image/default.png','/image/default.png',1)
+into MM_USER values(21,'joo','1234','이중세뇌','maxminminus@kebi.com','여',40,'서울시','/image/default.png','/image/default.png',1)
 SELECT * FROM DUAL;
 
 SELECT * FROM MM_USER;
@@ -191,17 +192,17 @@ SELECT * FROM MM_BOARD;
 INSERT ALL
 INTO MM_EVENT VALUES(1, 3, 1,'[Pub Party Friday]', '▶️상세내용
 강남 인터내셔널펍파티에 오신것을 환영합니다. 매주 금요일 토요일 강남의 GSM테라스에서는 200~300여명의 멤버들이 모여 인터내셔널 펍 파티를 즐기고 있습니다.'
-, sysdate, 'PM 7','강남',10,40000)
-INTO MM_EVENT VALUES(2, 14, 4,'한강 러닝', '같이 한강 뛰어요!!' , sysdate, 'PM 4','뚝섬 유원지역',5,0)
-INTO MM_EVENT VALUES(3, 5, 5,'이벤트제목1', '이벤트내용1' , '20/01/20', 'PM 6','장소1',5,10000)
-INTO MM_EVENT VALUES(4, 4, 13,'이벤트제목2', '이벤트내용2' , '20/02/01', 'PM 7','장소1',10,5000)
-INTO MM_EVENT VALUES(5, 16, 2,'이벤트제목3', '이벤트내용3' , '20/01/18', 'PM 5','장소1',20,15000)
-INTO MM_EVENT VALUES(6, 17, 8,'이벤트제목4', '이벤트내용4' , '20/02/08', 'PM 6','장소1',5,20000)
-INTO MM_EVENT VALUES(7, 4, 7,'이벤트제목5', '이벤트내용5' , '20/01/20', 'PM 5','장소1',15,0)
-INTO MM_EVENT VALUES(8, 6, 6,'이벤트제목6', '이벤트내용6' , '20/08/20', 'PM 1','장소1',23,5000)
-INTO MM_EVENT VALUES(9, 15, 5,'이벤트제목7', '이벤트내용7' , '20/05/05', 'PM 2','장소1',14,3000)
-INTO MM_EVENT VALUES(10, 10, 4,'이벤트제목8', '이벤트내용8' , '20/03/08', 'PM 6','장소1',5,10000)
-INTO MM_EVENT VALUES(11, 12, 3,'이벤트제목9', '이벤트내용9' , '20/05/07', 'PM 9','장소1',8,0)
+, '20/01/01', 'PM 7','강남',10,40000,'/images/event/gallery/p1.jpg','/images/event/gallery/p1.jpg' )
+INTO MM_EVENT VALUES(2, 14, 4,'한강 러닝', '같이 한강 뛰어요!!' , '20/01/20', 'PM 4','뚝섬 유원지역',5,0,'/images/event/gallery/p2.jpg','/images/event/gallery/p2.jpg')
+INTO MM_EVENT VALUES(3, 5, 5,'이벤트제목1', '이벤트내용1' , '20/01/20', 'PM 6','장소1',5,10000,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
+INTO MM_EVENT VALUES(4, 4, 13,'이벤트제목2', '이벤트내용2' , '20/02/01', 'PM 7','장소1',10,5000,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
+INTO MM_EVENT VALUES(5, 16, 2,'이벤트제목3', '이벤트내용3' , '20/01/18', 'PM 5','장소1',20,15000,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
+INTO MM_EVENT VALUES(6, 17, 8,'이벤트제목4', '이벤트내용4' , '20/02/08', 'PM 6','장소1',5,20000,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
+INTO MM_EVENT VALUES(7, 4, 7,'이벤트제목5', '이벤트내용5' , '20/01/20', 'PM 5','장소1',15,0,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
+INTO MM_EVENT VALUES(8, 6, 6,'이벤트제목6', '이벤트내용6' , '20/08/20', 'PM 1','장소1',23,5000,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
+INTO MM_EVENT VALUES(9, 15, 5,'이벤트제목7', '이벤트내용7' , '20/05/05', 'PM 2','장소1',14,3000,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
+INTO MM_EVENT VALUES(10, 10, 4,'이벤트제목8', '이벤트내용8' , '20/03/08', 'PM 6','장소1',5,10000,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
+INTO MM_EVENT VALUES(11, 12, 3,'이벤트제목9', '이벤트내용9' , '20/05/07', 'PM 9','장소1',8,0,'/images/event/gallery/ev1.jpg','/images/event/gallery/ev1.jpg')
 SELECT * FROM DUAL;
 
 SELECT * FROM MM_EVENT;
