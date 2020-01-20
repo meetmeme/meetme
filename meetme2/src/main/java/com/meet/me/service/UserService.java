@@ -22,5 +22,6 @@ public interface UserService {
 	public List<User> getRandomUser();
 	public List<User_interests> getInterestsNums(int num);
 	public int update(User user);
+	public int delete_interests(String user_id);
 }
  

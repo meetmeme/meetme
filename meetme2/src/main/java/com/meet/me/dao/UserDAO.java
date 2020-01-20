@@ -86,5 +86,7 @@ public class UserDAO {
 		return sqlSession.selectList("User_interests.getNum", num);
 	}
 	
-	
+	public int delete_interests(String user_id) {
+		return sqlSession.delete("User_interests.delete", user_id);
+	}
 }
