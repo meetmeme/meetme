@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.sql.*"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +48,7 @@
 	text-align: right;
 }
 
-#edit_input {
+#edit_input, #gender{
 	float: right;
 	width: 220px;
 }
@@ -84,7 +85,22 @@ input, textarea {
 </style>
 </head>
 <body>
+	<%
+		Connection dbconn;
+		Statement stmt;
+		ResultSet rs;
+		String user_gender;
+		String id = request.getParameter("id");
 
+		String sql = "select * from mm_user where user_id='" + id + "'";
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		dbconn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "TIGER");
+		stmt = dbconn.createStatement();
+		rs = stmt.executeQuery(sql);
+
+		rs.next();
+		user_gender = rs.getString("user_gender");
+	%>
 	<div id="colorlib-page">
 		<div id="colorlib-main">
 			<div class="hero-wrap hero-wrap-2 js-fullheight"
@@ -103,9 +119,8 @@ input, textarea {
 							<h2 class="h4 font-weight-bold">기본 프로필</h2>
 							<div class="row block-9">
 								<div class="col-md-4">
-									<img alt="my_img"
-										src="resources/upload${userinfo.user_save}" id="image"
-										class="img-thumbnail img-responsive"
+									<img alt="my_img" src="resources/upload${userinfo.user_save}"
+										id="image" class="img-thumbnail img-responsive"
 										style="width: 100%; margin-top: 10px;"> <label
 										id="edit_label"><input type="file" name="uploadfile"
 										accept="image/gif, image/jpeg, image/png"
@@ -144,8 +159,9 @@ input, textarea {
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Gender: <input type="text" name="user_gender" id="edit_input"
-												value="${userinfo.user_gender}">
+											Gender: <span id="gender"><input type="radio" name="user_gender" value="남 " <%if(user_gender.equals("남")){%>checked="checked"<%}%>><span>남자</span>
+											<input type="radio" name="user_gender" value="여" <%if(user_gender.equals("여")){%>checked="checked"<%}%>><span>여자</span>
+											</span>
 										</div>
 										<div class="col-md-12 mb-4">
 											<button id="edit_btn">
@@ -165,7 +181,8 @@ input, textarea {
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Interests: <label><input type=checkbox name=category
+											Interests: 
+											<label><input type=checkbox name=category
 												id=outdoor value=1>등산</label> <label><input
 												type=checkbox name=category id=technology value=2>기술</label>
 											<label><input type=checkbox name=category id=family

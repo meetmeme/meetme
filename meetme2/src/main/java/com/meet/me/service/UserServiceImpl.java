@@ -156,5 +156,10 @@ public class UserServiceImpl implements UserService{
 		return dao.update(user);
 	}
 
+
+	@Override
+	public int delete_interests(String user_id) {
+		return dao.delete_interests(user_id);
+	}
 }
 

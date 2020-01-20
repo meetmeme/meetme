@@ -27,26 +27,26 @@ import com.meet.me.service.UserService;
 
 @Controller
 public class MyhomeController {
-	
+
 	@Autowired
 	MyHomeService mhservice;
-	
+
 	@Autowired
 	UserService userservice;
-	
+
 	@RequestMapping(value = "/mmain.mh", method = RequestMethod.GET)
-	public ModelAndView mmain(
-			@RequestParam("id") String m_id, 
-			HttpSession session, 
-			ModelAndView mv, 
-			HttpServletRequest request) throws Exception{
-		
+	public ModelAndView mmain(@RequestParam("id") String m_id, HttpSession session, ModelAndView mv,
+			HttpServletRequest request) throws Exception {
+
 		MyHome mh_info = mhservice.getinfo(m_id);
 		User m_info = userservice.user_info(m_id);
-
-		if(mh_info==null||m_info==null) {
+		
+		System.out.println("tttt<>"+m_id);
+		System.out.println("ttt<<>>"+mh_info);
+		System.out.println("ttt<<>>"+m_info);
+		if (mh_info == null || m_info == null) {
 			System.out.println("정보 수집 실패");
-		}else {
+		} else {
 			System.out.println("정보 수집 성공");
 			mv.setViewName("myhome/mmain");
 			mv.addObject("mh_info", mh_info);
@@ -56,23 +56,20 @@ public class MyhomeController {
 	}
 
 	@RequestMapping(value = "/mprofile.mh", method = RequestMethod.GET)
-	public ModelAndView mprofile(
-			HttpSession session, 
-			ModelAndView mv, 
-			HttpServletRequest request) throws Exception{
-		
-		String user_id = (String)session.getAttribute("user_id1");
+	public ModelAndView mprofile(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
+
+		String user_id = (String) session.getAttribute("user_id1");
 		int user_num = (int) session.getAttribute("user_num1");
 		MyHome mhinfo = mhservice.getinfo(user_id);
 		User userinfo = userservice.user_info(user_id);
 		List<User_interests> user_interests = userservice.getInterestsNums(user_num);
 
-		for(User_interests u : user_interests)
+		for (User_interests u : user_interests)
 			System.out.println(u);
 
-		if(mhinfo==null||userinfo==null) {
+		if (mhinfo == null || userinfo == null) {
 			System.out.println("정보 수집 실패");
-		}else {
+		} else {
 			System.out.println("정보 수집 성공");
 			mv.setViewName("myhome/mprofile");
 			mv.addObject("mhinfo", mhinfo);
@@ -81,74 +78,87 @@ public class MyhomeController {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/mevent.mh", method = RequestMethod.GET)
 	public String mevent() {
 		return "myhome/mevent";
 	}
-	
+
 	@RequestMapping(value = "/mboard.mh", method = RequestMethod.GET)
 	public String mboard() {
 		return "myhome/mboard";
 	}
-	
-	//프로필 수정
-	@RequestMapping(value="/updateProfile.mh", method = RequestMethod.POST)
-	public void updateProfile(
-			User user, User_interests user_interests, MyHome myhome,
-			ModelAndView mv, HttpSession session, HttpServletResponse response) throws IOException {
-		
-		String user_id = (String)session.getAttribute("user_id1");
+
+	// 프로필 수정
+	@RequestMapping(value = "/updateProfile.mh", method = RequestMethod.POST)
+	public void updateProfile(User user, User_interests user_interests, MyHome myhome, ModelAndView mv,
+			HttpSession session, HttpServletResponse response) throws IOException {
+
+		//기본프로필 수정
+		String user_id = (String) session.getAttribute("user_id1");
 		MultipartFile uploadfile = user.getUploadfile();
-		if (!uploadfile.isEmpty()) {
-			String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
-			user.setUser_original(fileName); // 원래 파일명 저장
 
-			// 새로운 폴더 이름 : 오늘 년+월+일
-			Calendar c = Calendar.getInstance();
-			int year = c.get(Calendar.YEAR); // 오늘 년 구합니다.
-			int month = c.get(Calendar.MONTH) + 1;// 오늘 월 구합니다.
-			int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
-			// String
-			// saveFoler=request.getSession().getServletContext().getRealPath("resources") +
-			// "/upload/";
-			String saveFolder = "C:\\Users\\32426\\git\\m2\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
-			String homedir = saveFolder + year + "-" + month + "-" + date;
-			System.out.println(homedir);
-			File path1 = new File(homedir);
-			if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
-				path1.mkdir(); // 없을 경우 경로 만들기
+		User user2 = userservice.user_info(user_id);
+		user.setUser_original(user2.getUser_original());
+		user.setUser_save(user2.getUser_save());
+		
+		if (uploadfile.getOriginalFilename()!="") {
+			if (!uploadfile.isEmpty()) {
+				String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
+				System.out.println("ori>>" + fileName);
+				user.setUser_original(fileName); // 원래 파일명 저장
+
+				Calendar c = Calendar.getInstance();
+				int year = c.get(Calendar.YEAR); // 오늘 년 구합니다.
+				int month = c.get(Calendar.MONTH) + 1;// 오늘 월 구합니다.
+				int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
+				
+				String saveFolder = "C:\\Users\\32426\\git\\m2\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+				String homedir = saveFolder + year + "-" + month + "-" + date;
+				System.out.println(homedir);
+				File path1 = new File(homedir);
+				if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
+					path1.mkdir(); // 없을 경우 경로 만들기
+				}
+
+				Random r = new Random();
+				int random = r.nextInt(100000000);
+
+				int index = fileName.lastIndexOf(".");
+				System.out.println("index = " + index);
+				String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
+				System.out.println("fileExtension = " + fileExtension);
+				String refileName = "bbs" + year + month + date + random + "." + fileExtension;
+				System.out.println("refileName = " + refileName);
+				String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
+				System.out.println("fileDbName = " + fileDBName);
+				uploadfile.transferTo(new File(saveFolder + fileDBName));
+				user.setUser_save(fileDBName);
 			}
-
-			Random r = new Random();
-			int random = r.nextInt(100000000);
-
-			int index = fileName.lastIndexOf(".");
-			System.out.println("index = " + index);
-			String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
-			System.out.println("fileExtension = " + fileExtension);
-			String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-			System.out.println("refileName = " + refileName);
-			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-			System.out.println("fileDbName = " + fileDBName);
-			uploadfile.transferTo(new File(saveFolder + fileDBName));
-			user.setUser_save(fileDBName);
 		}
-		System.out.println("TEST>>>"+user.getUser_id());
+
 		int result1 = userservice.update(user);
-		//	userservice.update(user_interests)
-		//	mhservice.update(myhome)
+		
+		//Interests 수정
+		int result2 = userservice.delete_interests(user_id);
+		
+		//userservice.interests_update(user_interests);
+		
+		
+		
+//		userservice.update(user_interests)
+//		mhservice.update(myhome)
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
-		if(result1==1) {
+		if (result1 == 1) {
 			System.out.println("업데이트 완료");
-			out.println("location.href='mprofile.mh?id="+user_id+"'");
-		}else {
+			out.println("location.href='mprofile.mh?id=" + user_id + "'");
+		} else {
 			System.out.println("업데이트 실패");
 			out.println("history.back();");
 		}
 		out.println("</script>");
 		out.close();
-		
+
 	}
 }
