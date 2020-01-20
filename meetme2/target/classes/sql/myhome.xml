@@ -3,21 +3,58 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Myhomes">
 	<select id="info" resultType="myhome" parameterType="String">
-		select * from mm_myhome where user_num = (select user_num from mm_user where user_id=#{user_id})
+		select *
+		from mm_myhome where user_num = (select user_num from mm_user where
+		user_id=#{user_id})
 	</select>
-	
-	<select id="AllboardCount" resultType="int" parameterType="String">
+
+	<select id="AllboardCount" resultType="int"
+		parameterType="String">
 		select count(*)
 		from mm_board
-		where to_date(board_date, 'yy/mm/dd') like #{month}
+		where to_date(board_date,
+		'yy/mm/dd') like #{month}
 	</select>
-	
+
 	<select id="AlldayCount" resultType="int" parameterType="String">
-		select count(*)
+		select
+		count(*)
 		from mm_board
 		where to_date(board_date, 'yy/mm/dd') like #{day}
 	</select>
+	<select id="search" parameterType="map" resultType="user">
+		select DISTINCT * from MM_MYHOME h
+		left join MM_HASHTAG_USE u
+		on(H.MYHOME_NUM = u.MYHOME_NUM)
+		left join mm_user us
+		on(h.user_num =
+		us.USER_NUM)
+		<where>
+			<if test="keyword!='%null%'">
+				(upper(MYHOME_INTRO) like upper(#{keyword})
+				OR upper(USER_ID) like upper(#{keyword})
+				OR upper(USER_NAME) like upper(#{keyword}))
+			</if>
+			<if test="hashtag!='null'">
+				AND u.HASHTAG_NUM = #{hashtag}
+			</if>
+			<if test="searchUser!='%null%'">
+				AND (upper(USER_ID) like upper(#{searchUser})
+				OR upper(USER_NAME) like upper(#{searchUser}))
+			</if>
+		</where>
+	</select>
 	
+	<select id="searchHash" parameterType="String" resultType="user">
+		select u.* from MM_USER u
+		left join MM_MYHOME m
+		on(m.USER_NUM = u.USER_NUM)
+		left join MM_HASHTAG_USE
+		using(MYHOME_NUM)
+		left join MM_HASHTAG
+		using(HASHTAG_NUM)
+		where upper(HASHTAG_TITLE) like #{hashtag} 
+	</select>
 </mapper>
 
 

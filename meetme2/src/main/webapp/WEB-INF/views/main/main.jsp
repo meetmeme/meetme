@@ -90,17 +90,16 @@
 					<c:forEach var="user" items="${RandomUser}">
 					<div class="col-md-4 col-sm-4">
 						<div class="item">
-							<div class="overlay" onClick="mh_popup('${user.user_id}')" title="go to ${user.user_id}'s minihome">
+							<div class="overlay" onClick="mh_popup('${user.user_id}')" title="go to ${user.user_name}'s minihome">
 								<div class="content">
-									<a href="#" class="nino-icon" title="follow ${user.user_id}!"><i class="mdi mdi-bookmark-plus-outline"></i></a>
+									<a href="#" class="nino-icon" title="follow ${user.user_name}!"><i class="mdi mdi-bookmark-plus-outline"></i></a>
 								</div>
-								<img src="resources/${user.user_save}">
+								<img src="resources/upload${user.user_save}">
 							</div>
 						</div>
 						<div class="info">
-							<h4 class="name">${user.user_id}</h4>
-							<span class="regency">${user_user_name}</span>
-						</div>
+							<h4 class="name">${user.user_name}</h4><span class="regency">(${user.user_id})</span><br>
+						</div><br>
 					</div>
 					</c:forEach>
 				</div>

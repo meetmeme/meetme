@@ -29,12 +29,12 @@ public class EventDAO {
 		return sqlSession.selectList("Events.search", keywords);
 	}
 
-	public List<Event> searchHash(Map<String, String> keywords) {
-		return sqlSession.selectList("Events.searchHash", keywords);
-	}
-
 	public List<Event> searchDate(Map<String, String> keywords) {
 		return sqlSession.selectList("Events.searchDate", keywords);
+	}
+
+	public List<Event> searchHash(String hashtag) {
+		return sqlSession.selectList("Events.searchHash", hashtag);
 	}
 
 }
