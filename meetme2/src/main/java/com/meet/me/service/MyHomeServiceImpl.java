@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.MyhomeDAO;
+import com.meet.me.domain.Board;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 
@@ -29,5 +30,9 @@ public class MyHomeServiceImpl  implements MyHomeService{
 	@Override
 	public void update(MyHome myhome) {
 		mdao.update(myhome);
+	}
+	@Override
+	public int board_insert(Board board) {
+		return mdao.board_insert(board);
 	}
 }
