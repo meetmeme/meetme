@@ -23,8 +23,8 @@
 							<div layout="row" class="verticalCenter cursor"
 								onclick="location.href='event.main?event=${event.EVENT_NUM}'">
 								<div class="nino-avatar fsr">
-									<img class="img-circle img-thumbnail"
-										src="resources/${event.EVENT_SAVE}" alt="">
+									<img class="img-circle img-thumbnail square"
+										src="resources${event.EVENT_SAVE}" alt="">
 								</div>
 								<div>
 									<p class="quote"><strong>"</strong>${event.EVENT_CONTENT}<strong>"</strong></p>

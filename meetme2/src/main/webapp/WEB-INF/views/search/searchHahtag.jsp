@@ -23,7 +23,7 @@
 										<article>
 											<div class="articleThumb">
 												<a href="event.main?event=${event.EVENT_NUM}"><img
-													src="${event.EVENT_SAVE} alt=""></a>
+													src="resources${event.EVENT_SAVE}" alt=""></a>
 												<div class="date">
 													<span class="number">${event.EVENT_DATE}</span> <span
 														class="text"></span>

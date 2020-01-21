@@ -176,10 +176,10 @@
 					<option value="0_all">ALL</option>
 
 				</select> <br> <br> <input type="text" id="search-dateRange"
-					class="form-control" value="2020/01/01 - 2020/01/10" /> <input
+					class="form-control" value="2020/01/01 - 2020/12/31" /> <input
 					type=hidden name="search-dateStart" id="search-dateStart"
 					value="2020-01-01"> <input type=hidden
-					name="search-dateEnd" id="search-dateEnd" value="2020-01-10">
+					name="search-dateEnd" id="search-dateEnd" value="2020-12-31">
 				<br> <br> <input type=submit value="search"
 					class="form-control btn_submit">
 			</form>
