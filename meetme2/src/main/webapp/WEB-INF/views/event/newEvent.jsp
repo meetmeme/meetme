@@ -3,36 +3,44 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="resources/js/main.js"></script>
-<body data-target="#nino-navbar" data-spy="scroll">
-	<jsp:include page="../main/header.jsp" />
-	 <link rel="stylesheet" href="resources/css/event.css">
+<jsp:include page="../main/header.jsp" />
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css">
+
+<link rel="stylesheet" href="resources/css/jquery.timepicker.css">
+<script src="resources/js/event/jquery.timepicker.min.js"></script>
+
+<script src="resources/js/event/newEvent.js"></script>
+<link rel="stylesheet" href="resources/css/newEvent.css?after">
+
+<body data-target="#nino-navbar" data-spy="scroll">
+	
 	<!-- category
     ================================================== -->
 	<section id="nino-portfolio">
 		<div class="container">
 			<h2 class="nino-sectionHeading">
-				<span class="nino-subHeading">M&M</span>
+				<span class="nino-subHeading">M&M</span> 
 			</h2>
 		</div>
 		<div class="sectionContent">
 			<form action="" class="nino-subscribeForm">
-				<h2 class="nino-sectionHeading"><span class="nino-subHeading">title</span></h2>
+				<h2 class="nino-sectionHeading">title</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+					<input type="text" class="form-control" id="event_title" name="event_title" placeholder="Enter title" required>
 				</div>
 				
-				<h2 class="nino-sectionHeading"><span class="nino-subHeading">detail</span></h2>
+				<h2 class="nino-sectionHeading">detail</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+					<textarea rows="20" class="form-control" cols="120" id="event_detail" name="event_detail" placeholder="Enter event detail"></textarea>
 				</div>
 				
 				<h2 class="nino-sectionHeading">when</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+					<input id="datepicker" class="form-control" type="date">
+					<input class="form-control" type="text" name="time" value="" placeholder="시간선택"  id="time">
+
 				</div>
 				
 				<h2 class="nino-sectionHeading">where</h2>
@@ -51,6 +59,11 @@
 				</div>
 				
 				<h2 class="nino-sectionHeading">Related photos</h2>
+       			<div class="input-group input-group-lg">
+					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+				</div>
+				
+				<h2 class="nino-sectionHeading">hash tags</h2>
        			<div class="input-group input-group-lg">
 					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
 				</div>
