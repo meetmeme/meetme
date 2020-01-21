@@ -16,4 +16,9 @@
 	<update id="checkNotice" parameterType="String">
 		update MM_NOTICE set NOTICE_CK = 1 where NOTICE_NUM = #{notice_num}
 	</update>
+	
+	<insert id="addNotification">
+		insert into MM_NOTICE values((select nvl(max(notice_num),0)+1 from MM_NOTICE),
+		#{user_num}, #{title}, #{content}, sysdate, 0)
+	</insert>
 </mapper>

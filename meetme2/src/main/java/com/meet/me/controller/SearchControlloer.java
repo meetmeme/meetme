@@ -61,7 +61,7 @@ public class SearchControlloer {
 
 		List<Event> searchResult = new ArrayList<Event>();
 
-		if (searchKeyword != null || !searchCategoryValue.equals("0") || searchHashtag.length() > 0) {
+		if (searchKeyword != null || !searchCategoryValue.equals("0") || !searchHashtag.equals("null")) {
 			Map<String, String> keywords = new HashMap<String, String>();
 			keywords.put("keyword", "%" + searchKeyword + "%");
 			keywords.put("category", searchCategoryValue);
@@ -190,6 +190,33 @@ public class SearchControlloer {
 		mv.addObject("hashtag", hashtag);
 		mv.addObject("HeaderComment", "look who's use hashtag '#" + hashtag + "'!");
 
+		return mv;
+	}
+	
+	@GetMapping(value = "/category.sc")
+	public ModelAndView searchCatregoryEvent(ModelAndView mv, HttpServletRequest request,
+			@RequestParam("category") String category) {
+//		List<Post> searchResultMiniPost = new ArrayList<Post>();
+		List<Event> searchResultMiniEvent = new ArrayList<Event>();
+		
+		// event 검색
+		searchResultMiniEvent = eventService.searchCat("%" + category + "%");
+		
+		for(Event e : searchResultMiniEvent) {
+			String title = e.getEVENT_TITLE();
+			String context = e.getEVENT_CONTENT();
+			if(context.length() > 100)
+				e.setEVENT_CONTENT(context.substring(0, 100)+" ...");
+			if(title.length() > 20)
+				e.setEVENT_TITLE(title.substring(0, 20)+" ...");
+		}
+		
+		mv.setViewName("search/searchHahtag");
+//		mv.addObject("posts", searchResultMiniPost);
+		mv.addObject("events", searchResultMiniEvent);
+		mv.addObject("categorysearch", category);
+		mv.addObject("HeaderComment", " '" + category + "' Events!");
+		
 		return mv;
 	}
 

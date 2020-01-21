@@ -1,6 +1,8 @@
 package com.meet.me.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,15 @@ public class CommunityDAO {
 
 	public int checkNotice(String notice_num) {
 		return sqlSession.update("Community.checkNotice", notice_num);
+	}
+
+	public void addNotification(int user_num, String title, String content) {
+		Map<String, String> notice = new HashMap<String, String>();
+		notice.put("user_num", user_num+"");
+		notice.put("title", title);
+		notice.put("content", content);
+		
+		sqlSession.insert("Community.addNotification", notice); 
 	}
 
 }

@@ -12,5 +12,7 @@ public interface CommunityService {
 
 	public int checkNotice(String notice_num);
 
+	public void addNotification(int user_num, String title, String content);
+
 }
  

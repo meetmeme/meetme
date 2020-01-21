@@ -9,6 +9,7 @@
 <body data-target="#nino-navbar" data-spy="scroll">
 	<jsp:include page="header.jsp" />
 
+<input type="hidden" id=userIdCache value="${user_id1}">
 	<!-- Testimonial
     ================================================== -->
 	<section class="nino-testimonial bg-white">
@@ -24,12 +25,14 @@
 								onclick="location.href='event.main?event=${event.EVENT_NUM}'">
 								<div class="nino-avatar fsr">
 									<img class="img-circle img-thumbnail square"
-										src="resources${event.EVENT_SAVE}" alt="">
+										src="resources${event.EVENT_ORIGINAL}" alt="">
 								</div>
 								<div>
-									<p class="quote"><strong>"</strong>${event.EVENT_CONTENT}<strong>"</strong></p>
-									<span class="number">${event.EVENT_DATE}</span><br>
-									<span class="name">${event.EVENT_TITLE}</span>
+									<p class="quote">
+										<strong>"</strong>${event.EVENT_CONTENT}<strong>"</strong>
+									</p>
+									<span class="number">${event.EVENT_DATE}</span><br> <span
+										class="name">${event.EVENT_TITLE}</span>
 								</div>
 							</div>
 						</li>
@@ -56,14 +59,14 @@
 			<ul class="nino-portfolioItems">
 				<c:forEach var="cat" items="${category}">
 					<li class="item"><a class="nino-prettyPhoto"
-						rel="prettyPhoto[gallery1]" title="Development Mobile"
-						href="resources/image/category_main/${cat.CATEGORY_NAME}.jpg">
-							<img src="resources/image/category_main/${cat.CATEGORY_NAME}.jpg" />
+						title="Let's see what events are in ${cat.CATEGORY_NAME}"
+						href="category.sc?category=${cat.CATEGORY_NAME}"> <img
+							src="resources/image/category_main/${cat.CATEGORY_NAME}.jpg" />
 							<div class="overlay">
 								<div class="content">
 									<i class="mdi mdi-cube-outline nino-icon"></i>
 									<h4 class="title">${cat.CATEGORY_NAME}</h4>
-									<span class="desc">무슨 내용을 넣을까요?</span>
+									<span class="desc"></span>
 								</div>
 							</div>
 					</a></li>
@@ -75,7 +78,7 @@
 
 
 
-  <!-- Our Team
+	<!-- Our Team
     ================================================== -->
 	<section id="nino-ourTeam">
 		<div class="container">
@@ -83,31 +86,38 @@
 				<span class="nino-subHeading">M&Ms</span> Explore people
 			</h2>
 			<p class="nino-sectionDesc">
-				See who will be your colleague!<br>				 
+				See who could be your colleague!<br>
 			</p>
 			<div class="sectionContent">
 				<div class="row nino-hoverEffect">
 					<c:forEach var="user" items="${RandomUser}">
-					<div class="col-md-4 col-sm-4">
-						<div class="item">
-							<div class="overlay" onClick="mh_popup('${user.user_id}')" title="go to ${user.user_name}'s minihome">
-								<div class="content">
-									<a href="#" class="nino-icon" title="follow ${user.user_name}!"><i class="mdi mdi-bookmark-plus-outline"></i></a>
+						<c:if test="${user.user_id != 'admin' && user.user_id != user_id1}">
+							<div class="col-md-4 col-sm-4">
+								<div class="item">
+									<div class="overlay" onClick="mh_popup('${user.user_id}')"
+										title="go to ${user.user_name}'s minihome">
+										<div class="content">
+											<a class="nino-icon" onclick="follow('${user.user_num}','${user.user_name}')"
+												title="follow ${user.user_name}!"><i
+												class="mdi mdi-bookmark-plus-outline"></i></a>
+										</div>
+										<img class="Rectangle"
+											src="resources/upload${user.user_original}">
+									</div>
 								</div>
-								<img src="resources/upload${user.user_save}">
+								<div class="info">
+									<h4 class="name">${user.user_name}</h4>
+									<span class="regency">(${user.user_id})</span><br>
+								</div>
+								<br>
 							</div>
-						</div>
-						<div class="info">
-							<h4 class="name">${user.user_name}</h4><span class="regency">(${user.user_id})</span><br>
-						</div><br>
-					</div>
+						</c:if>
 					</c:forEach>
 				</div>
 			</div>
 		</div>
-	</section><!--/#nino-ourTeam-->
-
-
+	</section>
+	<!--/#nino-ourTeam-->
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

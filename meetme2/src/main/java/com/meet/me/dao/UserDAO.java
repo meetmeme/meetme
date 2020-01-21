@@ -89,4 +89,12 @@ public class UserDAO {
 	public int delete_interests(String user_id) {
 		return sqlSession.delete("User_interests.delete", user_id);
 	}
+
+	public int follow(Map<String, String> userKey) {
+		return sqlSession.insert("Users.follow", userKey);
+	}
+
+	public int followCheck(Map<String, String> userKey) {
+		return Integer.parseInt(sqlSession.selectOne("Users.followCheck", userKey));
+	}
 }

@@ -54,4 +54,9 @@ public class EventServiceImpl implements EventService{
 		return dao.getUser(event);
 	}
 
+	@Override
+	public List<Event> searchCat(String category) {
+		return dao.searchCat(category);
+	}
+
 }

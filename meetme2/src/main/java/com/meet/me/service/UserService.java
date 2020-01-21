@@ -1,6 +1,7 @@
 package com.meet.me.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
@@ -23,5 +24,7 @@ public interface UserService {
 	public List<User_interests> getInterestsNums(int num);
 	public int update(User user);
 	public int delete_interests(String user_id);
+	public int follow(Map<String, String> userKey);
+	public int followCheck(Map<String, String> userKey);
 }
  
