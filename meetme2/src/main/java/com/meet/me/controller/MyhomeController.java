@@ -3,8 +3,11 @@ package com.meet.me.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
+import com.meet.me.service.EventService;
 import com.meet.me.service.MyHomeService;
 import com.meet.me.service.UserService;
 
@@ -33,6 +38,10 @@ public class MyhomeController {
 
 	@Autowired
 	UserService userservice;
+	
+	@Autowired
+	EventService eventservice;
+	
 
 	@RequestMapping(value = "/mmain.mh", method = RequestMethod.GET)
 	public ModelAndView mmain(@RequestParam("id") String m_id, HttpSession session, ModelAndView mv,
@@ -62,6 +71,14 @@ public class MyhomeController {
 		int user_num = (int) session.getAttribute("user_num1");
 		MyHome mhinfo = mhservice.getinfo(user_id);
 		User userinfo = userservice.user_info(user_id);
+		
+
+		//카테고리 리스트 가져오기
+		Map<String,List<String>> map = new HashMap<String,List<String>>(); 
+		List<String> categoryList = new ArrayList<String>();
+		categoryList = eventservice.getCategory();
+		map.put("categoryList",categoryList);
+		
 		List<User_interests> user_interests = userservice.getInterestsNums(user_num);
 
 		for (User_interests u : user_interests)
@@ -71,10 +88,12 @@ public class MyhomeController {
 			System.out.println("정보 수집 실패");
 		} else {
 			System.out.println("정보 수집 성공");
+			
 			mv.setViewName("myhome/mprofile");
 			mv.addObject("mhinfo", mhinfo);
 			mv.addObject("userinfo", userinfo);
 			mv.addObject("user_interests", user_interests);
+			mv.addObject("categoryList", categoryList);
 		}
 		return mv;
 	}
@@ -91,11 +110,13 @@ public class MyhomeController {
 
 	// 프로필 수정
 	@RequestMapping(value = "/updateProfile.mh", method = RequestMethod.POST)
-	public void updateProfile(User user, User_interests user_interests, MyHome myhome, ModelAndView mv,
+	public void updateProfile(User user, User_interests user_interests, MyHome myhome, 
+			@RequestParam("category") String category, ModelAndView mv,
 			HttpSession session, HttpServletResponse response) throws IOException {
 
-		//기본프로필 수정
+		/****기본프로필 수정****/
 		String user_id = (String) session.getAttribute("user_id1");
+		int user_num = user.getUser_num();
 		MultipartFile uploadfile = user.getUploadfile();
 
 		User user2 = userservice.user_info(user_id);
@@ -140,14 +161,29 @@ public class MyhomeController {
 		int result1 = userservice.update(user);
 		
 		//Interests 수정
-		int result2 = userservice.delete_interests(user_id);
+		String tmp[] = category.split(",");
+		List<Integer> cat_list = new ArrayList<Integer>(); 
+		for (int i = 0; i < tmp.length; i++) {
+			if (tmp[i] != null && !tmp[i].equals("")) {
+				cat_list.add(Integer.parseInt(tmp[i]));
+			}
+		}
 		
-		//userservice.interests_update(user_interests);
-		
-		
-		
-//		userservice.update(user_interests)
-//		mhservice.update(myhome)
+		user_interests = new User_interests();
+		user_interests.setUser_num(user_num);
+		//기존 흥미 정보 삭제
+		userservice.delete_interests(user_id);
+		//신규 흥미 정보 삽입
+		for(int i : cat_list) {
+			user_interests.setCategory_num(i);
+			userservice.category(user_interests);
+		}
+
+		/***미니홈피 프로필 수정***/
+		System.out.println(">>>"+myhome.getMyhome_intro());
+		System.out.println(">>>"+myhome.getMyhome_num());
+		mhservice.update(myhome);
+
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		if (result1 == 1) {
@@ -161,4 +197,11 @@ public class MyhomeController {
 		out.close();
 
 	}
+
+	//글쓰기
+	@GetMapping(value = "/BoardWrite.mh")
+	public String boardwrite() throws Exception {
+		return "myhome/mboard_write";
+	}
+
 }

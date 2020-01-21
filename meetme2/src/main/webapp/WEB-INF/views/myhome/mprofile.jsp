@@ -48,7 +48,7 @@
 	text-align: right;
 }
 
-#edit_input, #gender{
+#edit_input, #gender {
 	float: right;
 	width: 220px;
 }
@@ -104,7 +104,7 @@ input, textarea {
 	<div id="colorlib-page">
 		<div id="colorlib-main">
 			<div class="hero-wrap hero-wrap-2 js-fullheight"
-				style="background-image: url(resources/images2/wooden-floor.jpg);"
+				style="background-image: url(resources/images2/whitespace.jpg);"
 				data-stellar-background-ratio="0.5">
 				<div class="overlay"></div>
 
@@ -114,6 +114,7 @@ input, textarea {
 						enctype="multipart/form-data">
 						<input type="hidden" name="user_id" value="${userinfo.user_id}">
 						<input type="hidden" name="user_num" value="${userinfo.user_num}">
+						<input type="hidden" name="myhome_num" value="${mhinfo.myhome_num}">
 						<div class="container">
 
 							<h2 class="h4 font-weight-bold">기본 프로필</h2>
@@ -159,8 +160,11 @@ input, textarea {
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Gender: <span id="gender"><input type="radio" name="user_gender" value="남 " <%if(user_gender.equals("남")){%>checked="checked"<%}%>><span>남자</span>
-											<input type="radio" name="user_gender" value="여" <%if(user_gender.equals("여")){%>checked="checked"<%}%>><span>여자</span>
+											Gender: <span id="gender"><input type="radio"
+												name="user_gender" value="남 "
+												<%if (user_gender.equals("남")) {%> checked="checked" <%}%>><span>남자</span>
+												<input type="radio" name="user_gender" value="여"
+												<%if (user_gender.equals("여")) {%> checked="checked" <%}%>><span>여자</span>
 											</span>
 										</div>
 										<div class="col-md-12 mb-4">
@@ -181,22 +185,13 @@ input, textarea {
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
-											Interests: 
-											<label><input type=checkbox name=category
-												id=outdoor value=1>등산</label> <label><input
-												type=checkbox name=category id=technology value=2>기술</label>
-											<label><input type=checkbox name=category id=family
-												value=3>가족</label> <label><input type=checkbox
-												name=category id=healthy value=4>건강</label> <label><input
-												type=checkbox name=category id=sports value=5>운동</label> <label><input
-												type=checkbox name=category id=study value=6>학습</label> <label><input
-												type=checkbox name=category id=language value=7>언어</label> <label><input
-												type=checkbox name=category id=photo value=8>사진</label> <label><input
-												type=checkbox name=category id=music value=9>음악</label> <label><input
-												type=checkbox name=category id=dance value=10>춤</label> <label><input
-												type=checkbox name=category id=game value=11>게임</label> <label><input
-												type=checkbox name=category id=pet value=12>애완동물</label> <label><input
-												type=checkbox name=category id=DIY value=13>DIY</label>
+											Interests:
+											<c:forEach var="c" items="${categoryList}"
+												varStatus="status">
+												<label><input type=checkbox name=category id=family
+													value=${status.count}>${c.CATEGORY_NAME}</label>
+											</c:forEach>
+											
 										</div>
 									</div>
 
@@ -210,14 +205,14 @@ input, textarea {
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-music"></span>
 											</button>
-											BGM: 트와이스-Cheer Up
+											BGM: <input type="text" name="myhome_bgm" value="${mhinfo.myhome_bgm}">
 										</div>
 										<div class="col-md-12 mb-3">
 											<button id="edit_btn">
 												<span class="glyphicon glyphicon-pencil"></span>
 											</button>
 											Introduce:
-											<textarea name="intro" rows="2" class="form-control">${mhinfo.myhome_intro}</textarea>
+											<textarea name="myhome_intro" rows="2" class="form-control">${mhinfo.myhome_intro}</textarea>
 										</div>
 									</div>
 								</div>

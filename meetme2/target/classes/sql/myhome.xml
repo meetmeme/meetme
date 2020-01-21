@@ -55,6 +55,12 @@
 		using(HASHTAG_NUM)
 		where upper(HASHTAG_TITLE) like #{hashtag} 
 	</select>
+	
+	<update id="update" parameterType="myhome">
+		update mm_myhome set
+		myhome_intro=#{myhome_intro}, myhome_bgm=#{myhome_bgm}
+		where myhome_num=#{myhome_num}
+	</update>
 </mapper>
 
 

@@ -11,5 +11,6 @@ public interface MyHomeService {
 
 	public MyHome getinfo(String user_id);
 	public List<User> search(Map<String, String> keywords);
-	public List<User> searchHash(String hashtag);	
+	public List<User> searchHash(String hashtag);
+	public void update(MyHome myhome);	
 }
