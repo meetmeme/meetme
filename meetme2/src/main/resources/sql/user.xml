@@ -93,7 +93,7 @@
 	</delete>
 
 	<select id="getFriends" parameterType="map" resultType="user">
-		SELECT DISTINCT *
+		SELECT DISTINCT u.*
 		FROM MM_FOLLOWS f
 		JOIN MM_USER u
 		on (u.USER_NUM = f.FOLLOWING_NUM)
@@ -115,6 +115,13 @@
 		where user_id=#{user_id}
 	</update>
 	
+	<insert id="follow" parameterType="map">
+		insert into MM_FOLLOWS values(#{userKey}, ${following})
+	</insert>
+	
+	<select id="followCheck" parameterType="map" resultType="String">
+		select count(*) from MM_FOLLOWS where USER_NUM = #{userKey} and FOLLOWING_NUM = #{following}
+	</select>
 
 </mapper>
 

@@ -6,7 +6,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
@@ -21,11 +23,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -34,6 +38,7 @@ import com.meet.me.domain.Category;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
+import com.meet.me.service.CommunityService;
 import com.meet.me.service.UserService;
 
 @Controller
@@ -42,6 +47,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private CommunityService communityService;
+	
 	// 회원가입폼에서 아이디 검사
 	@RequestMapping(value = "/idcheck.net", method = RequestMethod.GET)
 	public void idcheck(@RequestParam("user_id") String user_id, // 파라미터로 받은 값을 String id 저장
@@ -51,7 +59,7 @@ public class UserController {
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}// idcheck
-	
+
 	// 회원가입폼에서 이메일 검사
 	@RequestMapping(value = "/emailcheck.net", method = RequestMethod.GET)
 	public void emailcheck(@RequestParam("user_email") String user_email, // 파라미터로 받은 값을 String email 저장
@@ -62,21 +70,19 @@ public class UserController {
 		out.print(result);
 	}// emailcheck
 
-	
 	// 회원가입 처리
 	@RequestMapping(value = "/joinProcess.net", method = RequestMethod.POST)
 	public String joinProcess(User user, HttpServletResponse response,
 			@RequestParam("sel_category") String sel_category, RedirectAttributes rttr) throws Exception {
-		
+
 		String user_id = user.getUser_id();
 		String tmp[] = sel_category.split(",");
-		List<Integer> cat_list = new ArrayList<Integer>(); 
+		List<Integer> cat_list = new ArrayList<Integer>();
 		for (int i = 0; i < tmp.length; i++) {
 			if (tmp[i] != null && !tmp[i].equals("")) {
 				cat_list.add(Integer.parseInt(tmp[i]));
 			}
 		}
-		
 
 		MultipartFile uploadfile = user.getUploadfile();
 		if (!uploadfile.isEmpty()) {
@@ -98,7 +104,7 @@ public class UserController {
 			if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
 				path1.mkdir(); // 없을 경우 경로 만들기
 			}
-	
+
 			Random r = new Random();
 			int random = r.nextInt(100000000);
 
@@ -116,43 +122,58 @@ public class UserController {
 			// 바뀐 파일명으로 저장
 			user.setUser_save(fileDBName);
 		}
-	
-			userService.insert(user); // 저장 메서드 호출
-			rttr.addFlashAttribute("msg", "regSuccess");
-			
-			User user1 = userService.getNum(user_id);
-			
-			int user_num = user1.getUser_num();
-			
-			User_interests inter = new User_interests();
-			
-			inter.setUser_num(user_num);
-			
-			for(int i : cat_list) {
-				inter.setCategory_num(i);
-				userService.category(inter);
-			}
-			
-			userService.setMyhome(user_num);
-	
-			
-			return "main/main";
+
+		userService.insert(user); // 저장 메서드 호출
+		rttr.addFlashAttribute("msg", "regSuccess");
+
+		User user1 = userService.getNum(user_id);
+
+		int user_num = user1.getUser_num();
+
+		User_interests inter = new User_interests();
+
+		inter.setUser_num(user_num);
+
+		for (int i : cat_list) {
+			inter.setCategory_num(i);
+			userService.category(inter);
+		}
+
+		userService.setMyhome(user_num);
+
+		return "redirect:main.index";
 
 	}// joinProcess
-	
+
 	@RequestMapping(value = "/emailConfirm.net", method = RequestMethod.GET)
-	public String emailConfirm(User user, String user_email, String user_id, Model model) throws Exception { // 이메일 인증 확인창
+	public String emailConfirm(User user, String user_email, String user_id, Model model) throws Exception { // 이메일 인증
+																												// 확인창
 		System.out.println("user_email : " + user_email);
 		System.out.println("user_id" + user_id);
-		
+
 		user = userService.getNum(user_id);
-		
+
 		user_email = user.getUser_email();
 		System.out.println("user_email2 : " + user_email);
-		
+
 		userService.userAuth(user_email);
 		model.addAttribute("user_email", user_email);
 
+		// admin follow하기
+		int userNum = userService.getNum(user_id).getUser_num();
+		Map<String, String> userKey = new HashMap<String, String>();
+		userKey.put("following", "1");
+		userKey.put("userKey", userNum + "");
+		userService.follow(userKey);
+
+		userKey.put("following", userNum + "");
+		userKey.put("userKey", "1");
+		userService.follow(userKey);
+
+		// 환영 알람
+		communityService.addNotification(userNum, "Welcome to Meet Me!",
+				"Meet Me에 가입하신 것을 환영합니다! 즐거운 하루 되세요😎");
+		
 		return "user/emailConfirm"; // emailConfirm.jsp
 	}
 
@@ -164,15 +185,17 @@ public class UserController {
 		User user = new User();
 		int result = userService.isId(user_id, user_pass);
 		user = userService.user_info(user_id);
-	
+
 		if (result == 1) {
 			int user_num = user.getUser_num();
 			int certification = user.getUserCertification();
-			
-			if(certification == 1) {
+
+			if (certification == 1) {
 				// 로그인 성공
 				session.setAttribute("user_id1", user_id);
 				session.setAttribute("user_num1", user_num);
+				session.setAttribute("user_name1", user.getUser_name());
+				session.setAttribute("user_original", user.getUser_original());
 				// "saveid"라는 이름의 쿠키에 id의 값을 저장한 쿠키를 생성합니다.
 				Cookie savecookie = new Cookie("saveid", user_id);
 				if (!u.equals("")) {
@@ -198,10 +221,10 @@ public class UserController {
 			return "redirect:main.index";
 		} else {
 			String message = null;
-			
-			if(result == 0) {
+
+			if (result == 0) {
 				message = "비밀번호가 일치하지 않습니다.";
-			}else if (result == -1) {
+			} else if (result == -1) {
 				message = "아이디가 존재하지 않습니다.";
 			}
 			response.setContentType("text/html;charset=utf-8");
@@ -222,4 +245,24 @@ public class UserController {
 		return "redirect:main.index";
 
 	}
+
+	@GetMapping(value = "follow.us")
+	@ResponseBody
+	public int follow(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws IOException {
+		String following = request.getParameter("following"); // follow 할 사람
+		String userNum = session.getAttribute("user_num1").toString(); // 사용자
+
+		Map<String, String> userKey = new HashMap<String, String>();
+		userKey.put("following", following);
+		userKey.put("userKey", userNum);
+
+		int follow = userService.followCheck(userKey);
+		if (follow > 0)
+			return 0;
+		if (follow <= 0)
+			follow = userService.follow(userKey);
+		return follow;
+	}
+
 }

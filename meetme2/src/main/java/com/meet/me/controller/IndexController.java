@@ -48,7 +48,6 @@ public class IndexController {
 			num = Integer.parseInt(session.getAttribute("user_num1").toString());
 		List<Event> event = eventService.getIntrestingEvent(id);
 		List<User> RandomUser = userService.getRandomUser();
-		List<Notice> notification = communityService.getNotification(num);
 		List<String> category = eventService.getCategory();
 
 		System.out.println(RandomUser.size());
@@ -68,7 +67,6 @@ public class IndexController {
 		mv.addObject("event", event);
 		mv.addObject("category", category);
 		mv.addObject("RandomUser", RandomUser);
-		mv.addObject("notification", notification);
 		mv.addObject("note", note);
 		
 		mv.addObject("HeaderComment", "The real world is calling");

@@ -14,5 +14,6 @@ public interface EventService {
 	public List<Event> searchHash(String hashtag);
 	public int getAttend(int event);
 	public List<User> getUser(int event);
+	public List<Event> searchCat(String category);
 }
  

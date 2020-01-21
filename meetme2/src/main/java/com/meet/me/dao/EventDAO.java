@@ -46,4 +46,9 @@ public class EventDAO {
 		return sqlSession.selectList("Events.getUser", event);
 	}
 
+	public List<Event> searchCat(String category) {
+		return sqlSession.selectList("Events.searchCat", category);
+
+	}
+
 }

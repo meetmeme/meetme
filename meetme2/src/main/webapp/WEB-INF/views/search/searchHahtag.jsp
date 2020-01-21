@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" />
+
 <!DOCTYPE html>
 <html lang="en">
 <body data-target="#nino-navbar" data-spy="scroll">
@@ -8,7 +11,7 @@
 	<div class=bodyMin>
 		<hr>
 		<!-- event result -->
-		<div class=bodySubMinMain>
+				<div class=bodySubMinMain>
 			<!-- Latest Blog   ================================================== -->
 			<section id="nino-latestBlog">
 				<div class="container">
@@ -19,14 +22,20 @@
 						<div class="row">
 							<c:if test="${!empty events}">
 								<c:forEach var="event" items="${events}">
+								<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
+								<fmt:formatDate value="${event.EVENT_DATE}" pattern="yyyyMMddHHmm" var="Date"/>
 									<div class="col-md-4 col-sm-4">
-										<article>
-											<div class="articleThumb">
-												<a href="event.main?event=${event.EVENT_NUM}"><img
-													src="resources${event.EVENT_SAVE}" alt=""></a>
+										<article class="square_article">
+											<div class="articleThumb square_search">
+												<a href="event.main?event=${event.EVENT_NUM}">
+												<img src="resources${event.EVENT_ORIGINAL}" alt=""></a>
 												<div class="date">
-													<span class="number">${event.EVENT_DATE}</span> <span
-														class="text"></span>
+													<c:if test="${Date > nowDate}">
+													<span class="number">${event.EVENT_DATE}</span> 
+													</c:if>
+													<c:if test="${Date <= nowDate}">
+														<span class="number"><del class="gray"><i>${event.EVENT_DATE}</i></del></span> 
+													</c:if>
 												</div>
 											</div>
 											<h3 class="articleTitle">
@@ -54,42 +63,43 @@
 
 		<hr>
 		<!-- minihome result -->
-		<div class=bodySubMinMain>
-			<!-- Story About Us
+		<c:if test="${empty categorysearch}">
+			<div class=bodySubMinMain>
+				<!-- Story About Us
     ================================================== -->
-			<section id="nino-story">
-				<div class="container">
-					<h2 class="nino-sectionHeading">
-						<span class="nino-subHeading">Minihome</span>
-					</h2>
-					<p class="nino-sectionDesc"></p>
-					<div class="sectionContent">
-						<div class="row nino-hoverEffect">
-							<c:if test="${empty minihome}">
-								<p class=center>검색 결과가 없습니다.</p>
-							</c:if>
-							<c:if test="${!empty minihome}">
-								<c:forEach var="home" items="${minihome}">
-									<div class="col-md-4 col-sm-4">
-										<div class="item">
-											<a class="overlay" onClick="mh_popup('${home.user_id}')"
-												title="go to ${home.user_id}'s minihome"> <span
-												class="content"> <i class="mdi mdi-airplay nino-icon"></i>
-													${home.user_name} <br>
-												<span>(${home.user_id})</span>
-											</span> <img src="resources/upload${home.user_save}" alt="">
-											</a>
+				<section id="nino-story">
+					<div class="container">
+						<h2 class="nino-sectionHeading">
+							<span class="nino-subHeading">Minihome</span>
+						</h2>
+						<p class="nino-sectionDesc"></p>
+						<div class="sectionContent">
+							<div class="row nino-hoverEffect">
+								<c:if test="${empty minihome}">
+									<p class=center>검색 결과가 없습니다.</p>
+								</c:if>
+								<c:if test="${!empty minihome}">
+									<c:forEach var="home" items="${minihome}">
+										<div class="col-md-4 col-sm-4">
+											<div class="item">
+												<a class="overlay" onClick="mh_popup('${home.user_id}')"
+													title="go to ${home.user_id}'s minihome"> <span
+													class="content"> <i
+														class="mdi mdi-airplay nino-icon"></i> ${home.user_name} <br>
+														<span>(${home.user_id})</span>
+												</span> <img src="resources/upload${home.user_original}" alt="">
+												</a>
+											</div>
 										</div>
-									</div>
-								</c:forEach>
-							</c:if>
+									</c:forEach>
+								</c:if>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-			<!--/#nino-story-->
-		</div>
-
+				</section>
+				<!--/#nino-story-->
+			</div>
+		</c:if>
 
 		<%-- 		<!-- post result -->
 		<div class=bodySubMin>
