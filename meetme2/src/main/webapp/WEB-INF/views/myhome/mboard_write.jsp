@@ -11,38 +11,34 @@
 
 </head>
 <body>
+<%
+String id = request.getParameter("id"); 
+%>
+<input type="hidden" name="id" value="<%=id %>">
 	<div id="colorlib-page">
 		<div id="colorlib-main">
 			<div class="container">
 				<section class="ftco-section">
-					<form action="BoardAddAction.bo" method="post"
+					<form action="insert_BoardWrite.mh" method="post"
 						enctype="multipart/form-data" name="boardform">
+						<input type="hidden" name="MYHOME_NUM" value="${mh_info.myhome_num}">
 						<h1>게시판 작성</h1>
 						<div class="form-group">
-							<label for="board_name">글쓴이</label> <input name="BOARD_NAME"
-								id="board_name" value="${id }" readOnly type="text" size="10"
+							<label for="board_name">글쓴이</label> <input name="BOARD_ID"
+								id="BOARD_ID" value="${userinfo.user_id}" readOnly type="text" size="10"
 								maxlength="30" class="form-control"
 								placeholder="Enter_board_name">
 
 						</div>
-
 						<div class="form-group">
-							<label for="board_pass">비밀번호</label> <input name="BOARD_PASS"
-								id="board_pass" value="" type="password" size="10"
-								maxlength="20" class="form-control"
-								placeholder="Enter board_pass">
-						</div>
-
-
-						<div class="form-group">
-							<label for="board_subject">제목</label> <input name="BOARD_SUBJECT"
-								id="board_subject" type="text" size="50" maxlength="100"
+							<label for="board_subject">제목</label> <input name="BOARD_TITLE"
+								id="BOARD_TITLE" type="text" size="50" maxlength="100"
 								class="form-control" placeholder="Enter_board_subject">
 
 						</div>
 						<div class="form-group">
 							<label for="board_content">내용</label>
-							<textarea name="BOARD_CONTENT" id="board_content" cols="67"
+							<textarea name="BOARD_CONTENT" id="BOARD_CONTENT" cols="67"
 								rows="10" class="form-control"></textarea>
 
 

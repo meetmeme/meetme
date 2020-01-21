@@ -61,6 +61,12 @@
 		myhome_intro=#{myhome_intro}, myhome_bgm=#{myhome_bgm}
 		where myhome_num=#{myhome_num}
 	</update>
+	
+	<insert id="board_insert" parameterType="board">
+		insert into mm_board
+		values(#{MYHOME_NUM},(select nvl(max(BOARD_NUM),0)+1 from mm_board),#{BOARD_ID},
+		'',#{BOARD_TITLE},#{BOARD_CONTENT},#{BOARD_PHOTO},#{BOARD_ORIGINAL},#{BOARD_DATE})
+	</insert>
 </mapper>
 
 

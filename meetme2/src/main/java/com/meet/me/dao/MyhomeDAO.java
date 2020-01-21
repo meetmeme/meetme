@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.meet.me.domain.Board;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 
@@ -32,5 +33,8 @@ public class MyhomeDAO {
 		sqlSession.update("Myhomes.update", myhome);
 	}
 
-	
+	public int board_insert(Board board) {
+		return sqlSession.insert("Myhomes.board_insert", board);
+	}
+
 }

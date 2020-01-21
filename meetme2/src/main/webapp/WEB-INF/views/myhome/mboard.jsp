@@ -8,62 +8,18 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <jsp:include page="/WEB-INF/views/myhome/mnavi.jsp" />
-
 </head>
 <body>
 	<div id="colorlib-page">
 		<div id="colorlib-main">
-			<section class="ftco-section">
+			<section class="ftco-section" style="padding-top: 10px;">
 				<div class="container">
 					<div class="row">
 						<div>
-							<div>
-								<button type="button"
-									class="btn btn-info float-right p-3 px-xl-4 py-xl-3"
-									style="background: #A390EE">글 쓰 기</button>
-							</div>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="blog-entry ftco-animate">
-
-										<a href="#" class="img"
-											style="background-image: url(resources/images2/image_1.jpg);"></a>
-										<div class="text pt-2 mt-3">
-											<span class="category mb-1 d-block"><a href="#">Technology</a></span>
-											<h3 class="mb-4">
-												<a href="#">The Newest Technology On This Year 2019</a>
-											</h3>
-											<p class="mb-4">Even the all-powerful Pointing has no
-												control about the blind texts it is an almost unorthographic
-												life One day however a small line of blind text by the name
-												of Lorem Ipsum decided to leave for the far World of
-												Grammar.</p>
-											<div class="author mb-4 d-flex align-items-center">
-												<a href="#" class="img"
-													style="background-image: url(resources/images2/person_1.jpg);"></a>
-												<div class="ml-3 info">
-													<span>Written by</span>
-													<h3>
-														<a href="#">Dave Lewis</a>, <span>Nov 28, 2018</span>
-													</h3>
-												</div>
-											</div>
-											<div class="meta-wrap d-md-flex align-items-center">
-												<div class="half order-md-last text-md-right">
-													<p class="meta">
-														<span><i class="icon-heart"></i>3</span> <span><i
-															class="icon-eye"></i>100</span> <span><i
-															class="icon-comment"></i>5</span>
-													</p>
-												</div>
-												<div class="half">
-													<p>
-														<a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">Continue
-															Reading</a>
-													</p>
-												</div>
-											</div>
-										</div>
+										<div id="write"></div>
 									</div>
 								</div>
 
@@ -336,6 +292,16 @@
 
 	<jsp:include page="/WEB-INF/views/myhome/mscript.jsp" />
 	<script>
+		var id_arr = new Array();
+		id_arr = document.location.href.split("?");
+		console.log("dd>>>" + id_arr[1]);
+		console.log("dd2>>>" + "id=${user_id1}");
+		if (id_arr[1] == "id=${user_id1}") {
+			$("#write")
+					.append(
+							"<button type=button id=write_btn class='btn float-right p-3 px-xl-4 py-xl-3'>글 쓰 기</button>");
+		}
+
 		$('button').click(function() {
 			location.href = "BoardWrite.mh?id=" + "${user_id1}";
 		});
