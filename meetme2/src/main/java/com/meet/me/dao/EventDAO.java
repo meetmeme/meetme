@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.meet.me.domain.Event;
+import com.meet.me.domain.User;
 @Repository
 public class EventDAO {
 	@Autowired
@@ -35,6 +36,14 @@ public class EventDAO {
 
 	public List<Event> searchHash(String hashtag) {
 		return sqlSession.selectList("Events.searchHash", hashtag);
+	}
+	
+	public int attend(int event) {
+		return sqlSession.selectOne("Events.attend", event);
+	}
+
+	public List<User> getUser(int event) {
+		return sqlSession.selectList("Events.getUser", event);
 	}
 
 }

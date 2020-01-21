@@ -11,6 +11,24 @@ insert into MM_EVENT values(2, 4,'한강 러닝',
 insert into MM_EVENT values(3, 4,'222한강 러닝',
 '같이 한강 뛰어요!!' , sysdate, 'PM 4','뚝섬 유원지역',5,0);
 
+
+
+delete * from MM_EVENT;
+
 select * from MM_EVENT    WHERE EVENT_TITLE like '%Pub%' or EVENT_CONTENT like '%Pub%' or EVENT_LOCATION     like '%Pub%'
 
 select * from MM_EVENT;
+
+insert into MM_EVENT_ATTENDEE values(3, 3);
+insert into MM_EVENT_ATTENDEE values(3, 4);
+insert into MM_EVENT_ATTENDEE values(3, 5);
+insert into MM_EVENT_ATTENDEE values(3, 6);
+insert into MM_EVENT_ATTENDEE values(3, 7);
+insert into MM_EVENT_ATTENDEE values(3, 8);
+insert into MM_EVENT_ATTENDEE values(3, 9);
+insert into MM_EVENT_ATTENDEE values(3, 10);
+insert into MM_EVENT_ATTENDEE values(3, 11);
+insert into MM_EVENT_ATTENDEE values(3, 12);
+insert into MM_EVENT_ATTENDEE values(3, 13);
+insert into MM_EVENT_ATTENDEE values(3, 14);
+insert into MM_EVENT_ATTENDEE values(5, 3);

@@ -103,7 +103,7 @@
 									data-toggle="modal">join</a></li>
 							</c:if>
 							<c:if test="${!empty user_id1}">
-								<li><a href="#">Create New Group</a></li>
+								<li><a href="new.event">Create New Event</a></li>
 								<li><a id="userMenuBox"><img
 										class="header_profilePic img-circle" alt=""
 										src="resources/images/profile.png"></a> <!-- 사용자 팝업 메뉴 -->

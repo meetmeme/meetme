@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.EventDAO;
 import com.meet.me.domain.Event;
+import com.meet.me.domain.User;
 @Service
 public class EventServiceImpl implements EventService{
 	@Autowired
@@ -42,4 +43,15 @@ public class EventServiceImpl implements EventService{
 	public List<Event> searchHash(String hashtag) {
 		return dao.searchHash(hashtag);
 	}
+
+	@Override
+	public int getAttend(int event) {
+		return dao.attend(event);
+	}
+
+	@Override
+	public List<User> getUser(int event) {
+		return dao.getUser(event);
+	}
+
 }

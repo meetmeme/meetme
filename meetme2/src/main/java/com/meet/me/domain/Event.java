@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Event {
 	private int EVENT_NUM;
+	private int USER_NUM;
 	private int CATEGORY_NUM;
 	private String EVENT_TITLE;
 	private String EVENT_CONTENT;
@@ -13,8 +14,10 @@ public class Event {
 	private String EVENT_LOCATION;
 	private int EVENT_MAX;
 	private int EVENT_PRICE;
-	private String EVENT_SAVE = "https://source.unsplash.com/random/130x130";
-	private String EVENT_ORIGINAL = "https://source.unsplash.com/random/130x130";
+	private String EVENT_SAVE;
+	private String EVENT_ORIGINAL;
+//	private String EVENT_SAVE = "https://source.unsplash.com/random/130x130";
+//	private String EVENT_ORIGINAL = "https://source.unsplash.com/random/130x130";
 
 	// ------DB에 없는 것
 	private List<String> categorys;
@@ -122,4 +125,11 @@ public class Event {
 		EVENT_ORIGINAL = eVENT_ORIGINAL;
 	}
 
+	public int getUSER_NUM() {
+		return USER_NUM;
+	}
+
+	public void setUSER_NUM(int uSER_NUM) {
+		USER_NUM = uSER_NUM;
+	}
 }
