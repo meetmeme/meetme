@@ -30,10 +30,10 @@ public class SearchControlloer {
 
 	@Autowired
 	private EventService eventService;
-	
+
 	@Autowired
 	private MyHomeService mimihomeService;
-	
+
 	@Autowired
 	private HashtagService hashtagService;
 
@@ -82,6 +82,16 @@ public class SearchControlloer {
 			searchResult = eventService.searchDate(keywords);
 		}
 
+
+		for(Event e : searchResult) {
+			String title = e.getEVENT_TITLE();
+			String context = e.getEVENT_CONTENT();
+			if(context.length() > 100)
+				e.setEVENT_CONTENT(context.substring(0, 100)+" ...");
+			if(title.length() > 20)
+				e.setEVENT_TITLE(title.substring(0, 20)+" ...");
+		}
+		
 		System.out.println("----");
 		for (Event e : searchResult) {
 			System.out.print(e.getEVENT_TITLE() + "\t");
@@ -122,10 +132,10 @@ public class SearchControlloer {
 		keywords.put("dateStart", "0000-00-00 00:00:00");
 		keywords.put("searchUser", "%" + searchUser + "%");
 		System.out.println("event : " + keywords);
-		
-		//minihome 검색
+
+		// minihome 검색
 		searchResultMinihome = mimihomeService.search(keywords);
-		
+
 		// event 검색
 		searchResultMiniEvent = eventService.search(keywords);
 
@@ -134,7 +144,16 @@ public class SearchControlloer {
 			System.out.print(e.getUser_name() + "\t");
 		}
 		System.out.println("\n----");
-		
+
+		for (Event e : searchResultMiniEvent) {
+			String title = e.getEVENT_TITLE();
+			String context = e.getEVENT_CONTENT();
+			if (context.length() > 150)
+				e.setEVENT_CONTENT(context.substring(0, 150) + " ...");
+			if (title.length() > 25)
+				e.setEVENT_TITLE(title.substring(0, 25) + " ...");
+		}
+
 		mv.setViewName("search/searchMinihome");
 		mv.addObject("minihome", searchResultMinihome);
 //		mv.addObject("posts", searchResultMiniPost);
@@ -144,32 +163,33 @@ public class SearchControlloer {
 
 		return mv;
 	}
-	
+
 	@GetMapping(value = "/hashtag.sc")
-	public ModelAndView searchHashtag(ModelAndView mv, HttpServletRequest request, @RequestParam("hashtag") String hashtag) {
+	public ModelAndView searchHashtag(ModelAndView mv, HttpServletRequest request,
+			@RequestParam("hashtag") String hashtag) {
 		List<User> searchResultMinihome = new ArrayList<User>();
 //		List<Post> searchResultMiniPost = new ArrayList<Post>();
 		List<Event> searchResultMiniEvent = new ArrayList<Event>();
-		
-		//minihome 검색
+
+		// minihome 검색
 		searchResultMinihome = mimihomeService.searchHash("%" + hashtag + "%");
-		
+
 		// event 검색
 		searchResultMiniEvent = eventService.searchHash("%" + hashtag + "%");
-		
+
 		System.out.println("----");
 		for (User e : searchResultMinihome) {
 			System.out.print(e.getUser_name() + "\t");
 		}
 		System.out.println("\n----");
-		
+
 		mv.setViewName("search/searchHahtag");
 		mv.addObject("minihome", searchResultMinihome);
 //		mv.addObject("posts", searchResultMiniPost);
 		mv.addObject("events", searchResultMiniEvent);
 		mv.addObject("hashtag", hashtag);
-		mv.addObject("HeaderComment", "look who's use hashtag '#"+hashtag+"'!");
-		
+		mv.addObject("HeaderComment", "look who's use hashtag '#" + hashtag + "'!");
+
 		return mv;
 	}
 

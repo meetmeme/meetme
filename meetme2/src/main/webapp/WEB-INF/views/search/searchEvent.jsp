@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <body data-target="#nino-navbar" data-spy="scroll">
@@ -60,7 +61,7 @@
 										<article>
 											<div class="articleThumb">
 												<a href="event.main?event=${event.EVENT_NUM}"><img
-													src="${event.EVENT_SAVE} alt=""></a>
+													src="resources${event.EVENT_SAVE}" alt="" class="square"></a>
 												<div class="date">
 													<span class="number">${event.EVENT_DATE}</span> <span
 														class="text"></span>

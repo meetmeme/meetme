@@ -63,12 +63,16 @@
 								<c:forEach var="home" items="${minihome}">
 									<div class="col-md-4 col-sm-4">
 										<div class="item">
-											<a class="overlay"  onClick="mh_popup('${home.user_id}')" title="go to ${home.user_id}'s minihome"> <span class="content">
-													<i class="mdi mdi-airplay nino-icon"></i> ${home.user_name}
-													<br><span>(${home.user_id})</span>
+											<a class="overlay" onClick="mh_popup('${home.user_id}')"
+												title="go to ${home.user_id}'s minihome"> <span
+												class="content"> <i class="mdi mdi-airplay nino-icon"></i>
+													${home.user_name} <br>
+												<span>(${home.user_id})</span>
 											</span> <img src="resources/upload${home.user_save}" alt="">
 											</a>
 										</div>
+										<p>${home.user_name}</p>
+
 									</div>
 								</c:forEach>
 							</c:if>
@@ -150,7 +154,8 @@
 									<li href="event.main?event=${event.EVENT_NUM}">
 										<div layout="row">
 											<div class="nino-symbol fsr">
-												<i class="mdi mdi-comment-multiple-outline nino-icon"></i>
+												<img
+													src="resources${event.EVENT_SAVE}" alt="" class="square">
 											</div>
 											<div>
 												<p class="quote">${event.EVENT_CONTENT}</p>

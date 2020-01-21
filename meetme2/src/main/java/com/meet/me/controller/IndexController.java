@@ -49,13 +49,24 @@ public class IndexController {
 		List<Event> event = eventService.getIntrestingEvent(id);
 		List<User> RandomUser = userService.getRandomUser();
 		List<Notice> notification = communityService.getNotification(num);
-		
+		List<String> category = eventService.getCategory();
+
 		System.out.println(RandomUser.size());
 		for(User u : RandomUser)
 		System.out.println(u.getUser_id());
 		
+		for(Event e : event) {
+			String title = e.getEVENT_TITLE();
+			String context = e.getEVENT_CONTENT();
+			if(context.length() > 250)
+				e.setEVENT_CONTENT(context.substring(0, 250)+" ...");
+			if(title.length() > 25)
+				e.setEVENT_TITLE(title.substring(0, 25)+" ...");
+		}
+		
 		mv.setViewName("main/main");
 		mv.addObject("event", event);
+		mv.addObject("category", category);
 		mv.addObject("RandomUser", RandomUser);
 		mv.addObject("notification", notification);
 		mv.addObject("note", note);
