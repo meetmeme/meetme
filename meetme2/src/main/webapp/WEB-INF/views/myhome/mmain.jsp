@@ -20,9 +20,9 @@ String id = request.getParameter("id");
 
 		<div id="colorlib-main">
 			<div class="hero-wrap hero-wrap-2 js-fullheight"
-				style="background-image: url(resources/images2/wooden-floor.jpg);"
+				style="background-image: url(resources/images2/whitespace.jpg);"
 				data-stellar-background-ratio="0.5">
-				<div class="overlay"></div>
+				
 				<div
 					class="js-fullheight d-flex justify-content-center align-items-center">
 					<div class="col-md-8 text text-center">

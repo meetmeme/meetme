@@ -26,4 +26,8 @@ public class MyHomeServiceImpl  implements MyHomeService{
 	public List<User> searchHash(String hashtag) {
 		return mdao.searchHash(hashtag);
 	}
+	@Override
+	public void update(MyHome myhome) {
+		mdao.update(myhome);
+	}
 }

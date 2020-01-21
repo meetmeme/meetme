@@ -28,5 +28,9 @@ public class MyhomeDAO {
 		return sqlSession.selectList("Myhomes.searchHash", hashtag);
 	}
 
+	public void update(MyHome myhome) {
+		sqlSession.update("Myhomes.update", myhome);
+	}
+
 	
 }
