@@ -25,46 +25,10 @@
 				<!--Body-->
 				<div class="modal-body" id=noticeModal>
 					<!--Body-->
-					<c:if test="${!empty notification}">
-						<c:forEach items="${notification}" var="notice">
-							<div class="modal-subcontent">
-								<button type="button" class="close white-text deleteNotice">
-									<span aria-hidden="true">&times;</span>
-								</button>
-								<input type="hidden" value="${notice.NOTICE_NUM}">
-								<h5 class="modal-subtitle">
-									<strong>${notice.NOTICE_TITLE}</strong> <i>${notice.NOTICE_DATE}</i>
-								</h5>
-								<div class="modal-subbody">
-									<p>${notice.NOTICE_CONTENT}</p>
-								</div>
-							</div>
-						</c:forEach>
-					</c:if>
-					<c:if test="${empty notification}">
-						<h3>NO NOTIFICATION</h3>
-					</c:if>
+					<!-- script ajax로 내용 넣음 -->
 				</div>
 			</div>
 		</div>
 		<!--/.Content-->
 	</div>
 </div>
-<script>
-	$('.deleteNotice').click(function() {
-		$.ajax({
-			type : 'post',
-			url : 'deleteNotice.cm',
-			dataType : 'json',
-			data : {
-				'notice_num' : $(this).next().val()
-			},
-			success : function(data) {
-				if(data == 1){
-					location.href=window.location.href + '?note=true';
-				}
-			} //end success
-		}); //end ajax
-	});
-
-</script>

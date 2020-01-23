@@ -2,6 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
 <html lang="en">
 <body data-target="#nino-navbar" data-spy="scroll">
@@ -57,14 +58,20 @@
 						<div class="row">
 							<c:if test="${!empty events}">
 								<c:forEach var="event" items="${events}">
+								<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
+								<fmt:formatDate value="${event.EVENT_DATE}" pattern="yyyyMMddHHmm" var="Date"/>
 									<div class="col-md-4 col-sm-4">
-										<article>
-											<div class="articleThumb">
-												<a href="event.main?event=${event.EVENT_NUM}"><img
-													src="resources${event.EVENT_SAVE}" alt="" class="square"></a>
+										<article class="square_article">
+											<div class="articleThumb square_search">
+												<a href="event.main?event=${event.EVENT_NUM}">
+												<img src="resources${event.EVENT_ORIGINAL}" alt=""></a>
 												<div class="date">
-													<span class="number">${event.EVENT_DATE}</span> <span
-														class="text"></span>
+													<c:if test="${Date > nowDate}">
+													<span class="number">${event.EVENT_DATE}</span> 
+													</c:if>
+													<c:if test="${Date <= nowDate}">
+														<span class="number"><del class="gray"><i>${event.EVENT_DATE}</i></del></span> 
+													</c:if>
 												</div>
 											</div>
 											<h3 class="articleTitle">

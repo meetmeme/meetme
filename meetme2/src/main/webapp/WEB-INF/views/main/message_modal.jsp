@@ -14,7 +14,7 @@
 			</div>
 			<!-- body -->
 			<div class="modal-body ui-front">
-				<form name="msgform" action="sendMsg.cm" method="post">
+				<form name="msgform" action="sendMsg.cm" method="post" onsubmit="return check()">
 					<div class="form-group">
 						<b class="articleDesc">To.</b> <input class="form-control"
 							type="text" id="receiver" name="receiver"

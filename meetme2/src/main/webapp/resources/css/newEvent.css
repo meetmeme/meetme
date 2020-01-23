@@ -1,4 +1,8 @@
 @charset "utf-8";
+
+input{
+	border-radius : 5px;
+}
 #foot{
 	width: 100%;
 	border-top : 1px solid #d8d7d7;
@@ -74,7 +78,6 @@
 .input-group{
 	width : 100%;
 }
-
 .nino-sectionHeading {
 	font-weight: 700;
 	font-size: 18px;
@@ -100,4 +103,29 @@
 text-align : left;
 }
 	
+#event_detail{
+	width:100%;
+	height : 20em;
+	resize : none;
+}
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+    appearance: none;
+}
+
+#datepicker{
+	width : 50%;
+	margin : auto;
+}
+
+#time{
+	width : 50%;
+}
+
+
+
+
+
+
 

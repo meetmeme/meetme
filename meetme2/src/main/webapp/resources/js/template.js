@@ -57,7 +57,7 @@ jQuery(function($) {
 	$('.nino-portfolioItems > li').each( function() { $(this).hoverdir(); } );
 	
 	/* =============== PERTTYPHOTO =============== */
-	$("a.nino-prettyPhoto").prettyPhoto();
+	/*$("a.nino-prettyPhoto").prettyPhoto();*/
 	
 	/* =============== SMOOTH SCROOL EFFECT =============== */
 	/*

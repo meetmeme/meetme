@@ -15,7 +15,6 @@
 	<select id="getIntrestingEvent" parameterType="String"
 		resultType="event">
 		select * from MM_EVENT where <![CDATA[EVENT_DATE >= sysdate]]>
-		order by EVENT_DATE
 	</select>
 
 	<select id="getDetail" resultType="Event">
@@ -45,13 +44,14 @@
 				OR
 				upper(e.EVENT_LOCATION) like upper(#{keyword}))
 			</if>
-			<if test="category>'0'">
+			<if test="category!='0'">
 				AND e.CATEGORY_NUM= #{category}
 			</if>
 			<if test="hashtag!='null'">
 				AND u.HASHTAG_NUM = #{hashtag}
 			</if>
 		</where>
+		order by EVENT_DATE
 	</select>
 
 	<select id="searchDate" parameterType="map" resultType="event">
@@ -75,6 +75,18 @@
 		<![CDATA[
 			AND e.EVENT_DATE >= sysdate
 		]]>
+	</select>
+	
+	<select id="searchCat" parameterType="String"
+		resultType="event">
+		select DISTINCT * from MM_EVENT e
+		left join MM_CATEGORY C
+		using(category_num)
+		where upper(category_name) like upper(#{category})
+		<![CDATA[
+			AND e.EVENT_DATE >= sysdate
+		]]>
+		order by e.EVENT_DATE
 	</select>
 	
 	<select id="attend" parameterType="int" resultType="int">

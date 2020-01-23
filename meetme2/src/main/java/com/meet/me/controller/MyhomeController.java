@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.meet.me.domain.Board;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
@@ -198,10 +199,45 @@ public class MyhomeController {
 
 	}
 
-	//글쓰기
+	//글쓰기페이지
 	@GetMapping(value = "/BoardWrite.mh")
-	public String boardwrite() throws Exception {
-		return "myhome/mboard_write";
+	public ModelAndView boardwrite(@RequestParam("id") String m_id, HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
+		String user_id = (String) session.getAttribute("user_id1");
+		int user_num = (int) session.getAttribute("user_num1");
+		MyHome mh_info = mhservice.getinfo(m_id);
+		System.out.println("m_id>>"+m_id);
+		User userinfo = userservice.user_info(user_id);
+		
+		if (userinfo == null) {
+			System.out.println("정보 수집 실패");
+		} else {
+			System.out.println("정보 수집 성공");
+			
+			mv.setViewName("myhome/mboard_write");
+			mv.addObject("userinfo", userinfo);
+			mv.addObject("mh_info", mh_info);
+		}
+		return mv;
+	}
+
+	//글쓰기
+	@RequestMapping(value = "/insert_BoardWrite.mh")
+	public ModelAndView insertboard(HttpSession session, Board board, 
+			ModelAndView mv, HttpServletRequest request) throws Exception {
+		String user_id = (String) session.getAttribute("user_id1");
+		int user_num = (int) session.getAttribute("user_num1");
+		User userinfo = userservice.user_info(user_id);
+		int result1 = mhservice.board_insert(board);
+		
+		if (userinfo == null) {
+			System.out.println("정보 수집 실패");
+		} else {
+			System.out.println("정보 수집 성공");
+			
+			mv.setViewName("myhome/mboard_write");
+			mv.addObject("userinfo", userinfo);
+		}
+		return mv;
 	}
 
 }

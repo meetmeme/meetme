@@ -28,5 +28,10 @@ public class CommunityServiceImpl implements CommunityService{
 	public int checkNotice(String notice_num) {
 		return dao.checkNotice(notice_num);
 	}
+
+	@Override
+	public void addNotification(int user_num, String title, String content) {
+		dao.addNotification(user_num, title, content);
+	}
 	
 }

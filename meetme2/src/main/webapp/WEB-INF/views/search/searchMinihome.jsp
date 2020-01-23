@@ -68,7 +68,7 @@
 												class="content"> <i class="mdi mdi-airplay nino-icon"></i>
 													${home.user_name} <br>
 												<span>(${home.user_id})</span>
-											</span> <img src="resources/upload${home.user_save}" alt="">
+											</span> <img src="resources/upload${home.user_original}" alt="">
 											</a>
 										</div>
 										<p>${home.user_name}</p>
@@ -155,7 +155,7 @@
 										<div layout="row">
 											<div class="nino-symbol fsr">
 												<img
-													src="resources${event.EVENT_SAVE}" alt="" class="square">
+													src="resources${event.EVENT_ORIGINAL}" alt="" class="square">
 											</div>
 											<div>
 												<p class="quote">${event.EVENT_CONTENT}</p>
