@@ -88,7 +88,6 @@ public class UserController {
 			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
 //			String saveFolder = "C:\\Users\\user1\\git\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
 			String homedir = saveFolder + year + "-" + month + "-" + date;
-			System.out.println(homedir);
 			File path1 = new File(homedir);
 			if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
 				path1.mkdir(); // 없을 경우 경로 만들기
@@ -98,14 +97,10 @@ public class UserController {
 			int random = r.nextInt(100000000);
 
 			int index = fileName.lastIndexOf(".");
-			System.out.println("index = " + index);
 			String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
-			System.out.println("fileExtension = " + fileExtension);
 			String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-			System.out.println("refileName = " + refileName);
 			// 오라클 디비에 저장될 파일명
 			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-			System.out.println("fileDBName = " + fileDBName);
 			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
 			uploadfile.transferTo(new File(saveFolder + fileDBName));
 			// 바뀐 파일명으로 저장
@@ -145,13 +140,9 @@ public class UserController {
 	@RequestMapping(value = "/emailConfirm.net", method = RequestMethod.GET)
 	public String emailConfirm(User user, String user_email, String user_id, Model model) throws Exception { // 이메일 인증
 																												// 확인창
-		System.out.println("user_email : " + user_email);
-		System.out.println("user_id : " + user_id);
-
 		user = userService.getNum(user_id);
 
 		user_email = user.getUser_email();
-		System.out.println("user_email2 : " + user_email);
 
 		userService.userAuth(user_email);
 		model.addAttribute("user_email", user_email);
@@ -197,7 +188,6 @@ public class UserController {
 				Cookie savecookie = new Cookie("saveid", user_id);
 				if (!u.equals("")) {
 					savecookie.setMaxAge(60 * 60);
-					System.out.println("쿠키저장 : 60*60초");
 				} else {
 					System.out.println("쿠키저장 : 0");
 					savecookie.setMaxAge(0);

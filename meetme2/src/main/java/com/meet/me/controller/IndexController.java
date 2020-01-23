@@ -40,14 +40,10 @@ public class IndexController {
 		
 		if(session.getAttribute("user_id1") != null)
 			user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
-		System.out.println(user_num);
 		List<Event> event = eventService.getIntrestingEvent(id);
 		List<User> RandomUser = userService.getRandomUser(user_num);
 		List<String> category = eventService.getCategory();
 
-		System.out.println(RandomUser.size());
-		for(User u : RandomUser)
-		System.out.println(u.getUser_id());
 		
 		for(Event e : event) {
 			String title = e.getEVENT_TITLE();

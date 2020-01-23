@@ -26,9 +26,8 @@ public class EventController {
 		int count = eventService.getAttend(event);
 		List<User> u = eventService.getUser(event);
 		if(e == null) {
-			System.out.println("detail 없어");
+			System.out.println("detail 실패");
 		}else {
-			System.out.println("detail 성공");
 			mv.setViewName("event/eventDetail");
 			mv.addObject("event",e);
 			mv.addObject("count",count);

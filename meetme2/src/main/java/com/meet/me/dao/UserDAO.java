@@ -71,7 +71,6 @@ public class UserDAO {
 	}
 
 	public List<User> getFriends(Map<String, String> map) {
-		System.out.println(map);
 		return sqlSession.selectList("Users.getFriends", map);
 	}
 
