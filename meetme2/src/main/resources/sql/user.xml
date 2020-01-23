@@ -6,11 +6,12 @@
 		select *
 		from mm_user where user_id = #{user_id}
 	</select>
-	
+
 	<select resultType="User" parameterType="String" id="emailcheck">
-		select * from mm_user where user_email = #{user_email}
+		select *
+		from mm_user where user_email = #{user_email}
 	</select>
-	
+
 
 	<insert parameterType="User" id="insert">
 		insert into mm_user
@@ -56,18 +57,18 @@
 	<select id="getSearchList" parameterType="map" resultType="user">
 		select *
 		from (select rownum rnum, b.*
-			from (select * from mm_user
-				where user_id != 'admin'
-				<if test="search_field!=null">
-					and
-					<choose>
-						<when test="search_field=='user_num'">user_num</when>
-						<when test="search_field=='user_id'">user_id</when>
-						<when test="search_field=='user_name'">user_name</when>
-					</choose>
-					like #{search_word}
-				</if>
-				order by user_num desc)b
+		from (select * from mm_user
+		where user_id != 'admin'
+		<if test="search_field!=null">
+			and
+			<choose>
+				<when test="search_field=='user_num'">user_num</when>
+				<when test="search_field=='user_id'">user_id</when>
+				<when test="search_field=='user_name'">user_name</when>
+			</choose>
+			like #{search_word}
+		</if>
+		order by user_num desc)b
 		)
 		where rnum &gt;=#{start} and rnum &lt;=
 		#{end}
@@ -93,35 +94,53 @@
 	</delete>
 
 	<select id="getFriends" parameterType="map" resultType="user">
-		SELECT DISTINCT u.*
+		SELECT
+		DISTINCT u.*
 		FROM MM_FOLLOWS f
 		JOIN MM_USER u
-		on (u.USER_NUM = f.FOLLOWING_NUM)
-		WHERE (upper(USER_ID) LIKE upper(#{title}) OR upper(USER_NAME) LIKE upper(#{title}))
+		on (u.USER_NUM =
+		f.FOLLOWING_NUM)
+		WHERE (upper(USER_ID) LIKE upper(#{title}) OR
+		upper(USER_NAME) LIKE upper(#{title}))
 		AND F.USER_NUM = #{userNum}
 	</select>
-	
-	<select id="getRandomUser" resultType="user">
-		SELECT * FROM MM_USER SAMPLE(20)
+
+	<select id="getRandomUser" parameterType="String" resultType="user">
+		<![CDATA[select * from (select * from MM_USER where USER_ID != 'admin' order by dbms_random.value) where rownum < 4]]>
+			AND USER_ID != #{user_num}
 	</select>
 	<!-- sample(##) 테이블이 가지고 있는 수의 ##% -->
-	
+
 	<update id="update" parameterType="user">
 		update mm_user set
-		user_name=#{user_name}, user_pass=#{user_pass}, 
+		user_name=#{user_name}, user_pass=#{user_pass},
 		user_email=#{user_email}, user_gender=#{user_gender},
 		user_age=#{user_age}, user_city=#{user_city},
-		user_save=#{user_save}, user_original=#{user_original}
+		user_save=#{user_save},
+		user_original=#{user_original}
 		where user_id=#{user_id}
 	</update>
-	
+
 	<insert id="follow" parameterType="map">
-		insert into MM_FOLLOWS values(#{userKey}, ${following})
+		insert into MM_FOLLOWS
+		values(#{userKey}, ${following})
 	</insert>
-	
+
 	<select id="followCheck" parameterType="map" resultType="String">
-		select count(*) from MM_FOLLOWS where USER_NUM = #{userKey} and FOLLOWING_NUM = #{following}
+		select
+		count(*) from MM_FOLLOWS where USER_NUM = #{userKey} and FOLLOWING_NUM
+		= #{following}
 	</select>
+
+	<select id="user_info_email" parameterType="String"
+		resultType="user">
+		select * from MM_USER join USERAUTH using(USER_EMAIL) where user_email =
+		#{user_email}
+	</select>
+	
+	<update id="setPassword" parameterType="user">
+		update MM_USER set USER_PASS = #{user_pass} where USER_EMAIL = #{user_email}
+	</update>
 
 </mapper>
 
