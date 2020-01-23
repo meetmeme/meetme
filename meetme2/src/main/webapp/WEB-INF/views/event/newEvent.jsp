@@ -5,6 +5,8 @@
 <html lang="en">
 <jsp:include page="../main/header.jsp" />
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeltxv7nKepg24QdvqCG60cnwT9H5U5pY&libraries=places" async defer></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css">
 
@@ -13,6 +15,9 @@
 
 <script src="resources/js/event/newEvent.js"></script>
 <link rel="stylesheet" href="resources/css/newEvent.css?after">
+
+
+
 
 <body data-target="#nino-navbar" data-spy="scroll">
 	
@@ -33,29 +38,30 @@
 				
 				<h2 class="nino-sectionHeading">detail</h2>
        			<div class="input-group input-group-lg">
-					<textarea rows="20" class="form-control" cols="120" id="event_detail" name="event_detail" placeholder="Enter event detail"></textarea>
+					<textarea rows="20" class="form-control" cols="120" id="event_detail" name="event_detail" placeholder="Enter event detail" required></textarea>
 				</div>
 				
 				<h2 class="nino-sectionHeading">when</h2>
        			<div class="input-group input-group-lg">
-					<input id="datepicker" class="form-control" type="date">
-					<input class="form-control" type="text" name="time" value="" placeholder="시간선택"  id="time">
-
+					<input id="event_date" name="event_date" class="form-control" type="date" required>
+					<input class="form-control" type="text" name="event_time" value="" placeholder="time"  id="event_time" required>
 				</div>
 				
 				<h2 class="nino-sectionHeading">where</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+					<input type="text" class="form-control" name="event_location" id="event_location" placeholder="Enter place" required>
 				</div>
+				<input class="field" id="lat" /> <input class="field" id="lng" />
+
 				
 				<h2 class="nino-sectionHeading">how many people</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+					<input type="number" class="form-control" name="event_people" id="event_people" required>
 				</div>
 				
-				<h2 class="nino-sectionHeading">cost</h2>
+				<h2 class="nino-sectionHeading">cost(￦)</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+					<input type="number" class="form-control" name="event_cost" id="event_cost" value="0">
 				</div>
 				
 				<h2 class="nino-sectionHeading">Related photos</h2>
@@ -72,113 +78,17 @@
 					<input type="hidden" class="form-control" name="event_title" placeholder="Enter title" required>
 					<!-- user_num 넘기기 -->
 				</div>
-				
-				
+				<br>
+				<div class="input-group input-group-lg">
+					<button type="submit" class="submit">create</button>
+				</div>				
        		</form>
        		
-       		
-       		
-       		
-			
+       		<br>
+       		<br>
 		</div>
 	</section>	<!--/#nino-portfolio-->
 	
-	
-	<section id="nino-portfolio">
-		<div class="container">
-			<h2 class="nino-sectionHeading">
-				<span class="nino-subHeading">category</span> Browse events by
-				category
-			</h2>
-			<p class="nino-sectionDesc">Attend local events to meet people,
-				try something new, or do more of what you love</p>
-		</div>
-		<div class="sectionContent">
-			<ul class="nino-portfolioItems">
-				<c:forEach var="cat" items="${category}">
-					<li class="item"><a class="nino-prettyPhoto"
-						rel="prettyPhoto[gallery1]" title="Development Mobile"
-						href="resources/image/category_main/${cat.CATEGORY_NAME}.jpg">
-							<img src="resources/image/category_main/${cat.CATEGORY_NAME}.jpg" />
-							<div class="overlay">
-								<div class="content">
-									<i class="mdi mdi-cube-outline nino-icon"></i>
-									<h4 class="title">${cat.CATEGORY_NAME}</h4>
-									<span class="desc">무슨 내용을 넣을까요?</span>
-								</div>
-							</div>
-					</a></li>
-				</c:forEach>
-			</ul>
-		</div>
-	</section>	<!--/#nino-portfolio-->
-	
-	
-	<section id="nino-portfolio">
-		<div class="container">
-			<h2 class="nino-sectionHeading">
-				<span class="nino-subHeading">category</span> Browse events by
-				category
-			</h2>
-			<p class="nino-sectionDesc">Attend local events to meet people,
-				try something new, or do more of what you love</p>
-		</div>
-		<div class="sectionContent">
-			<ul class="nino-portfolioItems">
-				<c:forEach var="cat" items="${category}">
-					<li class="item"><a class="nino-prettyPhoto"
-						rel="prettyPhoto[gallery1]" title="Development Mobile"
-						href="resources/image/category_main/${cat.CATEGORY_NAME}.jpg">
-							<img src="resources/image/category_main/${cat.CATEGORY_NAME}.jpg" />
-							<div class="overlay">
-								<div class="content">
-									<i class="mdi mdi-cube-outline nino-icon"></i>
-									<h4 class="title">${cat.CATEGORY_NAME}</h4>
-									<span class="desc">무슨 내용을 넣을까요?</span>
-								</div>
-							</div>
-					</a></li>
-				</c:forEach>
-			</ul>
-		</div>
-	</section>	<!--/#nino-portfolio-->
-
-
-
-  <!-- Our Team
-    ================================================== -->
-	<section id="nino-ourTeam">
-		<div class="container">
-			<h2 class="nino-sectionHeading">
-				<span class="nino-subHeading">M&Ms</span> Explore people
-			</h2>
-			<p class="nino-sectionDesc">
-				See who will be your colleague!<br>				 
-			</p>
-			<div class="sectionContent">
-				<div class="row nino-hoverEffect">
-					<c:forEach var="user" items="${RandomUser}">
-					<div class="col-md-4 col-sm-4">
-						<div class="item">
-							<div class="overlay" onClick="mh_popup('${user.user_id}')" title="go to ${user.user_id}'s minihome">
-								<div class="content">
-									<a href="#" class="nino-icon" title="follow ${user.user_id}!"><i class="mdi mdi-bookmark-plus-outline"></i></a>
-								</div>
-								<img src="resources/${user.user_save}">
-							</div>
-						</div>
-						<div class="info">
-							<h4 class="name">${user.user_id}</h4>
-							<span class="regency">${user_user_name}</span>
-						</div>
-					</div>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</section><!--/#nino-ourTeam-->
-
-
 	<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

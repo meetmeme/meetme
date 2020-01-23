@@ -114,16 +114,23 @@ input[type="date"]::-webkit-inner-spin-button {
     appearance: none;
 }
 
-#datepicker{
+#event_date{
 	width : 50%;
 	margin : auto;
 }
 
-#time{
+#event_time{
 	width : 50%;
 }
 
-
+.submit{
+	margin : 0 41%;
+	width : 150px;
+	height : 100px;
+	font-family: 'Kaushan Script', cursive;
+	font-size: 50px;
+	color: rgba(241, 114, 114, 0.96);
+}
 
 
 
