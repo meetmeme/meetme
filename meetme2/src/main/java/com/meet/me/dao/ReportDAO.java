@@ -29,6 +29,15 @@ public class ReportDAO {
 		return sqlSession.selectList("Report.eventReport");
 	}
 
+	public void alert(int user_num) {
+		sqlSession.insert("Report.alert", user_num);
+	}
+
+	public void addCheck(int report_num) {
+		sqlSession.update("Report.addCheck", report_num);
+	}
+
+
 
 
 }

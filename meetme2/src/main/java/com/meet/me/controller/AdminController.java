@@ -191,5 +191,23 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping(value="/user_alert.ad", method=RequestMethod.GET)
+	public String user_alert(int user_num, int report_num, HttpServletResponse response) throws Exception{
+		reportService.alert(user_num);
+		reportService.addCheck(report_num);
+	
+		return "redirect:report.ad";
+	}
+	
+	@RequestMapping(value="/report_delete.ad", method=RequestMethod.GET)
+	public String report_delete(int user_num, int event_num, HttpServletResponse response) throws Exception{
+		System.out.println("user_num : " + user_num);
+		System.out.println("event_num : " + event_num);
+		
+		reportService.delUser(user_num);
+		reportService.delEvent(event_num);
+	
+		return "redirect:report.ad";
+	}
 		
 }

@@ -38,5 +38,28 @@ public class ReportServiceImpl implements ReportService{
 		return dao.eventReport();
 	}
 
+	@Override
+	public void alert(int user_num) {
+		dao.alert(user_num);
+	}
+
+	@Override
+	public void addCheck(int report_num) {
+		dao.addCheck(report_num);
+	}
+
+	@Override
+	public void delUser(int user_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delEvent(int event_num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 	
 }

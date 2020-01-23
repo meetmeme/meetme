@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
 				+ "<span>직접 만나 함께하는 즐거움!! <br>로컬 이벤트에 참여하고 사람들과 좋아하는 일을 함께하며 <br>새로운 경험을 즐겨보세요👏👏</span><br><br><hr>" 
 				+ "<a href='localhost:8088/me/emailConfirm.net?user_id="
 				+ user.getUser_id() + "&key=" + key + "' target='_blank'>👉🏻이메일 인증하기👈🏻</a>"
+				+ "<br><a href='localhost:8088/me/main.index'>👉🏻Meet Me! 바로가기👈🏻</a>"
 				+ "<hr></div>");
 		sendMail.setFrom("account@meetme.com", "MeetMe"); // 보낸이
 		sendMail.setTo(user.getUser_email()); // 받는이

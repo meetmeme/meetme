@@ -33,6 +33,18 @@
 		on mm_report.event_num=mm_event.event_num
 		order by report_date desc
 	</select>
+	
+	<insert id="alert" parameterType="int">
+		insert into mm_notice
+		values ((select nvl(max(notice_num),0)+1 from MM_NOTICE), #{user_num},
+		'경고', '회원님은 적절하지 않은 게시물이나 이벤트를 등록하였습니다. 확인 후 삭제 조치 바랍니다.',sysdate,0)
+	</insert>
+	
+	<update id="addCheck" parameterType="int">
+		update mm_report
+		set report_ck = 1
+		where report_num = #{report_num}
+	</update>
 </mapper>
 
 
