@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Dash;
 import com.meet.me.domain.Follows;
+import com.meet.me.domain.Report;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 import com.meet.me.service.DashService;
@@ -75,6 +76,7 @@ public class AdminController {
 				day[i-1] = Integer.toString(i);
 			}
 		}
+		
 		
 		List<Integer> dayCount = new ArrayList<Integer>();
 		int count3 = 0;
@@ -176,35 +178,73 @@ public class AdminController {
 		eventCount = reportService.eventCount();
 		
 		//신고 디테일
-		List<String> userReport = new ArrayList<String>();
-		List<String> eventReport = new ArrayList<String>();
+		List<Report> userReport = new ArrayList<Report>();
+		List<Report> eventReport = new ArrayList<Report>();
 		userReport = reportService.userReport();
 		eventReport = reportService.eventReport();
 		
+		//경고 수
+		List<Report> u_alertC = new ArrayList<Report>();
+		List<Report> e_alertC = new ArrayList<Report>();
 		
+		u_alertC = reportService.userAlertCount();
+		e_alertC = reportService.eventAlertCount();
+		
+		//경고 3회이상
+		List<String> list1 = new ArrayList<String>();
+		for(Report r1 : u_alertC) {
+			if(r1.getU()>2 && r1.getUser_num()!=0) {
+				String user_id = reportService.getId(r1.getUser_num());
+				list1.add(user_id);
+			}
+		}
+		
+		List<String> list2 = new ArrayList<String>();
+		for(Report r2 : e_alertC) {
+			if(r2.getE()>2 && r2.getEvent_num()!=0) {
+				String event_title = reportService.getEvent(r2.getEvent_num());
+				list2.add(event_title);
+			}
+		}
+		
+		mv.addObject("u_alertC", u_alertC);
+		mv.addObject("e_alertC", e_alertC);
 		mv.addObject("userCount", userCount);
 		mv.addObject("eventCount", eventCount);
 		mv.addObject("userReport", userReport);
 		mv.addObject("eventReport", eventReport);
+		mv.addObject("userList", list1);
+		mv.addObject("eventList", list2);
 		mv.setViewName("admin/report");
 		mv.addObject("HeaderComment", "Admin Page");
 		return mv;
 	}
 	
 	@RequestMapping(value="/user_alert.ad", method=RequestMethod.GET)
-	public String user_alert(int user_num, int report_num, HttpServletResponse response) throws Exception{
-		reportService.alert(user_num);
+	public String user_alert(int user_num, int report_num) throws Exception{
+		reportService.u_alert(user_num);
 		reportService.addCheck(report_num);
 	
 		return "redirect:report.ad";
 	}
 	
-	@RequestMapping(value="/report_delete.ad", method=RequestMethod.GET)
-	public String report_delete(int user_num, int event_num, HttpServletResponse response) throws Exception{
-		System.out.println("user_num : " + user_num);
-		System.out.println("event_num : " + event_num);
-		
+	@RequestMapping(value="/event_alert.ad", method=RequestMethod.GET)
+	public String event_alert(int event_num, int report_num) throws Exception{
+		reportService.e_alert(event_num);
+		reportService.addCheck(report_num);
+	
+		return "redirect:report.ad";
+	}
+	
+	@RequestMapping(value="/userDel.ad", method=RequestMethod.GET)
+	public String userDel(int user_num) throws Exception{
 		reportService.delUser(user_num);
+	
+		return "redirect:report.ad";
+	}
+	
+	@RequestMapping(value="/eventDel.ad", method=RequestMethod.GET)
+	public String eventDel(int event_num) throws Exception{
 		reportService.delEvent(event_num);
 	
 		return "redirect:report.ad";

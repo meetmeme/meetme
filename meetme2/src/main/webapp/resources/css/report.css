@@ -1,16 +1,62 @@
 @charset "UTF-8";
 
 .userReport, .eventReport{
-	float : left;
+	margin : 20px;
+	display : inline-block;
 	width : 45%;
-	text-align: center;
-	
 }
 
 caption {
 	font-size : 20px;
 	font-weight: bold;
+	margin-bottom : 10px;
+	background: skyblue;
+	padding : 10px;
 }
 .userReport td, .eventReport td {
 	padding : 10px;
 } 
+
+.userlist, .eventlist{
+	border : 1px solid black;
+	padding : 10px;
+}
+
+.userTable,.eventTable {
+	border : 1px solid black;
+	margin-top : 20px;
+}
+
+.userTable{
+	width : 100%
+}
+
+tr:first-child{
+	border : 1px solid black;
+}
+
+td:first-child{
+	width : 15%
+}
+td:nth-child(2), td:nth-child(3){
+	width : 25%
+}
+td:nth-child(4){
+	width : 15%
+}
+td:nth-child(5),td:nth-child(6){
+	width : 10%
+}
+
+button {
+	border : none;
+	border-radius: 5px;
+	width : 50px;
+}
+
+.d1,.d2{
+	background: black;
+}
+.w1, .w2{
+	background: red;
+}
