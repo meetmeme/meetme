@@ -32,41 +32,71 @@
 		<where>
 			<if test="keyword!='%null%'">
 				(upper(MYHOME_INTRO) like upper(#{keyword})
-				OR upper(USER_ID) like upper(#{keyword})
-				OR upper(USER_NAME) like upper(#{keyword}))
+				OR
+				upper(USER_ID) like upper(#{keyword})
+				OR upper(USER_NAME) like
+				upper(#{keyword}))
 			</if>
 			<if test="hashtag!='null'">
 				AND u.HASHTAG_NUM = #{hashtag}
 			</if>
 			<if test="searchUser!='%null%'">
 				AND (upper(USER_ID) like upper(#{searchUser})
-				OR upper(USER_NAME) like upper(#{searchUser}))
+				OR
+				upper(USER_NAME) like upper(#{searchUser}))
 			</if>
 		</where>
 	</select>
-	
+
 	<select id="searchHash" parameterType="String" resultType="user">
 		select u.* from MM_USER u
 		left join MM_MYHOME m
-		on(m.USER_NUM = u.USER_NUM)
+		on(m.USER_NUM =
+		u.USER_NUM)
 		left join MM_HASHTAG_USE
 		using(MYHOME_NUM)
-		left join MM_HASHTAG
+		left join
+		MM_HASHTAG
 		using(HASHTAG_NUM)
-		where upper(HASHTAG_TITLE) like #{hashtag} 
+		where upper(HASHTAG_TITLE) like #{hashtag}
 	</select>
-	
+
 	<update id="update" parameterType="myhome">
 		update mm_myhome set
 		myhome_intro=#{myhome_intro}, myhome_bgm=#{myhome_bgm}
-		where myhome_num=#{myhome_num}
+		where
+		myhome_num=#{myhome_num}
 	</update>
-	
+
+	<!-- <insert id="board_insert" parameterType="board"> insert into mm_board 
+		values(#{MYHOME_NUM},(select nvl(max(BOARD_NUM),0)+1 from mm_board),#{BOARD_ID}, 
+		'',#{BOARD_TITLE},#{BOARD_CONTENT},#{BOARD_ORIGINAL},#{BOARD_DATE}) </insert> -->
+
 	<insert id="board_insert" parameterType="board">
-		insert into mm_board
-		values(#{MYHOME_NUM},(select nvl(max(BOARD_NUM),0)+1 from mm_board),#{BOARD_ID},
-		'',#{BOARD_TITLE},#{BOARD_CONTENT},#{BOARD_PHOTO},#{BOARD_ORIGINAL},#{BOARD_DATE})
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="BOARD_NUM">
+			select nvl(max(BOARD_NUM),0)+1 from MM_BOARD
+		</selectKey>
+		insert into MM_BOARD values(#{MYHOME_NUM},#{BOARD_NUM},
+		#{BOARD_ID},'',#{BOARD_TITLE},#{BOARD_CONTENT},#{BOARD_PHOTO,
+		jdbcType=VARCHAR},
+		#{BOARD_ORIGINAL, jdbcType=VARCHAR},sysdate)
 	</insert>
+
+	<select id="count" parameterType="String" resultType="int">
+		select count(*) from mm_board where BOARD_ID=#{u_id}
+	</select>
+
+	<select id="list" parameterType="java.util.Map"
+		resultType="Board">
+		select * from (select
+		rownum rnum, b.* from (select * from mm_board where
+		BOARD_ID=#{u_id}
+		order by BOARD_NUM desc) b) where rnum &gt;=#{start}
+		and rnum &lt;=#{end}
+	</select>
+
+
 </mapper>
 
 

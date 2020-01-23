@@ -1,6 +1,7 @@
 package com.meet.me.dao;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,8 +34,20 @@ public class MyhomeDAO {
 		sqlSession.update("Myhomes.update", myhome);
 	}
 
-	public int board_insert(Board board) {
-		return sqlSession.insert("Myhomes.board_insert", board);
+//	public int board_insert(Board board) {
+//		return sqlSession.insert("Myhomes.board_insert", board);
+//	}
+
+	public void insertBoard(Board board) {
+		sqlSession.insert("Myhomes.board_insert", board);
+	}
+
+	public int getListCount(String u_id) {
+		return sqlSession.selectOne("Myhomes.count", u_id);
+	}
+
+	public List<Board> getBoardList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Myhomes.list", map);
 	}
 
 }

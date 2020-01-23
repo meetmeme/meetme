@@ -97,11 +97,11 @@ public class MyhomeController {
 	public String mevent() {
 		return "myhome/mevent";
 	}
-
-	@RequestMapping(value = "/mboard.mh", method = RequestMethod.GET)
-	public String mboard() {
-		return "myhome/mboard";
-	}
+//
+//	@RequestMapping(value = "/mboard.mh", method = RequestMethod.GET)
+//	public String mboard() {
+//		return "myhome/mboard";
+//	}
 
 	// 프로필 수정
 	@RequestMapping(value = "/updateProfile.mh", method = RequestMethod.POST)
@@ -184,40 +184,5 @@ public class MyhomeController {
 
 	}
 
-	//글쓰기페이지
-	@GetMapping(value = "/BoardWrite.mh")
-	public ModelAndView boardwrite(@RequestParam("id") String m_id, HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
-		String user_id = (String) session.getAttribute("user_id1");
-		int user_num = (int) session.getAttribute("user_num1");
-		MyHome mh_info = mhservice.getinfo(m_id);
-		User userinfo = userservice.user_info(user_id);
-		
-		if (userinfo == null) {
-			System.out.println("정보 수집 실패");
-		} else {
-			mv.setViewName("myhome/mboard_write");
-			mv.addObject("userinfo", userinfo);
-			mv.addObject("mh_info", mh_info);
-		}
-		return mv;
-	}
-
-	//글쓰기
-	@RequestMapping(value = "/insert_BoardWrite.mh")
-	public ModelAndView insertboard(HttpSession session, Board board, 
-			ModelAndView mv, HttpServletRequest request) throws Exception {
-		String user_id = (String) session.getAttribute("user_id1");
-		int user_num = (int) session.getAttribute("user_num1");
-		User userinfo = userservice.user_info(user_id);
-		int result1 = mhservice.board_insert(board);
-		
-		if (userinfo == null) {
-			System.out.println("정보 수집 실패");
-		} else {
-			mv.setViewName("myhome/mboard_write");
-			mv.addObject("userinfo", userinfo);
-		}
-		return mv;
-	}
 
 }

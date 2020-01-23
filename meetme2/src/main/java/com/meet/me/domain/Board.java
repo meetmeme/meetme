@@ -2,6 +2,8 @@ package com.meet.me.domain;
 
 import java.sql.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Board {
 	private int MYHOME_NUM;
 	private int BOARD_NUM;
@@ -9,9 +11,16 @@ public class Board {
 	private String BOARD_PASS;
 	private String BOARD_TITLE;
 	private String BOARD_CONTENT;
+	private MultipartFile uploadfile;
 	private String BOARD_PHOTO;
 	private String BOARD_ORIGINAL;
 	private Date BOARD_DATE;
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
 	public int getMYHOME_NUM() {
 		return MYHOME_NUM;
 	}

@@ -1,4 +1,3 @@
-	<script src="resources/js2/jquery.min.js"></script>
 	<script src="resources/js2/jquery-migrate-3.0.1.min.js"></script>
 	<script src="resources/js2/popper.min.js"></script>
 	<script src="resources/js2/bootstrap.min.js"></script>
