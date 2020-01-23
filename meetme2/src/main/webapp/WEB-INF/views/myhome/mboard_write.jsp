@@ -14,15 +14,15 @@
 <%
 String id = request.getParameter("id"); 
 %>
-<input type="hidden" name="id" value="<%=id %>">
 	<div id="colorlib-page">
 		<div id="colorlib-main">
 			<div class="container">
 				<section class="ftco-section">
-					<form action="insert_BoardWrite.mh" method="post"
+					<form action="BoardAddAction.mh" method="post"
 						enctype="multipart/form-data" name="boardform">
+						<input type="hidden" name="id" value="<%=id %>">
 						<input type="hidden" name="MYHOME_NUM" value="${mh_info.myhome_num}">
-						<h1>게시판 작성</h1>
+						<h1>게시글 작성</h1>
 						<div class="form-group">
 							<label for="board_name">글쓴이</label> <input name="BOARD_ID"
 								id="BOARD_ID" value="${userinfo.user_id}" readOnly type="text" size="10"
@@ -62,10 +62,10 @@ String id = request.getParameter("id");
 	</div>
 
 	<jsp:include page="/WEB-INF/views/myhome/mscript.jsp" />
-	<script>
+<!-- 	<script>
 		$('button').click(function() {
 			location.href = "BoardWrite.mh";
 		});
-	</script>
+	</script> -->
 </body>
 </html>

@@ -14,5 +14,8 @@ public interface MyHomeService {
 	public List<User> search(Map<String, String> keywords);
 	public List<User> searchHash(String hashtag);
 	public void update(MyHome myhome);
-	public int board_insert(Board board);	
+//	public int board_insert(Board board);
+	public void insertBoard(Board board);
+	public int getListCount(String u_id);
+	public List<Board> boardlist(int page, int limit, String u_id);	
 }

@@ -31,7 +31,6 @@ String id = request.getParameter("id");
 						<div class="desc">
 							<h2 class="subheading">Hello I'm</h2>
 							<h1 class="mb-4">${m_info.user_id}</h1>
-							<h1 class="mb-4">${m_info.user_num}</h1>
 							<p class="mb-4">${mh_info.myhome_intro}</p>
 							<ul class="ftco-social mt-3">
 
