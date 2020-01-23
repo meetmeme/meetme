@@ -78,8 +78,8 @@ public class UserDAO {
 	public User isEmail(String user_email) {
 		return sqlSession.selectOne("Users.emailcheck", user_email);
 	}
-	public List<User> getRandomUser() {
-		return sqlSession.selectList("Users.getRandomUser");
+	public List<User> getRandomUser(String user_num) {
+		return sqlSession.selectList("Users.getRandomUser", user_num);
 	}
 
 	public List<User_interests> getInterestsNums(int num) {
@@ -96,5 +96,13 @@ public class UserDAO {
 
 	public int followCheck(Map<String, String> userKey) {
 		return Integer.parseInt(sqlSession.selectOne("Users.followCheck", userKey));
+	}
+
+	public User user_info_email(String user_email) {
+		return sqlSession.selectOne("Users.user_info_email",user_email);
+	}
+
+	public int setPassword(User u) {
+		return sqlSession.update("Users.setPassword", u);
 	}
 }

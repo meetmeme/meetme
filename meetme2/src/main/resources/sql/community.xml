@@ -10,7 +10,7 @@
 
 	<select id="getNotification" parameterType="String"
 		resultType="notice">
-		select * from MM_NOTICE where USER_NUM = #{id} AND NOTICE_CK = 0
+		select * from MM_NOTICE where USER_NUM = #{id} AND NOTICE_CK = 0 order by NOTICE_DATE desc
 	</select>
 	
 	<update id="checkNotice" parameterType="String">

@@ -14,7 +14,7 @@
 
 	<select id="getIntrestingEvent" parameterType="String"
 		resultType="event">
-		select * from MM_EVENT where <![CDATA[EVENT_DATE >= sysdate]]>
+		select * from MM_EVENT where <![CDATA[EVENT_DATE >= sysdate]]> order by event_date
 	</select>
 
 	<select id="getDetail" resultType="Event">
@@ -51,7 +51,7 @@
 				AND u.HASHTAG_NUM = #{hashtag}
 			</if>
 		</where>
-		order by EVENT_DATE
+		order by e.EVENT_DATE
 	</select>
 
 	<select id="searchDate" parameterType="map" resultType="event">
@@ -61,6 +61,7 @@
 		e.EVENT_DATE >= TO_DATE(#{dateStart,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
 		AND e.EVENT_DATE <= TO_DATE(#{dateEnd,jdbcType=DATE} , 'YYYY-MM-DD HH24:MI:SS')
 		]]>
+		order by e.event_date
 	</select>
 
 	<select id="searchHash" parameterType="String"
@@ -75,6 +76,7 @@
 		<![CDATA[
 			AND e.EVENT_DATE >= sysdate
 		]]>
+		order by e.event_date
 	</select>
 	
 	<select id="searchCat" parameterType="String"

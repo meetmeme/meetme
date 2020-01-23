@@ -27,6 +27,7 @@
 					</div>
 					<div>
 						<input type="checkbox" name="u" class="articleDesc" id="idSaveCheck">Remember me
+						<a class=right href="#" data-target="#layerpop5" data-toggle="modal">Forgot your password?</a>
 					</div>
 					<br>
 					<div class="clearfix form-group">

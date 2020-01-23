@@ -16,6 +16,8 @@ public class User {
 	private String user_original="/image/default.png";
 	private int userCertification;
 	
+	private String AUTHKEY; // db에 없는 값
+	
 	public MultipartFile getUploadfile() {
 		return uploadfile;
 	}
@@ -89,4 +91,12 @@ public class User {
 	public void setUserCertification(int userCertification) {
 		this.userCertification = userCertification;
 	}
+	public String getAUTHKEY() {
+		return AUTHKEY;
+	}
+	public void setAUTHKEY(String aUTHKEY) {
+		AUTHKEY = aUTHKEY;
+	}
+	
+	
 }
