@@ -23,7 +23,7 @@ public interface ReportService {
 
 	void delUser(int user_num);
 
-	void delEvent(int event_num);
+	void delEvent(int event_num); 
 
 	List<Report> userAlertCount();
 

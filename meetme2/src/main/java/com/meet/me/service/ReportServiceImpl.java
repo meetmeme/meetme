@@ -78,7 +78,7 @@ public class ReportServiceImpl implements ReportService{
 	public String getId(int user_num) {
 		return dao.getId(user_num);
 	}
-
+ 
 	@Override
 	public String getEvent(int event_num) {
 		return dao.getEvent(event_num);

@@ -58,7 +58,7 @@ public class ReportDAO {
 	public List<Report> eventAlertCount() {
 		return sqlSession.selectList("Report.eAlertC");
 	}
-
+ 
 	public String getId(int user_num) {
 		return sqlSession.selectOne("Report.getId", user_num);
 	}

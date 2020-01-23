@@ -14,7 +14,7 @@ public class Report {
 	private int u;
 	private int e;
 	private int report_ck;
-	
+	 
 	public String getUser_id() {
 		return user_id;
 	}

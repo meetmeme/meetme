@@ -77,6 +77,7 @@ public class AdminController {
 			}
 		}
 		
+		
 		List<Integer> dayCount = new ArrayList<Integer>();
 		int count3 = 0;
 		for(int i=0;i<day.length;i++) {

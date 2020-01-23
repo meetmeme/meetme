@@ -86,7 +86,7 @@
 	</select>
 	
 	<select id="getEvent" resultType="String">
-		select event_title
+		select event_title 
 		from mm_event
 		where event_num=#{event_num}
 	</select>
