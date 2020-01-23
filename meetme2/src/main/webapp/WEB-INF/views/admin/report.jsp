@@ -6,7 +6,7 @@
 
 <jsp:include page="../main/header.jsp" />
 <link rel="stylesheet" type="text/css" href="resources/css/report.css" />
-
+<script src="resources/js/myhome.js"></script>
 <body data-target="#nino-navbar" data-spy="scroll">
 	<div class="container admin_out">
 		<nav class="admin_nav" id="nino-navbar" class="navbar navbar-default" role="navigation">
@@ -46,7 +46,7 @@
 					<c:forEach var="u" items="${userReport}">
 						<tr>
 							<td>${u.reporter_id}</td>
-							<td>${u.user_id}</td>	<!-- 유저 마이홈으로 이동 -->
+							<td><a onClick="mh_popup('${u.user_id}')">${u.user_id}</a></td>	
 							<td>${u.report_content}</td>
 							<td>${u.report_date}</td>
 							<td><button type="button" class="w1" onclick="location.href='user_alert.ad?user_num=${u.user_num}&report_num=${u.report_num}'">경고</button></td>
@@ -86,7 +86,7 @@
 					<c:forEach var="e" items="${eventReport}">
 						<tr>
 							<td>${e.reporter_id}</td>
-							<td>${e.event_title}</td>	<!-- 해당 이벤트 페이지로 이동 -->
+							<td><a onclick="location.href='event.main?event=${e.event_num}'">${e.event_title}</a></td>
 							<td>${e.report_content}</td>
 							<td>${e.report_date}</td>
 							<td><button type="button" class="w2" onclick="location.href='event_alert.ad?event_num=${e.event_num}&report_num=${e.report_num}'">경고</button></td>
