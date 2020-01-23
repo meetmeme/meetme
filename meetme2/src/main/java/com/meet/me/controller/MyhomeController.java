@@ -51,13 +51,9 @@ public class MyhomeController {
 		MyHome mh_info = mhservice.getinfo(m_id);
 		User m_info = userservice.user_info(m_id);
 		
-		System.out.println("tttt<>"+m_id);
-		System.out.println("ttt<<>>"+mh_info);
-		System.out.println("ttt<<>>"+m_info);
 		if (mh_info == null || m_info == null) {
 			System.out.println("정보 수집 실패");
 		} else {
-			System.out.println("정보 수집 성공");
 			mv.setViewName("myhome/mmain");
 			mv.addObject("mh_info", mh_info);
 			mv.addObject("m_info", m_info);
@@ -88,8 +84,6 @@ public class MyhomeController {
 		if (mhinfo == null || userinfo == null) {
 			System.out.println("정보 수집 실패");
 		} else {
-			System.out.println("정보 수집 성공");
-			
 			mv.setViewName("myhome/mprofile");
 			mv.addObject("mhinfo", mhinfo);
 			mv.addObject("userinfo", userinfo);
@@ -127,7 +121,6 @@ public class MyhomeController {
 		if (uploadfile.getOriginalFilename()!="") {
 			if (!uploadfile.isEmpty()) {
 				String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
-				System.out.println("ori>>" + fileName);
 				user.setUser_original(fileName); // 원래 파일명 저장
 
 				Calendar c = Calendar.getInstance();
@@ -137,7 +130,6 @@ public class MyhomeController {
 				
 				String saveFolder = "C:\\Users\\32426\\git\\m2\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
 				String homedir = saveFolder + year + "-" + month + "-" + date;
-				System.out.println(homedir);
 				File path1 = new File(homedir);
 				if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
 					path1.mkdir(); // 없을 경우 경로 만들기
@@ -147,13 +139,9 @@ public class MyhomeController {
 				int random = r.nextInt(100000000);
 
 				int index = fileName.lastIndexOf(".");
-				System.out.println("index = " + index);
 				String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
-				System.out.println("fileExtension = " + fileExtension);
 				String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-				System.out.println("refileName = " + refileName);
 				String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-				System.out.println("fileDbName = " + fileDBName);
 				uploadfile.transferTo(new File(saveFolder + fileDBName));
 				user.setUser_save(fileDBName);
 			}
@@ -181,14 +169,11 @@ public class MyhomeController {
 		}
 
 		/***미니홈피 프로필 수정***/
-		System.out.println(">>>"+myhome.getMyhome_intro());
-		System.out.println(">>>"+myhome.getMyhome_num());
 		mhservice.update(myhome);
 
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
 		if (result1 == 1) {
-			System.out.println("업데이트 완료");
 			out.println("location.href='mprofile.mh?id=" + user_id + "'");
 		} else {
 			System.out.println("업데이트 실패");
@@ -198,5 +183,6 @@ public class MyhomeController {
 		out.close();
 
 	}
+
 
 }

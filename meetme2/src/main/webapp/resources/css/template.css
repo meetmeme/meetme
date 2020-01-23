@@ -1401,6 +1401,9 @@ div.pp_default .pp_social {
 .center{
 	text-align: center;
 }
+.full-width{
+	width: 100%;
+}
 #searchKeywordShow{
 	padding: 0 0 0 0;
 }
@@ -1466,4 +1469,9 @@ div.pp_default .pp_social {
 
 .gray{
 	color: gray;
+}
+
+.right{
+	text-align: right;
+	float: right;
 }

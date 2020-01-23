@@ -19,17 +19,76 @@
 	</select>
 	
 	<select id="userReport" resultType="report">
-		select report_num, reporter_id, mm_user.user_id, mm_report.user_num, report_content, report_date 
+		select report_num, reporter_id, mm_user.user_id, mm_report.user_num, report_content, report_date,report_ck 
 		from mm_report 
 		inner join mm_user 
 		on mm_report.user_num=mm_user.user_num
+		order by report_date desc
 	</select>
 	
 	<select id="eventReport" resultType="report">
-		select report_num, reporter_id, report_content, mm_report.event_num, mm_event.event_title, report_date
+		select report_num, reporter_id, report_content, mm_report.event_num, mm_event.event_title, report_date, mm_event.user_num,report_ck
 		from mm_report 
 		inner join MM_EVENT
 		on mm_report.event_num=mm_event.event_num
+		order by report_date desc
+	</select>
+	
+	<insert id="u_alert" parameterType="int">
+		insert into mm_notice
+		values ((select nvl(max(notice_num),0)+1 from MM_NOTICE), #{user_num},
+		'경고', '회원님은 적절하지 않은 게시물을 등록하였습니다. 확인 후 삭제 조치 바랍니다.',sysdate,0)
+	</insert>
+	
+	<insert id="e_alert" parameterType="int">
+		insert into mm_notice
+		values ((select nvl(max(notice_num),0)+1 from MM_NOTICE), 
+		(select user_num from mm_event where event_num=#{event_num}),
+		'경고', '회원님은 적절하지 않은 이벤트를 등록하였습니다. 확인 후 삭제 조치 바랍니다.',sysdate,0)
+	</insert>
+	
+	<update id="addCheck" parameterType="int">
+		update mm_report
+		set report_ck = 1
+		where report_num = #{report_num}
+	</update>
+	
+	<delete id="delUser" parameterType="int">
+		delete
+		from mm_user
+		where user_num = #{user_num}
+	</delete>
+	
+	<delete id="delEvent" parameterType="int">
+		delete
+		from mm_event
+		where event_num = #{event_num}
+	</delete>
+	
+	<select id="uAlertC" resultType="report">
+		select count(*) u, user_num
+		from mm_report
+		where report_ck = 1
+		group by user_num
+	</select>
+	
+	<select id="eAlertC" resultType="report">
+		select count(*) e, event_num
+		from mm_report
+		where report_ck = 1
+		group by event_num
+	</select>
+	
+	<select id="getId" resultType="String">
+		select user_id
+		from mm_user
+		where user_num=#{user_num}
+	</select>
+	
+	<select id="getEvent" resultType="String">
+		select event_title 
+		from mm_event
+		where event_num=#{event_num}
 	</select>
 </mapper>
 

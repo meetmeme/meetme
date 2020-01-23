@@ -20,11 +20,14 @@ public interface UserService {
 	public int delete(String user_id);
 	public List<User> getFriends(String title, int userNum);
 	public int isEmail(String user_email);
-	public List<User> getRandomUser();
+	public List<User> getRandomUser(int num);
 	public List<User_interests> getInterestsNums(int num);
 	public int update(User user);
 	public int delete_interests(String user_id);
 	public int follow(Map<String, String> userKey);
 	public int followCheck(Map<String, String> userKey);
+	public void setPW(User user) throws Exception;
+	public User user_info_email(String email);
+	public int setPassword(User u);
 }
  

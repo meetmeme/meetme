@@ -215,3 +215,4 @@
 <jsp:include page="join_modal.jsp" />
 <jsp:include page="message_modal.jsp" />
 <jsp:include page="notice_modal.jsp" />
+<jsp:include page="setpw_modal.jsp" />

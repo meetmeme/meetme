@@ -11,7 +11,10 @@ public class Report {
 	private Date report_date;
 	private String user_id;
 	private String event_title;
-	
+	private int u;
+	private int e;
+	private int report_ck;
+	 
 	public String getUser_id() {
 		return user_id;
 	}
@@ -61,5 +64,23 @@ public class Report {
 	public void setReporter_id(String reporter_id) {
 		this.reporter_id = reporter_id;
 	}
-	
+	public int getU() {
+		return u;
+	}
+	public void setU(int u) {
+		this.u = u;
+	}
+	public int getE() {
+		return e;
+	}
+	public void setE(int e) {
+		this.e = e;
+	}
+	public int getReport_ck() {
+		return report_ck;
+	}
+	public void setReport_ck(int report_ck) {
+		this.report_ck = report_ck;
+	}
+
 }

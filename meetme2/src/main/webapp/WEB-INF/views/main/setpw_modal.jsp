@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 로그인 모달 -->
-	<div class="modal fade" id="layerpop" >
+	<div class="modal fade" id="layerpop5" >
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <!-- header -->
@@ -10,28 +10,21 @@
 	        <!-- 닫기(x) 버튼 -->
 	        <button type="button" class="close" data-dismiss="modal">×</button>
 	        <!-- header title -->
-	        <h4 class="modal-title">LOGIN</h4>
+	        <h4 class="modal-title">Forgot Your Password?</h4>
 	      </div>
 	      <!-- body -->
 	      <div class="modal-body">
-	            <form name="loginform" action="loginProcess.net" method="post">
+	            <form name="loginform" action="setPasswordRequest.net" method="post">
+	            <p>Enter your email address below, <br>and we'll email you instructions on how to change your password.</p>
 					<div class="form-group">
-						<b class="articleDesc">ID</b>
-						<input class="form-control" type="text" name="user_id1" placeholder="Enter id" required
+						<b class="articleDesc">Email address</b>
+						<input class="form-control" type="text" name="email" placeholder="Enter email" required
 						value="${saveid}">
 						<br>
 					</div>
-					<div class="form-group">
-						<b class="articleDesc">PASSWORD</b>
-						<input class="form-control" type="password" name="user_pass1" placeholder="Enter password" required>
-					</div>
-					<div>
-						<input type="checkbox" name="u" class="articleDesc" id="idSaveCheck">Remember me
-						<a class=right href="#" data-target="#layerpop5" data-toggle="modal">Forgot your password?</a>
-					</div>
 					<br>
 					<div class="clearfix form-group">
-						<button type="submit" class="btn btn-primary submitbtn">로그인</button>
+						<button type="submit" class="btn btn-primary submitbtn">비밀번호 찾기</button>
 					</div>
 				</form>
 	      </div>

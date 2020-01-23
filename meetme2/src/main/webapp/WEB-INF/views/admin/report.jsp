@@ -5,7 +5,8 @@
 <html lang="en">
 
 <jsp:include page="../main/header.jsp" />
-
+<link rel="stylesheet" type="text/css" href="resources/css/report.css" />
+<script src="resources/js/myhome.js"></script>
 <body data-target="#nino-navbar" data-spy="scroll">
 	<div class="container admin_out">
 		<nav class="admin_nav" id="nino-navbar" class="navbar navbar-default" role="navigation">
@@ -17,112 +18,117 @@
 		</nav>
 	</div>
 	
-	<c:if test="${userCount>0}">
-		<div>
-			<table>
-				<caption>회원 신고목록</caption>
-				<tr>
-					<td>신고자</td>
-					<td>ID</td>
-					<td>신고날짜</td>
-					<td>경고</td>
-					<td>삭제</td>
-				</tr>
-				<c:forEach var="u" items="${userReport}">
-					<tr>
-						<td>${u.reporter_id}</td>
-						<td><a onclick="reportDetail1('${u.report_num}')" data-target="#layerpop" data-toggle="modal">${u.user_id}</a></td>
-						<td>${u.report_date}</td>
-						<td><a href="user_alert.ad?user_num=${u.user_num}">경고</a></td>
-						<td><a href="user_delete.ad?user_id=${u.user_id}">삭제</a></td>
-					</tr>
-				</c:forEach>
-			</table>
-		</div>
-	</c:if>
 	
-	<c:if test="${eventCount>0}">
-		<div>
-			<table>
-				<caption>이벤트 신고목록</caption>
-				<tr>
-					<td>신고자</td>
-					<td>이벤트</td>
-					<td>신고날짜</td>
-					<td>경고</td>
-					<td>삭제</td>
-				</tr>
-				<c:forEach var="e" items="${eventReport}">
-					<tr>
-						<td>${e.reporter_id}</td>
-						<td><a onclick="reportDetail2('${e.report_num}')" data-target="#layerpop2" data-toggle="modal">${e.event_title}</a></td>
-						<td>${e.report_date}</td>
-						<td><a href="user_alert.ad?user_num=${e.user_num}">경고</a></td>
-						<td><a href="event_delete.ad?event_num=${e.event_num}">삭제</a></td>
-					</tr>
+	<div class="userReport">
+	
+		<div class="userlist">
+			<h3>Black User List</h3>
+			<ul>
+				<c:forEach items="${userList}" var="list">
+					<li>${list}<li>
 				</c:forEach>
-			</table>
+			</ul>
 		</div>
-	</c:if>
-	<div class="modal fade" id="layerpop" >
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <!-- header -->
-	      <div class="modal-header">
-	        <!-- 닫기(x) 버튼 -->
-	        <button type="button" class="close" data-dismiss="modal">×</button>
-	        <!-- header title -->
-	        <h4 class="modal-title">신고 내용</h4>
-	      </div>
-	      <!-- body -->
-	      <div class="modal-body">
-	      	<div id="content">
-	      			
-	      	</div>
-	      </div>
-	     </div>
-	    </div>
-	   </div>
-	   
-	   <div class="modal fade" id="layerpop2" >
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <!-- header -->
-	      <div class="modal-header">
-	        <!-- 닫기(x) 버튼 -->
-	        <button type="button" class="close" data-dismiss="modal">×</button>
-	        <!-- header title -->
-	        <h4 class="modal-title">신고 내용</h4>
-	      </div>
-	      <!-- body -->
-	      <div class="modal-body">
-	      	<div id="content2">
-	      			
-	      	</div>
-	      </div>
-	     </div>
-	    </div>
-	   </div>
+		
+		<div class="u">
+			<c:if test="${userCount>0}">
+				
+				<table class="userTable">
+					<caption>회원 신고목록 (${userCount}개)</caption>
+					<tr>
+						<td>신고자</td>
+						<td>ID</td>
+						<td>신고내용</td>
+						<td>신고날짜</td>
+						<td>경고</td>
+						<td>삭제</td>
+					</tr>
+					<c:forEach var="u" items="${userReport}">
+						<tr>
+							<td>${u.reporter_id}</td>
+							<td><a onClick="mh_popup('${u.user_id}')">${u.user_id}</a></td>	
+							<td>${u.report_content}</td>
+							<td>${u.report_date}</td>
+							<td><button type="button" class="w1" onclick="location.href='user_alert.ad?user_num=${u.user_num}&report_num=${u.report_num}'">경고</button></td>
+							<td><button type="button" class="d1" onclick="location.href='userDel.ad?user_num=${u.user_num}'">삭제</button></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+		</div>
+	
+	</div>
+	
+	
+	<div class="eventReport">
+	
+		<div class="eventlist">
+			<h3>Black Event List</h3>
+			<ul>
+				<c:forEach items="${eventList}" var="list">
+					<li>${list}<li>
+				</c:forEach>
+			</ul>
+		</div>
+		
+		<div class="e">
+			<c:if test="${eventCount>0}">
+				<table class="eventTable">
+					<caption>이벤트 신고목록 (${eventCount}개)</caption>
+					<tr>
+						<td>신고자</td>
+						<td>이벤트</td>
+						<td>신고내용</td>
+						<td>신고날짜</td>
+						<td>경고</td>
+						<td>삭제</td>
+					</tr>
+					<c:forEach var="e" items="${eventReport}">
+						<tr>
+							<td>${e.reporter_id}</td>
+							<td><a onclick="location.href='event.main?event=${e.event_num}'">${e.event_title}</a></td>
+							<td>${e.report_content}</td>
+							<td>${e.report_date}</td>
+							<td><button type="button" class="w2" onclick="location.href='event_alert.ad?event_num=${e.event_num}&report_num=${e.report_num}'">경고</button></td>
+							<td><button type="button" class="d2" onclick="location.href='eventDel.ad?event_num=${e.event_num}'">삭제</button></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</c:if>
+		</div>
+		
+	</div>
 	
 	<script>
-		function reportDetail1(num){
-			<c:forEach var="u" items="${userReport}">
-				if("${u.report_num}"==num){
-					var str = document.getElementById("content");
-					str.innerHTML = "${u.report_content}";
-				}
-			</c:forEach>
+		var list1 = new Array(); 
+		
+		<c:forEach items="${userReport}" var="item">
+			list1.push("${item.report_ck}");
+		</c:forEach>
+		
+		var w1 = document.getElementsByClassName("w1");
+		
+		for(var i=0; i<list1.length;i++){
+			if(list1[i]==1){
+				w1[i].style.background = 'lightgrey';
+			}
 		}
 		
-		function reportDetail2(num){
-			<c:forEach var="e" items="${eventReport}">
-				if("${e.report_num}"==num){
-					var str = document.getElementById("content2");
-					str.innerHTML = "${e.report_content}";
-				}
-			</c:forEach>
+		var list2 = new Array(); 
+		
+		<c:forEach items="${eventReport}" var="item">
+			list2.push("${item.report_ck}");
+		</c:forEach>
+		
+		var w2 = document.getElementsByClassName("w2");
+		
+		for(var i=0; i<list2.length;i++){
+			if(list2[i]==1){
+				w2[i].style.background = 'lightgrey';
+			}
 		}
-	</script>
+	</script> 
+	
 	
 	
 </body>
