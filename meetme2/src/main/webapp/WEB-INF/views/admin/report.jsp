@@ -34,11 +34,11 @@
 				<c:forEach var="u" items="${userReport}">
 					<tr>
 						<td>${u.reporter_id}</td>
-						<td><a href="user_info.ad?user_id=${u.user_id}">${u.user_id}</a></td>
+						<td>${u.user_id}</td>
 						<td>${u.report_content}</td>
 						<td>${u.report_date}</td>
-						<td><a href="user_alert.ad?user_num=${u.user_num}">경고</a></td>
-						<td><a href="user_delete.ad?user_id=${u.user_id}">삭제</a></td>
+						<td><a href="user_alert.ad?user_num=${u.user_num}&report_num=${u.report_num}">경고</a></td>
+						<td><a href="report_delete.ad?user_id=${u.user_id}">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</table>
@@ -60,11 +60,11 @@
 				<c:forEach var="e" items="${eventReport}">
 					<tr>
 						<td>${e.reporter_id}</td>
-						<td><a onclick="reportDetail2('${e.report_num}')" >${e.event_title}</a></td>
+						<td>${e.event_title}</td>
 						<td>${e.report_content}</td>
 						<td>${e.report_date}</td>
-						<td><a href="user_alert.ad?user_num=${e.user_num}">경고</a></td>
-						<td><a href="event_delete.ad?event_num=${e.event_num}">삭제</a></td>
+						<td><a href="user_alert.ad?user_num=${e.user_num}&report_num=${u.report_num}">경고</a></td>
+						<td><a href="report_delete.ad?event_num=${e.event_num}">삭제</a></td>
 					</tr>
 				</c:forEach>
 			</table>

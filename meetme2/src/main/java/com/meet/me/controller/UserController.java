@@ -97,7 +97,7 @@ public class UserController {
 			// String
 			// saveFoler=request.getSession().getServletContext().getRealPath("resources") +
 			// "/upload/";
-			String saveFolder = "C:\\Users\\user1\\git\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+			String saveFolder = "D:\\final\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 			System.out.println(homedir);
 			File path1 = new File(homedir);
@@ -140,6 +140,14 @@ public class UserController {
 		}
 
 		userService.setMyhome(user_num);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("alert('입력하신 이메일 주소에 로그인하여 이메일 인증을 해주세요');");
+		out.println("location.href='main.index';");
+		out.println("</script>");
+		out.close();
 
 		return "redirect:main.index";
 

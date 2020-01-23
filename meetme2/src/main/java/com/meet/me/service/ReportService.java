@@ -13,5 +13,13 @@ public interface ReportService {
 
 	List<String> eventReport();
 
+	void alert(int user_num);
+
+	void addCheck(int report_num);
+
+	void delUser(int user_num);
+
+	void delEvent(int event_num);
+
 
 }

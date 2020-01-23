@@ -97,7 +97,7 @@
 						</div>
 						
 						<div class="clearfix form-group">
-			         		<button type="submit" class="btn btn-primary submitbtn">회원가입</button>
+			         		<button type="submit" class="btn submitbtn" onclick="insert();">회원가입</button>
 			        	</div>		        
 					</div>		          
 			                      
