@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Event;
-import com.meet.me.domain.Notice;
 import com.meet.me.domain.User;
-import com.meet.me.service.CommunityService;
 import com.meet.me.service.EventService;
 import com.meet.me.service.UserService;
 
@@ -26,10 +24,6 @@ public class IndexController {
 	
 	@Autowired
 	private UserService userService;
-	
-	@Autowired
-	private CommunityService communityService;
-	
 	
 	//메인 화면 -카테고리, 해시태그 값을 가져감
 	@GetMapping(value="/main.index")
@@ -42,12 +36,13 @@ public class IndexController {
 		if(session.getAttribute("user_id1") != null)
 			id = session.getAttribute("user_id1").toString();
 		
-		int num = 0;
+		int user_num = 0;
 		
 		if(session.getAttribute("user_id1") != null)
-			num = Integer.parseInt(session.getAttribute("user_num1").toString());
+			user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
+		System.out.println(user_num);
 		List<Event> event = eventService.getIntrestingEvent(id);
-		List<User> RandomUser = userService.getRandomUser();
+		List<User> RandomUser = userService.getRandomUser(user_num);
 		List<String> category = eventService.getCategory();
 
 		System.out.println(RandomUser.size());

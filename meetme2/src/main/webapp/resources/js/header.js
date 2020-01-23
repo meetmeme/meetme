@@ -1,6 +1,5 @@
 $(window).on('load', function() {
-	if ($('#note').val())
-		$('#darkModalForm').modal('show');
+	// 알람 있는지 확인 예정
 });
 $(function() {
 
@@ -148,11 +147,11 @@ $(function() {
 		}, // end source
 		select : function(event, ui) {
 			$('#receiver_num').val(ui.item.test);
-			  console.log('2 : ' + ui);//사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
-			  console.log('3 : ' + ui.item.label); 
-			  console.log('4 : ' + ui.item.value);
-			  console.log('5 : ' + ui.item.test);
-			 
+			console.log('2 : ' + ui);// 사용자가 오토컴플릿이 만들어준 목록에서 선택을 하면 반환되는 객체
+			console.log('3 : ' + ui.item.label);
+			console.log('4 : ' + ui.item.value);
+			console.log('5 : ' + ui.item.test);
+
 		},// end select
 		focus : function(event, ui) {
 			return false; // 한글 에러 방지
@@ -241,8 +240,8 @@ $(function() {
 				}
 			})
 
-			//알람 삭제
-		$(document).on('click', '.deleteNotice', function(){
+	// 알람 삭제
+	$(document).on('click', '.deleteNotice', function() {
 		$.ajax({
 			type : 'post',
 			url : 'deleteNotice.cm',
@@ -254,47 +253,59 @@ $(function() {
 				if (data == 1) {
 					getNotificationDiv();
 				}
-			} //end success
-		}); //end ajax
+			} // end success
+		}); // end ajax
 	});
 
 	// 유저 메뉴 알람 누르면 알람 가져오기
 	$('#noticeModaltag').click(function() {
 		getNotificationDiv();
 	});
-	
-	function getNotificationDiv(){
-		$.ajax({
-			type : 'get',
-			url : 'getNotification.cm',
-			data : {},
-			dataType : 'json',
-			success : function(data) {
-				if (data.length < 0) {
-					$('#noticeModal').append('<h3>NO NOTIFICATION</h3>');
-				} else {
-					var htmldata = ""
-						$('#noticeModal').empty();
-					$.each(data, function(index, item) {
-						htmldata = htmldata 
-									+ '<div class="modal-subcontent">'
-																		+ '	<button type="button" class="close white-text deleteNotice">'
-									+ '		<span aria-hidden="true">&times;</span>'
-									+ '	</button>'
-									+ '	<input type="hidden" value="'+item.NOTICE_NUM+'">'
-									+ '	<h5 class="modal-subtitle">'
-									+ '		<strong>'+item.NOTICE_TITLE+'</strong> <i>'+item.NOTICE_DATE+'</i>'
-									+ '	</h5>'
-									+ '	<div class="modal-subbody">'
-									+ '		<p>'+item.NOTICE_CONTENT+'</p>'
-									+ '	</div>'
-									+ '</div>'
-					})
-					console.log(htmldata);
-					$('#noticeModal').append(htmldata);
-				}
-			} // end success
-		}); // end ajax
+
+	function getNotificationDiv() {
+		$
+				.ajax({
+					type : 'get',
+					url : 'getNotification.cm',
+					data : {},
+					dataType : 'json',
+					success : function(data) {
+						if (data.length < 0) {
+							$('#noticeModal')
+									.append('<h3>NO NOTIFICATION</h3>');
+						} else {
+							var htmldata = ""
+							$('#noticeModal').empty();
+							$
+									.each(
+											data,
+											function(index, item) {
+												htmldata = htmldata
+														+ '<div class="modal-subcontent">'
+														+ '	<button type="button" class="close white-text deleteNotice">'
+														+ '		<span aria-hidden="true">&times;</span>'
+														+ '	</button>'
+														+ '	<input type="hidden" value="'
+														+ item.NOTICE_NUM
+														+ '">'
+														+ '	<h5 class="modal-subtitle">'
+														+ '		<strong>'
+														+ item.NOTICE_TITLE
+														+ '</strong> <i>'
+														+ item.NOTICE_DATE
+														+ '</i>'
+														+ '	</h5>'
+														+ '	<div class="modal-subbody">'
+														+ '		<p>'
+														+ item.NOTICE_CONTENT
+														+ '</p>' + '	</div>'
+														+ '</div>'
+											})
+							console.log(htmldata);
+							$('#noticeModal').append(htmldata);
+						}
+					} // end success
+				}); // end ajax
 	}
 });
 function follow(user_id, user_name) {
@@ -317,11 +328,20 @@ function follow(user_id, user_name) {
 	}); // end ajax
 }
 
-function check(){
-	if(!$('#receiver_num').val()){
+function check() {
+	if (!$('#receiver_num').val()) {
 		$('#receiver').val('누구한테 보내실 건가요? 🤔');
 		return false;
-	}else{
+	} else {
 		return true;
 	}
+}
+
+function checkPw() {
+	if ($("#setpassword").val() == $("#setpasswordch").val())
+		return true;
+	else
+		alert('비밀번호를 확인해주세요.');
+	return false;
+
 }
