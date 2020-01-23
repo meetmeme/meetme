@@ -18,11 +18,13 @@ img.avatar {
 	border-radius: 50%;
 }
 
-.category_img{
+.category_img, .cat_p{
 	border-radius : 10px;
 	cursor : pointer;
 	width : 150px;
 	height : 150px;
+	float : left;
+	padding : 10px;
 }
 
 .modal-title{
@@ -36,4 +38,27 @@ img.avatar {
 	height : 30px;
 	cursor : pointer;
 }
+.nextbtn1, .nextbtn2{
+	background-color: #F6CECE; 
+	border-color:#F6CECE;
+	display : block;
+	float : right;
+	
+}
 
+.nextbtn1:hover, .nextbtn2:hover{
+	background-color:#F5A9A9;
+	border-color:#F5A9A9;
+}
+
+.submitbtn{
+	background-color : #F78181;
+	border-color : #F78181;
+	clear : both;
+	display : block;
+	float : right;
+}
+.submitbtn:hover{
+	background-color: #FA5858;
+	border-color:#FA5858;
+}

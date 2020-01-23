@@ -23,13 +23,15 @@
 		from mm_report 
 		inner join mm_user 
 		on mm_report.user_num=mm_user.user_num
+		order by report_date desc
 	</select>
 	
 	<select id="eventReport" resultType="report">
-		select report_num, reporter_id, report_content, mm_report.event_num, mm_event.event_title, report_date
+		select report_num, reporter_id, report_content, mm_report.event_num, mm_event.event_title, report_date, mm_event.user_num
 		from mm_report 
 		inner join MM_EVENT
 		on mm_report.event_num=mm_event.event_num
+		order by report_date desc
 	</select>
 </mapper>
 
