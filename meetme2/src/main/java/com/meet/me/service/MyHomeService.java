@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.meet.me.domain.Board;
+import com.meet.me.domain.Follows;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 
@@ -17,5 +18,6 @@ public interface MyHomeService {
 //	public int board_insert(Board board);
 	public void insertBoard(Board board);
 	public int getListCount(String u_id);
-	public List<Board> boardlist(int page, int limit, String u_id);	
+	public List<Board> boardlist(int page, int limit, String u_id);
+	public List<Follows> follows(int m_num);	
 }

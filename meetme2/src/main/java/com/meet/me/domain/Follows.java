@@ -4,9 +4,15 @@ public class Follows {
 	private int user_num;
 	private int following_num;
 	private String user_id;
+	private String user_name;
 	private int follower_ck;
 	private int c;
-	
+	public String getUser_name() {
+		return user_name;
+	}
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 	public int getUser_num() {
 		return user_num;
 	}

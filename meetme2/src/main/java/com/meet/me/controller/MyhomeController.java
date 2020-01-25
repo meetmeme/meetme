@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Board;
+import com.meet.me.domain.Follows;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
@@ -182,6 +184,17 @@ public class MyhomeController {
 		out.println("</script>");
 		out.close();
 
+	}
+	
+	//팔로워 표시
+	@ResponseBody
+	@RequestMapping(value = "/follower.mh", method = RequestMethod.POST)
+	public List<Follows> followers(@RequestParam(value="id", required=false) String m_id, ModelAndView mv) throws Exception {
+		List<Follows> follows = new ArrayList<Follows>();
+		User m_info = userservice.user_info(m_id);
+		follows=mhservice.follows(m_info.getUser_num());
+		System.out.println("팔로우 정보 : " + follows.size());
+		return follows;
 	}
 
 
