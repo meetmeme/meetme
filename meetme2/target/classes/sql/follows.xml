@@ -4,13 +4,23 @@
 <mapper namespace="Follows">
 	<select id="followCount" resultType="follows">
 		select a.*, u.user_id
-		from (select user_num, count(FOLLOWING_NUM) c
-				from mm_follows 
-				group by user_num
-				order by count(FOLLOWING_NUM) desc) a
+		from
+		(select user_num, count(FOLLOWING_NUM) c
+		from mm_follows
+		group by user_num
+		order by count(FOLLOWING_NUM) desc) a
 		inner join mm_user u
-		on a.user_num = u.user_num
+		on a.user_num =
+		u.user_num
 		where rownum &lt;=5
+	</select>
+
+	<select id="followlist" parameterType="int"
+		resultType="follows">
+		select f.user_num, f.following_num, u.user_name
+		from MM_FOLLOWS f, MM_USER u
+		where u.USER_NUM=f.FOLLOWING_NUM
+		and f.user_num=#{m_num}
 	</select>
 </mapper>
 

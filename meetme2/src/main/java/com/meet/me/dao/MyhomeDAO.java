@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.meet.me.domain.Board;
+import com.meet.me.domain.Follows;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 
@@ -48,6 +49,10 @@ public class MyhomeDAO {
 
 	public List<Board> getBoardList(HashMap<String, Object> map) {
 		return sqlSession.selectList("Myhomes.list", map);
+	}
+
+	public List<Follows> follows(int m_num) {
+		return sqlSession.selectList("Follows.followlist", m_num);
 	}
 
 }

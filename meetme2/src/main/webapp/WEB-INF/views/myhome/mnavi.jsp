@@ -51,7 +51,7 @@
 						}
 					}
 				};
-				console.log("getParameters('id')>>>"+getParameters('id'));
+				console.log("getParameters('id')>>>" + getParameters('id'));
 				console.log("dd2>>>" + "${user_id1}");
 				if (getParameters('id') == "${user_id1}")
 					$("#navi").append(
@@ -79,6 +79,24 @@
 					$('li:nth-child(5)').siblings().removeClass(
 							"colorlib-active");
 				}
+
+				$.ajax({
+					type : "post",
+					url : "follower.mh",
+					data : {
+						"id" : $("#id").val()
+					},
+					dataType : "json",
+					success : function(rdata) {
+						output = '';
+						$(rdata).each(
+								function(index, item) {
+									output += "<option value='"+index+"'>"
+											+ this.user_name + "</option>"
+								})
+						$("#follows").append(output);
+					}
+				})
 			});
 </script>
 <title>Insert title here</title>
@@ -87,7 +105,7 @@
 	<%
 		String id = request.getParameter("id");
 	%>
-
+	<input type="hidden" name="id" id="id" value="<%=id%>">
 	<aside id="colorlib-aside" role="complementary"
 		class="js-fullheight text-center">
 		<h1 id="colorlib-logo">
@@ -103,22 +121,9 @@
 		</nav>
 
 		<div class="colorlib-footer">
-			<p>
-				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-				Copyright &copy;
-				<script>
-					document.write(new Date().getFullYear());
-				</script>
-				All rights reserved | This template is made with <i
-					class="icon-heart" aria-hidden="true"></i> by <a
-					href="https://colorlib.com" target="_blank">Colorlib</a>
 			<ul>
-				<select name=neighbor id=neighbor onchange="neighbor()">
+				<select name=follows id=follows>
 					<option value="" selected>이웃목록</option>
-					<option value="1">김현윤</option>
-					<option value="2">주혜원</option>
-					<option value="3">이소희</option>
-					<option value="4">홍찬미</option>
 				</select>
 			</ul>
 		</div>
