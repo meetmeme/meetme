@@ -5,7 +5,7 @@
 <html lang="en">
 <jsp:include page="../main/header.jsp" />
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAeltxv7nKepg24QdvqCG60cnwT9H5U5pY&libraries=places" async defer></script>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css">
@@ -14,9 +14,9 @@
 <script src="resources/js/event/jquery.timepicker.min.js"></script>
 
 <script src="resources/js/event/newEvent.js"></script>
-<link rel="stylesheet" href="resources/css/newEvent.css?after">
+<link rel="stylesheet" href="resources/css/newEvent.css">
 
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCJ1vbVWbRvoI0UuQBbhS_MLsJNEksyE&libraries=places,geometry&callback=initMap" async defer ></script>
 
 
 <body data-target="#nino-navbar" data-spy="scroll">
@@ -49,9 +49,16 @@
 				
 				<h2 class="nino-sectionHeading">where</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_location" id="event_location" placeholder="Enter place" required>
+					<input type="text" class="form-control" name="address" id="address" placeholder="Enter place ex)서울 중구 남대문로 120" required>
+					<button id="mapSearch" type="button" value="Geocode">search</button>
 				</div>
+				<br>
 				<input class="field" id="lat" /> <input class="field" id="lng" />
+
+				
+    			<div id="google-map">
+    			</div>
+
 
 				
 				<h2 class="nino-sectionHeading">how many people</h2>
@@ -66,12 +73,12 @@
 				
 				<h2 class="nino-sectionHeading">Related photos</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+					파일첨부
 				</div>
 				
 				<h2 class="nino-sectionHeading">hash tags</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="event_title" placeholder="Enter title" required>
+					<input type="text" class="form-control" name="event_title" placeholder="Enter tags" required>
 				</div>
 				
        			<div class="input-group input-group-lg">
