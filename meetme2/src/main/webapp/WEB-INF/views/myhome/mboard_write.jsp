@@ -46,7 +46,6 @@ String id = request.getParameter("id");
 
 						<div class="form-group">
 							<label for="board_file">파일 첨부</label> <label for="upfile">
-								<img src="resources/image/attach.png" alt="사막">
 							</label> <input type="file" id="upfile" name="uploadfile"> <span
 								id="filevalue"></span>
 						</div>

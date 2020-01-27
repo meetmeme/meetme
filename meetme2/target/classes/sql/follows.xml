@@ -17,7 +17,7 @@
 
 	<select id="followlist" parameterType="int"
 		resultType="follows">
-		select f.user_num, f.following_num, u.user_name
+		select f.user_num, f.following_num, u.user_name, u.user_id
 		from MM_FOLLOWS f, MM_USER u
 		where u.USER_NUM=f.FOLLOWING_NUM
 		and f.user_num=#{m_num}

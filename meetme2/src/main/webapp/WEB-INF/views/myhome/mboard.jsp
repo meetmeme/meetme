@@ -30,8 +30,10 @@
 								<c:forEach var="b" items="${boardlist}">
 									<div class="col-md-12">
 										<div class="blog-entry ftco-animate">
-											<a href="#" class="img"
-												style="background-image: url(resources/images2/image_2.jpg);"></a>
+										<c:if test="${!empty b.BOARD_PHOTO }">
+											<img  class="img"
+											 src="resources/upload${b.BOARD_PHOTO}">
+										</c:if>
 											<div class="text pt-2 mt-3">
 												<span class="category mb-1 d-block">날짜</span>
 												<h3 class="mb-4">${b.BOARD_TITLE}</h3>
