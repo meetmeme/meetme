@@ -27,6 +27,7 @@
 <link rel="stylesheet" href="resources/css2/icomoon.css">
 <link rel="stylesheet" href="resources/css2/style.css">
 <script src="resources/js2/jquery-3.2.1.min.js"></script>
+<script src="resources/js/myhome.js"></script>
 
 <script>
 	$(document).ready(
@@ -90,13 +91,14 @@
 					success : function(rdata) {
 						output = '';
 						$(rdata).each(
-								function(index, item) {
-									output += "<option value='"+index+"'>"
+								function() {
+									output += "<option value='"+this.user_id+"'>"
 											+ this.user_name + "</option>"
 								})
 						$("#follows").append(output);
 					}
 				})
+				
 			});
 </script>
 <title>Insert title here</title>
@@ -122,7 +124,7 @@
 
 		<div class="colorlib-footer">
 			<ul>
-				<select name=follows id=follows>
+				<select name=follows id=follows onchange="mh_popup(this.value)">
 					<option value="" selected>이웃목록</option>
 				</select>
 			</ul>
