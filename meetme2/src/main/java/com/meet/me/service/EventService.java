@@ -15,5 +15,10 @@ public interface EventService {
 	public int getAttend(int event);
 	public List<User> getUser(int event);
 	public List<Event> searchCat(String category);
+	public int insertEvent(Event event) throws Exception;
+	public int has(String string);
+	public void insertTagUse(int tag_num);
+	public void insertHashtag(String string);
+	public int getUser_num(String id);
 }
  

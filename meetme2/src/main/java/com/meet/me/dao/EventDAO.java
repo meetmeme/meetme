@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.meet.me.domain.Event;
+import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
 @Repository
 public class EventDAO {
@@ -48,7 +49,26 @@ public class EventDAO {
 
 	public List<Event> searchCat(String category) {
 		return sqlSession.selectList("Events.searchCat", category);
+	}
 
+	public int insertEvent(Event event) {
+		return sqlSession.insert("Events.insertEvent", event);
+	}
+
+	public Hashtag has(String tag) {
+		return sqlSession.selectOne("Events.has", tag);
+	}
+
+	public void insertTagUse(int tag_num) {
+		sqlSession.insert("Events.insertTagUse");
+	}
+
+	public void insertHashtag(String title) {
+		sqlSession.insert("Events.insertHashtag");
+	}
+
+	public int getnum(String id) {
+		return sqlSession.selectOne("Events.num", id);
 	}
 
 }

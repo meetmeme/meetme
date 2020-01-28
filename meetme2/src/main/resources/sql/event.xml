@@ -103,4 +103,32 @@
 							where EVENT_NUM = #{event_num})
 	</select>
 	
+	<insert parameterType="Event" id="insertEvent">
+		insert into mm_event
+		values((select nvl(max(event_num),0)+1 from mm_event),
+		#{user_num},#{category_num},#{event_title},#{event_content},#{event_date},#{event_time},
+		#{event_location},#{event_lat},#{event_lng},#{event_max}, #{event_price}, #{event_save},
+		#{event_original}, #{event_hashtag})
+	</insert>
+	
+	<select id="has" parameterType="String" resultType="Hashtag">
+		select HASHTAG_NUM from MM_HASHTAG
+		where HASHTAG_TITLE = #{tag}
+	</select>
+	
+	<insert id="insertTagUse" parameterType="int">
+		insert into MM_HASHTAG_USE(HASHTAG_NUM, EVENT_NUM)
+		values( #{tag_num}, (select max(EVENT_NUM) from MM_EVENT)+1)
+	</insert>
+	
+	<insert id="insertHashtag" parameterType="String">
+		insert into MM_HASHTAG
+		values((select nvl(max(HASHTAG_NUM),0)+1 from MM_HASHTAG), #{title})
+	</insert>
+	
+	<select id="num" parameterType="String" resultType="int">
+		select USER_NUM from MM_USER
+		where USER_ID = #{id}
+	</select>
+	
 </mapper>
