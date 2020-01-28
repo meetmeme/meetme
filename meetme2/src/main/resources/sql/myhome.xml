@@ -84,18 +84,33 @@
 	</insert>
 
 	<select id="count" parameterType="String" resultType="int">
-		select count(*) from mm_board where BOARD_ID=#{u_id}
+		select
+		count(*) from mm_board where BOARD_ID=#{u_id}
 	</select>
 
 	<select id="list" parameterType="java.util.Map"
 		resultType="Board">
 		select * from (select
-		rownum rnum, b.* from (select * from mm_board where
+		rownum rnum, b.* from (select * from
+		mm_board where
 		BOARD_ID=#{u_id}
-		order by BOARD_NUM desc) b) where rnum &gt;=#{start}
+		order by BOARD_NUM desc) b) where rnum
+		&gt;=#{start}
 		and rnum &lt;=#{end}
 	</select>
 
+	<select id="detail" resultType="Board" parameterType="int">
+		select *
+		from mm_board where BOARD_NUM = #{num}
+	</select>
+
+	<update id="modify" parameterType="Board">
+		update mm_board set BOARD_TITLE=#{BOARD_TITLE},
+		BOARD_CONTENT=#{BOARD_CONTENT},
+		BOARD_PHOTO=#{BOARD_PHOTO, jdbcType=VARCHAR},
+		BOARD_ORIGINAL=#{BOARD_ORIGINAL, jdbcType=VARCHAR}
+		where BOARD_NUM=#{BOARD_NUM}
+	</update>
 
 </mapper>
 

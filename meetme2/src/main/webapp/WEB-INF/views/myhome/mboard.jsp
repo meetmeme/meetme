@@ -40,16 +40,9 @@
 												<p class="mb-4">${b.BOARD_CONTENT}</p>
 												<div class="meta-wrap d-md-flex align-items-center">
 													<div class="half order-md-last text-md-right">
-														<p class="meta">
-															<span><i class="icon-heart"></i>3</span> <span><i
-																class="icon-eye"></i>100</span> <span><i
-																class="icon-comment"></i>5</span>
-														</p>
-													</div>
-													<div class="half">
-														<p>
-															<a href="#" class="btn btn-primary p-3 px-xl-4 py-xl-3">수정하기</a>
-														</p>
+														<a href="BoardModifyView.mh?id=${user_id1}&num=${b.BOARD_NUM }">
+															<button type=button id=modify_btn class='btn float-right p-3 px-xl-4 py-xl-3'>수정하기</button>
+														</a>
 													</div>
 												</div>
 											</div>
@@ -144,7 +137,7 @@
 							"<button type=button id=write_btn class='btn float-right p-3 px-xl-4 py-xl-3'>글 쓰 기</button>");
 		}
 
-		$('button').click(function() {
+		$('#write_btn').click(function() {
 			location.href = "BoardWrite.mh?id=" + "${user_id1}";
 		});
 	</script>
