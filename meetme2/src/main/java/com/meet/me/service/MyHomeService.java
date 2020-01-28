@@ -19,5 +19,7 @@ public interface MyHomeService {
 	public void insertBoard(Board board);
 	public int getListCount(String u_id);
 	public List<Board> boardlist(int page, int limit, String u_id);
-	public List<Follows> follows(int m_num);	
+	public List<Follows> follows(int m_num);
+	public Board getDetail(int num);
+	public int boardModify(Board board);	
 }

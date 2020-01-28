@@ -84,7 +84,8 @@ public class MyhomeBoardController {
 			int month = c.get(Calendar.MONTH);
 			int date = c.get(Calendar.DATE);
 
-			String saveFolder = "C:\\Users\\32426\\git\\m3\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+			//String saveFolder = "C:\\Users\\32426\\git\\m3\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 
 			System.out.println(homedir);
@@ -116,31 +117,6 @@ public class MyhomeBoardController {
 		return "redirect:mboard.mh?id=" + user_id;
 	}
 
-
-//	@RequestMapping(value = "/BoardDetailAction.bo")
-//	public ModelAndView BoardDetail(@RequestParam(value = "num") int num, ModelAndView m, HttpServletRequest request) {
-//
-//		// 글의 내용을 DAO에서 읽은 후 얻은 결과를 boarddata 객체에 저장합니다.
-//		System.out.println("num :" + num);
-//		Board boarddata = boardservice.getDetail(num);
-//
-//		if (boarddata == null) {
-//			System.out.println("상세보기 실패");
-//			m.setViewName("error/error");
-//			m.addObject("url", request.getRequestURL());
-//			m.addObject("message", "상세보기 실패입니다.");
-//		} else {
-//			System.out.println("상세보기 성공");
-//			int count = commentService.getListCount(num);
-//			m.setViewName("board/qna_board_view");
-//			m.addObject("count", count);
-//			m.addObject("boarddata", boarddata);
-//
-//		}
-//
-//		return m;
-//	}
-//
 	@RequestMapping(value = "/mboard.mh")
 	public ModelAndView boardlist(@RequestParam("id") String u_id, @RequestParam(value = "page", required = false, defaultValue = "1") int page,
 			ModelAndView model) throws Exception {
@@ -206,81 +182,69 @@ public class MyhomeBoardController {
 //		}
 //		return mv;
 //	}
-//
-//	@GetMapping("BoardModifyView.bo")
-//	public ModelAndView BoardModifyView(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
-//		Board board = boardservice.getDetail(num);
-//		// 글 내용 불러오기 실패한 경우입니다.
-//		if (board == null) {
-//			System.out.println("(수정)상세보기 실패");
-//			mv.setViewName("error/error");
-//			mv.addObject("url", request.getRequestURL());
-//			mv.addObject("message", "(수정)상세보기 실패");
-//			return mv;
-//		}
-//		System.out.println("(수정)상세보기 성공");
-//
-//		// 수정 폼 페이지로 이동할 때 원문 글 내용을 보여주기 때문에 board 객체를
-//		// ModelAndView 객체에 저장합니다.
-//		mv.addObject("boarddata", board);
-//		// 글 수정 폼 페이지로 이동하기 위해 경로를 설정합니다.
-//		mv.setViewName("board/qna_board_modify");
-//		return mv;
-//	}
-//
-//	@PostMapping("BoardModifyAction.bo")
-//	public ModelAndView BoardModifyAction(Board board, String before_file, ModelAndView mv, HttpServletRequest request,
-//			HttpServletResponse response) throws Exception {
-//		boolean usercheck = boardservice.isBoardWriter(board.getBOARD_NUM(), board.getBOARD_PASS());
-//		// 비밀번호가 다른 경우
-//		if (usercheck == false) {
-//			response.setContentType("text/html;charset=utf-8");
-//			PrintWriter out = response.getWriter();
-//			out.println("<script>");
-//			out.println("alert('비밀번호가 다릅니다.');");
-//			out.println("</script>");
-//			out.close();
-//			return null;
-//		}
-//		MultipartFile uploadfile = board.getUploadfile();
-//		//1.
-//		//String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
-//
-//		if (uploadfile != null && !uploadfile.isEmpty()) { // 파일 변경한 경우
-//			System.out.println("파일 변경한 경우");
-//			String fileName = uploadfile.getOriginalFilename(); // 원래 파일
-//			board.setBOARD_ORIGINAL(fileName);
-//			String fileDBName = fileDBName(fileName, saveFolder);
-//
-//			// transferTo(File path):업로드한 파일을 매개변수의 경로에 저장합니다.
-//			uploadfile.transferTo(new File(saveFolder + fileDBName));
-//
-//			// 바뀐 파일명으로 저장
-//			board.setBOARD_FILE(fileDBName);
-//		}
-//
-//		int result = boardservice.boardModify(board);
-//		if (result == 0) {
-//			System.out.println("게시판 수정 실패");
-//			mv.setViewName("error/error");
-//			mv.addObject("url", request.getRequestURL());
-//			mv.addObject("message", "게시판 수정실패");
-//		} else {// 수정 성공의 경우
-//			System.out.println("게시판 수정 완료");
-//			
+
+	@GetMapping("BoardModifyView.mh")
+	public ModelAndView BoardModifyView(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
+		Board board = mhservice.getDetail(num);
+		// 글 내용 불러오기 실패한 경우입니다.
+		if (board == null) {
+			System.out.println("(수정)상세보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "(수정)상세보기 실패");
+			return mv;
+		}
+		System.out.println("(수정)상세보기 성공");
+
+		// 수정 폼 페이지로 이동할 때 원문 글 내용을 보여주기 때문에 board 객체를
+		// ModelAndView 객체에 저장합니다.
+		mv.addObject("boarddata", board);
+		// 글 수정 폼 페이지로 이동하기 위해 경로를 설정합니다.
+		mv.setViewName("myhome/mboard_modify");
+		return mv;
+	}
+
+	@PostMapping("BoardModifyAction.mh")
+	public ModelAndView BoardModifyAction(@RequestParam("id") String m_id, Board board, String before_file, ModelAndView mv, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		MultipartFile uploadfile = board.getUploadfile();
+		String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
+
+		if (uploadfile != null && !uploadfile.isEmpty()) { // 파일 변경한 경우
+			System.out.println("파일 변경한 경우");
+			String fileName = uploadfile.getOriginalFilename(); // 원래 파일
+			board.setBOARD_ORIGINAL(fileName);
+			String fileDBName = fileDBName(fileName, saveFolder);
+
+			// transferTo(File path):업로드한 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+
+			// 바뀐 파일명으로 저장
+			board.setBOARD_PHOTO(fileDBName);
+		}
+
+		int result = mhservice.boardModify(board);
+		if (result == 0) {
+			System.out.println("게시판 수정 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "게시판 수정실패");
+		} else {// 수정 성공의 경우
+			System.out.println("게시판 수정 완료");
+			
 //			//추가
 //			//수정 전에 파일이 있고 새로운 파일을 선택한 경우는 삭제할 목록을 테이블에 추가합니다.
-//			if(!before_file.equals("")&&!before_file.contentEquals(board.getBOARD_FILE())) {
-//				boardservice.insert_deleteFile(before_file);
+//			if(!before_file.equals("")&&!before_file.contentEquals(board.getBOARD_PHOTO())) {
+//				mhservice.insert_deleteFile(before_file);
 //			}
-//			String url = "redirect:BoardDetailAction.bo?num=" + board.getBOARD_NUM();
-//
-//			// 수정한 글 내용을 보여주기 위해 글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
-//			mv.setViewName(url);
-//		}
-//		return mv;
-//	}
-//
+			String url = "redirect:mboard.mh?id=" + m_id;
+
+			// 수정한 글 내용을 보여주기 위해 글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
+			mv.setViewName(url);
+		}
+		return mv;
+	}
+
 //	@PostMapping("BoardDeleteAction.bo")
 //	public String BoardDeleteAction(String BOARD_PASS, int num, HttpServletResponse response) throws Exception {
 //		// 글 삭제 명령을 요청한 사용자가 글을 작성한 사용자인지 판단하기 위해
@@ -416,47 +380,47 @@ public class MyhomeBoardController {
 //			e.printStackTrace();
 //		}
 //	}
-//
-//	private String fileDBName(String fileName, String saveFolder) {
-//		// 새로운 폴더 이름 : 오늘 년+월+일
-//		Calendar c = Calendar.getInstance();
-//		int year = c.get(Calendar.YEAR); // 오늘 년도 구합니다.
-//		int month = c.get(Calendar.MONTH) + 1; // 오늘 월 구합니다.
-//		int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
-//
-//		String homedir = saveFolder + year + "-" + month + "-" + date;
-//		System.out.println(homedir);
-//		File path1 = new File(homedir);
-//		if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
-//			path1.mkdir(); // 없을 경우 새로운 폴더를 생성
-//		}
-//
-//		// 난수를 구합니다. 사용자가 올린 파일의 이름이 중복되면 안되니까
-//		Random r = new Random();
-//		int random = r.nextInt(100000000);
-//
-//		/* 확장자 구하기 시작 //// 원래 파일의 형식이 .png / .jpg / 같은 형식일거니까 */
-//		int index = fileName.lastIndexOf(".");
-//		/*
-//		 * 문자열에서 특정 문자열의 위치 값을 반환한다. indexOf가 처음 발견되는 문자열에 대한 index를 반환하는 반면,
-//		 * lastIndexOf는 마지막으로 발견되는 문자열의 index를 반환합니다. (파일명에 점이 여러개 있을 경우 맨 마지막에 발견되는
-//		 * 문자열의 위치를 리턴합니다.)
-//		 */
-//
-//		System.out.println("index = " + index);
-//
-//		String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
-//		System.out.println("fileExtension = " + fileExtension);
-//		/* 확장자 구하기 끝 */
-//
-//		// 새로운 파일명을 저장
-//		String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-//		System.out.println("refileName = " + refileName);
-//
-//		// 오라클 디비에 저장될 파일명
-//		String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-//		System.out.println("fileDbName = " + fileDBName);
-//
-//		return fileDBName;
-//	}
+
+	private String fileDBName(String fileName, String saveFolder) {
+		// 새로운 폴더 이름 : 오늘 년+월+일
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR); // 오늘 년도 구합니다.
+		int month = c.get(Calendar.MONTH) + 1; // 오늘 월 구합니다.
+		int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
+
+		String homedir = saveFolder + year + "-" + month + "-" + date;
+		System.out.println(homedir);
+		File path1 = new File(homedir);
+		if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
+			path1.mkdir(); // 없을 경우 새로운 폴더를 생성
+		}
+
+		// 난수를 구합니다. 사용자가 올린 파일의 이름이 중복되면 안되니까
+		Random r = new Random();
+		int random = r.nextInt(100000000);
+
+		/* 확장자 구하기 시작 //// 원래 파일의 형식이 .png / .jpg / 같은 형식일거니까 */
+		int index = fileName.lastIndexOf(".");
+		/*
+		 * 문자열에서 특정 문자열의 위치 값을 반환한다. indexOf가 처음 발견되는 문자열에 대한 index를 반환하는 반면,
+		 * lastIndexOf는 마지막으로 발견되는 문자열의 index를 반환합니다. (파일명에 점이 여러개 있을 경우 맨 마지막에 발견되는
+		 * 문자열의 위치를 리턴합니다.)
+		 */
+
+		System.out.println("index = " + index);
+
+		String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
+		System.out.println("fileExtension = " + fileExtension);
+		/* 확장자 구하기 끝 */
+
+		// 새로운 파일명을 저장
+		String refileName = "bbs" + year + month + date + random + "." + fileExtension;
+		System.out.println("refileName = " + refileName);
+
+		// 오라클 디비에 저장될 파일명
+		String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
+		System.out.println("fileDbName = " + fileDBName);
+
+		return fileDBName;
+	}
 }

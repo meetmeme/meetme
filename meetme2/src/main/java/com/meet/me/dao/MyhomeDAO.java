@@ -55,4 +55,12 @@ public class MyhomeDAO {
 		return sqlSession.selectList("Follows.followlist", m_num);
 	}
 
+	public Board getDetail(int num) {
+		return sqlSession.selectOne("Myhomes.detail", num);
+	}
+
+	public int boardModify(Board board) {
+		return sqlSession.insert("Myhomes.modify", board);
+	}
+
 }

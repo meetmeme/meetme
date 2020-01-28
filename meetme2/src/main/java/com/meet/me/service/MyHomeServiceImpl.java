@@ -57,4 +57,12 @@ public class MyHomeServiceImpl  implements MyHomeService{
 	public List<Follows> follows(int m_num) {
 		return mhdao.follows(m_num);
 	}
+	@Override
+	public Board getDetail(int num) {
+		return mhdao.getDetail(num);
+	}
+	@Override
+	public int boardModify(Board board) {
+		return mhdao.boardModify(board);
+	}
 }
