@@ -15,3 +15,5 @@ SELECT * FROM MM_FOLLOWS;
 SELECT * FROM MM_FRICOM;
 SELECT * FROM MM_MESSAGE;
 SELECT * FROM MM_REPORT;
+
+select user_id, CryptString.decrypt(user_pass, 'encrypt') user_pass from MM_USER;

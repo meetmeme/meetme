@@ -3,12 +3,17 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="Users">
 	<select resultType="User" parameterType="String" id="idcheck">
+		select user_num, user_id, CryptString.decrypt(user_pass, 'encrypt') user_pass, user_name, user_email, user_gender, user_age, user_city, user_original, user_save, usercertification
+		from mm_user where user_id = #{user_id}
+	</select>
+	
+	<select resultType="User" parameterType="String" id="userinfo">
 		select *
 		from mm_user where user_id = #{user_id}
 	</select>
 
 	<select resultType="User" parameterType="String" id="emailcheck">
-		select *
+		select user_num, user_id, CryptString.decrypt(user_pass, 'encrypt') user_pass, user_name, user_email, user_gender, user_age, user_city, user_original, user_save, usercertification
 		from mm_user where user_email = #{user_email}
 	</select>
 
@@ -16,13 +21,13 @@
 	<insert parameterType="User" id="insert">
 		insert into mm_user
 		values((select nvl(max(user_num),0)+1 from mm_user),
-		#{user_id},#{user_pass},#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city},
+		#{user_id},CryptString.encrypt(#{user_pass}, 'encrypt'),#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city},
 		#{user_save}, #{user_original}, 0)
 	</insert>
 
 	<select id="selectNum" parameterType="String" resultType="User">
-		select
-		* from mm_user
+		select user_num, user_id, CryptString.decrypt(user_pass, 'encrypt') user_pass, user_name, user_email, user_gender, user_age, user_city, user_original, user_save, usercertification
+		from mm_user
 		where user_id = #{user_id}
 	</select>
 
@@ -89,8 +94,8 @@
 	</select>
 
 	<delete id="delete" parameterType="String">
-		delete from mm_user where
-		user_id=#{user_id}
+		delete from mm_user 
+		where user_id=#{user_id}
 	</delete>
 
 	<select id="getFriends" parameterType="map" resultType="user">
@@ -113,7 +118,7 @@
 
 	<update id="update" parameterType="user">
 		update mm_user set
-		user_name=#{user_name}, user_pass=#{user_pass},
+		user_name=#{user_name}, user_pass=CryptString.encrypt(#{user_pass}, 'encrypt'),
 		user_email=#{user_email}, user_gender=#{user_gender},
 		user_age=#{user_age}, user_city=#{user_city},
 		user_save=#{user_save},
@@ -123,23 +128,27 @@
 
 	<insert id="follow" parameterType="map">
 		insert into MM_FOLLOWS
-		values(#{userKey}, ${following})
+		values(#{userKey}, #{following})
 	</insert>
 
 	<select id="followCheck" parameterType="map" resultType="String">
-		select
-		count(*) from MM_FOLLOWS where USER_NUM = #{userKey} and FOLLOWING_NUM
-		= #{following}
+		select count(*) 
+		from MM_FOLLOWS 
+		where USER_NUM = #{userKey} 
+		and FOLLOWING_NUM = #{following}
 	</select>
 
 	<select id="user_info_email" parameterType="String"
 		resultType="user">
-		select * from MM_USER join USERAUTH using(USER_EMAIL) where user_email =
-		#{user_email}
+		select user_num, user_id, CryptString.decrypt(user_pass, 'encrypt') user_pass, user_name, user_email, user_gender, user_age, user_city, user_original, user_save, usercertification
+		from MM_USER join USERAUTH using(USER_EMAIL) 
+		where user_email = #{user_email}
 	</select>
 	
 	<update id="setPassword" parameterType="user">
-		update MM_USER set USER_PASS = #{user_pass} where USER_EMAIL = #{user_email}
+		update MM_USER 
+		set USER_PASS = CryptString.encrypt(#{user_pass}, 'encrypt') 
+		where USER_EMAIL = #{user_email}
 	</update>
 
 </mapper>
