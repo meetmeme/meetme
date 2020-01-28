@@ -33,7 +33,7 @@ public class UserDAO {
 	}
 
 	public User user_info(String user_id) {
-		return sqlSession.selectOne("Users.idcheck",user_id);
+		return sqlSession.selectOne("Users.userinfo",user_id);
 	}
 	
 	public int update(User u) {
