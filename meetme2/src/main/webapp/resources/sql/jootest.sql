@@ -32,3 +32,22 @@ insert into MM_EVENT_ATTENDEE values(3, 12);
 insert into MM_EVENT_ATTENDEE values(3, 13);
 insert into MM_EVENT_ATTENDEE values(3, 14);
 insert into MM_EVENT_ATTENDEE values(5, 3);
+
+
+
+select * from MM_EVENT_GALLERY;
+
+
+select * from MM_HASHTAG;
+
+select * from MM_HASHTAG_USE;
+
+
+
+
+
+
+
+
+
+

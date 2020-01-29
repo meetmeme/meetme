@@ -1,5 +1,6 @@
 package com.meet.me.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.meet.me.domain.Event;
+import com.meet.me.domain.Gallery;
+import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
 @Repository
 public class EventDAO {
@@ -48,7 +51,37 @@ public class EventDAO {
 
 	public List<Event> searchCat(String category) {
 		return sqlSession.selectList("Events.searchCat", category);
+	}
 
+	public int insertEvent(Event event) {
+		return sqlSession.insert("Events.insertEvent", event);
+	}
+
+	public Hashtag has(String tag) {
+		return sqlSession.selectOne("Events.has", tag);
+	}	
+
+	public int insertTagUse(int tag_num, int event_num) {
+		Map<String, Integer> num = new HashMap<String, Integer>();
+		num.put("tag_num", tag_num);
+		num.put("event_num", event_num);
+		return sqlSession.insert("Events.insertTagUse",num);
+	}
+
+	public void insertHashtag(String title) {
+		sqlSession.insert("Events.insertHashtag", title);
+	}
+
+	public int getnum(String id) {
+		return sqlSession.selectOne("Events.num", id);
+	}
+
+	public int getEventnum() {
+		return sqlSession.selectOne("Events.Eventnum");
+	}
+
+	public void insertGallery(Gallery gall) {
+		sqlSession.insert("Events.Gallery", gall);
 	}
 
 }
