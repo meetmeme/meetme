@@ -18,7 +18,7 @@ public class Event {
 	private int EVENT_MAX;
 	private int EVENT_PRICE;
 	private String EVENT_SAVE;
-	private String EVENT_ORIGINAL;	
+	private String EVENT_ORIGINAL;
 //	private String EVENT_SAVE = "https://source.unsplash.com/random/130x130";
 //	private String EVENT_ORIGINAL = "https://source.unsplash.com/random/130x130";
 
@@ -27,6 +27,31 @@ public class Event {
 	private List<MultipartFile> upload;
 	private String row_hashtag;
 	private String user_id;
+	private String event_detail;	
+
+	public String getEVENT_SAVE() {
+		return EVENT_SAVE;
+	}
+
+	public void setEVENT_SAVE(String eVENT_SAVE) {
+		EVENT_SAVE = eVENT_SAVE;
+	}
+
+	public String getEVENT_ORIGINAL() {
+		return EVENT_ORIGINAL;
+	}
+
+	public void setEVENT_ORIGINAL(String eVENT_ORIGINAL) {
+		EVENT_ORIGINAL = eVENT_ORIGINAL;
+	}
+
+	public String getEvent_detail() {
+		return event_detail;
+	}
+
+	public void setEvent_detail(String event_detail) {
+		this.event_detail = event_detail;
+	}
 
 	public String getUser_id() {
 		return user_id;
@@ -67,11 +92,6 @@ public class Event {
 
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
-	}
-
-	@Override
-	public String toString() {
-		return "Event [EVENT_NUM=" + EVENT_NUM + ", EVENT_TITLE=" + EVENT_TITLE + ", EVENT_DATE=" + EVENT_DATE + "]";
 	}
 
 	public int getEVENT_NUM() {
@@ -154,22 +174,6 @@ public class Event {
 		this.categorys = categorys;
 	}
 
-	public String getEVENT_SAVE() {
-		return EVENT_SAVE;
-	}
-
-	public void setEVENT_SAVE(String eVENT_SAVE) {
-		EVENT_SAVE = eVENT_SAVE;
-	}
-
-	public String getEVENT_ORIGINAL() {
-		return EVENT_ORIGINAL;
-	}
-
-	public void setEVENT_ORIGINAL(String eVENT_ORIGINAL) {
-		EVENT_ORIGINAL = eVENT_ORIGINAL;
-	}
-
 	public int getUSER_NUM() {
 		return USER_NUM;
 	}
@@ -177,4 +181,17 @@ public class Event {
 	public void setUSER_NUM(int uSER_NUM) {
 		USER_NUM = uSER_NUM;
 	}
+
+	@Override
+	public String toString() {
+		return "Event [EVENT_NUM=" + EVENT_NUM + ", USER_NUM=" + USER_NUM + ", CATEGORY_NUM=" + CATEGORY_NUM
+				+ ", EVENT_TITLE=" + EVENT_TITLE + ", EVENT_CONTENT=" + EVENT_CONTENT + ", EVENT_DATE=" + EVENT_DATE
+				+ ", EVENT_TIME=" + EVENT_TIME + ", EVENT_LOCATION=" + EVENT_LOCATION + ", EVENT_LAT=" + EVENT_LAT
+				+ ", EVENT_LNG=" + EVENT_LNG + ", EVENT_MAX=" + EVENT_MAX + ", EVENT_PRICE=" + EVENT_PRICE
+				+ ", categorys=" + categorys + ", upload=" + upload + ", row_hashtag=" + row_hashtag + ", user_id="
+				+ user_id + ", event_detail=" + event_detail + "]";
+	}
+
+	
+	
 }

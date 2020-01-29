@@ -61,7 +61,7 @@ try{
 				
 				<h2 class="nino-sectionHeading">detail</h2>
        			<div class="input-group input-group-lg">
-					<textarea rows="20" class="form-control" cols="120"  id="event_content" name="EVENT_CONTENT" placeholder="Enter event detail" required></textarea>
+					<textarea rows="20" class="form-control" cols="120"  id="event_content" name="event_detail" placeholder="Enter event detail" required></textarea>
 				</div>
 				
 				<h2 class="nino-sectionHeading">when</h2>

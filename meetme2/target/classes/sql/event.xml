@@ -105,10 +105,10 @@
 	
 	<insert parameterType="Event" id="insertEvent">
 		insert into mm_event
-		values((select nvl(max(event_num),0)+1 from mm_event),
-		#{user_num},#{category_num},#{event_title},#{event_content},#{event_date},#{event_time},
-		#{event_location},#{event_lat},#{event_lng},#{event_max}, #{event_price}, #{event_save},
-		#{event_original}, #{event_hashtag})
+		values((select nvl(max(EVENT_NUM),0)+1 from mm_event),
+		#{USER_NUM},#{CATEGORY_NUM},#{EVENT_TITLE},#{EVENT_CONTENT},#{EVENT_DATE},#{EVENT_TIME},
+		#{EVENT_LOCATION},#{EVENT_LAT},#{EVENT_LNG},#{EVENT_MAX}, #{EVENT_PRICE}, #{EVENT_SAVE},
+		#{EVENT_ORIGINAL})
 	</insert>
 	
 	<select id="has" parameterType="String" resultType="Hashtag">
@@ -118,7 +118,7 @@
 	
 	<insert id="insertTagUse" parameterType="int">
 		insert into MM_HASHTAG_USE(HASHTAG_NUM, EVENT_NUM)
-		values( #{tag_num}, (select max(EVENT_NUM) from MM_EVENT)+1)
+		values( #{tag_num}, #{event_num} )
 	</insert>
 	
 	<insert id="insertHashtag" parameterType="String">
@@ -130,5 +130,13 @@
 		select USER_NUM from MM_USER
 		where USER_ID = #{id}
 	</select>
+	
+	<select id="Eventnum" resultType="int">
+		select max(event_num) from mm_event
+	</select>
+	
+	<insert id="Gallery" parameterType="Gallery">
+		insert into mm_event_gallery values(#{EVENT_NUM}, #{EVENT_GALLERY}, #{EVENT_GALLERY_ORIGINAL})
+	</insert>
 	
 </mapper>

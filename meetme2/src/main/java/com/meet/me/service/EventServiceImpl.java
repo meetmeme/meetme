@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.EventDAO;
 import com.meet.me.domain.Event;
+import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
 @Service
@@ -76,20 +77,28 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public void insertTagUse(int tag_num) {
-		dao.insertTagUse(tag_num);
-		System.out.println("MM_HASHTAG_USE 추가함");
+	public int insertTagUse(int tag_num, int event_num) {
+		return dao.insertTagUse(tag_num, event_num);
 	}
 
 	@Override
 	public void insertHashtag(String title) {
 		dao.insertHashtag(title);
-		System.out.println("MM_HASHTAG 만듬");
 	}
 
 	@Override
-	public int getUser_num(String id) {
+	public int getUSER_NUM(String id) {
 		return dao.getnum(id);
+	}
+
+	@Override
+	public int getEventnum() {
+		return dao.getEventnum();
+	}
+
+	@Override
+	public void insertGallery(Gallery gall) {
+		dao.insertGallery(gall);
 	}
 
 }
