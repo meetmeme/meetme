@@ -1,3 +1,5 @@
+![readme_1](./image/readme_1.JPG)
+
 # Meet Me!
 * M&M
 * 02/06/2020 ~ 12/30/2019
