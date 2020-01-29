@@ -68,10 +68,6 @@
 		myhome_num=#{myhome_num}
 	</update>
 
-	<!-- <insert id="board_insert" parameterType="board"> insert into mm_board 
-		values(#{MYHOME_NUM},(select nvl(max(BOARD_NUM),0)+1 from mm_board),#{BOARD_ID}, 
-		'',#{BOARD_TITLE},#{BOARD_CONTENT},#{BOARD_ORIGINAL},#{BOARD_DATE}) </insert> -->
-
 	<insert id="board_insert" parameterType="board">
 		<selectKey resultType="int" order="BEFORE"
 			keyProperty="BOARD_NUM">
@@ -83,12 +79,12 @@
 		#{BOARD_ORIGINAL, jdbcType=VARCHAR},sysdate)
 	</insert>
 
-	<select id="count" parameterType="String" resultType="int">
+	<select id="board_count" parameterType="String" resultType="int">
 		select
 		count(*) from mm_board where BOARD_ID=#{u_id}
 	</select>
 
-	<select id="list" parameterType="java.util.Map"
+	<select id="board_list" parameterType="java.util.Map"
 		resultType="Board">
 		select * from (select
 		rownum rnum, b.* from (select * from
@@ -99,17 +95,47 @@
 		and rnum &lt;=#{end}
 	</select>
 
-	<select id="detail" resultType="Board" parameterType="int">
+	<select id="board_detail" resultType="Board" parameterType="int">
 		select *
 		from mm_board where BOARD_NUM = #{num}
 	</select>
 
-	<update id="modify" parameterType="Board">
-		update mm_board set BOARD_TITLE=#{BOARD_TITLE},
+	<update id="board_modify" parameterType="Board">
+		update mm_board set
+		BOARD_TITLE=#{BOARD_TITLE},
 		BOARD_CONTENT=#{BOARD_CONTENT},
 		BOARD_PHOTO=#{BOARD_PHOTO, jdbcType=VARCHAR},
 		BOARD_ORIGINAL=#{BOARD_ORIGINAL, jdbcType=VARCHAR}
-		where BOARD_NUM=#{BOARD_NUM}
+		where
+		BOARD_NUM=#{BOARD_NUM}
+	</update>
+
+	<select id="comment_list" parameterType="int"
+		resultType="comment">
+		select * from mm_comment where BOARD_USER_NUM = #{board_user_num}
+	</select>
+
+<!-- 	<insert id="comment_insert" parameterType="comment">
+		<selectKey resultType="int" order="BEFORE"
+			keyProperty="COMMENT_NUM">
+			select nvl(max(COMMENT_NUM),0)+1 from MM_COMMENT
+		</selectKey>
+		insert into mm_comment
+		values(#{COMMENT_NUM},#{USER_NUM},#{BOARD_USER_NUM},#{COMMENT_CONTENT},sysdate,#{BOARD_NUM})
+	</insert> -->
+	<insert id="comment_insert" parameterType="comment">
+		insert into mm_comment
+		values(	(select nvl(max(COMMENT_NUM),0)+1 from MM_COMMENT),#{USER_NUM},#{BOARD_USER_NUM},#{COMMENT_CONTENT},sysdate,#{BOARD_NUM})
+	</insert>
+
+
+	<delete id="comment_delete" parameterType="int">
+		delete from mm_comment where COMMENT_NUM = #{COMMENT_NUM}
+	</delete>
+
+	<update id="comment_update" parameterType="comment">
+		update mm_comment set
+		COMMENT_CONTENT = #{COMMENT_CONTENT} where COMMENT_NUM = #{COMMENT_NUM}
 	</update>
 
 </mapper>

@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Board;
+import com.meet.me.domain.Comment;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 import com.meet.me.service.MyHomeService;
@@ -140,8 +142,12 @@ public class MyhomeBoardController {
 			endpage = maxpage;
 		
 		model.setViewName("myhome/mboard");
-		List<Board> list = mhservice.boardlist(page, limit, u_id);
-
+		
+		int board_user_num = userservice.user_info(u_id).getUser_num();
+		System.out.println("text>>>user_num>>>"+board_user_num);
+		List<Board> boardlist = mhservice.boardlist(page, limit, u_id);
+		System.out.println("board>>"+board_user_num);
+		List<Comment> commentlist = mhservice.getCommentList(board_user_num);
 		System.out.println("page =" + page);
 		System.out.println("limit =" + limit);
 		
@@ -150,7 +156,8 @@ public class MyhomeBoardController {
 		model.addObject("startpage", startpage);
 		model.addObject("endpage", endpage);
 		model.addObject("limit", limit);
-		model.addObject("boardlist", list);
+		model.addObject("boardlist", boardlist);
+		model.addObject("commentlist", commentlist);
 		model.addObject("listcount", listcount);
 		return model;
 	}
@@ -423,4 +430,46 @@ public class MyhomeBoardController {
 
 		return fileDBName;
 	}
+
+//	@ResponseBody
+//	@PostMapping("CommentList.mh")
+//	public List<Comment> commentList(int board_num) throws IOException {
+//
+//		List<Comment> list = mhservice.getCommentList(board_num);
+//		System.out.println("댓글 정보 : " + list.size());
+//		return list;
+//	}
+
+	
+	@PostMapping("CommentDelete.mh")
+	public void CommentDelete(int num , HttpServletResponse resp) throws IOException {
+		int result = mhservice.commentsDelete(num);
+		resp.getWriter().print(result);
+	}
+	
+	@PostMapping("CommentUpdate.mh")
+	public void CommentUpdate(Comment c, HttpServletResponse res) throws IOException {
+	
+		int result = mhservice.commentUpdate(c);
+		res.getWriter().print(result);
+		
+	}
+	
+	@RequestMapping("CommentAdd.mh")
+	public void CommentAdd(@RequestParam(value="board_num", required=false) int board_num,
+			@RequestParam(value="board_user_num", required=false) int board_user_num,
+			HttpSession session, String content, HttpServletResponse response) throws Exception {
+		System.out.println("comment 글num = " + board_num);
+		int user_num = (int) session.getAttribute("user_num1");
+		Comment c = new Comment();
+		c.setUSER_NUM(user_num);
+		c.setBOARD_USER_NUM(board_user_num);
+		c.setCOMMENT_CONTENT(content);
+		c.setBOARD_NUM(board_num);
+		int result = mhservice.commentsInsert(c);
+		System.out.println("result = " + result);
+		response.getWriter().print(result);
+	}
+
+	
 }
