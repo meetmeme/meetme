@@ -52,12 +52,12 @@ public class CommunityController {
 		response.getWriter().write(jsonList);
 	}
 
-	@PostMapping(value = "deleteNotice.cm")
+	@PostMapping(value = "deleteNotice.cm")	//알람 읽음
 	@ResponseBody
-	public int checkNotice(HttpServletRequest request) throws IOException {
+	public int readNotice(HttpServletRequest request) throws IOException {
 		String notice_num = request.getParameter("notice_num").toString();
 
-		int result = communityService.checkNotice(notice_num);
+		int result = communityService.readNotice(notice_num);
 
 		return result;
 
@@ -96,5 +96,16 @@ public class CommunityController {
 			out.println("</script>");
 			out.close();
 		}
+	}
+	
+	@PostMapping(value = "checkNotification.cm") // 알람 있는지 확인
+	@ResponseBody
+	public int checkNotification(HttpServletRequest request) throws IOException {
+		String user_num = request.getParameter("userNum").toString();
+		
+		int numOfNotif = communityService.checkNotification(user_num);
+		
+		return numOfNotif;
+		
 	}
 }

@@ -24,7 +24,7 @@ public class CommunityDAO {
 		return sqlSession.selectList("Community.getNotification", id+"");
 	}
 
-	public int checkNotice(String notice_num) {
+	public int readNotice(String notice_num) {
 		return sqlSession.update("Community.checkNotice", notice_num);
 	}
 
@@ -35,6 +35,10 @@ public class CommunityDAO {
 		notice.put("content", content);
 		
 		sqlSession.insert("Community.addNotification", notice); 
+	}
+
+	public int checkNotification(String user_num) {
+		return sqlSession.selectOne("checkNotification", user_num);
 	}
 
 }

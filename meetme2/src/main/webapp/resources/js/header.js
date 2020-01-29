@@ -1,5 +1,21 @@
 $(window).on('load', function() {
-	// 알람 있는지 확인 예정
+	if (!$('#user_num1').val())
+		return false;
+	$.ajax({
+		type : 'post',
+		url : 'checkNotification.cm',
+		dataType : 'text',
+		data : {
+			'userNum' : $('#user_num1').val()
+		},
+		success : function(data) {
+			if(data > 0){
+				$('#userMenuBox').children().css({"border": "2px solid rgba(243,129,129)"}); 
+				$('#userMenuBox').children().addClass('blink');
+				$('#noticeModaltag').append("<span class='numOfNotice'>"+data+"</span>");
+			}
+		} // end success
+	}); // end ajax
 });
 $(function() {
 
@@ -256,6 +272,11 @@ $(function() {
 			} // end success
 		}); // end ajax
 	});
+	
+	// notice close
+	$(document).on('click', '.closeNotice', function() {
+		window.location.reload();
+	});
 
 	// 유저 메뉴 알람 누르면 알람 가져오기
 	$('#noticeModaltag').click(function() {
@@ -308,25 +329,6 @@ $(function() {
 				}); // end ajax
 	}
 });
-function follow(user_id, user_name) {
-	if (!$('#userIdCache').val())
-		return false;
-	$.ajax({
-		type : 'get',
-		url : 'follow.us',
-		data : {
-			'following' : user_id,
-		},
-		dataType : 'json',
-		success : function(data) {
-			if (data == 1) {
-				alert('💡' + user_name + '님을 팔로우 하였습니다💡');
-			} else if (data <= 0) {
-				alert('💡' + user_name + '님을 이미 팔로우 하고있습니다😅');
-			}
-		} // end success
-	}); // end ajax
-}
 
 function check() {
 	if (!$('#receiver_num').val()) {

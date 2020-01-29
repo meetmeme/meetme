@@ -10,9 +10,11 @@ public interface CommunityService {
 
 	public List<Notice> getNotification(int id);
 
-	public int checkNotice(String notice_num);
+	public int readNotice(String notice_num);
 
 	public void addNotification(int user_num, String title, String content);
+
+	public int checkNotification(String user_num);
 
 }
  
