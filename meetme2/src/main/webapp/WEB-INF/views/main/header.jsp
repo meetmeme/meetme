@@ -40,8 +40,8 @@
 <link rel="stylesheet" type="text/css" href="resources/css/join.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/modal.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/dash.css" />
-<link rel="stylesheet" type="text/css"
-	href="resources/css/user_list.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/user_list.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/header.css" />
 
 <!-- javascript -->
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
@@ -119,7 +119,7 @@
 											<c:if test="${!empty user_id1}">
 												<li><a href="#" onClick="mh_popup('${user_id1}')">myhome</a></li>
 												<li><a href="#" data-target="#darkModalForm"
-													data-toggle="modal" id='noticeModaltag'>notification</a></li>
+													data-toggle="modal" id='noticeModaltag' class='notification'>notification</a></li>
 												<li><a href="#" data-target="#layerpop3"
 													data-toggle="modal">message</a></li>
 												<li><a href="logout.net">logout</a></li>
@@ -207,6 +207,7 @@
 	</div>
 	<!--/#nino-searchForm-->
 	<input type="hidden" value="${note}" id=note>
+	<input type="hidden" value="${user_num1}" id=user_num1>
 </header>
 <!--/#header-->
 

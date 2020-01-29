@@ -21,4 +21,8 @@
 		insert into MM_NOTICE values((select nvl(max(notice_num),0)+1 from MM_NOTICE),
 		#{user_num}, #{title}, #{content}, sysdate, 0)
 	</insert>
+	
+	<select id="checkNotification" parameterType="String" resultType="Integer">
+		select count(*) from MM_NOTICE where USER_NUM = #{user_num} AND NOTICE_CK = 0
+	</select>
 </mapper>

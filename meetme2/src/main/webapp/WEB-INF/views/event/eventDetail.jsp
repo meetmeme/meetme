@@ -5,28 +5,48 @@
         <meta charset="utf-8">
         <title>Meet Me | ${event.EVENT_TITLE}</title>
     	<meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 
-Flex Template 
-http://www.templatemo.com/tm-406-flex
--->
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
 		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-        <script src="http://maps.googleapis.com/maps/api/js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBwlNqAEil52XRPHmSVb4Luk18qQG9GqcM&sensor=false&language=ko"></script> 
-        
+
         <link rel="stylesheet" href="resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="resources/css/font-awesome.css"  type='text/css'>
         <link rel="stylesheet" href="resources/css/animate.css">
         <link rel="stylesheet" href="resources/css/templatemo_misc.css">
         <link rel="stylesheet" href="resources/css/templatemo_style.css">
-        <link rel="stylesheet" href="resources/css/event.css">
-
-		<script src="resources/js/event/map.js"></script>
+        <link rel="stylesheet" href="resources/css/event.css">		
         <script src="resources/js/event/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-        
-    </head>
+       
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCJ1vbVWbRvoI0UuQBbhS_MLsJNEksyE" async defer ></script> 
+ 		<script src="resources/js/event/vendor/jquery-1.11.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="resources/js/event/vendor/jquery-1.11.0.min.js"><\/script>')</script>
+        <script src="resources/js/event/bootstrap.js"></script>
+        <script src="resources/js/event/plugins.js"></script>
+        <script src="resources/js/event/main.js"></script>
+
+     <!-- Google Map -->
+        <script src="resources/js/event/vendor/jquery.gmap3.min.js"></script>
+     <!--  Google Map Init -->      
+         <script type="text/javascript">
+          jQuery(function($){
+                $('#map_canvas').gmap3({
+                    marker:{
+                        address: '${event.EVENT_LAT}, ${event.EVENT_LNG}' 
+                    },
+                        map:{
+                        options:{
+                        zoom: 18,
+                        scrollwheel: false,
+                        streetViewControl : true
+                        }
+                    }
+                });
+
+                $('body').bind('touchstart', function() {});
+            }); 
+        </script>
+ 	</head>
     <body>
     
 <jsp:include page="../main/header.jsp" />
@@ -51,28 +71,32 @@ http://www.templatemo.com/tm-406-flex
                         <ul class="slides">     
                             <li>
                                 <div class="overlay"></div>
-                                <img src="resources/${event.EVENT_SAVE}" alt="">
+                                <div class="sum"><img class="sumimg" src="resources/upload/event${event.EVENT_SAVE}" alt=""></div>
                                 <div class="slider-caption visible-md visible-lg">
                                     <h2>${event.EVENT_TITLE}</h2><br>
                                     <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
-                                    <p>#해시태그 #검색되게</p>                                    
+                                    <p>
+                                    	<c:forEach var="tag" items="${tag}">
+                                    		<a class="tagSearch" href="hashtag.sc?hashtag=${tag.HASHTAG_TITLE}">#${tag.HASHTAG_TITLE} </a>                                	
+                                    	</c:forEach>
+                                    </p>                                    
                                 </div>
-                            </li>
-                           
-                           <%-- 
-                           
-                           <c:forEach var="pic" items="${pic}">       
+                            </li>                           
+                           <c:forEach var="gall" items="${gall}">       
                             <li>
                                 <div class="overlay"></div>
-                                <img src="resources/${pic.EVENT_PHOTO}" alt="">
+                                <div class="sum"><img class="sumimg" src="resources//upload/event${gall.EVENT_GALLERY}" alt=""></div>
                                 <div class="slider-caption visible-md visible-lg">
                                     <h2>${event.EVENT_TITLE}</h2><br>
                                     <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
-                                    <p>#해시태그 #검색되게</p>                                    
+                                    <p>
+                                    	<c:forEach var="tag" items="${tag}">
+                                    		<a class="tagSearch" href="hashtag.sc?hashtag=${tag.HASHTAG_TITLE}">#${tag.HASHTAG_TITLE} </a>                                	
+                                    	</c:forEach>
+                                    </p>                                   
                                 </div>
                             </li>
                            </c:forEach> 
-                            --%>
                            
                         </ul>
                     </div> <!-- /.flexslider -->
@@ -118,15 +142,16 @@ http://www.templatemo.com/tm-406-flex
            </c:forEach>
          </div> <!-- /.row -->  
         </div> <!-- /#our-team -->
-       
-        
+               
 
         <div class="content-section" id="location">
         	<div class="container">
 				<h2 class="nino-sectionHeading">
 					<span class="nino-subHeading">LOCATION</span> When & Where
 				</h2>
-				<p class="nino-sectionDesc">Be sure to keep track of time and place and have fun.</p>			
+				<p class="nino-sectionDesc">Be sure to keep track of time and place and have fun.</p>	
+				<input type="hidden" value="${event.EVENT_LAT}" id="lat">	
+				<input type="hidden" value="${event.EVENT_LNG}" id="lng">				
                 <div class="row">
                     <div class="col-md-12">
                        <div class="googlemap-wrapper">
@@ -191,38 +216,7 @@ http://www.templatemo.com/tm-406-flex
   	 		<a href="#" id="nino-scrollToTop">Go to Top</a>     
         </div>
         
-        <script src="resources/js/event/vendor/jquery-1.11.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="resources/js/event/vendor/jquery-1.11.0.min.js"><\/script>')</script>
-        <script src="resources/js/event/bootstrap.js"></script>
-        <script src="resources/js/event/plugins.js"></script>
-        <script src="resources/js/event/main.js"></script>
-
-        <!-- Google Map -->
-        <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
-        <script src="resources/js/event/vendor/jquery.gmap3.min.js"></script>
-        
-        <!-- Google Map Init-->
-        <script type="text/javascript">
-            jQuery(function($){
-                $('#map_canvas').gmap3({
-                    marker:{
-                        address: '37.769725, -122.462154' 
-                    },
-                        map:{
-                        options:{
-                        zoom: 15,
-                        scrollwheel: false,
-                        streetViewControl : true
-                        }
-                    }
-                });
-
-                /* Simulate hover on iPad
-                 * http://stackoverflow.com/questions/2851663/how-do-i-simulate-a-hover-with-a-touch-in-touch-enabled-browsers
-                 --------------------------------------------------------------------------------------------------------------*/ 
-                $('body').bind('touchstart', function() {});
-            });
-        </script>
+      
         <!-- templatemo 406 flex -->
     </body>
 </html>

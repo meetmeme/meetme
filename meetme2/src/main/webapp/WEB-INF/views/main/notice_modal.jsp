@@ -13,7 +13,7 @@
 				<div class="modal-header text-center pb-4">
 					<button type="button" class="close white-text" data-dismiss="modal"
 						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
+						<span aria-hidden="true" class='closeNotice'>&times;</span>
 					</button>
 					<br>
 					<h3 class="modal-title w-100 white-text font-weight-bold"

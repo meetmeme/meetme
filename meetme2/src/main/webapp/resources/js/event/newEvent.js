@@ -21,10 +21,10 @@ jQuery(document).ready(function($) {
 
 	});
 	
-	$("#event_people").focusout(function(){
-		if($("#event_people").val()<2){
+	$("#event_max").focusout(function(){
+		if($("#event_max").val()<2){
 			alert("최소 인원은 2명 입니다.");
-			$("#event_people").val('');
+			$("#event_max").val('');
 		};
 	});
 	
@@ -34,6 +34,9 @@ jQuery(document).ready(function($) {
 //		$("#event_cost").val(cost.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
 //	});
 			
+	
+	
+	
 });
 
 /**

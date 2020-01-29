@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.EventDAO;
 import com.meet.me.domain.Event;
+import com.meet.me.domain.Gallery;
+import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
 @Service
 public class EventServiceImpl implements EventService{
@@ -57,6 +59,56 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public List<Event> searchCat(String category) {
 		return dao.searchCat(category);
+	}
+	
+	@Override
+	public int insertEvent(Event event) throws Exception {		
+		return dao.insertEvent(event);	
+	}
+
+	@Override
+	public int has(String tag) {
+		Hashtag hashtag = dao.has(tag);
+		int result = 0;
+		if(hashtag != null) 
+			result = hashtag.getHASHTAG_NUM();
+		System.out.println("태그 결과"+result);
+		return result;
+	}
+
+	@Override
+	public int insertTagUse(int tag_num, int event_num) {
+		return dao.insertTagUse(tag_num, event_num);
+	}
+
+	@Override
+	public void insertHashtag(String title) {
+		dao.insertHashtag(title);
+	}
+
+	@Override
+	public int getUSER_NUM(String id) {
+		return dao.getnum(id);
+	}
+
+	@Override
+	public int getEventnum() {
+		return dao.getEventnum();
+	}
+
+	@Override
+	public void insertGallery(Gallery gall) {
+		dao.insertGallery(gall);
+	}
+
+	@Override
+	public List<Gallery> getGall(int event) {
+		return dao.getGall(event);
+	}
+
+	@Override
+	public List<Hashtag> getHashtag(int event) {
+		return dao.getHashtag(event);
 	}
 
 }

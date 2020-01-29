@@ -94,10 +94,10 @@
 						<c:if test="${user.user_id != 'admin' && user.user_id != user_id1}">
 							<div class="col-md-4 col-sm-4">
 								<div class="item">
-									<div class="overlay" onClick="mh_popup('${user.user_id}')"
+									<div class="overlay"   onClick="minihome('${user.user_id}','0','0','mh_popup')"
 										title="go to ${user.user_name}'s minihome">
 										<div class="content">
-											<a class="nino-icon" onclick="follow('${user.user_num}','${user.user_name}')"
+											<a class="nino-icon" onclick="minihome('0','${user.user_num}','${user.user_name}','follow')"
 												title="follow ${user.user_name}!"><i
 												class="mdi mdi-bookmark-plus-outline"></i></a>
 										</div>
