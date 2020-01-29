@@ -5,8 +5,6 @@
 <html lang="en">
 <jsp:include page="../main/header.jsp" />
 
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/css/pikaday.css">
 
@@ -102,7 +100,7 @@ try{
 				
 				<h2 class="nino-sectionHeading">hash tags</h2>
        			<div class="input-group input-group-lg">
-					<input type="text" class="form-control" name="row_hashtag" placeholder="Enter hash tags ex)#meetme #meet #event" required>
+					<input type="text" class="form-control" name="row_hashtag" placeholder="Enter hash tags ex)#meetme #meet #event">
 				</div>
 				
 				<br>

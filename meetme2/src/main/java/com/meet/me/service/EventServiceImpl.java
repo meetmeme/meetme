@@ -101,4 +101,14 @@ public class EventServiceImpl implements EventService{
 		dao.insertGallery(gall);
 	}
 
+	@Override
+	public List<Gallery> getGall(int event) {
+		return dao.getGall(event);
+	}
+
+	@Override
+	public List<Hashtag> getHashtag(int event) {
+		return dao.getHashtag(event);
+	}
+
 }

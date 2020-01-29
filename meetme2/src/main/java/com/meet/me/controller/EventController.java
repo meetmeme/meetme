@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Gallery;
+import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
 import com.meet.me.service.EventService;
 import com.meet.me.service.UserService;
@@ -37,6 +38,8 @@ public class EventController {
 		Event e = eventService.getDetail(event);	
 		int count = eventService.getAttend(event);
 		List<User> u = eventService.getUser(event);
+		List<Gallery> gall	= eventService.getGall(event);
+		List<Hashtag> tag = eventService.getHashtag(event);
 		if(e == null) {
 			System.out.println("detail 실패");
 		}else {
@@ -44,6 +47,8 @@ public class EventController {
 			mv.addObject("event",e);
 			mv.addObject("count",count);
 			mv.addObject("user",u);
+			mv.addObject("gall", gall);
+			mv.addObject("tag", tag);
 		}
 		return mv;		
 	}

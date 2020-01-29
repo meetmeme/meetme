@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Gallery;
+import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
 public interface EventService {
 	public List<String> getCategory();
@@ -23,5 +24,7 @@ public interface EventService {
 	public int getUSER_NUM(String id);
 	public int getEventnum();
 	public void insertGallery(Gallery gall);
+	public List<Gallery> getGall(int event);
+	public List<Hashtag> getHashtag(int event);
 }
  

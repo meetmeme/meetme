@@ -99,5 +99,24 @@
 .nino-sectionHeading:not(.nino-sectionHeading:after) {	
 text-align : left;
 }
+
+.tagSearch{
+	color : white;
+}
 	
+.sum{
+	height : 50em;
+	width : auto;
+	overflow: hidden;
+}
+
+.sumimg{
+	width : auto;
+}
+
+.flexslider .slides img {
+	width : auto;
+	margin : auto;
+	min-width : 80%;
+}
 

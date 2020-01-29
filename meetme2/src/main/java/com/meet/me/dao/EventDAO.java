@@ -84,4 +84,12 @@ public class EventDAO {
 		sqlSession.insert("Events.Gallery", gall);
 	}
 
+	public List<Gallery> getGall(int event) {
+		return sqlSession.selectList("Events.getGall", event);
+	}
+
+	public List<Hashtag> getHashtag(int event) {
+		return sqlSession.selectList("Events.getHashtag",event);
+	}
+
 }

@@ -139,4 +139,16 @@
 		insert into mm_event_gallery values(#{EVENT_NUM}, #{EVENT_GALLERY}, #{EVENT_GALLERY_ORIGINAL})
 	</insert>
 	
+	<select id="getGall" resultType="Gallery">
+		select * from mm_event_gallery where EVENT_NUM = #{event}
+	</select>
+	
+	<select id="getHashtag" resultType="Hashtag">
+		select * from MM_HASHTAG where HASHTAG_NUM in (
+									select HASHTAG_NUM from MM_HASHTAG_USE where EVENT_NUM = #{event}
+										)
+	</select>
+	
+	
+	
 </mapper>

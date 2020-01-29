@@ -42,7 +42,12 @@ select * from MM_HASHTAG;
 
 select * from MM_HASHTAG_USE;
 
-
+select * from MM_HASHTAG 
+where HASHTAG_NUM in (
+	select HASHTAG_NUM 
+	from MM_HASHTAG_USE 
+	where EVENT_NUM = 5
+	);
 
 
 
