@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.MyhomeDAO;
 import com.meet.me.domain.Board;
+import com.meet.me.domain.Comment;
 import com.meet.me.domain.Follows;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
@@ -64,5 +65,21 @@ public class MyHomeServiceImpl  implements MyHomeService{
 	@Override
 	public int boardModify(Board board) {
 		return mhdao.boardModify(board);
+	}
+	@Override
+	public List<Comment> getCommentList(int board_user_num) {
+		return mhdao.getcommentlist(board_user_num);
+	}
+	@Override
+	public int commentsDelete(int num) {
+		return mhdao.commentdelete(num);
+	}
+	@Override
+	public int commentUpdate(Comment c) {
+		return mhdao.commentupdate(c);
+	}
+	@Override
+	public int commentsInsert(Comment c) {
+		return mhdao.commentinsert(c);
 	}
 }

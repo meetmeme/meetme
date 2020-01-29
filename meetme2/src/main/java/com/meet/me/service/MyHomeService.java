@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.meet.me.domain.Board;
+import com.meet.me.domain.Comment;
 import com.meet.me.domain.Follows;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
@@ -21,5 +22,9 @@ public interface MyHomeService {
 	public List<Board> boardlist(int page, int limit, String u_id);
 	public List<Follows> follows(int m_num);
 	public Board getDetail(int num);
-	public int boardModify(Board board);	
+	public int boardModify(Board board);
+	public List<Comment> getCommentList(int BOARD_USER_NUM);
+	public int commentsDelete(int num);
+	public int commentUpdate(Comment c);
+	public int commentsInsert(Comment c);	
 }
