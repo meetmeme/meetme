@@ -130,7 +130,7 @@
            <c:forEach var="user" items="${user}">               
                <div class="team-member col-md-3 col-sm-6">
                    <div class="member-thumb">
-                    <img src="resources/${user.user_save}" alt="">
+                    <img src="resources/upload${user.user_save}" alt="">
                        <div class="team-overlay">
                            <h3>${user.user_name }</h3>
                            <ul class="social">
@@ -150,8 +150,6 @@
 					<span class="nino-subHeading">LOCATION</span> When & Where
 				</h2>
 				<p class="nino-sectionDesc">Be sure to keep track of time and place and have fun.</p>	
-				<input type="hidden" value="${event.EVENT_LAT}" id="lat">	
-				<input type="hidden" value="${event.EVENT_LNG}" id="lng">				
                 <div class="row">
                     <div class="col-md-12">
                        <div class="googlemap-wrapper">
@@ -159,12 +157,12 @@
                      
 	                       <div class="ww">
 		                       	<div id="when">
-		                       		<span class="fa icon fa-clock" ></span>
-		                       		<span class="wtext">${event.EVENT_TIME}</span>
+		                       		<p class="fa icon fa-clock" ></p>
+		                       		<p class="wtext">${event.EVENT_TIME}</p>
 		                       	</div>
 		                       	<div id="where">
-		                       		<span class="fa icon fa-map-marker" ></span>
-		                       		<span class="wtext">${event.EVENT_LOCATION}</span>
+		                       		<p class="fa icon fa-map-marker" ></p>
+		                       		<p class="wtext">${event.EVENT_LOCATION}</p>
 		                       	</div>
 	                       </div>
                       </div> <!-- /.googlemap-wrapper -->
@@ -207,16 +205,27 @@
    					${event.EVENT_TITLE}
    				</span>
    			</div>
+   			<div id="footMax" class="footcon">
+   				잔여석<br>
+   				 ${remain}
+   			</div>
    			<div id="footPrice" class="footcon">
+   				가격(￦)<br>
    				 ${event.EVENT_PRICE}
    			</div>
    			<div id="footBtn" class="footcon">
+   			
+   			<c:if test="${remain>0}">
 				<button class="attend" type="submit">참석</button>
+			</c:if>
+			<c:if test="${remain<1}">
+				<button class="full" type="button">매진</button>
+			</c:if>
+			
    			</div>
   	 		<a href="#" id="nino-scrollToTop">Go to Top</a>     
         </div>
         
       
-        <!-- templatemo 406 flex -->
     </body>
 </html>

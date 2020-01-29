@@ -50,9 +50,18 @@ where HASHTAG_NUM in (
 	);
 
 
+insert into MM_EVENT_ATTENDEE values(13,1);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
 
-
-
+select * from MM_USER;
 
 
 

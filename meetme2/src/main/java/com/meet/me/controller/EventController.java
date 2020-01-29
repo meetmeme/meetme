@@ -40,16 +40,18 @@ public class EventController {
 		List<User> u = eventService.getUser(event);
 		List<Gallery> gall	= eventService.getGall(event);
 		List<Hashtag> tag = eventService.getHashtag(event);
-		if(e == null) {
-			System.out.println("detail 실패");
-		}else {
-			mv.setViewName("event/eventDetail");
-			mv.addObject("event",e);
-			mv.addObject("count",count);
-			mv.addObject("user",u);
-			mv.addObject("gall", gall);
-			mv.addObject("tag", tag);
-		}
+		int remain = e.getEVENT_MAX() - eventService.getRemain(event);
+		System.out.println("남은 자리="+remain);
+		
+		mv.setViewName("event/eventDetail");
+		mv.addObject("event",e);
+		mv.addObject("count",count);
+		mv.addObject("user",u);
+		mv.addObject("gall", gall);
+		mv.addObject("tag", tag);
+		mv.addObject("remain", remain);
+		
+		
 		return mv;		
 	}
 	
@@ -143,7 +145,8 @@ public class EventController {
 		}		
 		
 		// 방금 넣은 event_num
-		event_num = eventService.getEventnum();			
+		event_num = eventService.getEventnum();	
+		System.out.println("등록한 이벤트 번호 = " + event_num);
 		
 		String row = event.getRow_hashtag();
 		if(!row.isEmpty()) {

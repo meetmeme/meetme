@@ -758,22 +758,23 @@ hr {
 
 .map-canvas {
   height: 600px;
-  width : 65%;
+  width : 55%;
   border: 10px solid #efefef;
   float : left;
 }
 
 .ww{
-	width : 25%;
+	width : 35%;
 	float : left;
-	margin : 100px 20px;
+	margin : 100px 0px 0px 20px;
 	height: 600px;
-	
+	text-align : center;
 }
 
 #when, #where{
-	height : 50%;
+	height : 30%;
 	font-size : large;
+	margin-top : 3rem;
 }
 
 .icon{

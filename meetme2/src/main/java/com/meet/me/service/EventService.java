@@ -26,5 +26,6 @@ public interface EventService {
 	public void insertGallery(Gallery gall);
 	public List<Gallery> getGall(int event);
 	public List<Hashtag> getHashtag(int event);
+	public int getRemain(int event);
 }
  

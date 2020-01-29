@@ -111,4 +111,9 @@ public class EventServiceImpl implements EventService{
 		return dao.getHashtag(event);
 	}
 
+	@Override
+	public int getRemain(int event) {
+		return dao.getRemain(event);
+	}
+
 }

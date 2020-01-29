@@ -92,4 +92,8 @@ public class EventDAO {
 		return sqlSession.selectList("Events.getHashtag",event);
 	}
 
+	public int getRemain(int event) {
+		return sqlSession.selectOne("Events.getRemain", event);
+	}
+
 }
