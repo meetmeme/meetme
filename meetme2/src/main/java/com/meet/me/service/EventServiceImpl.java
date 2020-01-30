@@ -116,4 +116,14 @@ public class EventServiceImpl implements EventService{
 		return dao.alleventinfo(u_num);
 	}
 
+	@Override
+	public List<Event> expectedeventinfo(int u_num) {
+		return dao.expectedeventinfo(u_num);
+	}
+
+	@Override
+	public List<Event> pasteventinfo(int u_num) {
+		return dao.pasteventinfo(u_num);
+	}
+
 }

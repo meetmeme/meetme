@@ -52,8 +52,7 @@
 						}
 					}
 				};
-				console.log("getParameters('id')>>>" + getParameters('id'));
-				console.log("dd2>>>" + "${user_id1}");
+				
 				if (getParameters('id') == "${user_id1}")
 					$("#navi").append(
 							"<li><a href='mprofile.mh?id=" + "${user_id1}"
@@ -117,7 +116,7 @@
 			<ul id="navi">
 				<li><a href="mmain.mh?id=<%=id%>">홈</a></li>
 				<li><a href="mboard.mh?id=<%=id%>">게시판</a></li>
-				<li><a href="mevent.mh?id=<%=id%>">이벤트</a></li>
+				<li><a href="mevent.mh?id=<%=id%>&page=all">이벤트</a></li>
 				<li><a href="mguestbook.mh?id=<%=id%>">방명록</a></li>
 			</ul>
 		</nav>

@@ -201,12 +201,19 @@ public class MyhomeController {
 
 
 	@RequestMapping(value = "/mevent.mh")
-	public ModelAndView mevent(@RequestParam("id") String u_id, ModelAndView model) throws Exception {
-		
+	public ModelAndView mevent(@RequestParam("id") String u_id, String page, ModelAndView model) throws Exception {
+		System.out.println("page>>>"+page);
 		model.setViewName("myhome/mevent");
-		
+		List<Event> eventlist =  new ArrayList<Event>();
 		int u_num = userservice.user_info(u_id).getUser_num();
-		List<Event> eventlist = eventservice.alleventinfo(u_num);
+		if(page.equals("all")) {
+			eventlist = eventservice.alleventinfo(u_num);
+		}else if(page.equals("expected")) {
+			eventlist = eventservice.expectedeventinfo(u_num);
+		}else {
+			eventlist = eventservice.pasteventinfo(u_num);
+		}
+		
 		System.out.println("이벤트 정보 : " + eventlist.size());
 		model.addObject("eventlist", eventlist);
 		return model;
