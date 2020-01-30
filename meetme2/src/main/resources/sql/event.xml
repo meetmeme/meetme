@@ -153,5 +153,13 @@
 		select count(USER_NUM) from MM_EVENT_ATTENDEE where EVENT_NUM = #{event}
 	</select>
 	
+	<select id="isAttend" parameterType="Attendee" resultType="int">
+		select count(*) from MM_EVENT_ATTENDEE where EVENT_NUM = #{event_num} and USER_NUM = #{user_num}
+	</select>
+	
+	<insert id="insertAttend" parameterType="Attendee">
+		insert into MM_EVENT_ATTENDEE values(#{event_num}, #{user_num})
+	</insert>
+	
 	
 </mapper>

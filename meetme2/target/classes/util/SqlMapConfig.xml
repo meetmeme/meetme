@@ -16,6 +16,7 @@
 		<typeAlias alias="follows" type="com.meet.me.domain.Follows"/>
 		<typeAlias alias="board" type="com.meet.me.domain.Board"/>
 		<typeAlias alias="gallery" type="com.meet.me.domain.Gallery"/>
+		<typeAlias alias="attendee" type="com.meet.me.domain.Attendee"/>
 	</typeAliases>
 	
 	<mappers>

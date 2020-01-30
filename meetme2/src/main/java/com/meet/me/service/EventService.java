@@ -3,6 +3,7 @@ package com.meet.me.service;
 import java.util.List;
 import java.util.Map;
 
+import com.meet.me.domain.Attendee;
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
@@ -27,5 +28,7 @@ public interface EventService {
 	public List<Gallery> getGall(int event);
 	public List<Hashtag> getHashtag(int event);
 	public int getRemain(int event);
+	public int isAttend(Attendee att);
+	public int insertAttend(Attendee att);
 }
  

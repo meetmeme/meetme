@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.meet.me.domain.Attendee;
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
@@ -94,6 +95,14 @@ public class EventDAO {
 
 	public int getRemain(int event) {
 		return sqlSession.selectOne("Events.getRemain", event);
+	}
+
+	public int isAttend(Attendee att) {
+		return sqlSession.selectOne("Events.isAttend", att);
+	}
+
+	public int insertAttend(Attendee att) {
+		return sqlSession.insert("Events.insertAttend", att);
 	}
 
 }
