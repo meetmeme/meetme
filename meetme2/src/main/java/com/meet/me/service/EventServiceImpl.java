@@ -111,4 +111,9 @@ public class EventServiceImpl implements EventService{
 		return dao.getHashtag(event);
 	}
 
+	@Override
+	public List<Event> alleventinfo(int u_num) {
+		return dao.alleventinfo(u_num);
+	}
+
 }

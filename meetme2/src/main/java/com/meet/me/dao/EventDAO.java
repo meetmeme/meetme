@@ -92,4 +92,8 @@ public class EventDAO {
 		return sqlSession.selectList("Events.getHashtag",event);
 	}
 
+	public List<Event> alleventinfo(int u_num) {
+		return sqlSession.selectList("Events.alleventinfo",u_num);
+	}
+
 }

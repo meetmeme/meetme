@@ -28,6 +28,25 @@ public class Event {
 	private String row_hashtag;
 	private String user_id;
 	private String event_detail;	
+	private String user_photo;
+	private String user_name;
+	
+
+	public String getUser_photo() {
+		return user_photo;
+	}
+
+	public void setUser_photo(String user_photo) {
+		this.user_photo = user_photo;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
 
 	public String getEVENT_SAVE() {
 		return EVENT_SAVE;

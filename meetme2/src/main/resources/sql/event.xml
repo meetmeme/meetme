@@ -149,6 +149,11 @@
 										)
 	</select>
 	
+	<select id="alleventinfo" resultType="event" parameterType="int">
+		select e.*, u.USER_SAVE user_photo, u.USER_NAME user_name from mm_event e join mm_event_attendee a on e.EVENT_NUM = a.EVENT_NUM join mm_user u on a.user_num = u.user_num where a.user_num=#{u_num}
+
+	</select>
+	
 	
 	
 </mapper>

@@ -162,34 +162,6 @@ public class MyhomeBoardController {
 		return model;
 	}
 
-//	@GetMapping("BoardReplyView.bo")
-//	public ModelAndView BoardReplyView(int num, ModelAndView mv, HttpServletRequest request) {
-//		Board board = boardservice.getDetail(num);
-//		if (board == null) {
-//			mv.setViewName("error/error");
-//			mv.addObject("url", request.getRequestURL());
-//			mv.addObject("message", "게시판 답변글 가져오기 실패");
-//		} else {
-//			mv.addObject("boarddata", board);
-//			mv.setViewName("board/qna_board_reply");
-//		}
-//		return mv;
-//	}
-//
-//	@PostMapping("BoardReplyAction.bo")
-//	public ModelAndView BoardReplyAction(Board board, ModelAndView mv, HttpServletRequest request) throws Exception {
-//		// boardservice.boardReplyUpdate(board);
-//		int result = boardservice.boardReply(board);
-//		if (result == 0) {
-//			mv.setViewName("error/error");
-//			mv.addObject("url", request.getRequestURL());
-//			mv.addObject("message", "게시판 답변 처리실패");
-//		} else {
-//			mv.setViewName("redirect:BoardList.bo");
-//		}
-//		return mv;
-//	}
-
 	@GetMapping("BoardModifyView.mh")
 	public ModelAndView BoardModifyView(int num, ModelAndView mv, HttpServletRequest request) throws Exception {
 		Board board = mhservice.getDetail(num);
@@ -289,104 +261,6 @@ public class MyhomeBoardController {
 //		return null;
 //	}
 //
-//	@ResponseBody
-//	@RequestMapping(value = "/BoardListAjax.bo")
-//	public Map<String, Object> boardListAjax(
-//			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-//			@RequestParam(value = "limit", defaultValue = "10", required = false) int limit) throws Exception {
-//
-//		// 총 리스트 수를 받아옵니다.
-//		int listcount = boardservice.getListCount(); // 총 리스트 수
-//
-//		int maxpage = (listcount + limit - 1) / limit;
-//		System.out.println("총 페이지수 : " + maxpage);
-//
-//		int startpage = ((page - 1) / 10) * 10 + 1;
-//		System.out.println("현재 페이지에 보여줄 시작 페이지 수 = " + startpage);
-//
-//		// endpage: 현재 페이지 그룹에서 보여줄 마지막 페이지수([10],[20],[30]) 등
-//		int endpage = startpage + 10 - 1;
-//		System.out.println("현재 페이지에 보여줄 마지막 페이지 수 =" + endpage);
-//
-//		if (endpage > maxpage)
-//			endpage = maxpage;
-//		List<Board> boardlist = boardservice.boardlist(page, limit);
-//
-//		// BoardAjax 이용하기
-//		/*
-//		 * BoardAjax ba = new BoardAjax(); ba.setPage(page); ba.setMaxpage(maxpage);
-//		 * ba.setStartpage(startpage); ba.setEndpage(endpage);
-//		 * ba.setListcount(listcount); ba.setBoardlist(boardlist); ba.setLimit(limit);
-//		 */
-//		// Map 이용하기
-//		System.out.println("map 이용하기");
-//		Map<String, Object> ba = new HashMap<String, Object>();
-//		ba.put("page", page);
-//		ba.put("maxpage", maxpage);
-//		ba.put("startpage", startpage);
-//		ba.put("endpage", endpage);
-//		ba.put("listcount", listcount);
-//		ba.put("boardlist", boardlist);
-//		ba.put("limit", limit);
-//		return ba;
-//	}
-//
-//	@GetMapping("BoardFileDown.bo")
-//	public void BoardFileDown(String filename, HttpServletRequest request, String original,
-//			HttpServletResponse response) throws Exception {
-//		
-//		// 서블릿의 실행 환경 정보를 담고있는 객체를 리턴한다.
-//				ServletContext context = request.getSession().getServletContext();
-//				
-//		//1.
-//		//String savePath = "resources/upload";
-//		//String sDownloadPath = context.getRealPath(savePath);
-//		//String sFilePath = sDownloadPath + "\\" + filename;
-//		//"\" 추가하기 위해 "\\" 사용합니다.
-//		//String sFilePath = sDownloadPath + "/" + filename;
-//
-//		//2.
-//		String sFilePath = saveFolder +"/" +filename;
-//		System.out.println(sFilePath);
-//		
-//		byte b[] = new byte[4096];
-//
-//		// sFilePath에 있는 파일의 MimeType을 구해온다.
-//		String sMimeType = context.getMimeType(sFilePath);
-//		System.out.println("sMimeType>>>" + sMimeType);
-//
-//		if (sMimeType == null)
-//			sMimeType = "application/octet-stream";
-//
-//		response.setContentType(sMimeType);
-//
-//		// 한글 깨짐 방지
-//		String sEncoding = new String(original.getBytes("utf-8"), "ISO-8859-1");
-//		System.out.println(sEncoding);
-//
-//		/*
-//		 * Content-Disposition: attatchment:브라우저는 해당 Content를 처리하지 않고 다운로드 한다.
-//		 */
-//		response.setHeader("Content-Disposition", "attatchment; filename=" + sEncoding);
-//
-//		// 프로젝트 속성 - 자바버전 1.8로 변경
-//		try (
-//				// 웹 브라우저로의 출력 스트림 생성한다.
-//				BufferedOutputStream out2 = new BufferedOutputStream(response.getOutputStream());
-//				// sFilePath로 지정한 파일에 대한 입력 스트림을 생성한다.
-//				BufferedInputStream in = new BufferedInputStream(new FileInputStream(sFilePath));) {
-//			int numRead;
-//			// read(b, 0, b.length):바이트 배열 b의 0번부터 b.length
-//			// 크기만큼 읽어온다
-//			while ((numRead = in.read(b, 0, b.length)) != -1) { // 읽을 데이터가 존재
-//				// 바이트 배열 b의 0번부터 numRead크기만큼 브라우저로 출력
-//				out2.write(b, 0, numRead);
-//
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
 
 	private String fileDBName(String fileName, String saveFolder) {
 		// 새로운 폴더 이름 : 오늘 년+월+일
@@ -430,15 +304,6 @@ public class MyhomeBoardController {
 
 		return fileDBName;
 	}
-
-//	@ResponseBody
-//	@PostMapping("CommentList.mh")
-//	public List<Comment> commentList(int board_num) throws IOException {
-//
-//		List<Comment> list = mhservice.getCommentList(board_num);
-//		System.out.println("댓글 정보 : " + list.size());
-//		return list;
-//	}
 
 	
 	@PostMapping("CommentDelete.mh")
