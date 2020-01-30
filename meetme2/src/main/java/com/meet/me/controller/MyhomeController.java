@@ -25,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Board;
+import com.meet.me.domain.Comment;
+import com.meet.me.domain.Event;
 import com.meet.me.domain.Follows;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
@@ -95,10 +97,10 @@ public class MyhomeController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/mevent.mh", method = RequestMethod.GET)
-	public String mevent() {
-		return "myhome/mevent";
-	}
+//	@RequestMapping(value = "/mevent.mh", method = RequestMethod.GET)
+//	public String mevent() {
+//		return "myhome/mevent";
+//	}
 //
 //	@RequestMapping(value = "/mboard.mh", method = RequestMethod.GET)
 //	public String mboard() {
@@ -197,5 +199,17 @@ public class MyhomeController {
 		return follows;
 	}
 
+
+	@RequestMapping(value = "/mevent.mh")
+	public ModelAndView mevent(@RequestParam("id") String u_id, ModelAndView model) throws Exception {
+		
+		model.setViewName("myhome/mevent");
+		
+		int u_num = userservice.user_info(u_id).getUser_num();
+		List<Event> eventlist = eventservice.alleventinfo(u_num);
+		System.out.println("이벤트 정보 : " + eventlist.size());
+		model.addObject("eventlist", eventlist);
+		return model;
+	}
 
 }
