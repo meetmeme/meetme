@@ -26,12 +26,13 @@
 							<div class="row">
 								<div class="col-md-12" style="padding-bottom: 10px;">
 									<nav class="nav nav-pills flex-column flex-sm-row">
-										<a class="flex-sm-fill text-sm-center nav-link active"
-											href="#">전체</a> <a
-											class="flex-sm-fill text-sm-center nav-link" href="#">참여예정</a>
-										<a class="flex-sm-fill text-sm-center nav-link" href="#">저장됨</a>
-										<a class="flex-sm-fill text-sm-center nav-link" href="#"
-											tabindex="-1" aria-disabled="true">과거</a>
+										<a class="flex-sm-fill text-sm-center nav-link"
+											href="mevent.mh?id=<%=id%>&page=all">전체</a> <a
+											class="flex-sm-fill text-sm-center nav-link"
+											href="mevent.mh?id=<%=id%>&page=expected">참여예정</a> <a
+											class="flex-sm-fill text-sm-center nav-link"
+											href="mevent.mh?id=<%=id%>&page=past" tabindex="-1"
+											aria-disabled="true">과거</a>
 									</nav>
 								</div>
 								<c:forEach var="e" items="${eventlist}">
@@ -96,6 +97,47 @@
 	</div>
 
 	<jsp:include page="/WEB-INF/views/myhome/mscript.jsp" />
+	<script>
+		$(document).ready(
+				function() {
 
+					var getParameters = function(paramName) {
+						// 리턴값을 위한 변수 선언
+						var returnValue;
+
+						// 현재 URL 가져오기
+						var url = location.href;
+
+						// get 파라미터 값을 가져올 수 있는 ? 를 기점으로 slice 한 후 split 으로 나눔
+						var parameters = (url.slice(url.indexOf('?') + 1,
+								url.length)).split('&');
+
+						// 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
+						for (var i = 0; i < parameters.length; i++) {
+							var varName = parameters[i].split('=')[0];
+							if (varName.toUpperCase() == paramName
+									.toUpperCase()) {
+								returnValue = parameters[i].split('=')[1];
+								return decodeURIComponent(returnValue);
+							}
+						}
+
+					};
+
+					if (getParameters('page') == "all") {
+						$('a:nth-child(1)').addClass("active");
+						$('a:nth-child(1)').siblings().removeClass(
+								"colorlib-active");
+					} else if (getParameters('page') == "expected") {
+						$('a:nth-child(2)').addClass("active");
+						$('a:nth-child(2)').siblings().removeClass(
+								"colorlib-active");
+					} else if (getParameters('page') == "past") {
+						$('a:nth-child(3)').addClass("active");
+						$('a:nth-child(3)').siblings().removeClass(
+								"colorlib-active");
+					}
+				})
+	</script>
 </body>
 </html>

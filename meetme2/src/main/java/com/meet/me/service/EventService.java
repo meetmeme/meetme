@@ -27,5 +27,7 @@ public interface EventService {
 	public List<Gallery> getGall(int event);
 	public List<Hashtag> getHashtag(int event);
 	public List<Event> alleventinfo(int u_id);
+	public List<Event> expectedeventinfo(int u_num);
+	public List<Event> pasteventinfo(int u_num);
 }
  

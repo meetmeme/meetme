@@ -96,4 +96,12 @@ public class EventDAO {
 		return sqlSession.selectList("Events.alleventinfo",u_num);
 	}
 
+	public List<Event> expectedeventinfo(int u_num) {
+		return sqlSession.selectList("Events.expecteventinfo",u_num);
+	}
+
+	public List<Event> pasteventinfo(int u_num) {
+		return sqlSession.selectList("Events.pasteventinfo",u_num);
+	}
+
 }
