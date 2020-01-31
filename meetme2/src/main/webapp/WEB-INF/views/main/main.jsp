@@ -47,7 +47,7 @@
 											<strong>"</strong>${event.EVENT_CONTENT}<strong>"</strong>
 										</p>
 										<span class="number">${event.EVENT_DATE}</span><br> <span
-											class="name">${event.EVENT_TITLE}</span>
+											class="quote"><strong>${event.EVENT_TITLE}</strong></span>
 									</div>
 								</div>
 							</li>
