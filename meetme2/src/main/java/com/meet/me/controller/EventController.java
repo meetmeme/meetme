@@ -95,8 +95,10 @@ public class EventController {
 	
 	// 이벤트 등록
 	@RequestMapping(value = "/createEvent.event", method = RequestMethod.POST)
-	public String createEvent(Event event, Gallery gall, HttpServletRequest request, HttpServletResponse response)throws Exception {
+	public String createEvent(Attendee att, Event event, Gallery gall, HttpServletRequest request, HttpServletResponse response)throws Exception {
 		System.out.println("등록시작");
+		
+		System.out.println("날짜"+event.getEVENT_DATE());
 		
 		// user_id으로 user_num구하기
 		String id = event.getUser_id();
@@ -193,13 +195,18 @@ public class EventController {
 			}	
 		}
 		
-		return "redirect:main.index";			
+		att.setUser_num(num);
+		att.setEvent_num(event_num);
+		int attend = eventService.insertAttend(att);
+		System.out.println("주최자 참석됨? "+attend);
+		
+		return "redirect:event.main?event="+event_num;			
 	}
 	
 	
-	// 이벤트 무료 참석
-	@RequestMapping(value = "/freeAttend.event", method = RequestMethod.GET)
-	public String FreeAttend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request) {		
+	// 이벤트 참석
+	@RequestMapping(value = "/Attend.event", method = RequestMethod.GET)
+	public String Attend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request) {		
 		String id = cookieId(request);
 		int num = eventService.getUSER_NUM(id);
 		att.setUser_num(num);

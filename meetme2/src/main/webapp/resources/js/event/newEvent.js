@@ -27,15 +27,9 @@ jQuery(document).ready(function($) {
 			$("#event_max").val('');
 		};
 	});
-	
-//	$("#event_cost").focusout(function(){
-//		console.log($("#event_cost").val());
-//		var cost = $("#event_cost").val();
-//		$("#event_cost").val(cost.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
-//	});
 			
 	$('form').submit(function() {
-		if ($("#upload").text() == '') {
+		if (!$("#upload").val()) {
 			alert("사진을 최소 1장 등록해주세요");
 			return false;
 		}

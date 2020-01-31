@@ -1,5 +1,6 @@
 package com.meet.me.domain;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -10,7 +11,7 @@ public class Event {
 	private int CATEGORY_NUM;
 	private String EVENT_TITLE;
 	private String EVENT_CONTENT;
-	private String EVENT_DATE;
+	private Date EVENT_DATE;
 	private String EVENT_TIME;
 	private String EVENT_LOCATION;
 	private String EVENT_LAT;
@@ -126,11 +127,11 @@ public class Event {
 		EVENT_CONTENT = eVENT_CONTENT;
 	}
 
-	public String getEVENT_DATE() {
+	public Date getEVENT_DATE() {
 		return EVENT_DATE;
 	}
 
-	public void setEVENT_DATE(String eVENT_DATE) {
+	public void setEVENT_DATE(Date eVENT_DATE) {
 		EVENT_DATE = eVENT_DATE;
 	}
 

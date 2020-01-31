@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
@@ -17,7 +19,9 @@
         <link rel="stylesheet" href="resources/css/templatemo_style.css">
         <link rel="stylesheet" href="resources/css/event.css">		
         <script src="resources/js/event/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-       
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+      
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCJ1vbVWbRvoI0UuQBbhS_MLsJNEksyE" async defer ></script> 
  		<script src="resources/js/event/vendor/jquery-1.11.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="resources/js/event/vendor/jquery-1.11.0.min.js"><\/script>')</script>
@@ -44,6 +48,7 @@
                 $('body').bind('touchstart', function() {});
             }); 
         </script>
+       
  	</head>
     <body>
     <%
@@ -136,8 +141,8 @@ try{
 				<span class="nino-subHeading">Attendant</span> ${count} people will attended
 			</h2>
 			<p class="nino-sectionDesc">Check out who you're going to meet.</p>
-		</div>
-		<div class="row">
+		
+			<div class="row">
            <c:forEach var="user" items="${user}">               
                <div class="team-member col-md-3 col-sm-6">
                    <div class="member-thumb">
@@ -151,7 +156,9 @@ try{
                    </div> <!-- /.member-thumb -->
                </div> <!-- /.team-member -->
            </c:forEach>
-         </div> <!-- /.row -->  
+         </div> <!-- /.row --> 
+		</div>
+		 
         </div> <!-- /#our-team -->
                
 
@@ -205,6 +212,7 @@ try{
         
       <div id="foot">        	
    			<div id="footText" class="footcon">
+   			<input type="hidden" id="event_num" value="${event.EVENT_NUM}">
    				<span id="date">
    					${event.EVENT_DATE}
    				</span>
@@ -222,10 +230,16 @@ try{
    			</div>
    			<div id="footPrice" class="footcon">
    				가격(￦)<br>
-   				 ${event.EVENT_PRICE}
+   				<span id="price"> ${event.EVENT_PRICE}</span>
    			</div>
    			<div id="footBtn" class="footcon">
    			
+   			<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
+			<fmt:formatDate value="${event.EVENT_DATE}" pattern="yyyyMMddHHmm" var="Date"/>
+			
+			<c:if test="${Date > nowDate}">		
+				
+			
    			<c:if test="${att==0}">
    				<c:if test="${remain>0}">
 					<button id="attend" type="button">참석</button>
@@ -239,14 +253,27 @@ try{
 		                
 		                <c:if test="${event.EVENT_PRICE == 0 }">
 		                	<h4>무료</h4><br>		                
-		                	<button id="yes_free" type="submit" onclick="location.href='freeAttend.event?event=${event.EVENT_NUM}'">참석</button>
+		                	<button id="yes_free" type="submit" onclick="location.href='Attend.event?event=${event.EVENT_NUM}'">참석</button>
 		                </c:if>
 		                <c:if test="${event.EVENT_PRICE > 0}">
 		                	<h4>${event.EVENT_PRICE}(원)</h4><br>		                
 		                	<button id="yes_pay" type="submit" >결제</button>
+		                	
+		                	
 		                </c:if>
 				      </div>		 
 				    </div>
+				    
+				    <div id="payModal" class="payModal">				    	
+				      <div class="event-modal-content">
+				        <span class="close" id="close">&times;</span>                                                               
+				        <h2> 결제 </h2><br>
+				        <h4>${event.EVENT_PRICE}</h4>		                   
+		                <button id="cancel_event" type="submit" onclick="location.href='cancelAttend.event?event=${event.EVENT_NUM}'">취소</button>
+		
+				      </div>	
+				    </div>
+				    
 				</c:if>
 				<c:if test="${remain<1}">
 					<button id="full" type="button">매진</button>
@@ -263,10 +290,12 @@ try{
 	                <button id="cancel_event" type="submit" onclick="location.href='cancelAttend.event?event=${event.EVENT_NUM}'">취소</button>
 	                
 			      </div>		 
-			    </div>
-   				
+			    </div>   				
    			</c:if>
-   			
+   			</c:if>
+   			<c:if test="${Date <= nowDate}">
+   				<button id="end" type="button">지난 이벤트</button>
+   			</c:if>
    			
    			
    			 
