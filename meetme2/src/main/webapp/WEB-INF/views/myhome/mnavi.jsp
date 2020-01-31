@@ -30,75 +30,80 @@
 <script src="resources/js/myhome.js"></script>
 
 <script>
-	$(document).ready(
-			function() {
-				var getParameters = function(paramName) {
-					// 리턴값을 위한 변수 선언
-					var returnValue;
+	$(document)
+			.ready(
+					function() {
+						var getParameters = function(paramName) {
+							// 리턴값을 위한 변수 선언
+							var returnValue;
 
-					// 현재 URL 가져오기
-					var url = location.href;
+							// 현재 URL 가져오기
+							var url = location.href;
 
-					// get 파라미터 값을 가져올 수 있는 ? 를 기점으로 slice 한 후 split 으로 나눔
-					var parameters = (url.slice(url.indexOf('?') + 1,
-							url.length)).split('&');
+							// get 파라미터 값을 가져올 수 있는 ? 를 기점으로 slice 한 후 split 으로 나눔
+							var parameters = (url.slice(url.indexOf('?') + 1,
+									url.length)).split('&');
 
-					// 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
-					for (var i = 0; i < parameters.length; i++) {
-						var varName = parameters[i].split('=')[0];
-						if (varName.toUpperCase() == paramName.toUpperCase()) {
-							returnValue = parameters[i].split('=')[1];
-							return decodeURIComponent(returnValue);
+							// 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
+							for (var i = 0; i < parameters.length; i++) {
+								var varName = parameters[i].split('=')[0];
+								if (varName.toUpperCase() == paramName
+										.toUpperCase()) {
+									returnValue = parameters[i].split('=')[1];
+									return decodeURIComponent(returnValue);
+								}
+							}
+						};
+
+						if (getParameters('id') == "${user_id1}")
+							$("#navi").append(
+									"<li><a href='mprofile.mh?id="
+											+ "${user_id1}" + "'>프로필</a></li>");
+
+						if (location.pathname == "/me/mmain.mh") {
+							$('li:nth-child(1)').addClass("colorlib-active");
+							$('li:nth-child(1)').siblings().removeClass(
+									"colorlib-active");
+						} else if (location.pathname == "/me/mboard.mh") {
+							$('li:nth-child(2)').addClass("colorlib-active");
+							$('li:nth-child(2)').siblings().removeClass(
+									"colorlib-active");
+						} else if (location.pathname == "/me/mevent.mh") {
+							$('li:nth-child(3)').addClass("colorlib-active");
+							$('li:nth-child(3)').siblings().removeClass(
+									"colorlib-active");
+						} else if (location.pathname == "/me/mmessage.mh") {
+							$('li:nth-child(4)').addClass("colorlib-active");
+							$('li:nth-child(4)').siblings().removeClass(
+									"colorlib-active");
+						} else if (location.pathname == "/me/mprofile.mh") {
+							$('li:nth-child(5)').addClass("colorlib-active");
+							$('li:nth-child(5)').siblings().removeClass(
+									"colorlib-active");
 						}
-					}
-				};
-				
-				if (getParameters('id') == "${user_id1}")
-					$("#navi").append(
-							"<li><a href='mprofile.mh?id=" + "${user_id1}"
-									+ "'>프로필</a></li>");
 
-				if (location.pathname == "/me/mmain.mh") {
-					$('li:nth-child(1)').addClass("colorlib-active");
-					$('li:nth-child(1)').siblings().removeClass(
-							"colorlib-active");
-				} else if (location.pathname == "/me/mboard.mh") {
-					$('li:nth-child(2)').addClass("colorlib-active");
-					$('li:nth-child(2)').siblings().removeClass(
-							"colorlib-active");
-				} else if (location.pathname == "/me/mevent.mh") {
-					$('li:nth-child(3)').addClass("colorlib-active");
-					$('li:nth-child(3)').siblings().removeClass(
-							"colorlib-active");
-				} else if (location.pathname == "/me/mmessage.mh") {
-					$('li:nth-child(4)').addClass("colorlib-active");
-					$('li:nth-child(4)').siblings().removeClass(
-							"colorlib-active");
-				} else if (location.pathname == "/me/mprofile.mh") {
-					$('li:nth-child(5)').addClass("colorlib-active");
-					$('li:nth-child(5)').siblings().removeClass(
-							"colorlib-active");
-				}
-
-				$.ajax({
-					type : "post",
-					url : "follower.mh",
-					data : {
-						"id" : $("#id").val()
-					},
-					dataType : "json",
-					success : function(rdata) {
-						output = '';
-						$(rdata).each(
-								function() {
-									output += "<option value='"+this.user_id+"'>"
-											+ this.user_name + "</option>"
+						$
+								.ajax({
+									type : "post",
+									url : "follower.mh",
+									data : {
+										"id" : $("#id").val()
+									},
+									dataType : "json",
+									success : function(rdata) {
+										output = '';
+										$(rdata)
+												.each(
+														function() {
+															output += "<option value='"+this.user_id+"'>"
+																	+ this.user_name
+																	+ "</option>"
+														})
+										$("#follows").append(output);
+									}
 								})
-						$("#follows").append(output);
-					}
-				})
-				
-			});
+
+					});
 </script>
 <title>Insert title here</title>
 </head>
@@ -120,7 +125,6 @@
 				<li><a href="mmessage.mh?id=<%=id%>&page=send">메시지</a></li>
 			</ul>
 		</nav>
-
 		<div class="colorlib-footer">
 			<ul>
 				<select name=follows id=follows onchange="mh_popup(this.value)">
