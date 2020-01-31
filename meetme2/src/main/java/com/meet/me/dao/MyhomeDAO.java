@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.meet.me.domain.Board;
 import com.meet.me.domain.Comment;
 import com.meet.me.domain.Follows;
+import com.meet.me.domain.Message;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 
@@ -76,4 +77,11 @@ public class MyhomeDAO {
 		return sqlSession.insert("Myhomes.comment_insert", c);
 	}
 
+	public List<Message> sendmessage(int u_num){
+		return sqlSession.selectList("Myhomes.sendmessage", u_num);
+	}
+
+	public List<Message> receivemessage(int u_num){
+		return sqlSession.selectList("Myhomes.receivemessage", u_num);
+	}
 }

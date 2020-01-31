@@ -70,7 +70,7 @@
 					$('li:nth-child(3)').addClass("colorlib-active");
 					$('li:nth-child(3)').siblings().removeClass(
 							"colorlib-active");
-				} else if (location.pathname == "/me/mguest.mh") {
+				} else if (location.pathname == "/me/mmessage.mh") {
 					$('li:nth-child(4)').addClass("colorlib-active");
 					$('li:nth-child(4)').siblings().removeClass(
 							"colorlib-active");
@@ -117,7 +117,7 @@
 				<li><a href="mmain.mh?id=<%=id%>">홈</a></li>
 				<li><a href="mboard.mh?id=<%=id%>">게시판</a></li>
 				<li><a href="mevent.mh?id=<%=id%>&page=all">이벤트</a></li>
-				<li><a href="mguestbook.mh?id=<%=id%>">방명록</a></li>
+				<li><a href="mmessage.mh?id=<%=id%>&page=send">메시지</a></li>
 			</ul>
 		</nav>
 

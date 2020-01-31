@@ -6,6 +6,7 @@ import java.util.Map;
 import com.meet.me.domain.Board;
 import com.meet.me.domain.Comment;
 import com.meet.me.domain.Follows;
+import com.meet.me.domain.Message;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 
@@ -27,4 +28,6 @@ public interface MyHomeService {
 	public int commentsDelete(int num);
 	public int commentUpdate(Comment c);
 	public int commentsInsert(Comment c);	
+	public List<Message> sendmessage(int u_num);
+	public List<Message> receivemessage(int u_num);
 }

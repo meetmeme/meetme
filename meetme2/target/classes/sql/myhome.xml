@@ -112,31 +112,47 @@
 
 	<select id="comment_list" parameterType="int"
 		resultType="comment">
-		select * from mm_comment where BOARD_USER_NUM = #{board_user_num}
+		select * from mm_comment where BOARD_USER_NUM =
+		#{board_user_num}
 	</select>
 
-<!-- 	<insert id="comment_insert" parameterType="comment">
-		<selectKey resultType="int" order="BEFORE"
-			keyProperty="COMMENT_NUM">
-			select nvl(max(COMMENT_NUM),0)+1 from MM_COMMENT
-		</selectKey>
-		insert into mm_comment
-		values(#{COMMENT_NUM},#{USER_NUM},#{BOARD_USER_NUM},#{COMMENT_CONTENT},sysdate,#{BOARD_NUM})
-	</insert> -->
+	<!-- <insert id="comment_insert" parameterType="comment"> <selectKey resultType="int" 
+		order="BEFORE" keyProperty="COMMENT_NUM"> select nvl(max(COMMENT_NUM),0)+1 
+		from MM_COMMENT </selectKey> insert into mm_comment values(#{COMMENT_NUM},#{USER_NUM},#{BOARD_USER_NUM},#{COMMENT_CONTENT},sysdate,#{BOARD_NUM}) 
+		</insert> -->
 	<insert id="comment_insert" parameterType="comment">
 		insert into mm_comment
-		values(	(select nvl(max(COMMENT_NUM),0)+1 from MM_COMMENT),#{USER_NUM},#{BOARD_USER_NUM},#{COMMENT_CONTENT},sysdate,#{BOARD_NUM})
+		values( (select nvl(max(COMMENT_NUM),0)+1 from
+		MM_COMMENT),#{USER_NUM},#{BOARD_USER_NUM},#{COMMENT_CONTENT},sysdate,#{BOARD_NUM})
 	</insert>
 
 
 	<delete id="comment_delete" parameterType="int">
-		delete from mm_comment where COMMENT_NUM = #{COMMENT_NUM}
+		delete from mm_comment
+		where COMMENT_NUM = #{COMMENT_NUM}
 	</delete>
 
 	<update id="comment_update" parameterType="comment">
 		update mm_comment set
-		COMMENT_CONTENT = #{COMMENT_CONTENT} where COMMENT_NUM = #{COMMENT_NUM}
+		COMMENT_CONTENT = #{COMMENT_CONTENT} where COMMENT_NUM =
+		#{COMMENT_NUM}
 	</update>
+
+	<select id="sendmessage" parameterType="int"
+		resultType="message">
+		select m.*, u.user_name receiver_name
+		from mm_message m,
+		mm_user u where m.receiver_id=u.user_num and
+		sender_id=#{u_num} order by sent_date desc
+	</select>
+
+	<select id="receivemessage" parameterType="int"
+		resultType="message">
+		select m.*, u.user_name sender_name
+		from mm_message m,
+		mm_user u where m.sender_id=u.user_num and
+		receiver_id=#{u_num} order by sent_date desc
+	</select>
 
 </mapper>
 

@@ -29,5 +29,6 @@ public interface UserService {
 	public void setPW(User user) throws Exception;
 	public User user_info_email(String email);
 	public int setPassword(User u);
+	public User isId2(String user_id);
 }
  
