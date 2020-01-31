@@ -24,7 +24,6 @@
         <script src="resources/js/event/bootstrap.js"></script>
         <script src="resources/js/event/plugins.js"></script>
         <script src="resources/js/event/main.js"></script>        
-        <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-x.y.z.js"></script>
         <script src="resources/js/event/vendor/jquery.gmap3.min.js"></script>
      <!--  Google Map Init -->      
          <script type="text/javascript">
@@ -248,20 +247,6 @@ try{
 		                </c:if>
 				      </div>		 
 				    </div>
-				    
-				    <div id="eventModal" class="eventModal"> 
-				      <div class="event-modal-content">
-				        <span class="close" id="close">&times;</span>                                                               
-				        <h2> 결제 </h2><br>
-				        <h4>${event.EVENT_TITLE}</h4>		   
-		                <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
-		                <h4>${event.EVENT_PRICE} (원)</h4><br>		                
-		                <button id="yes" type="submit">결제하기</button>
-				      </div>		 
-				    </div>
-					
-					
-					
 				</c:if>
 				<c:if test="${remain<1}">
 					<button id="full" type="button">매진</button>
@@ -269,6 +254,17 @@ try{
    			</c:if>
    			<c:if test="${att>0}">
    				<button id="cancel" type="submit">참석취소</button>
+   				<div id="eventModal" class="eventModal"> 
+			      <div class="event-modal-content">
+			        <span class="close" id="close">&times;</span>                                                               
+			        <h2> 취소 하시겠어요? </h2><br>
+			        <h4>${event.EVENT_TITLE}</h4>		   
+	                <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4><br>	                
+	                <button id="cancel_event" type="submit" onclick="location.href='cancelAttend.event?event=${event.EVENT_NUM}'">취소</button>
+	                
+			      </div>		 
+			    </div>
+   				
    			</c:if>
    			
    			

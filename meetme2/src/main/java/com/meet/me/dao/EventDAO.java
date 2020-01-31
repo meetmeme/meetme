@@ -105,4 +105,8 @@ public class EventDAO {
 		return sqlSession.insert("Events.insertAttend", att);
 	}
 
+	public int cancelAttend(Attendee att) {
+		return sqlSession.delete("Events.cancelAttend", att);
+	}
+
 }

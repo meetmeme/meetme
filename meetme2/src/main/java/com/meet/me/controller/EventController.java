@@ -210,6 +210,18 @@ public class EventController {
 		return "redirect:event.main?event="+event;		
 	}
 	
+	// 참석 취소 cancelAttend
+	@RequestMapping(value = "/cancelAttend.event", method = RequestMethod.GET)
+	public String cancelAttend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request) {		
+		String id = cookieId(request);
+		int num = eventService.getUSER_NUM(id);
+		att.setUser_num(num);
+		att.setEvent_num(event);
+		
+		int attend = eventService.deleteAttend(att);
+		System.out.println("참석취소됨? "+attend);
+		return "redirect:event.main?event="+event;		
+	}
 	
 	
 	

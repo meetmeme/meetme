@@ -127,5 +127,10 @@ public class EventServiceImpl implements EventService{
 		return dao.insertAttend(att);
 	}
 
+	@Override
+	public int deleteAttend(Attendee att) {
+		return dao.cancelAttend(att);
+	}
+
 
 }

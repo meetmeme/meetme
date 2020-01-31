@@ -30,5 +30,6 @@ public interface EventService {
 	public int getRemain(int event);
 	public int isAttend(Attendee att);
 	public int insertAttend(Attendee att);
+	public int deleteAttend(Attendee att);
 }
  

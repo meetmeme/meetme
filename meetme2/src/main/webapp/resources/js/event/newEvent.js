@@ -34,7 +34,12 @@ jQuery(document).ready(function($) {
 //		$("#event_cost").val(cost.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,'));
 //	});
 			
-	
+	$('form').submit(function() {
+		if ($("#upload").text() == '') {
+			alert("사진을 최소 1장 등록해주세요");
+			return false;
+		}
+	});
 	
 	
 });

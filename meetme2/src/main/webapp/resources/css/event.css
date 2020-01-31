@@ -85,11 +85,10 @@
 #cancel{
 	width : 13rem;
  	height : 6rem;
- 	border: 1px solid rgba(241, 114, 114, 0.96); 
  	background-color: rgba(132, 130, 130, 0.96); 
  	border-radius: 5px;
  	color: white; 
- 	font-size : 3rem;
+ 	font-size : 2rem;
  	line-height: 5rem;
  	float : right;
 }
@@ -216,6 +215,14 @@ text-align : left;
 	width : 10rem;
  	height : 5rem;
  	background-color: rgba(241, 114, 114, 0.96); 
+ 	border-radius: 5px;
+ 	color: white; 
+ 	font-size : 2rem;
+}
+#cancel_event{
+	width : 10rem;
+ 	height : 5rem;
+ 	background-color: rgba(132, 130, 130, 0.96); 
  	border-radius: 5px;
  	color: white; 
  	font-size : 2rem;

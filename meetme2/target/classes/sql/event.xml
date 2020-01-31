@@ -161,5 +161,10 @@
 		insert into MM_EVENT_ATTENDEE values(#{event_num}, #{user_num})
 	</insert>
 	
+	<delete id="cancelAttend" parameterType="Attendee">
+		delete from MM_EVENT_ATTENDEE where
+		USER_NUM=#{user_num} and EVENT_NUM = #{event_num}
+	</delete>
+	
 	
 </mapper>
