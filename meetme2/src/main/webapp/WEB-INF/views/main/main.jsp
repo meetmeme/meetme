@@ -3,13 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="resources/js/main.js"></script>
 <body data-target="#nino-navbar" data-spy="scroll">
 	<jsp:include page="header.jsp" />
 
-<input type="hidden" id=userIdCache value="${user_id1}">
+	<input type="hidden" id=userIdCache value="${user_id1}">
 	<!-- Testimonial
     ================================================== -->
 	<section class="nino-testimonial bg-white">
@@ -19,24 +17,42 @@
 			</h2>
 			<div class="nino-testimonialSlider">
 				<ul>
-					<c:forEach var="event" items="${event}">
+					<c:if test="${empty event}">
 						<li>
 							<div layout="row" class="verticalCenter cursor"
-								onclick="location.href='event.main?event=${event.EVENT_NUM}'">
-								<div class="nino-avatar fsr">
-									<img class="img-circle img-thumbnail square"
-										src="resources${event.EVENT_ORIGINAL}" alt="">
+									onclick="return searchEvent_main()">
+									<div class="nino-avatar fsr">
+										<img class="img-circle img-thumbnail square"
+											src="https://source.unsplash.com/random/300x300" alt="">
+									</div>
+									<div>
+										<p class="quote">
+											<strong>"</strong>관심 카테고리의 이벤트가 없습니다. 😥<strong>"</strong>
+										</p>
+									</div>
 								</div>
-								<div>
-									<p class="quote">
-										<strong>"</strong>${event.EVENT_CONTENT}<strong>"</strong>
-									</p>
-									<span class="number">${event.EVENT_DATE}</span><br> <span
-										class="name">${event.EVENT_TITLE}</span>
-								</div>
-							</div>
 						</li>
-					</c:forEach>
+					</c:if>
+					<c:if test="${!empty event}">
+						<c:forEach var="event" items="${event}">
+							<li>
+								<div layout="row" class="verticalCenter cursor"
+									onclick="location.href='event.main?event=${event.EVENT_NUM}'">
+									<div class="nino-avatar fsr">
+										<img class="img-circle img-thumbnail square"
+											src="resources${event.EVENT_ORIGINAL}" alt="">
+									</div>
+									<div>
+										<p class="quote">
+											<strong>"</strong>${event.EVENT_CONTENT}<strong>"</strong>
+										</p>
+										<span class="number">${event.EVENT_DATE}</span><br> <span
+											class="name">${event.EVENT_TITLE}</span>
+									</div>
+								</div>
+							</li>
+						</c:forEach>
+					</c:if>
 				</ul>
 			</div>
 		</div>
@@ -91,13 +107,16 @@
 			<div class="sectionContent">
 				<div class="row nino-hoverEffect">
 					<c:forEach var="user" items="${RandomUser}">
-						<c:if test="${user.user_id != 'admin' && user.user_id != user_id1}">
+						<c:if
+							test="${user.user_id != 'admin' && user.user_id != user_id1}">
 							<div class="col-md-4 col-sm-4">
 								<div class="item">
-									<div class="overlay"   onClick="minihome('${user.user_id}','0','0','mh_popup')"
+									<div class="overlay"
+										onClick="minihome('${user.user_id}','0','0','mh_popup')"
 										title="go to ${user.user_name}'s minihome">
 										<div class="content">
-											<a class="nino-icon" onclick="minihome('0','${user.user_num}','${user.user_name}','follow')"
+											<a class="nino-icon"
+												onclick="minihome('0','${user.user_num}','${user.user_name}','follow')"
 												title="follow ${user.user_name}!"><i
 												class="mdi mdi-bookmark-plus-outline"></i></a>
 										</div>

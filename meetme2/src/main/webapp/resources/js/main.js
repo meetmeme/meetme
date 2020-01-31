@@ -1,10 +1,10 @@
-jQuery(document).ready(function($) {
+/*$(document).ready(function() {
 
 	$('.articleThumb').click(function() {
 		location.href = "event.main";
 	});
 
-});
+});*/
 
 function follow(user_num, user_name) {
 	if (!$('#userIdCache').val())
@@ -28,13 +28,14 @@ function follow(user_num, user_name) {
 
 var minihome_check;
 function minihome(user_id, user_num, user_name, check) {
-	console.log(check);
-	console.log(minihome_check);
+	if (user_id <= 0) {
+		$('#header_nav').children(1).children(1)[0].click();
+	}
 	if (check == 'mh_popup') {
-		if(minihome_check == 1){
+		if (minihome_check == 1) {
 			minihome_check = 0;
 			return false;
-		}else{
+		} else {
 			mh_popup(user_id);
 		}
 	} else if (check == 'follow') {
@@ -42,4 +43,8 @@ function minihome(user_id, user_num, user_name, check) {
 		minihome_check = 1;
 	}
 
+}
+
+function searchEvent_main(){
+	$('.nino-search')[0].click();
 }

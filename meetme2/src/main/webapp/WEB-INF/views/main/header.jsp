@@ -72,6 +72,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="resources/js/header.js"></script>
+
 </head>
 
 
@@ -99,7 +100,7 @@
 				<div class="nino-menuItem pull-right">
 					<div class="collapse navbar-collapse pull-left"
 						id="nino-navbar-collapse">
-						<ul class="nav navbar-nav">
+						<ul class="nav navbar-nav" id="header_nav">
 							<c:if test="${empty user_id1}">
 								<li><a href="#" data-target="#layerpop" data-toggle="modal">login</a><br />
 								</li>

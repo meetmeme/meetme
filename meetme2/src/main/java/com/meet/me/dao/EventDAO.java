@@ -21,8 +21,10 @@ public class EventDAO {
 		return sqlSession.selectList("Events.getCategory");
 	}
 
-	public List<Event> getIntrestingEvent(String id) {
-		return sqlSession.selectList("Events.getIntrestingEvent", id);
+	public List<Event> getIntrestingEvent(List<String> InterestingCats) {
+		Map<String, Object> userInfo = new HashMap<String, Object>();
+		userInfo.put("InterestingCats", InterestingCats);
+		return sqlSession.selectList("Events.getIntrestingEvent", userInfo);
 	}
 	
 	public Event getDetail(int event_num) {
