@@ -107,7 +107,7 @@ public class MyhomeController {
 	@RequestMapping(value = "/updateProfile.mh", method = RequestMethod.POST)
 	public void updateProfile(User user, User_interests user_interests, MyHome myhome, 
 			@RequestParam("category") String category, ModelAndView mv,
-			HttpSession session, HttpServletResponse response) throws IOException {
+			HttpSession session, HttpServletResponse response, HttpServletRequest request) throws IOException {
 
 		String user_id = (String) session.getAttribute("user_id1");
 
@@ -129,7 +129,7 @@ public class MyhomeController {
 				int month = c.get(Calendar.MONTH) + 1;// 오늘 월 구합니다.
 				int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
 				
-				String saveFolder = "C:\\Users\\32426\\git\\m2\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
+				String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
 				String homedir = saveFolder + year + "-" + month + "-" + date;
 				File path1 = new File(homedir);
 				if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
@@ -192,7 +192,6 @@ public class MyhomeController {
 		List<Follows> follows = new ArrayList<Follows>();
 		User m_info = userservice.user_info(m_id);
 		follows=mhservice.follows(m_info.getUser_num());
-		System.out.println("팔로우 정보 : " + follows.size());
 		return follows;
 	}
 
@@ -210,7 +209,6 @@ public class MyhomeController {
 			eventlist = eventservice.pasteventinfo(u_num);
 		}
 		
-		System.out.println("이벤트 정보 : " + eventlist.size());
 		model.addObject("eventlist", eventlist);
 		return model;
 	}
@@ -227,7 +225,6 @@ public class MyhomeController {
 		}else {
 			messagelist = mhservice.receivemessage(u_num);
 		}
-		System.out.println("이벤트 정보 : " + messagelist.size());
 		model.addObject("page", page);
 		model.addObject("user", user);
 		model.addObject("messagelist", messagelist);

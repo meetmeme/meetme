@@ -86,7 +86,6 @@ public class MyhomeBoardController {
 			int month = c.get(Calendar.MONTH);
 			int date = c.get(Calendar.DATE);
 
-			//String saveFolder = "C:\\Users\\32426\\git\\m3\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
 			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 
