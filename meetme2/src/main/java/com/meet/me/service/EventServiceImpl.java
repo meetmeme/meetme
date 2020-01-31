@@ -22,8 +22,8 @@ public class EventServiceImpl implements EventService{
 	}
 
 	@Override
-	public List<Event> getIntrestingEvent(String id) {
-		return dao.getIntrestingEvent(id);
+	public List<Event> getIntrestingEvent(List<String> InterestingCats) {
+		return dao.getIntrestingEvent(InterestingCats);
 	}
 	
 	@Override

@@ -9,7 +9,7 @@ import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
 public interface EventService {
 	public List<String> getCategory();
-	public List<Event> getIntrestingEvent(String id);
+	public List<Event> getIntrestingEvent(List<String> InterestingCats);
 	public Event getDetail(int event);
 	public List<Event> search(Map<String, String> keywords);
 	public List<Event> searchDate(Map<String, String> keywords);

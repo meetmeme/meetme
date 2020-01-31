@@ -12,9 +12,17 @@
 		<result column="CATEGORY_NAME" property="CATEGORY_NAME" />
 	</resultMap>
 
-	<select id="getIntrestingEvent" parameterType="String"
-		resultType="event">
-		select * from MM_EVENT where <![CDATA[EVENT_DATE >= sysdate]]> order by event_date
+	<select id="getIntrestingEvent" resultType="event">
+		select * from MM_EVENT
+		<where>
+			<if test="!InterestingCats.isEmpty()">
+			EVENT_NUM IN 
+			<foreach collection="InterestingCats" item="item" open="(" close=")" separator=",">
+			#{item}
+			</foreach>
+			</if>
+		 	AND <![CDATA[EVENT_DATE >= sysdate]]> order by event_date
+		</where>
 	</select>
 
 	<select id="getDetail" resultType="Event">
