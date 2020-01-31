@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.EventDAO;
+import com.meet.me.domain.Attendee;
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
@@ -125,5 +126,24 @@ public class EventServiceImpl implements EventService{
 	public List<Event> pasteventinfo(int u_num) {
 		return dao.pasteventinfo(u_num);
 	}
+	public int getRemain(int event) {
+		return dao.getRemain(event);
+	}
+
+	@Override
+	public int isAttend(Attendee att) {
+		return dao.isAttend(att);
+	}
+
+	@Override
+	public int insertAttend(Attendee att) {
+		return dao.insertAttend(att);
+	}
+
+	@Override
+	public int deleteAttend(Attendee att) {
+		return dao.cancelAttend(att);
+	}
+
 
 }

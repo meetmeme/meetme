@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
@@ -17,15 +19,15 @@
         <link rel="stylesheet" href="resources/css/templatemo_style.css">
         <link rel="stylesheet" href="resources/css/event.css">		
         <script src="resources/js/event/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-       
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+      
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCJ1vbVWbRvoI0UuQBbhS_MLsJNEksyE" async defer ></script> 
  		<script src="resources/js/event/vendor/jquery-1.11.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="resources/js/event/vendor/jquery-1.11.0.min.js"><\/script>')</script>
         <script src="resources/js/event/bootstrap.js"></script>
         <script src="resources/js/event/plugins.js"></script>
-        <script src="resources/js/event/main.js"></script>
-
-     <!-- Google Map -->
+        <script src="resources/js/event/main.js"></script>        
         <script src="resources/js/event/vendor/jquery.gmap3.min.js"></script>
      <!--  Google Map Init -->      
          <script type="text/javascript">
@@ -46,9 +48,23 @@
                 $('body').bind('touchstart', function() {});
             }); 
         </script>
+       
  	</head>
     <body>
-    
+    <%
+String id = "";
+try{
+	Cookie[] cookies = request.getCookies();                 // 요청에서 쿠키를 가져온다.
+	if(cookies!=null){                                                    // 쿠키가 Null이 아닐때,
+		for(int i=0; i<cookies.length; i++){                        // 쿠키를 반복문으로 돌린다.
+			if(cookies[i].getName().equals("userInputId")){            // 쿠키의 이름이 id 일때
+			id=cookies[i].getValue();                        // 해당 쿠키의 값을 id 변수에 저장한다.
+			}
+		}	
+	}
+}catch(Exception e){}
+%>
+<input type="hidden" name="user_id" value="<%=id%>">  
 <jsp:include page="../main/header.jsp" />
         <div class="site-main" id="sTop">
             <div class="site-header">
@@ -125,12 +141,12 @@
 				<span class="nino-subHeading">Attendant</span> ${count} people will attended
 			</h2>
 			<p class="nino-sectionDesc">Check out who you're going to meet.</p>
-		</div>
-		<div class="row">
+		
+			<div class="row">
            <c:forEach var="user" items="${user}">               
                <div class="team-member col-md-3 col-sm-6">
                    <div class="member-thumb">
-                    <img src="resources/${user.user_save}" alt="">
+                    <img src="resources/upload${user.user_save}" alt="">
                        <div class="team-overlay">
                            <h3>${user.user_name }</h3>
                            <ul class="social">
@@ -140,7 +156,9 @@
                    </div> <!-- /.member-thumb -->
                </div> <!-- /.team-member -->
            </c:forEach>
-         </div> <!-- /.row -->  
+         </div> <!-- /.row --> 
+		</div>
+		 
         </div> <!-- /#our-team -->
                
 
@@ -150,8 +168,6 @@
 					<span class="nino-subHeading">LOCATION</span> When & Where
 				</h2>
 				<p class="nino-sectionDesc">Be sure to keep track of time and place and have fun.</p>	
-				<input type="hidden" value="${event.EVENT_LAT}" id="lat">	
-				<input type="hidden" value="${event.EVENT_LNG}" id="lng">				
                 <div class="row">
                     <div class="col-md-12">
                        <div class="googlemap-wrapper">
@@ -159,12 +175,12 @@
                      
 	                       <div class="ww">
 		                       	<div id="when">
-		                       		<span class="fa icon fa-clock" ></span>
-		                       		<span class="wtext">${event.EVENT_TIME}</span>
+		                       		<p class="fa icon fa-clock" ></p>
+		                       		<p class="wtext">${event.EVENT_TIME}</p>
 		                       	</div>
 		                       	<div id="where">
-		                       		<span class="fa icon fa-map-marker" ></span>
-		                       		<span class="wtext">${event.EVENT_LOCATION}</span>
+		                       		<p class="fa icon fa-map-marker" ></p>
+		                       		<p class="wtext">${event.EVENT_LOCATION}</p>
 		                       	</div>
 	                       </div>
                       </div> <!-- /.googlemap-wrapper -->
@@ -196,6 +212,7 @@
         
       <div id="foot">        	
    			<div id="footText" class="footcon">
+   			<input type="hidden" id="event_num" value="${event.EVENT_NUM}">
    				<span id="date">
    					${event.EVENT_DATE}
    				</span>
@@ -207,16 +224,88 @@
    					${event.EVENT_TITLE}
    				</span>
    			</div>
+   			<div id="footMax" class="footcon">
+   				잔여석<br>
+   				 ${remain}
+   			</div>
    			<div id="footPrice" class="footcon">
-   				 ${event.EVENT_PRICE}
+   				가격(￦)<br>
+   				<span id="price"> ${event.EVENT_PRICE}</span>
    			</div>
    			<div id="footBtn" class="footcon">
-				<button class="attend" type="submit">참석</button>
+   			
+   			<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
+			<fmt:formatDate value="${event.EVENT_DATE}" pattern="yyyyMMddHHmm" var="Date"/>
+			
+			<c:if test="${Date > nowDate}">		
+				
+			
+   			<c:if test="${att==0}">
+   				<c:if test="${remain>0}">
+					<button id="attend" type="button">참석</button>
+					
+					<div id="eventModal" class="eventModal"> 
+				      <div class="event-modal-content">
+				        <span class="close" id="close">&times;</span>                                                               
+				        <h2> 참석 하시겠어요? </h2><br>
+				        <h4>${event.EVENT_TITLE}</h4>		   
+		                <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
+		                
+		                <c:if test="${event.EVENT_PRICE == 0 }">
+		                	<h4>무료</h4><br>		                
+		                	<button id="yes_free" type="submit" onclick="location.href='Attend.event?event=${event.EVENT_NUM}'">참석</button>
+		                </c:if>
+		                <c:if test="${event.EVENT_PRICE > 0}">
+		                	<h4>${event.EVENT_PRICE}(원)</h4><br>		                
+		                	<button id="yes_pay" type="submit" >결제</button>
+		                	
+		                	
+		                </c:if>
+				      </div>		 
+				    </div>
+				    
+				    <div id="payModal" class="payModal">				    	
+				      <div class="event-modal-content">
+				        <span class="close" id="close">&times;</span>                                                               
+				        <h2> 결제 </h2><br>
+				        <h4>${event.EVENT_PRICE}</h4>		                   
+		                <button id="cancel_event" type="submit" onclick="location.href='cancelAttend.event?event=${event.EVENT_NUM}'">취소</button>
+		
+				      </div>	
+				    </div>
+				    
+				</c:if>
+				<c:if test="${remain<1}">
+					<button id="full" type="button">매진</button>
+				</c:if>   			
+   			</c:if>
+   			<c:if test="${att>0}">
+   				<button id="cancel" type="submit">참석취소</button>
+   				<div id="eventModal" class="eventModal"> 
+			      <div class="event-modal-content">
+			        <span class="close" id="close">&times;</span>                                                               
+			        <h2> 취소 하시겠어요? </h2><br>
+			        <h4>${event.EVENT_TITLE}</h4>		   
+	                <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4><br>	                
+	                <button id="cancel_event" type="submit" onclick="location.href='cancelAttend.event?event=${event.EVENT_NUM}'">취소</button>
+	                
+			      </div>		 
+			    </div>   				
+   			</c:if>
+   			</c:if>
+   			<c:if test="${Date <= nowDate}">
+   				<button id="end" type="button">지난 이벤트</button>
+   			</c:if>
+   			
+   			
+   			 
+   			
+   			
+			
    			</div>
   	 		<a href="#" id="nino-scrollToTop">Go to Top</a>     
         </div>
         
       
-        <!-- templatemo 406 flex -->
     </body>
 </html>

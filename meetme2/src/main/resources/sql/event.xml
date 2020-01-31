@@ -105,7 +105,7 @@
 	</select>
 	
 	<select id="getUser" parameterType="int" resultType="user">
-		select USER_SAVE,USER_NAME,USER_ID from MM_USER
+		select * from MM_USER
 		where USER_NUM in ( select USER_NUM 
 							from MM_EVENT_ATTENDEE 
 							where EVENT_NUM = #{event_num})
@@ -184,6 +184,22 @@
 		]]>
 	</select>
 	
+	<select id="getRemain" parameterType="event" resultType="int">
+		select count(USER_NUM) from MM_EVENT_ATTENDEE where EVENT_NUM = #{event}
+	</select>
+	
+	<select id="isAttend" parameterType="Attendee" resultType="int">
+		select count(*) from MM_EVENT_ATTENDEE where EVENT_NUM = #{event_num} and USER_NUM = #{user_num}
+	</select>
+	
+	<insert id="insertAttend" parameterType="Attendee">
+		insert into MM_EVENT_ATTENDEE values(#{event_num}, #{user_num})
+	</insert>
+	
+	<delete id="cancelAttend" parameterType="Attendee">
+		delete from MM_EVENT_ATTENDEE where
+		USER_NUM=#{user_num} and EVENT_NUM = #{event_num}
+	</delete>
 	
 	
 </mapper>

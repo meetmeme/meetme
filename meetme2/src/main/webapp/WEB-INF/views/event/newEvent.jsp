@@ -65,6 +65,7 @@ try{
 				<h2 class="nino-sectionHeading">when</h2>
        			<div class="input-group input-group-lg">
 					<input id="event_date" name="EVENT_DATE" class="form-control" type="date" required>
+					
 					<input class="form-control" type="text" name="EVENT_TIME" value="" placeholder="time"  id="event_time" required>
 				</div>
 				

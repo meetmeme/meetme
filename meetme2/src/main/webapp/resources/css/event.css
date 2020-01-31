@@ -4,11 +4,11 @@
 	border-top : 1px solid #d8d7d7;
 	background-color : #f9f9f9;
 	position: fixed;
-	height: 6em;
+	height: 8em;
 	bottom : 0px;
 	right : 0px;
 	cursor: default;
-	padding : 1rem;
+	padding : 2rem 15rem;
 	color : #565454;
 }
 
@@ -19,37 +19,88 @@
 #footText{
 	width: 60%;
 	line-height: 3rem;	
+	box-sizing: border-box; 
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	white-space:nowrap;
 }
 
 #date, #time{
+	font-size : 1.5rem;
+}
+
+#footMax{
+	width : 10%;
 	font-size : 2rem;
+	text-align: center;
+	line-height: 3rem;
 }
 
 #footPrice{
 	width : 10%;
 	font-size : 2rem;
 	text-align: center;
-	line-height: 5rem;
+	line-height: 3rem;
 }
 
 #footBtn{
-	width : 30%;
+	width : 15%;
 	text-align : center;
+	line-height: 3rem;
 }
+
+
 
 #title{
-	font-size : 4rem;
+	font-size : 2.5rem;
 	margin-bottom : 1rem;
+	width : 60%;
+	
 }
 
-.attend{
-	width : 8rem;
- 	height : 4rem;
+#attend{
+	width : 13rem;
+ 	height : 6rem;
  	border: 1px solid rgba(241, 114, 114, 0.96); 
  	background-color: rgba(241, 114, 114, 0.96); 
  	border-radius: 5px;
  	color: white; 
+ 	font-size : 3rem;
+ 	line-height: 5rem;
+ 	float : right;
+}
+
+#full{
+	width : 13rem;
+ 	height : 6rem;
+ 	border: 1px solid rgba(241, 114, 114, 0.96); 
+ 	background-color: rgba(132, 130, 130, 0.96); 
+ 	border-radius: 5px;
+ 	color: white; 
+ 	font-size : 3rem;
+ 	line-height: 5rem;
+ 	float : right;
+}
+#end{
+	width : 14rem;
+ 	height : 6rem;
+ 	background-color: rgba(132, 130, 130, 0.96); 
+ 	border-radius: 5px;
+ 	color: white; 
  	font-size : 2rem;
+ 	line-height: 5rem;
+ 	float : right;
+}
+
+#cancel{
+	width : 13rem;
+ 	height : 6rem;
+ 	background-color: rgba(132, 130, 130, 0.96); 
+ 	border-radius: 5px;
+ 	color: white; 
+ 	font-size : 2rem;
+ 	line-height: 5rem;
+ 	float : right;
 }
 
 #attendant .row:nth-child(2){
@@ -104,6 +155,7 @@ text-align : left;
 	color : white;
 }
 	
+/*  @@ 이거하면 사진 안나와 ㅠㅠ
 .sum{
 	height : 50em;
 	width : auto;
@@ -113,10 +165,108 @@ text-align : left;
 .sumimg{
 	width : auto;
 }
+ */
+ 
+#attendant > div > div > div > div > div{
+	width : 100%;
+	height : 100%;
+}
 
+#attendant > div > div > div > div > div > ul{
+	margin-top : 
+}
+
+#attendant > div > div > div > div > div > h3{
+	font-size : 14px;
+	margin-top : 5px;
+}
+ 
 .flexslider .slides img {
 	width : auto;
 	margin : auto;
 	min-width : 80%;
 }
+
+.col-md-3, .member-thumb, .team-member{
+	text-align: center;
+	width : 10rem;
+	height : 10rem;
+	
+}
+
+#attendant > div > div > div > div{
+	width : 100px;
+	height : 100px;
+	margin : auto;
+}
+
+#attendant > div > div > div{
+	width : 20%;
+}
+
+#attendant > div > div > div > div > img{
+	width  : 100%;
+	height : 100%;
+}
+
+.eventModal, .payModal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.event-modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 35%; /* Could be more or less, depending on screen size */        
+    height : 35%;                  
+}
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#eventModal > div > h2{
+	color : rgba(241, 114, 114, 0.96); 
+	font-size : 3rem;
+	margin-top : 20px;
+}
+
+#yes_free, #yes_pay{
+	width : 10rem;
+ 	height : 5rem;
+ 	background-color: rgba(241, 114, 114, 0.96); 
+ 	border-radius: 5px;
+ 	color: white; 
+ 	font-size : 2rem;
+}
+#cancel_event{
+	width : 10rem;
+ 	height : 5rem;
+ 	background-color: rgba(132, 130, 130, 0.96); 
+ 	border-radius: 5px;
+ 	color: white; 
+ 	font-size : 2rem;
+}
+
+
 

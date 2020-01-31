@@ -50,9 +50,20 @@ where HASHTAG_NUM in (
 	);
 
 
+insert into MM_EVENT_ATTENDEE values(13,1);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
+insert into MM_EVENT_ATTENDEE values(13,3);
 
+select * from MM_USER;
 
+select count(*) from MM_EVENT_ATTENDEE where EVENT_NUM = 13 and USER_NUM = 11;
 
-
-
+select * from MM_EVENT_ATTENDEE;
 

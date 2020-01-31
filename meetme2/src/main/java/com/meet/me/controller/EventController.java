@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.meet.me.domain.Attendee;
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
@@ -32,24 +34,52 @@ public class EventController {
 	
 	@Autowired
 	UserService userservice;
+	
+	// 쿠키 아이디 구하기
+	public String cookieId(HttpServletRequest request) {		
+		String id = "못가져옴";
+		try{
+			Cookie[] cookies = request.getCookies();                 // 요청에서 쿠키를 가져온다.
+			if(cookies!=null){                                                    // 쿠키가 Null이 아닐때,
+				for(int i=0; i<cookies.length; i++){                        // 쿠키를 반복문으로 돌린다.
+					if(cookies[i].getName().equals("userInputId")){            // 쿠키의 이름이 id 일때
+					id=cookies[i].getValue();                        // 해당 쿠키의 값을 id 변수에 저장한다.
+					}
+				}	
+			}
+		}catch(Exception ex){}			
+		return id;						
+	}	
 
 	@RequestMapping(value = "/event.main", method = RequestMethod.GET)
-	public ModelAndView DetailPage(ModelAndView mv, @RequestParam int event) {		
+	public ModelAndView DetailPage(Event ev, Attendee att, ModelAndView mv, HttpServletRequest request, @RequestParam int event) {		
 		Event e = eventService.getDetail(event);	
 		int count = eventService.getAttend(event);
 		List<User> u = eventService.getUser(event);
 		List<Gallery> gall	= eventService.getGall(event);
 		List<Hashtag> tag = eventService.getHashtag(event);
-		if(e == null) {
-			System.out.println("detail 실패");
-		}else {
-			mv.setViewName("event/eventDetail");
-			mv.addObject("event",e);
-			mv.addObject("count",count);
-			mv.addObject("user",u);
-			mv.addObject("gall", gall);
-			mv.addObject("tag", tag);
-		}
+		int remain = e.getEVENT_MAX() - eventService.getRemain(event);
+		System.out.println("남은 자리="+remain);
+		
+		String id = cookieId(request);		
+		// user_id으로 user_num구하기
+		System.out.println("id = "+id);
+		int num = eventService.getUSER_NUM(id);
+		System.out.println("USER_NUM = " + num);
+		
+		att.setUser_num(num);
+		att.setEvent_num(event);		
+		int attend = eventService.isAttend(att);		
+		
+		mv.setViewName("event/eventDetail");
+		mv.addObject("event",e);
+		mv.addObject("count",count);
+		mv.addObject("user",u);
+		mv.addObject("gall", gall);
+		mv.addObject("tag", tag);
+		mv.addObject("remain", remain);
+		mv.addObject("att", attend);	
+		
 		return mv;		
 	}
 	
@@ -65,10 +95,12 @@ public class EventController {
 	
 	// 이벤트 등록
 	@RequestMapping(value = "/createEvent.event", method = RequestMethod.POST)
-	public String createEvent(Event event, Gallery gall, HttpServletRequest request, HttpServletResponse response)throws Exception {
+	public String createEvent(Attendee att, Event event, Gallery gall, HttpServletRequest request, HttpServletResponse response)throws Exception {
 		System.out.println("등록시작");
 		
-		// user_num으로 user_id구하기
+		System.out.println("날짜"+event.getEVENT_DATE());
+		
+		// user_id으로 user_num구하기
 		String id = event.getUser_id();
 		int num = eventService.getUSER_NUM(id);
 		System.out.println("USER_NUM = " + num);
@@ -143,7 +175,8 @@ public class EventController {
 		}		
 		
 		// 방금 넣은 event_num
-		event_num = eventService.getEventnum();			
+		event_num = eventService.getEventnum();	
+		System.out.println("등록한 이벤트 번호 = " + event_num);
 		
 		String row = event.getRow_hashtag();
 		if(!row.isEmpty()) {
@@ -162,14 +195,40 @@ public class EventController {
 			}	
 		}
 		
-		System.err.println(event);
-		System.err.println(event.getUpload());	
+		att.setUser_num(num);
+		att.setEvent_num(event_num);
+		int attend = eventService.insertAttend(att);
+		System.out.println("주최자 참석됨? "+attend);
 		
-		return "redirect:main.index";
-			
+		return "redirect:event.main?event="+event_num;			
 	}
 	
 	
+	// 이벤트 참석
+	@RequestMapping(value = "/Attend.event", method = RequestMethod.GET)
+	public String Attend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request) {		
+		String id = cookieId(request);
+		int num = eventService.getUSER_NUM(id);
+		att.setUser_num(num);
+		att.setEvent_num(event);
+		
+		int attend = eventService.insertAttend(att);
+		System.out.println("참석됨? "+attend);
+		return "redirect:event.main?event="+event;		
+	}
+	
+	// 참석 취소 cancelAttend
+	@RequestMapping(value = "/cancelAttend.event", method = RequestMethod.GET)
+	public String cancelAttend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request) {		
+		String id = cookieId(request);
+		int num = eventService.getUSER_NUM(id);
+		att.setUser_num(num);
+		att.setEvent_num(event);
+		
+		int attend = eventService.deleteAttend(att);
+		System.out.println("참석취소됨? "+attend);
+		return "redirect:event.main?event="+event;		
+	}
 	
 	
 	
