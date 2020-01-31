@@ -191,4 +191,9 @@ public class UserServiceImpl implements UserService {
 	public int setPassword(User u) {
 		return dao.setPassword(u);
 	}
+
+	@Override
+	public User isId2(String user_id) {
+		return dao.isId(user_id);
+	}
 }

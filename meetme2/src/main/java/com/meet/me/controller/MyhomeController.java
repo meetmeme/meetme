@@ -28,6 +28,7 @@ import com.meet.me.domain.Board;
 import com.meet.me.domain.Comment;
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Follows;
+import com.meet.me.domain.Message;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
@@ -73,6 +74,10 @@ public class MyhomeController {
 		MyHome mhinfo = mhservice.getinfo(user_id);
 		User userinfo = userservice.user_info(user_id);
 		
+		/***암호화된 비밀번호값 DB 입력 방지***/
+		User user = userservice.isId2(user_id);
+		String ori_pass=user.getUser_pass();
+		userinfo.setUser_pass(ori_pass);
 
 		//카테고리 리스트 가져오기
 		Map<String,List<String>> map = new HashMap<String,List<String>>(); 
@@ -97,15 +102,6 @@ public class MyhomeController {
 		return mv;
 	}
 
-//	@RequestMapping(value = "/mevent.mh", method = RequestMethod.GET)
-//	public String mevent() {
-//		return "myhome/mevent";
-//	}
-//
-//	@RequestMapping(value = "/mboard.mh", method = RequestMethod.GET)
-//	public String mboard() {
-//		return "myhome/mboard";
-//	}
 
 	// 프로필 수정
 	@RequestMapping(value = "/updateProfile.mh", method = RequestMethod.POST)
@@ -113,8 +109,9 @@ public class MyhomeController {
 			@RequestParam("category") String category, ModelAndView mv,
 			HttpSession session, HttpServletResponse response) throws IOException {
 
-		/****기본프로필 수정****/
 		String user_id = (String) session.getAttribute("user_id1");
+
+		/****기본프로필 수정****/
 		int user_num = user.getUser_num();
 		MultipartFile uploadfile = user.getUploadfile();
 
@@ -202,7 +199,6 @@ public class MyhomeController {
 
 	@RequestMapping(value = "/mevent.mh")
 	public ModelAndView mevent(@RequestParam("id") String u_id, String page, ModelAndView model) throws Exception {
-		System.out.println("page>>>"+page);
 		model.setViewName("myhome/mevent");
 		List<Event> eventlist =  new ArrayList<Event>();
 		int u_num = userservice.user_info(u_id).getUser_num();
@@ -216,6 +212,25 @@ public class MyhomeController {
 		
 		System.out.println("이벤트 정보 : " + eventlist.size());
 		model.addObject("eventlist", eventlist);
+		return model;
+	}
+
+	@RequestMapping(value = "/mmessage.mh")
+	public ModelAndView mmessage(@RequestParam("id") String u_id, @RequestParam(value = "page", required = false) String page, ModelAndView model) throws Exception {
+		model.setViewName("myhome/mmessage");
+		List<Message> messagelist =  new ArrayList<Message>();
+		User user = userservice.user_info(u_id);
+		int u_num = user.getUser_num();
+		
+		if(page.equals("send")) {
+			messagelist = mhservice.sendmessage(u_num);
+		}else {
+			messagelist = mhservice.receivemessage(u_num);
+		}
+		System.out.println("이벤트 정보 : " + messagelist.size());
+		model.addObject("page", page);
+		model.addObject("user", user);
+		model.addObject("messagelist", messagelist);
 		return model;
 	}
 

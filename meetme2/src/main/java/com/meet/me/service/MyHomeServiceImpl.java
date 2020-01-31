@@ -11,6 +11,7 @@ import com.meet.me.dao.MyhomeDAO;
 import com.meet.me.domain.Board;
 import com.meet.me.domain.Comment;
 import com.meet.me.domain.Follows;
+import com.meet.me.domain.Message;
 import com.meet.me.domain.MyHome;
 import com.meet.me.domain.User;
 
@@ -81,5 +82,13 @@ public class MyHomeServiceImpl  implements MyHomeService{
 	@Override
 	public int commentsInsert(Comment c) {
 		return mhdao.commentinsert(c);
+	}
+	@Override
+	public List<Message> sendmessage(int u_num) {
+		return mhdao.sendmessage(u_num);
+	}
+	@Override
+	public List<Message> receivemessage(int u_num) {
+		return mhdao.receivemessage(u_num);
 	}
 }
