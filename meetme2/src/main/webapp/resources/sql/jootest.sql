@@ -67,3 +67,5 @@ select count(*) from MM_EVENT_ATTENDEE where EVENT_NUM = 13 and USER_NUM = 11;
 
 select * from MM_EVENT_ATTENDEE;
 
+select * from MM_EVENT_COMMENT;
+insert into MM_EVENT_COMMENT values(2, 51, 5, "넹~", '2020-01-11');

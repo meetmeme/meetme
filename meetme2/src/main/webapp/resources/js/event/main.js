@@ -86,6 +86,25 @@ jQuery(document).ready(function($) {
       $('.menu-first').removeClass('show');
     });
 
+    $('#writeBtn').click(function(){
+    	$.ajax({
+			type : "post",
+			url : "writeComment.event",
+			data : {"content" : $('#writeChat').val(),
+					"event_num" : $('#event_num').val()
+				},
+			success : function(result){
+				$('#content').val('');
+//				if(result == 1){
+//					getList();
+//				}
+				alert('등록되었습니다.');
+				window.location.reload();
+			}
+		});
+    });
+    
+    $('.chat').scrollTop($('.caht')[0].scrollHeight);
 
     /************** LightBox *********************/
       $(function(){

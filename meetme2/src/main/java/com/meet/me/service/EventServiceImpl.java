@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.meet.me.dao.EventDAO;
 import com.meet.me.domain.Attendee;
 import com.meet.me.domain.Event;
+import com.meet.me.domain.EventComment;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
@@ -143,6 +144,16 @@ public class EventServiceImpl implements EventService{
 	@Override
 	public int deleteAttend(Attendee att) {
 		return dao.cancelAttend(att);
+	}
+
+	@Override
+	public int writeComment(EventComment co) {
+		return dao.writeComment(co);
+	}
+
+	@Override
+	public List<EventComment> getComment(int event) {
+		return dao.getComment(event);
 	}
 
 

@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.meet.me.domain.Attendee;
 import com.meet.me.domain.Event;
+import com.meet.me.domain.EventComment;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
@@ -59,7 +60,7 @@ public class EventController {
 		List<Hashtag> tag = eventService.getHashtag(event);
 		int remain = e.getEVENT_MAX() - eventService.getRemain(event);
 		System.out.println("남은 자리="+remain);	
-		
+		List<EventComment> com = eventService.getComment(event);
 		
 		att.setUser_num(user_num);
 		att.setEvent_num(event);		
@@ -74,6 +75,8 @@ public class EventController {
 		mv.addObject("tag", tag);
 		mv.addObject("remain", remain);
 		mv.addObject("att", attend);	
+		mv.addObject("com",com);
+		mv.addObject("user_num",user_num);
 		
 		return mv;		
 	}
@@ -221,6 +224,21 @@ public class EventController {
 		return "redirect:event.main?event="+event;		
 	}
 	
+	// 댓글 등록
+	@RequestMapping(value = "/writeComment.event", method = RequestMethod.POST)
+	public String writeComment(EventComment co, ModelAndView mv, @RequestParam String content, @RequestParam int event_num, HttpServletRequest request, HttpSession session) {		
+		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
+
+		System.out.println("내용 = "+content+" 이번트번호 = "+event_num);
+		co.setEvent_num(event_num);
+		co.setUser_num(user_num);
+		co.setEvent_comm_content(content);
+		
+		int comm = eventService.writeComment(co);
+		
+		return "redirect:event.main?event="+event_num;		
+	}
+		
 	
 	
 	

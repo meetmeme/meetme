@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.meet.me.domain.Attendee;
 import com.meet.me.domain.Event;
+import com.meet.me.domain.EventComment;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
@@ -120,6 +121,14 @@ public class EventDAO {
 
 	public int cancelAttend(Attendee att) {
 		return sqlSession.delete("Events.cancelAttend", att);
+	}
+
+	public int writeComment(EventComment co) {
+		return sqlSession.insert("Events.writeComment", co);
+	}
+
+	public List<EventComment> getComment(int event) {
+		return sqlSession.selectList("Events.getComment", event);
 	}
 
 }
