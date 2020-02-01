@@ -51,20 +51,6 @@
        
  	</head>
     <body>
-    <%
-String id = "";
-try{
-	Cookie[] cookies = request.getCookies();                 // 요청에서 쿠키를 가져온다.
-	if(cookies!=null){                                                    // 쿠키가 Null이 아닐때,
-		for(int i=0; i<cookies.length; i++){                        // 쿠키를 반복문으로 돌린다.
-			if(cookies[i].getName().equals("userInputId")){            // 쿠키의 이름이 id 일때
-			id=cookies[i].getValue();                        // 해당 쿠키의 값을 id 변수에 저장한다.
-			}
-		}	
-	}
-}catch(Exception e){}
-%>
-<input type="hidden" name="user_id" value="<%=id%>">  
 <jsp:include page="../main/header.jsp" />
         <div class="site-main" id="sTop">
             <div class="site-header">
@@ -247,20 +233,23 @@ try{
 					<div id="eventModal" class="eventModal"> 
 				      <div class="event-modal-content">
 				        <span class="close" id="close">&times;</span>                                                               
-				        <h2> 참석 하시겠어요? </h2><br>
-				        <h4>${event.EVENT_TITLE}</h4>		   
-		                <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
-		                
+				        <h2 id="mtitle"> 참석 하시겠어요? </h2>
+				        
+				        <div id="mcontent">
+				        	<h4>${event.EVENT_TITLE}</h4>		   
+		                	<h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
+		                </div>
+		                <div id="mbtn">
 		                <c:if test="${event.EVENT_PRICE == 0 }">
-		                	<h4>무료</h4><br>		                
-		                	<button id="yes_free" type="submit" onclick="location.href='Attend.event?event=${event.EVENT_NUM}'">참석</button>
+		                	<h4>무료</h4>	                
+		                	<button class="paybtn" id="yes_free" type="submit" onclick="location.href='Attend.event?event=${event.EVENT_NUM}'">참석</button>
 		                </c:if>
 		                <c:if test="${event.EVENT_PRICE > 0}">
-		                	<h4>${event.EVENT_PRICE}(원)</h4><br>		                
-		                	<button id="yes_pay" type="submit" >결제</button>
-		                	
+		                	<h4>${event.EVENT_PRICE}(원)</h4>		                
+		                	<button class="btn" id="yes_pay" type="submit" >결제</button>
 		                	
 		                </c:if>
+		                </div>
 				      </div>		 
 				    </div>
 				    

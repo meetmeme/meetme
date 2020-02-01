@@ -2,13 +2,14 @@ package com.meet.me.controller;
 
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,43 +34,37 @@ public class EventController {
 	private EventService eventService;
 	
 	@Autowired
-	UserService userservice;
-	
-	// 쿠키 아이디 구하기
-	public String cookieId(HttpServletRequest request) {		
-		String id = "못가져옴";
-		try{
-			Cookie[] cookies = request.getCookies();                 // 요청에서 쿠키를 가져온다.
-			if(cookies!=null){                                                    // 쿠키가 Null이 아닐때,
-				for(int i=0; i<cookies.length; i++){                        // 쿠키를 반복문으로 돌린다.
-					if(cookies[i].getName().equals("userInputId")){            // 쿠키의 이름이 id 일때
-					id=cookies[i].getValue();                        // 해당 쿠키의 값을 id 변수에 저장한다.
-					}
-				}	
-			}
-		}catch(Exception ex){}			
-		return id;						
-	}	
+	UserService userservice;	
 
 	@RequestMapping(value = "/event.main", method = RequestMethod.GET)
-	public ModelAndView DetailPage(Event ev, Attendee att, ModelAndView mv, HttpServletRequest request, @RequestParam int event) {		
+	public ModelAndView DetailPage(Event ev, Attendee att, ModelAndView mv, HttpServletResponse response, HttpServletRequest request, @RequestParam int event, HttpSession session)throws Exception{		
+		try {
+			int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());	
+		} catch (Exception e) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 해주세요');");
+			out.println("history.back();");
+			out.println("</script>");	
+			return null;			
+		}
+			
+		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
+		
 		Event e = eventService.getDetail(event);	
 		int count = eventService.getAttend(event);
 		List<User> u = eventService.getUser(event);
 		List<Gallery> gall	= eventService.getGall(event);
 		List<Hashtag> tag = eventService.getHashtag(event);
 		int remain = e.getEVENT_MAX() - eventService.getRemain(event);
-		System.out.println("남은 자리="+remain);
+		System.out.println("남은 자리="+remain);	
 		
-		String id = cookieId(request);		
-		// user_id으로 user_num구하기
-		System.out.println("id = "+id);
-		int num = eventService.getUSER_NUM(id);
-		System.out.println("USER_NUM = " + num);
 		
-		att.setUser_num(num);
+		att.setUser_num(user_num);
 		att.setEvent_num(event);		
-		int attend = eventService.isAttend(att);		
+		int attend = eventService.isAttend(att);	
+		System.out.println(user_num+"은 참석을 하니?" + attend);
 		
 		mv.setViewName("event/eventDetail");
 		mv.addObject("event",e);
@@ -82,7 +77,7 @@ public class EventController {
 		
 		return mv;		
 	}
-	
+
 	// 이벤트 등록 폼
 	@RequestMapping(value = "/new.event", method = RequestMethod.GET)
 	public ModelAndView NewEvent(ModelAndView mv) {
@@ -95,17 +90,13 @@ public class EventController {
 	
 	// 이벤트 등록
 	@RequestMapping(value = "/createEvent.event", method = RequestMethod.POST)
-	public String createEvent(Attendee att, Event event, Gallery gall, HttpServletRequest request, HttpServletResponse response)throws Exception {
+	public String createEvent(Attendee att, Event event, Gallery gall, HttpServletRequest request, HttpServletResponse response, HttpSession session)throws Exception {
 		System.out.println("등록시작");
 		
 		System.out.println("날짜"+event.getEVENT_DATE());
 		
-		// user_id으로 user_num구하기
-		String id = event.getUser_id();
-		int num = eventService.getUSER_NUM(id);
-		System.out.println("USER_NUM = " + num);
-		event.setUSER_NUM(num);
-		
+		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
+		event.setUSER_NUM(user_num);
 		// 엔터 구별
 		String content = event.getEvent_detail();
 		content = content.replace("\r\n","<br>");
@@ -120,9 +111,10 @@ public class EventController {
 			int month = c.get(Calendar.MONTH) + 1; // 오늘 월 구합니다.
 			int date = c.get(Calendar.DATE); //오늘 일 구합니다.
 			//String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/uploadevent/";
-			String saveFolder = "D:\\mm\\0128\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\event\\";
+			//String saveFolder = "D:\\mm\\0128\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\event\\";
 			
-			
+			String saveFolder = "C:\\spring\\0131mm\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\event\\";
+						
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 			System.out.println(homedir);
 			  
@@ -195,7 +187,7 @@ public class EventController {
 			}	
 		}
 		
-		att.setUser_num(num);
+		att.setUser_num(user_num);
 		att.setEvent_num(event_num);
 		int attend = eventService.insertAttend(att);
 		System.out.println("주최자 참석됨? "+attend);
@@ -206,10 +198,10 @@ public class EventController {
 	
 	// 이벤트 참석
 	@RequestMapping(value = "/Attend.event", method = RequestMethod.GET)
-	public String Attend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request) {		
-		String id = cookieId(request);
-		int num = eventService.getUSER_NUM(id);
-		att.setUser_num(num);
+	public String Attend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request, HttpSession session) {		
+		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
+		System.out.println("참석 하려구 num = " + user_num);
+		att.setUser_num(user_num);
 		att.setEvent_num(event);
 		
 		int attend = eventService.insertAttend(att);
@@ -219,10 +211,9 @@ public class EventController {
 	
 	// 참석 취소 cancelAttend
 	@RequestMapping(value = "/cancelAttend.event", method = RequestMethod.GET)
-	public String cancelAttend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request) {		
-		String id = cookieId(request);
-		int num = eventService.getUSER_NUM(id);
-		att.setUser_num(num);
+	public String cancelAttend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request, HttpSession session) {		
+		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
+		att.setUser_num(user_num);
 		att.setEvent_num(event);
 		
 		int attend = eventService.deleteAttend(att);
