@@ -91,4 +91,8 @@ public class MyHomeServiceImpl  implements MyHomeService{
 	public List<Message> receivemessage(int u_num) {
 		return mhdao.receivemessage(u_num);
 	}
+	@Override
+	public int boardDelete(int num) {
+		return mhdao.boardDelete(num);
+	}
 }

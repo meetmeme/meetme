@@ -67,7 +67,9 @@ public class ReportDAO {
 		return sqlSession.selectOne("Report.getEvent", event_num);
 	}
 
-	
+	public int myhomeReport(Report report) {
+		return sqlSession.insert("Report.myhome_report", report);
+	}
 
 
 

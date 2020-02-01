@@ -110,6 +110,12 @@
 		BOARD_NUM=#{BOARD_NUM}
 	</update>
 
+	<delete id="board_delete" parameterType="int">
+		delete mm_board 
+		where
+		BOARD_NUM=#{num}
+	</delete>
+
 	<select id="comment_list" parameterType="int"
 		resultType="comment">
 		select * from mm_comment where BOARD_USER_NUM =

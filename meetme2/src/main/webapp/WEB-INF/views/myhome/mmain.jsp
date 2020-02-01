@@ -9,27 +9,17 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link
-	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	
 <script src="resources/js/myhomefollow.js"></script>
 <jsp:include page="/WEB-INF/views/myhome/mnavi.jsp" />
+<jsp:include page="/WEB-INF/views/myhome/report_modal.jsp" />
+
 <style>
 #follow {
 	position: relative;
 	top: 300px;
 	font-size: 20px;
 }
+
 </style>
 </head>
 <body>
@@ -59,10 +49,16 @@
 						</div>
 					</div>
 					<div id="follow">
-						<a href="#" id="follow_btn" style="background: none; border: none;"
+						<a href="#" id="follow_link" style="background: none; border: none;"
 							onclick="follow('${m_info.user_num}','${m_info.user_name}')"
 							title="follow ${m_info.user_name}!"><label>
-							<span class="glyphicon glyphicon-heart"> follow</span></label>
+							▶ follow</label>
+						</a>
+						&nbsp;&nbsp;
+						<a href="#" id="report" style="background: none; border: none;"
+							data-target="#layerpop3" data-toggle="modal"
+							title="${m_info.user_name} 신고하기!"><label>
+							▶ 신고</label>
 						</a>
 					</div>
 				</div>

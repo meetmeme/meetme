@@ -151,6 +151,9 @@
 		where USER_EMAIL = #{user_email}
 	</update>
 
+	<delete id="leave" parameterType="String">
+		delete from mm_user where user_id=#{user_id}
+	</delete>
 </mapper>
 
 

@@ -196,4 +196,9 @@ public class UserServiceImpl implements UserService {
 	public User isId2(String user_id) {
 		return dao.isId(user_id);
 	}
+
+	@Override
+	public int leave(String user_id) {
+		return dao.leave(user_id);
+	}
 }
