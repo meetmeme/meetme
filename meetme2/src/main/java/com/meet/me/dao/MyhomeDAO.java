@@ -84,4 +84,8 @@ public class MyhomeDAO {
 	public List<Message> receivemessage(int u_num){
 		return sqlSession.selectList("Myhomes.receivemessage", u_num);
 	}
+
+	public int boardDelete(int num) {
+		return sqlSession.delete("Myhomes.board_delete", num);
+	}
 }

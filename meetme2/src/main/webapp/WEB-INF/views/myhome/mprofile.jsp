@@ -11,19 +11,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <jsp:include page="/WEB-INF/views/myhome/mnavi.jsp" />
-<link
-	href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="resources/js/myhomeinfo.js"></script>
+<jsp:include page="/WEB-INF/views/myhome/leave_modal.jsp" />
 
 
 <style>
@@ -53,32 +42,6 @@
 	width: 220px;
 }
 
-#myModal {
-	display: none;
-	left: -250px;
-	justify-content: center;
-}
-
-.modal {
-	justify-content: center;
-}
-
-@media screen and (min-width: 768px) {
-	.modal:before {
-		display: inline-block;
-		vertical-align: middle;
-		content: " ";
-		height: 100%;
-		left: 0;
-	}
-}
-
-.modal-dialog {
-	display: inline-block;
-	text-align: left;
-	vertical-align: middle;
-}
-
 input, textarea {
 	background: none;
 }
@@ -102,7 +65,7 @@ input, textarea {
 		user_gender = rs.getString("user_gender");
 	%>
 	<div id="colorlib-page">
-		<div id="colorlib-main">
+		<div id="colorlib-main" style="font:10px;">
 			<div class="hero-wrap hero-wrap-2 js-fullheight"
 				style="background-image: url(resources/images2/whitespace.jpg);"
 				data-stellar-background-ratio="0.5">
@@ -114,7 +77,8 @@ input, textarea {
 						enctype="multipart/form-data">
 						<input type="hidden" name="user_id" value="${userinfo.user_id}">
 						<input type="hidden" name="user_num" value="${userinfo.user_num}">
-						<input type="hidden" name="myhome_num" value="${mhinfo.myhome_num}">
+						<input type="hidden" name="myhome_num"
+							value="${mhinfo.myhome_num}">
 						<div class="container">
 
 							<h2 class="h4 font-weight-bold">기본 프로필</h2>
@@ -130,36 +94,23 @@ input, textarea {
 									</a></label>
 								</div>
 								<div class="col-md-1 order-md-last pr-md-4"></div>
-								<div class="col-md-6 order-md-last pr-md-4">
+								<div class="col-md-6 order-md-last pr-md-4" style="height: 400px;">
 
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-4"></div>
 										<div class="col-md-12 mb-4">
-											<button id="edit_btn" data-toggle="modal"
-												data-target="#myModal">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
 											Name: <input type="text" name="user_name" id="edit_input"
 												value="${userinfo.user_name}">
 										</div>
 										<div class="col-md-12 mb-4">
-											<button id="edit_btn">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
 											Password: <input type="password" name="user_pass"
 												id="edit_input" value="${userinfo.user_pass}">
 										</div>
 										<div class="col-md-12 mb-4">
-											<button id="edit_btn">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
 											Email: <input type="text" name="user_email" id="edit_input"
 												value="${userinfo.user_email}">
 										</div>
 										<div class="col-md-12 mb-4">
-											<button id="edit_btn">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
 											Gender: <span id="gender"><input type="radio"
 												name="user_gender" value="남 "
 												<%if (user_gender.equals("남")) {%> checked="checked" <%}%>><span>남자</span>
@@ -168,74 +119,59 @@ input, textarea {
 											</span>
 										</div>
 										<div class="col-md-12 mb-4">
-											<button id="edit_btn">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
 											Age: <input type="text" name="user_age" id="edit_input"
 												value="${userinfo.user_age}">
 										</div>
 										<div class="col-md-12 mb-4">
-											<button id="edit_btn">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
 											Address: <input type="text" name="user_city" id="edit_input"
 												value="${userinfo.user_city}">
 										</div>
 										<div class="col-md-12 mb-4">
-											<button id="edit_btn">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
 											Interests:
-											<c:forEach var="c" items="${categoryList}"
-												varStatus="status">
+											<c:forEach var="c" items="${categoryList}" varStatus="status">
 												<label><input type=checkbox name=category id=family
 													value=${status.count}>${c.CATEGORY_NAME}</label>
 											</c:forEach>
-											
+
 										</div>
 									</div>
 
 								</div>
 
-								<div class="col-md-9 order-md-last pr-md-5">
+								<div class="col-md-8 order-md-last pr-md-5">
 									<h2 class="h4 font-weight-bold">미니홈피 프로필</h2>
 									<br>
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-3">
-											<button id="edit_btn">
-												<span class="glyphicon glyphicon-music"></span>
-											</button>
-											BGM: <input type="text" name="myhome_bgm" value="${mhinfo.myhome_bgm}">
+											BGM: <input type="text" name="myhome_bgm"
+												value="${mhinfo.myhome_bgm}">
 										</div>
 										<div class="col-md-12 mb-3">
-											<button id="edit_btn">
-												<span class="glyphicon glyphicon-pencil"></span>
-											</button>
 											Introduce:
 											<textarea name="myhome_intro" rows="2" class="form-control">${mhinfo.myhome_intro}</textarea>
 										</div>
 									</div>
 								</div>
-							</div>
+								<div class="col-md-4 order-md-last pr-md-8" style="top: 120px;">
+									<div class="form-group" style="text-align: center;">
+										<button type=submit class="btn btn-info">수정</button>
+										<button type=reset class="btn" style="background: #f8e77f">취소</button>
+										<button type=button id="leave" class="btn btn-primary" 
+										data-target="#layerpop3" data-toggle="modal">탈퇴</button>
+									</div>
+								</div>
 
-							<div class="form-group" style="text-align: center;">
-								<button type=submit class="btn btn-primary">수정</button>
-								<button type=reset class="btn btn-info">취소</button>
 							</div>
-						</div>
 					</form>
-
 				</section>
-
 			</div>
 			<!-- END COLORLIB-MAIN -->
 		</div>
 		<!-- END COLORLIB-PAGE -->
-
-
 	</div>
 	<jsp:include page="/WEB-INF/views/myhome/mscript.jsp" />
 	<script>
+		//interests 표시
 		var list = new Array();
 		<c:forEach items="${user_interests}" var="item">
 		list.push("${item.category_num}");
@@ -248,6 +184,10 @@ input, textarea {
 					this.checked = true; //checked 처리
 				}
 			}
+		})
+
+		$("#leave").on(click, function() {
+			ajax
 		})
 	</script>
 </body>

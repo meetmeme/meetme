@@ -30,5 +30,6 @@ public interface UserService {
 	public User user_info_email(String email);
 	public int setPassword(User u);
 	public User isId2(String user_id);
+	public int leave(String user_id);
 }
  

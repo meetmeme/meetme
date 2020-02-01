@@ -104,4 +104,8 @@ public class UserDAO {
 	public int setPassword(User u) {
 		return sqlSession.update("Users.setPassword", u);
 	}
+
+	public int leave(String user_id) {
+		return sqlSession.delete("Users.leave", user_id);
+	}
 }

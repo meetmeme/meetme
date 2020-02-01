@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,10 +31,12 @@ import com.meet.me.domain.Event;
 import com.meet.me.domain.Follows;
 import com.meet.me.domain.Message;
 import com.meet.me.domain.MyHome;
+import com.meet.me.domain.Report;
 import com.meet.me.domain.User;
 import com.meet.me.domain.User_interests;
 import com.meet.me.service.EventService;
 import com.meet.me.service.MyHomeService;
+import com.meet.me.service.ReportService;
 import com.meet.me.service.UserService;
 
 @Controller
@@ -47,6 +50,9 @@ public class MyhomeController {
 	
 	@Autowired
 	EventService eventservice;
+	
+	@Autowired
+	ReportService reportservice;
 	
 
 	@RequestMapping(value = "/mmain.mh", method = RequestMethod.GET)
@@ -230,5 +236,75 @@ public class MyhomeController {
 		model.addObject("messagelist", messagelist);
 		return model;
 	}
+	
+	@PostMapping(value = "/myhomeReport.mh")
+	public void myhomeReport(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws IOException {
+		int user_num = Integer.parseInt(request.getParameter("user_num").toString());
+		String reporter_id = session.getAttribute("user_name1").toString();
+		String content = request.getParameter("Content").toString();
 
+		Report report = new Report();
+		report.setReporter_id(reporter_id);
+		report.setUser_num(user_num);
+		report.setReport_content(content);
+
+		int result = reportservice.myhomeReport(report);
+
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (result == 1) { // 신고 성공
+			out.println("<script>");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		} else { // 실패
+			out.println("<script>");
+			out.println("alert('신고 실패했습니다.')");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
+	}
+
+	@PostMapping(value = "/leave.mh")
+	public void leave(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws IOException {
+		String user_id = request.getParameter("user_id").toString();
+		String check_pass = request.getParameter("password").toString();
+
+		User user = userservice.isId2(user_id);
+		String ori_pass=user.getUser_pass();
+		
+		System.out.println("check_pass"+check_pass);
+		System.out.println("user_pass"+ori_pass);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		int result;
+		if(check_pass.equals(ori_pass)) {
+			result=userservice.leave(user_id);
+			if (result == 1) { // 탈퇴 성공
+				session.invalidate();
+				out.println("<script>");
+				out.println("alert('탈퇴 되었습니다.')");
+				out.println("window.close()");
+				out.println("</script>");
+				out.close();
+			} else { // 실패
+				out.println("<script>");
+				out.println("alert('탈퇴 실패했습니다.')");
+				out.println("history.back();");
+				out.println("</script>");
+				out.close();
+			}
+		}else {
+			out.println("<script>");
+			out.println("alert('비밀번호가 틀렸습니다.')");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
+	}
 }

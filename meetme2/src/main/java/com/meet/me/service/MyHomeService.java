@@ -30,4 +30,5 @@ public interface MyHomeService {
 	public int commentsInsert(Comment c);	
 	public List<Message> sendmessage(int u_num);
 	public List<Message> receivemessage(int u_num);
+	public int boardDelete(int num);
 }

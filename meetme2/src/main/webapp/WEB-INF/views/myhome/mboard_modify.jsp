@@ -8,6 +8,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <jsp:include page="/WEB-INF/views/myhome/mnavi.jsp" />
+<jsp:include page="/WEB-INF/views/myhome/delete_board_modal.jsp" />
+
 <style>
 tr.center-block {
 	text-align: center
@@ -82,8 +84,10 @@ img {
 
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary">수정</button>
-						<button type="reset" class="btn btn-danger"
+						<button type="reset" class="btn btn-info"
 							onClick="histoty.go(-1)">취소</button>
+						<button type="button" id="delete" class="btn btn-danger"
+						data-target="#layerpop3" data-toggle="modal">삭제</button>
 					</div>
 
 

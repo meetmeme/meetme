@@ -33,7 +33,7 @@ public interface ReportService {
 
 	String getEvent(int event_num);
 
-	
+	int myhomeReport(Report report);
 
 
 }
