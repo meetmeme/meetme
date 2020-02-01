@@ -201,5 +201,14 @@
 		USER_NUM=#{user_num} and EVENT_NUM = #{event_num}
 	</delete>
 	
+	<insert id="writeComment" parameterType="EventComment">
+		insert into MM_EVENT_COMMENT 
+		values((select nvl(max(event_comm_num),0)+1 from MM_EVENT_COMMENT), 
+				#{event_num}, #{user_num}, #{event_comm_content}, SYSDATE)	
+	</insert>
+	
+	<select id="getComment" resultType="EventComment">
+		select * from MM_EVENT_COMMENT where EVENT_NUM = #{event}
+	</select>
 	
 </mapper>

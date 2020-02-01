@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.meet.me.domain.Attendee;
 import com.meet.me.domain.Event;
+import com.meet.me.domain.EventComment;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
@@ -34,5 +35,7 @@ public interface EventService {
 	public int isAttend(Attendee att);
 	public int insertAttend(Attendee att);
 	public int deleteAttend(Attendee att);
+	public int writeComment(EventComment co);
+	public List<EventComment> getComment(int event);
 }
  

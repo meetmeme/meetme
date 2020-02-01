@@ -51,20 +51,6 @@
        
  	</head>
     <body>
-    <%
-String id = "";
-try{
-	Cookie[] cookies = request.getCookies();                 // 요청에서 쿠키를 가져온다.
-	if(cookies!=null){                                                    // 쿠키가 Null이 아닐때,
-		for(int i=0; i<cookies.length; i++){                        // 쿠키를 반복문으로 돌린다.
-			if(cookies[i].getName().equals("userInputId")){            // 쿠키의 이름이 id 일때
-			id=cookies[i].getValue();                        // 해당 쿠키의 값을 id 변수에 저장한다.
-			}
-		}	
-	}
-}catch(Exception e){}
-%>
-<input type="hidden" name="user_id" value="<%=id%>">  
 <jsp:include page="../main/header.jsp" />
         <div class="site-main" id="sTop">
             <div class="site-header">
@@ -199,10 +185,39 @@ try{
 				</h2>
 				<p class="nino-sectionDesc">Share your information with people you're with in advance through comments</p>
 				 <div class="row">
-                    <div class="col-md-12">
-                       <div class="googlemap-wrapper">
-                            
-                      </div> <!-- /.googlemap-wrapper -->
+                    <div class="comment">	
+                    	<div class="chat">							
+							<c:forEach var="com" items="${com}">								
+								<c:if test="${com.user_num == user_num }">
+									<div class="mycom box3">${com.event_comm_content}<br>
+		                    				<a href="comUpdate.event" class="comUpdate">수정</a>
+		                    				<a href="comUpdate.event" class="comDelete">삭제</a>
+		                    		</div>
+								</c:if>
+								<c:if test="${com.user_num != user_num }">
+									<div class="pro">	
+										<img src="resources/images/profile.png" alt="">
+																	
+										<%-- <c:forEach var="user" items="${user}">    
+										 	<c:if test="${com.user_id == user.user_id }">
+										 		<img src="resources/upload${user.user_save}" alt="">
+										 	</c:if>
+										 	<c:if test="${com.user_id != user.user_id }">
+										 		<img src="resources/images/profile.png" alt="">
+										 	</c:if>
+							           </c:forEach> --%>
+							           
+							           
+							           
+									</div>
+									<div class="com box3">${com.event_comm_content}</div>
+								</c:if>								
+							</c:forEach>								
+                    	</div>
+                    	<div class="write">
+                    		<textarea rows=3 id="writeChat" maxLength="100" placeholder="최대 100글자까지 가능"></textarea>
+                    		<button id="writeBtn">등록</button>
+                    	</div>   
                     </div> <!-- /.col-md-12 -->
                 </div> <!-- /.row -->  
 			
@@ -247,20 +262,23 @@ try{
 					<div id="eventModal" class="eventModal"> 
 				      <div class="event-modal-content">
 				        <span class="close" id="close">&times;</span>                                                               
-				        <h2> 참석 하시겠어요? </h2><br>
-				        <h4>${event.EVENT_TITLE}</h4>		   
-		                <h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
-		                
+				        <h2 id="mtitle"> 참석 하시겠어요? </h2>
+				        
+				        <div id="mcontent">
+				        	<h4>${event.EVENT_TITLE}</h4>		   
+		                	<h4>${event.EVENT_DATE} ${event.EVENT_TIME}</h4>
+		                </div>
+		                <div id="mbtn">
 		                <c:if test="${event.EVENT_PRICE == 0 }">
-		                	<h4>무료</h4><br>		                
-		                	<button id="yes_free" type="submit" onclick="location.href='Attend.event?event=${event.EVENT_NUM}'">참석</button>
+		                	<h4>무료</h4>	                
+		                	<button class="paybtn" id="yes_free" type="submit" onclick="location.href='Attend.event?event=${event.EVENT_NUM}'">참석</button>
 		                </c:if>
 		                <c:if test="${event.EVENT_PRICE > 0}">
-		                	<h4>${event.EVENT_PRICE}(원)</h4><br>		                
-		                	<button id="yes_pay" type="submit" >결제</button>
-		                	
+		                	<h4>${event.EVENT_PRICE}(원)</h4>		                
+		                	<button class="btn" id="yes_pay" type="submit" >결제</button>
 		                	
 		                </c:if>
+		                </div>
 				      </div>		 
 				    </div>
 				    

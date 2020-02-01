@@ -25,6 +25,17 @@
 	white-space:nowrap;
 }
 
+#mcontent > h4:nth-child(1){
+	width: 100%;
+	line-height: 2rem;	
+	box-sizing: border-box; 
+	text-overflow:ellipsis; 
+	overflow:hidden; 
+	display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+}
+
 #date, #time{
 	font-size : 1.5rem;
 }
@@ -229,7 +240,7 @@ text-align : left;
     padding: 30px;
     border: 1px solid #888;
     width: 35%; /* Could be more or less, depending on screen size */        
-    height : 35%;                  
+    height : 40%;                  
 }
 /* The Close Button */
 .close {
@@ -248,7 +259,7 @@ text-align : left;
 #eventModal > div > h2{
 	color : rgba(241, 114, 114, 0.96); 
 	font-size : 3rem;
-	margin-top : 20px;
+	margin-bottom : 15px;
 }
 
 #yes_free, #yes_pay{
@@ -268,5 +279,135 @@ text-align : left;
  	font-size : 2rem;
 }
 
+.paybtn{
+	margin-top : 15px;
+}
+
+#mtitle{
+	height : 20%;
+}
+#mcontent{
+	height : 40%;
+}
+#mbtn{
+	height : 20%;
+}
+
+.comment{
+	width: 80%;
+	height : 1000px;
+	border : 2px solid lightgray;
+	margin : auto;
+	position : relative;
+}
+.chat{
+	height: 90%;
+	overflow:auto;
+	overflow-x : hidden;
+}
+.write{
+	position: absolute; 
+	bottom: 0; 
+	height : 10%;
+	width : 100%;
+	border-top : 2px solid lightgray;
+}
+#writeChat{
+	width : 80%;
+	height : 100%;
+	float : left;
+	resize : none;
+	font-size : 18px;
+}
+#writeBtn{
+	width : 20%;
+	display : inline-block;
+	height : 100%;
+	background: rgba(241, 114, 114, 0.96);
+	font-size : 26px;
+	color : white;
+}
+
+.box3 {
+  width: 50%;
+  margin: 35px auto;
+  border-radius: 15px;
+  background: #00bfb6;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  font-family: arial;
+  position: relative;
+  word-break:break-all;
+  font-size : 14px;
+}
+
+.mycom:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 15px solid rgb(241, 114, 114);
+  border-right: 15px solid transparent;
+  border-top: 15px solid rgb(241, 114, 114);
+  border-bottom: 15px solid transparent;
+  right: -16px;
+  top: 0px;
+}
+
+.com:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 15px solid transparent;
+  border-right: 15px solid lightgray;
+  border-top: 15px solid lightgray;
+  border-bottom: 15px solid transparent;
+  left: -16px;
+  top: 0px;
+}
+
+.mycom{
+	margin-right : 3em;
+	background-color: rgb(241, 114, 114);
+}
+.com{
+	margin-left : 7em;
+	background-color: lightgray;
+}
+
+.comUpdate{
+	text-align: right;
+	position : absolute;
+	right : 3em;
+	display : none;
+	color : white;
+}
+
+.comDelete{
+	text-align: right;
+	position : absolute;
+	right : 0.5em;
+	display : none;
+	color : white;
+}
+
+.box3:hover  .comUpdate{
+	display : block;	
+}
+.box3:hover  .comDelete{
+	display : block;	
+}
+
+.pro{
+	width: 8%;
+	height : 8%;
+	border : 1px solid black;
+	float : left;
+	border-radius : 3em;
+	margin-left : 0.7em;
+	overflow:hidden; 
+}
 
 

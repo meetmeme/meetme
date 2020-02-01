@@ -86,6 +86,25 @@ jQuery(document).ready(function($) {
       $('.menu-first').removeClass('show');
     });
 
+    $('#writeBtn').click(function(){
+    	$.ajax({
+			type : "post",
+			url : "writeComment.event",
+			data : {"content" : $('#writeChat').val(),
+					"event_num" : $('#event_num').val()
+				},
+			success : function(result){
+				$('#content').val('');
+//				if(result == 1){
+//					getList();
+//				}
+				alert('등록되었습니다.');
+				window.location.reload();
+			}
+		});
+    });
+    
+    $('.chat').scrollTop($('.caht')[0].scrollHeight);
 
     /************** LightBox *********************/
       $(function(){
@@ -137,20 +156,14 @@ jQuery(document).ready(function($) {
       	    buyer_postcode : '123-456'
       	}, function(rsp) {
       	    if ( rsp.success ) {
-      	        var msg = '결제가 완료되었습니다.';
-      	        msg += '고유ID : ' + rsp.imp_uid;
-      	        msg += '상점 거래ID : ' + rsp.buyer_email;
-      	        msg += '결제 금액 : ' + rsp.buyer_tel;
-      	        msg += '카드 승인번호 : ' + rsp.apply_num;     	      
+      	        var msg = '결제가 완료되었습니다.'; 
+      	        location.href='Attend.event?event='+ event_num;	
       	    } else {
       	        var msg = '결제에 실패하였습니다.';
       	        msg += '에러내용 : ' + rsp.error_msg;
       	    }
-
-      	    alert(msg);
-      	    location.href='Attend.event?event='+ event_num;	
-      	});
-    	  
+      	    alert(msg);      	   
+      	});    	  
     	  IMP.request_pay(kakaopay, callback)
       });
       
