@@ -18,19 +18,7 @@
 
 
 <body data-target="#nino-navbar" data-spy="scroll">
-<%
-String id = "";
-try{
-	Cookie[] cookies = request.getCookies();                 // 요청에서 쿠키를 가져온다.
-	if(cookies!=null){                                                    // 쿠키가 Null이 아닐때,
-		for(int i=0; i<cookies.length; i++){                        // 쿠키를 반복문으로 돌린다.
-			if(cookies[i].getName().equals("userInputId")){            // 쿠키의 이름이 id 일때
-			id=cookies[i].getValue();                        // 해당 쿠키의 값을 id 변수에 저장한다.
-			}
-		}	
-	}
-}catch(Exception e){}
-%>	
+
 	<!-- category
     ================================================== -->
 	<section id="nino-portfolio">
@@ -41,7 +29,6 @@ try{
 		</div>
 		<div class="sectionContent">
 			<form action="createEvent.event" method="POST" class="nino-subscribeForm" enctype="multipart/form-data">
-				<input type="hidden" name="user_id" value="<%=id%>">
 				
 				<h2 class="nino-sectionHeading">title</h2>
        			<div class="input-group input-group-lg">

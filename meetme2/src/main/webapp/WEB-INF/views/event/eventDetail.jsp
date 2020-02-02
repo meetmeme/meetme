@@ -48,7 +48,7 @@
                 $('body').bind('touchstart', function() {});
             }); 
         </script>
-       
+       <jsp:include page="/WEB-INF/views/event/report_modal.jsp" />
  	</head>
     <body>
 <jsp:include page="../main/header.jsp" />
@@ -61,7 +61,7 @@
                                 <li><a href="#" class="fa fa-facebook"></a></li>
                                 <li><a href="#" class="fa fa-twitter"></a></li>
                                 <li><a href="#" class="fa fa-dribbble"></a></li>
-                                <li><a href="#" class="fa fa-linkedin"></a></li>
+                                <li><a href="#" class="fa fa-warning"></a></li>
                             </ul>
                         </div> <!-- /.col-md-12 -->
                     </div> <!-- /.row -->
@@ -198,19 +198,16 @@
 								</c:if>
 								<c:if test="${com.user_num != user_num }">
 									<div class="pro">	
-										<img src="resources/images/profile.png" alt="">
+										<!-- <img src="resources/images/profile.png" alt=""> -->
 																	
-										<%-- <c:forEach var="user" items="${user}">    
-										 	<c:if test="${com.user_id == user.user_id }">
+										<c:forEach var="user" items="${user}">    
+										 	<c:if test="${com.user_num eq user.user_num }">
 										 		<img src="resources/upload${user.user_save}" alt="">
 										 	</c:if>
-										 	<c:if test="${com.user_id != user.user_id }">
+										 	<c:if test="${com.user_num ne user.user_num }">
 										 		<img src="resources/images/profile.png" alt="">
 										 	</c:if>
-							           </c:forEach> --%>
-							           
-							           
-							           
+							           </c:forEach>
 									</div>
 									<div class="com box3">${com.event_comm_content}</div>
 								</c:if>								
@@ -316,10 +313,6 @@
    			<c:if test="${Date <= nowDate}">
    				<button id="end" type="button">지난 이벤트</button>
    			</c:if>
-   			
-   			
-   			 
-   			
    			
 			
    			</div>
