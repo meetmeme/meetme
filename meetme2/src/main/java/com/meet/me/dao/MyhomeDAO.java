@@ -9,6 +9,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.meet.me.domain.BGM;
 import com.meet.me.domain.Board;
 import com.meet.me.domain.Comment;
 import com.meet.me.domain.Follows;
@@ -88,4 +89,9 @@ public class MyhomeDAO {
 	public int boardDelete(int num) {
 		return sqlSession.delete("Myhomes.board_delete", num);
 	}
+
+	public List<BGM> getbgm() {
+		return sqlSession.selectList("Myhomes.getbgm");
+	}
+	
 }

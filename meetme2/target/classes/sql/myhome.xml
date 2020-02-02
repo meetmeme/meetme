@@ -160,6 +160,11 @@
 		receiver_id=#{u_num} order by sent_date desc
 	</select>
 
+	<select id="getbgm"
+		resultType="bgm">
+		select * from mm_bgm
+	</select>
+
 </mapper>
 
 

@@ -19,6 +19,7 @@
 		<typeAlias alias="gallery" type="com.meet.me.domain.Gallery"/>
 		<typeAlias alias="attendee" type="com.meet.me.domain.Attendee"/>
 		<typeAlias alias="eventcomment" type="com.meet.me.domain.EventComment"/>
+		<typeAlias alias="bgm" type="com.meet.me.domain.BGM"/>
 	</typeAliases>
 	
 	<mappers>

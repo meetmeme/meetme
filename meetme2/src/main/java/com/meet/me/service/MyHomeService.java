@@ -3,6 +3,7 @@ package com.meet.me.service;
 import java.util.List;
 import java.util.Map;
 
+import com.meet.me.domain.BGM;
 import com.meet.me.domain.Board;
 import com.meet.me.domain.Comment;
 import com.meet.me.domain.Follows;
@@ -31,4 +32,5 @@ public interface MyHomeService {
 	public List<Message> sendmessage(int u_num);
 	public List<Message> receivemessage(int u_num);
 	public int boardDelete(int num);
+	public List<BGM> getbgm();
 }

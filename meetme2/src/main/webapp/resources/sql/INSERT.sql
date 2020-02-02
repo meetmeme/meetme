@@ -696,3 +696,9 @@ VALUES(25,'LoveandHate',8,'유저 신고12','2020-01-17',0)
 SELECT * FROM DUAL;
 
 SELECT * FROM MM_REPORT;
+
+
+INSERT INTO MM_BGM values(1,'Lyfo-High.mp3');
+INSERT INTO MM_BGM values(2,'test.mp3');
+
+

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.sql.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,11 +56,14 @@
 							}
 						};
 
-						if (getParameters('id') == "${user_id1}")
+						if (getParameters('id') == "${user_id1}"){
+							$("#navi").append(
+									"<li><a href='mmessage.mh?id="
+											+ "${user_id1}" + "&page=send'>메시지</a></li>");
 							$("#navi").append(
 									"<li><a href='mprofile.mh?id="
 											+ "${user_id1}" + "'>프로필</a></li>");
-
+						}
 						if (location.pathname == "/me/mmain.mh") {
 							$('li:nth-child(1)').addClass("colorlib-active");
 							$('li:nth-child(1)').siblings().removeClass(
@@ -110,6 +114,32 @@
 <body>
 	<%
 		String id = request.getParameter("id");
+		int user_num = (int) session.getAttribute("user_num1");
+		
+		Connection dbconn;
+		Connection dbconn2;
+		Statement stmt;
+		Statement stmt2;
+		ResultSet rs;
+		ResultSet rs2;
+		String myhome_bgm;
+		
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		String sql = "select * from mm_user where user_id='" + id + "'";
+		dbconn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "TIGER");
+		stmt = dbconn.createStatement();
+		rs = stmt.executeQuery(sql);
+		rs.next();
+		user_num = rs.getInt("user_num");
+
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		String sql2 = "select * from mm_myhome where user_num='" + user_num + "'";
+		dbconn2 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "TIGER");
+		stmt2 = dbconn2.createStatement();
+		rs2 = stmt2.executeQuery(sql2);
+
+		rs2.next();
+		myhome_bgm = rs2.getString("myhome_bgm"); 
 	%>
 	<input type="hidden" name="id" id="id" value="<%=id%>">
 	<aside id="colorlib-aside" role="complementary"
@@ -122,10 +152,14 @@
 				<li><a href="mmain.mh?id=<%=id%>">홈</a></li>
 				<li><a href="mboard.mh?id=<%=id%>">게시판</a></li>
 				<li><a href="mevent.mh?id=<%=id%>&page=all">이벤트</a></li>
-				<li><a href="mmessage.mh?id=<%=id%>&page=send">메시지</a></li>
 			</ul>
 		</nav>
 		<div class="colorlib-footer">
+			<ul>
+				<audio src="resources/bgm/<%=myhome_bgm%>" controls autoplay loop
+				 style="width:100%">
+				</audio>
+			</ul>
 			<ul>
 				<select name=follows id=follows onchange="mh_popup(this.value)">
 					<option value="" selected>이웃목록</option>

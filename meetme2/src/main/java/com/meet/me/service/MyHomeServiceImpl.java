@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meet.me.dao.MyhomeDAO;
+import com.meet.me.domain.BGM;
 import com.meet.me.domain.Board;
 import com.meet.me.domain.Comment;
 import com.meet.me.domain.Follows;
@@ -94,5 +95,9 @@ public class MyHomeServiceImpl  implements MyHomeService{
 	@Override
 	public int boardDelete(int num) {
 		return mhdao.boardDelete(num);
+	}
+	@Override
+	public List<BGM> getbgm() {
+		return mhdao.getbgm();
 	}
 }
