@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.meet.me.domain.BGM;
 import com.meet.me.domain.Board;
 import com.meet.me.domain.Comment;
 import com.meet.me.domain.Event;
@@ -74,12 +75,11 @@ public class MyhomeController {
 
 	@RequestMapping(value = "/mprofile.mh", method = RequestMethod.GET)
 	public ModelAndView mprofile(HttpSession session, ModelAndView mv, HttpServletRequest request) throws Exception {
-
 		String user_id = (String) session.getAttribute("user_id1");
 		int user_num = (int) session.getAttribute("user_num1");
 		MyHome mhinfo = mhservice.getinfo(user_id);
 		User userinfo = userservice.user_info(user_id);
-		
+		List<BGM> bgm = mhservice.getbgm();
 		/***암호화된 비밀번호값 DB 입력 방지***/
 		User user = userservice.isId2(user_id);
 		String ori_pass=user.getUser_pass();
@@ -95,6 +95,8 @@ public class MyhomeController {
 
 		for (User_interests u : user_interests)
 			System.out.println(u);
+		for (BGM b : bgm)
+			System.out.println(b);
 
 		if (mhinfo == null || userinfo == null) {
 			System.out.println("정보 수집 실패");
@@ -104,6 +106,7 @@ public class MyhomeController {
 			mv.addObject("userinfo", userinfo);
 			mv.addObject("user_interests", user_interests);
 			mv.addObject("categoryList", categoryList);
+			mv.addObject("bgm", bgm);
 		}
 		return mv;
 	}

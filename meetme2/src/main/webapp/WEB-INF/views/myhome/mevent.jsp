@@ -41,7 +41,7 @@
 											<a href="#" class="img img-2"
 												style="background-image: url(resources${e.EVENT_SAVE});"></a>
 											<div class="text text-2 pt-2 mt-3">
-												<span class="category mb-3 d-block"><a href="#">Technology</a></span>
+												<span class="category mb-3 d-block"><a href="#">Event</a></span>
 												<h3 class="mb-4">
 													<a href="#">${e.EVENT_TITLE}</a>
 												</h3>
@@ -57,17 +57,10 @@
 													</div>
 												</div>
 												<div class="meta-wrap align-items-center">
-													<div class="half order-md-last">
-														<p class="meta">
-															<span><i class="icon-heart"></i>3</span> <span><i
-																class="icon-eye"></i>100</span> <span><i
-																class="icon-comment"></i>5</span>
-														</p>
-													</div>
 													<div class="half">
 														<p>
-															<a href="#" class="btn py-2">Continue Reading <span
-																class="ion-ios-arrow-forward"></span></a>
+															<a href="#" class="btn py-2"
+															onclick="event_popup('${e.EVENT_NUM}')">이벤트 상세보기 </a>
 														</p>
 													</div>
 												</div>

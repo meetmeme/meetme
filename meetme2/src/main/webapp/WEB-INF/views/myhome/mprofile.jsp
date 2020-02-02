@@ -143,8 +143,12 @@ input, textarea {
 									<br>
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-3">
-											BGM: <input type="text" name="myhome_bgm"
-												value="${mhinfo.myhome_bgm}">
+											BGM: 
+												<select name=myhome_bgm id=myhome_bgm">
+													<c:forEach items="${bgm}" var="bgm">
+														<option value="${bgm.BGM_NAME}">${bgm.BGM_NAME}</option>
+													</c:forEach>
+												</select>
 										</div>
 										<div class="col-md-12 mb-3">
 											Introduce:
@@ -178,17 +182,12 @@ input, textarea {
 		</c:forEach>
 		$('input:checkbox[name="category"]').each(function() {
 			for (var i = 0; i < list.length; i++) {
-				console.log(list[i]);
 				if (this.value == list[i]) { //값 비교
-
 					this.checked = true; //checked 처리
 				}
 			}
 		})
 
-		$("#leave").on(click, function() {
-			ajax
-		})
 	</script>
 </body>
 </html>

@@ -48,6 +48,7 @@
 							</ul>
 						</div>
 					</div>
+					<c:if test="${m_info.user_num!=user_num1}">
 					<div id="follow">
 						<a href="#" id="follow_link" style="background: none; border: none;"
 							onclick="follow('${m_info.user_num}','${m_info.user_name}')"
@@ -61,6 +62,7 @@
 							▶ 신고</label>
 						</a>
 					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
