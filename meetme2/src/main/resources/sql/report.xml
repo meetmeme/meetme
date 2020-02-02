@@ -96,6 +96,12 @@
 		(select nvl(max(report_num),0)+1 from MM_REPORT),
 		#{reporter_id},#{user_num},'',#{report_content},sysdate,0)
 	</insert>
+	
+	<insert id="event_report" parameterType="report">
+		insert into mm_report values(
+		(select nvl(max(report_num),0)+1 from MM_REPORT),
+		#{reporter_id},'',#{event_num},#{report_content},sysdate,0)
+	</insert>
 </mapper>
 
 

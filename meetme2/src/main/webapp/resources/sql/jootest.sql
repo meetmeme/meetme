@@ -66,3 +66,5 @@ select count(*) from MM_EVENT_ATTENDEE where EVENT_NUM = 13 and USER_NUM = 11;
 select * from MM_EVENT_ATTENDEE;
 
 select * from MM_EVENT_COMMENT;
+
+select * from MM_REPORT;

@@ -2,6 +2,7 @@ package com.meet.me.controller;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.List;
@@ -25,18 +26,23 @@ import com.meet.me.domain.Event;
 import com.meet.me.domain.EventComment;
 import com.meet.me.domain.Gallery;
 import com.meet.me.domain.Hashtag;
+import com.meet.me.domain.Report;
 import com.meet.me.domain.User;
 import com.meet.me.service.EventService;
+import com.meet.me.service.ReportService;
 import com.meet.me.service.UserService;
 
 @Controller
 public class EventController {
 
 	@Autowired
-	private EventService eventService;
+	EventService eventService;
 	
 	@Autowired
 	UserService userservice;	
+	
+	@Autowired
+	ReportService reportservice;
 
 	@RequestMapping(value = "/event.main", method = RequestMethod.GET)
 	public ModelAndView DetailPage(Event ev, Attendee att, ModelAndView mv, HttpServletResponse response, HttpServletRequest request, @RequestParam int event, HttpSession session)throws Exception{		
@@ -254,7 +260,38 @@ public class EventController {
 		return up;
 	}
 	
-	
+	// 이벤트 신고
+	@RequestMapping(value = "/eventReport.event", method = RequestMethod.POST)
+	public void eventReport(Report re, HttpServletRequest request, HttpServletResponse response, HttpSession session)throws IOException {		
+		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
+		String user_id = session.getAttribute("user_name1").toString();
+		String content = request.getParameter("Content").toString();
+		int event_num = Integer.parseInt(request.getParameter("event_num").toString());
+		
+		re.setReporter_id(user_id);
+		re.setEvent_num(event_num);
+		re.setReport_content(content);
+		
+		System.out.println("뭐야 id = "+user_id);
+		
+		int report =reportservice.eventReport(re);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (report == 1) { // 신고 성공
+			out.println("<script>");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		} else { // 실패
+			out.println("<script>");
+			out.println("alert('신고 실패했습니다.')");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
+		
+	}
 	
 	
 	

@@ -35,5 +35,7 @@ public interface ReportService {
 
 	int myhomeReport(Report report);
 
+	int eventReport(Report re);
+
 
 }

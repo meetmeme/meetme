@@ -14,10 +14,10 @@
 			</div>
 			<!-- body -->
 			<div class="modal-body ui-front">
-				<form name="msgform" action="myhomeReport.mh" method="post" onsubmit="return check()">
+				<form action="eventReport.event" method="post" >
 					<div class="form-group">
-						<b class="articleDesc">신고자.</b> <input class="form-control"
-							type="text" id="reporter" name="reporter"
+						<b class="articleDesc">신고자</b> 
+						<input class="form-control"	type="text" id="reporter" name="reporter"
 							value="${user_name1 }" readonly="readonly"><br>
 					</div>
 					<div class="form-group">
@@ -30,7 +30,7 @@
 						<button type="submit" class="btn btn-primary submitbtn">SEND</button>
 					</div>
 					
-					<input type=hidden name=user_num value="${m_info.user_num }" >
+					<input type=hidden name="event_num" value="${event.EVENT_NUM}" >
 				</form>
 			</div>
 		</div>
