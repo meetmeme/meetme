@@ -15,10 +15,13 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <ul class="social-icons">
-                                <li><a href="#" class="fa fa-facebook"></a></li>
-                                <li><a href="#" class="fa fa-twitter"></a></li>
-                                <li><a href="#" class="fa fa-dribbble"></a></li>
-                                <li><a data-target="#layerpop3" data-toggle="modal" class="fa fa-warning"></a></li>
+                               <!--  <li><a href="" 
+                               		onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;"
+									class="fa fa-facebook"></a></li>
+                                <li><a href="" 
+                               	 	onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); return false;"
+									class="fa fa-twitter"></a></li> -->
+                                <li><a title="신고하기" data-target="#layerpop3" data-toggle="modal" class="fa fa-warning"></a></li>
                             </ul>
                         </div> <!-- /.col-md-12 -->
                     </div> <!-- /.row -->
@@ -238,16 +241,6 @@
 				      </div>		 
 				    </div>
 				    
-				    <div id="payModal" class="payModal">				    	
-				      <div class="event-modal-content">
-				        <span class="close" id="close">&times;</span>                                                               
-				        <h2> 결제 </h2><br>
-				        <h4>${event.EVENT_PRICE}</h4>		                   
-		                <button id="cancel_event" type="submit" onclick="location.href='cancelAttend.event?event=${event.EVENT_NUM}'">취소</button>
-		
-				      </div>	
-				    </div>
-				    
 				</c:if>
 				<c:if test="${remain<1}">
 					<button id="full" type="button">매진</button>
@@ -269,8 +262,7 @@
    			</c:if>
    			<c:if test="${Date <= nowDate}">
    				<button id="end" type="button">지난 이벤트</button>
-   			</c:if>
-   			
+   			</c:if>  			
 			
    			</div>
   	 		<a href="#" id="nino-scrollToTop">Go to Top</a>     

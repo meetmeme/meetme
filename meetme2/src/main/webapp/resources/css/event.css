@@ -196,6 +196,7 @@ text-align : left;
 	width : auto;
 	margin : auto;
 	min-width : 80%;
+	max-height : 50em;
 }
 
 .col-md-3, .member-thumb, .team-member{

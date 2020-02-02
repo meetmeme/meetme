@@ -16,6 +16,7 @@
         <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
         <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
       
+      <!-- 	<script src="resources/js/event/sns.js"></script>    -->
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCJ1vbVWbRvoI0UuQBbhS_MLsJNEksyE" async defer ></script> 
  		<script src="resources/js/event/vendor/jquery-1.11.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="resources/js/event/vendor/jquery-1.11.0.min.js"><\/script>')</script>
@@ -42,3 +43,7 @@
                 $('body').bind('touchstart', function() {});
             }); 
         </script>
+        
+        
+        
+        
