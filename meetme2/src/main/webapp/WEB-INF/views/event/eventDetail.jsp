@@ -190,8 +190,10 @@
 							<c:forEach var="com" items="${com}">								
 								<c:if test="${com.user_num == user_num }">
 									<div class="mycom box3">${com.event_comm_content}<br>
-		                    				<a href="comUpdate.event" class="comUpdate">수정</a>
-		                    				<a href="comUpdate.event" class="comDelete">삭제</a>
+											<input type='hidden' value="${com.event_comm_content}">
+		                    				<a class="comUpdate">수정</a>
+		                    				<input type='hidden' value="${com.event_comm_num}">
+		                    				<a href="comDelete.event" class="comDelete">삭제</a>
 		                    		</div>
 								</c:if>
 								<c:if test="${com.user_num != user_num }">

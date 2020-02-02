@@ -28,7 +28,7 @@
 										<article class="square_article">
 											<div class="articleThumb square_search">
 												<a href="event.main?event=${event.EVENT_NUM}">
-												<img src="resources${event.EVENT_ORIGINAL}" alt=""></a>
+												<img src="resources/upload/event${event.EVENT_ORIGINAL}" alt=""></a>
 												<div class="date">
 													<c:if test="${Date > nowDate}">
 													<span class="number">${event.EVENT_DATE}</span> 

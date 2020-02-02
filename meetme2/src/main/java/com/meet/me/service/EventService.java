@@ -37,5 +37,7 @@ public interface EventService {
 	public int deleteAttend(Attendee att);
 	public int writeComment(EventComment co);
 	public List<EventComment> getComment(int event);
+	public int comDelete(int num);
+	public int comUpdate(EventComment co);
 }
  

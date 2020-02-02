@@ -13,8 +13,6 @@ insert into MM_EVENT values(3, 4,'222한강 러닝',
 
 
 
-delete * from MM_EVENT;
-
 select * from MM_EVENT    WHERE EVENT_TITLE like '%Pub%' or EVENT_CONTENT like '%Pub%' or EVENT_LOCATION     like '%Pub%'
 
 select * from MM_EVENT;
@@ -68,4 +66,3 @@ select count(*) from MM_EVENT_ATTENDEE where EVENT_NUM = 13 and USER_NUM = 11;
 select * from MM_EVENT_ATTENDEE;
 
 select * from MM_EVENT_COMMENT;
-insert into MM_EVENT_COMMENT values(2, 51, 5, "넹~", '2020-01-11');

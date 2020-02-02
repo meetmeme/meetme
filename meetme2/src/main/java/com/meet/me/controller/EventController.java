@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,7 +47,7 @@ public class EventController {
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
 			out.println("alert('로그인 해주세요');");
-			out.println("history.back();");
+			out.println("location.href='main.index';");
 			out.println("</script>");	
 			return null;			
 		}
@@ -59,13 +60,11 @@ public class EventController {
 		List<Gallery> gall	= eventService.getGall(event);
 		List<Hashtag> tag = eventService.getHashtag(event);
 		int remain = e.getEVENT_MAX() - eventService.getRemain(event);
-		System.out.println("남은 자리="+remain);	
 		List<EventComment> com = eventService.getComment(event);
 		
 		att.setUser_num(user_num);
 		att.setEvent_num(event);		
 		int attend = eventService.isAttend(att);	
-		System.out.println(user_num+"은 참석을 하니?" + attend);
 		
 		mv.setViewName("event/eventDetail");
 		mv.addObject("event",e);
@@ -116,7 +115,7 @@ public class EventController {
 			//String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/uploadevent/";
 			//String saveFolder = "D:\\mm\\0128\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\event\\";
 			
-			String saveFolder = "C:\\spring\\0131mm\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\event\\";
+			String saveFolder = "C:\\spring\\0202mm\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\event\\";
 						
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 			System.out.println(homedir);
@@ -193,7 +192,6 @@ public class EventController {
 		att.setUser_num(user_num);
 		att.setEvent_num(event_num);
 		int attend = eventService.insertAttend(att);
-		System.out.println("주최자 참석됨? "+attend);
 		
 		return "redirect:event.main?event="+event_num;			
 	}
@@ -203,7 +201,6 @@ public class EventController {
 	@RequestMapping(value = "/Attend.event", method = RequestMethod.GET)
 	public String Attend(Attendee att, ModelAndView mv, @RequestParam int event, HttpServletRequest request, HttpSession session) {		
 		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
-		System.out.println("참석 하려구 num = " + user_num);
 		att.setUser_num(user_num);
 		att.setEvent_num(event);
 		
@@ -229,7 +226,6 @@ public class EventController {
 	public String writeComment(EventComment co, ModelAndView mv, @RequestParam String content, @RequestParam int event_num, HttpServletRequest request, HttpSession session) {		
 		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
 
-		System.out.println("내용 = "+content+" 이번트번호 = "+event_num);
 		co.setEvent_num(event_num);
 		co.setUser_num(user_num);
 		co.setEvent_comm_content(content);
@@ -238,7 +234,26 @@ public class EventController {
 		
 		return "redirect:event.main?event="+event_num;		
 	}
+	
+	// 댓글 삭제
+	@ResponseBody
+	@RequestMapping(value = "/comDelete.event", method = RequestMethod.POST)
+	public int comDelete(@RequestParam int num, HttpServletRequest request, HttpSession session) {		
+		int del = eventService.comDelete(num);
+		return del;
+	}
+	
+	// 댓글 수정
+	@ResponseBody
+	@RequestMapping(value = "/comUpdate.event", method = RequestMethod.POST)
+	public int comUpdate(EventComment co, @RequestParam int num, @RequestParam String content) {		
+		co.setEvent_comm_num(num);
+		co.setEvent_comm_content(content);
 		
+		int up = eventService.comUpdate(co);
+		return up;
+	}
+	
 	
 	
 	

@@ -86,25 +86,95 @@ jQuery(document).ready(function($) {
       $('.menu-first').removeClass('show');
     });
 
-    $('#writeBtn').click(function(){
-    	$.ajax({
-			type : "post",
-			url : "writeComment.event",
-			data : {"content" : $('#writeChat').val(),
+//    $('#writeBtn').click(function(){
+//    	$.ajax({
+//			type : "post",
+//			url : "writeComment.event",
+//			data : {"content" : $('#writeChat').val(),
+//					"event_num" : $('#event_num').val()
+//				},
+//			success : function(result){
+//				$('#content').val('');
+////				if(result == 1){
+////					getList();
+////				}
+//				alert('등록되었습니다.');
+//				window.location.reload();
+//			}
+//		});
+//    });
+    
+    $('.chat').scrollTop($('.chat')[0].scrollHeight);
+    
+    
+  // 수정
+    var num;
+    $('.comUpdate').click(function(){
+		var before = $(this).prev().val(); //선택한 내용을 가져옵니다.
+		$('#writeChat').focus().val(before); //textarea에 수정 전 내용을 보여줍니다.
+		num = $(this).next().val(); //수정할 댓글 번호를 저장합니다.
+		$('#writeBtn').text("수정"); //등록 버튼의 라벨을 '수정완료'로 변경합니다.
+	})
+	
+	// 삭제
+	$('.comDelete').click(function(){
+		var result = confirm("댓글을 삭제하시겠어요?");
+		if(result){
+			var num = $(this).prev().val(); //댓글번호 
+			console.log("com num = "+ num);
+			
+			$.ajax({
+				type : "post",
+				url : "comDelete.event",
+				data : {"num" : num},
+				success : function(result) {
+					
+					if(result == 1) {
+						window.location.reload();
+					}
+				}
+			});			
+			
+		    alert("삭제되었습니다.");
+		    
+		}else{
+		    return false;
+		}
+	});	
+    
+    //등록 또는 수정완료 버튼 클릭한 경우
+	//버튼의 라벨이 '등록'인 경우는 댓글을 추가하는 경우
+	//버튼의 라벨이 '수정완료'인 경우는 댓글을 수정하는 경우
+	$('#writeBtn').click(function(){		
+		var buttonText = $('#writeBtn').text(); //버튼의 라벨로 add할지 update 할지 파악
+		var content = $('#writeChat').val();
+		var url, data, mess;
+		if(buttonText == "등록") { //댓글 추가하는 경우
+			url = "writeComment.event";
+			data = {"content" : $('#writeChat').val(),
 					"event_num" : $('#event_num').val()
-				},
+					};
+			mess = "등록되었습니다.";
+		} else {				//댓글 수정하는 경우
+			url = "comUpdate.event";
+			data = {"num" : num,
+					"content" : content};
+			mess = "수정되었습니다.";
+			$('#write').text('등록'); //다시 등록으로 변경
+			
+		}
+		
+		$.ajax({
+			type : "post",
+			url : url,
+			data : data,
 			success : function(result){
 				$('#content').val('');
-//				if(result == 1){
-//					getList();
-//				}
-				alert('등록되었습니다.');
+				alert(mess);
 				window.location.reload();
 			}
 		});
-    });
-    
-    $('.chat').scrollTop($('.caht')[0].scrollHeight);
+	});
 
     /************** LightBox *********************/
       $(function(){

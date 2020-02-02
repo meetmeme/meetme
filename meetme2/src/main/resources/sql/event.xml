@@ -211,4 +211,15 @@
 		select * from MM_EVENT_COMMENT where EVENT_NUM = #{event}
 	</select>
 	
+	<delete id="comDelete" parameterType="int">
+		delete from MM_EVENT_COMMENT
+		where EVENT_COMM_NUM = #{num}
+	</delete>
+	
+	<update id="comUpdate" parameterType="EventComment">
+		update MM_EVENT_COMMENT set
+		EVENT_COMM_CONTENT=#{event_comm_content}
+		where EVENT_COMM_NUM=#{event_comm_num}
+	</update>
+	
 </mapper>

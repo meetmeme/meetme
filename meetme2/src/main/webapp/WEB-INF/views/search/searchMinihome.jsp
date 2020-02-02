@@ -155,7 +155,7 @@
 										<div layout="row">
 											<div class="nino-symbol fsr">
 												<img
-													src="resources${event.EVENT_ORIGINAL}" alt="" class="square">
+													src="resources/upload/event${event.EVENT_ORIGINAL}" alt="" class="square">
 											</div>
 											<div>
 												<p class="quote">${event.EVENT_CONTENT}</p>

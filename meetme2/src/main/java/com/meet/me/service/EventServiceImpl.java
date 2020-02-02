@@ -156,5 +156,15 @@ public class EventServiceImpl implements EventService{
 		return dao.getComment(event);
 	}
 
+	@Override
+	public int comDelete(int num) {
+		return dao.comDelete(num);
+	}
+
+	@Override
+	public int comUpdate(EventComment co) {
+		return dao.comUpdate(co);
+	}
+
 
 }

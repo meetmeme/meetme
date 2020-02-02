@@ -131,4 +131,12 @@ public class EventDAO {
 		return sqlSession.selectList("Events.getComment", event);
 	}
 
+	public int comDelete(int num) {
+		return sqlSession.delete("Events.comDelete", num);
+	}
+
+	public int comUpdate(EventComment co) {
+		return sqlSession.update("Events.comUpdate", co);
+	}
+
 }
