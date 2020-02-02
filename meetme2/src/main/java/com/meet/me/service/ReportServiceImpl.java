@@ -89,6 +89,11 @@ public class ReportServiceImpl implements ReportService{
 		return dao.myhomeReport(report);
 	}
 
+	@Override
+	public int eventReport(Report re) {
+		return dao.eventReport(re);
+	}
+
 
 
 

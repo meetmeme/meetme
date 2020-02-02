@@ -3,52 +3,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
-    <head>
-        <meta charset="utf-8">
-        <title>Meet Me | ${event.EVENT_TITLE}</title>
-    	<meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-
-        <link rel="stylesheet" href="resources/css/bootstrap.min.css">
-        <link rel="stylesheet" href="resources/css/font-awesome.css"  type='text/css'>
-        <link rel="stylesheet" href="resources/css/animate.css">
-        <link rel="stylesheet" href="resources/css/templatemo_misc.css">
-        <link rel="stylesheet" href="resources/css/templatemo_style.css">
-        <link rel="stylesheet" href="resources/css/event.css">		
-        <script src="resources/js/event/vendor/modernizr-2.6.1-respond-1.1.0.min.js"></script>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
-      
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBCJ1vbVWbRvoI0UuQBbhS_MLsJNEksyE" async defer ></script> 
- 		<script src="resources/js/event/vendor/jquery-1.11.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="resources/js/event/vendor/jquery-1.11.0.min.js"><\/script>')</script>
-        <script src="resources/js/event/bootstrap.js"></script>
-        <script src="resources/js/event/plugins.js"></script>
-        <script src="resources/js/event/main.js"></script>        
-        <script src="resources/js/event/vendor/jquery.gmap3.min.js"></script>
-     <!--  Google Map Init -->      
-         <script type="text/javascript">
-          jQuery(function($){
-                $('#map_canvas').gmap3({
-                    marker:{
-                        address: '${event.EVENT_LAT}, ${event.EVENT_LNG}' 
-                    },
-                        map:{
-                        options:{
-                        zoom: 18,
-                        scrollwheel: false,
-                        streetViewControl : true
-                        }
-                    }
-                });
-
-                $('body').bind('touchstart', function() {});
-            }); 
-        </script>
-       <jsp:include page="/WEB-INF/views/event/report_modal.jsp" />
+    <head>       
+       <jsp:include page="/WEB-INF/views/event/head.jsp" />
+       <jsp:include page="/WEB-INF/views/event/event_report_modal.jsp" />
  	</head>
     <body>
 <jsp:include page="../main/header.jsp" />
@@ -58,10 +15,13 @@
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <ul class="social-icons">
-                                <li><a href="#" class="fa fa-facebook"></a></li>
-                                <li><a href="#" class="fa fa-twitter"></a></li>
-                                <li><a href="#" class="fa fa-dribbble"></a></li>
-                                <li><a href="#" class="fa fa-warning"></a></li>
+                               <!--  <li><a href="" 
+                               		onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;"
+									class="fa fa-facebook"></a></li>
+                                <li><a href="" 
+                               	 	onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); return false;"
+									class="fa fa-twitter"></a></li> -->
+                                <li><a title="신고하기" data-target="#layerpop3" data-toggle="modal" class="fa fa-warning"></a></li>
                             </ul>
                         </div> <!-- /.col-md-12 -->
                     </div> <!-- /.row -->
@@ -281,16 +241,6 @@
 				      </div>		 
 				    </div>
 				    
-				    <div id="payModal" class="payModal">				    	
-				      <div class="event-modal-content">
-				        <span class="close" id="close">&times;</span>                                                               
-				        <h2> 결제 </h2><br>
-				        <h4>${event.EVENT_PRICE}</h4>		                   
-		                <button id="cancel_event" type="submit" onclick="location.href='cancelAttend.event?event=${event.EVENT_NUM}'">취소</button>
-		
-				      </div>	
-				    </div>
-				    
 				</c:if>
 				<c:if test="${remain<1}">
 					<button id="full" type="button">매진</button>
@@ -312,8 +262,7 @@
    			</c:if>
    			<c:if test="${Date <= nowDate}">
    				<button id="end" type="button">지난 이벤트</button>
-   			</c:if>
-   			
+   			</c:if>  			
 			
    			</div>
   	 		<a href="#" id="nino-scrollToTop">Go to Top</a>     
