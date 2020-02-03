@@ -195,9 +195,11 @@
 				<input type="text" autocomplete="off" placeholder="검색어"
 					id="searchMinihomeKeyword"
 					class="form-control nino-searchInput searchHashtag"
-					name="searchKeyword"> <input type="text" placeholder="해시태그"
+					name="searchKeyword"> 
+					<!-- <input type="text" placeholder="해시태그"
 					class="form-control nino-searchInput searchHashtag"
-					name="searchHashtag" id="searchMinihomeHashtag"> <input
+					name="searchHashtag" id="searchMinihomeHashtag">  -->
+					<input
 					type=hidden id=hashtagNumMinihome name=searchHashtagNum><input
 					type="text" autocomplete="off" placeholder="닉네임" id="searchUser"
 					name="searchUser" class="form-control nino-searchInput" id=name>

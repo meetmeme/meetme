@@ -197,3 +197,7 @@
   	z-index: 3;
   	font-weight: bold;
 }
+
+.small{
+	font-size: small;
+}

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
+import com.meet.me.domain.Board;
 import com.meet.me.domain.Event;
 import com.meet.me.domain.Hashtag;
 import com.meet.me.domain.User;
@@ -122,7 +123,7 @@ public class SearchControlloer {
 		searchKey.put("searchUser", searchUser);
 
 		List<User> searchResultMinihome = new ArrayList<User>();
-//		List<Post> searchResultMiniPost = new ArrayList<Post>();
+		List<Board> searchResultMiniPost = new ArrayList<Board>();
 		List<Event> searchResultMiniEvent = new ArrayList<Event>();
 
 		Map<String, String> keywords = new HashMap<String, String>();
@@ -135,6 +136,9 @@ public class SearchControlloer {
 
 		// minihome 검색
 		searchResultMinihome = mimihomeService.search(keywords);
+		
+		// post 검색
+		searchResultMiniPost = mimihomeService.searchBoard(keywords);
 
 		// event 검색
 		searchResultMiniEvent = eventService.search(keywords);
@@ -148,15 +152,19 @@ public class SearchControlloer {
 		for (Event e : searchResultMiniEvent) {
 			String title = e.getEVENT_TITLE();
 			String context = e.getEVENT_CONTENT();
-			if (context.length() > 150)
-				e.setEVENT_CONTENT(context.substring(0, 150) + " ...");
+			context.replace("<br>", " ");
+			if (context.length() > 100)
+				e.setEVENT_CONTENT(context.substring(0, 100) + " ...");
 			if (title.length() > 25)
 				e.setEVENT_TITLE(title.substring(0, 25) + " ...");
 		}
+		
+		for(Board b : searchResultMiniPost)
+			b.setBOARD_CONTENT(b.getBOARD_CONTENT().length() > 150 ? b.getBOARD_CONTENT().substring(0, 50)+" ..." : b.getBOARD_CONTENT());
 
 		mv.setViewName("search/searchMinihome");
 		mv.addObject("minihome", searchResultMinihome);
-//		mv.addObject("posts", searchResultMiniPost);
+		mv.addObject("posts", searchResultMiniPost);
 		mv.addObject("events", searchResultMiniEvent);
 		mv.addObject("searchKey", searchKey);
 		mv.addObject("HeaderComment", "Minihome Search Results");

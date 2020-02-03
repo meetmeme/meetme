@@ -47,6 +47,10 @@ public class CommunityController {
 		int userNum = Integer.parseInt(session.getAttribute("user_num1").toString());
 		List<Notice> notification = communityService.getNotification(userNum);
 
+		for(Notice n : notification) {
+			n.setNOTICE_CONTENT(n.getNOTICE_CONTENT().replace("<br>", " "));
+			n.setNOTICE_CONTENT(n.getNOTICE_CONTENT().length() > 30 ? n.getNOTICE_CONTENT().substring(0, 30)+" ..." : n.getNOTICE_CONTENT());
+		}
 		Gson gson = new Gson();
 		String jsonList = gson.toJson(notification);
 		response.getWriter().write(jsonList);

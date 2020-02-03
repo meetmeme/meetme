@@ -93,5 +93,9 @@ public class MyhomeDAO {
 	public List<BGM> getbgm() {
 		return sqlSession.selectList("Myhomes.getbgm");
 	}
+
+	public List<Board> searchBoard(Map<String, String> keywords) {
+		return sqlSession.selectList("Myhomes.searchBoard", keywords);
+	}
 	
 }

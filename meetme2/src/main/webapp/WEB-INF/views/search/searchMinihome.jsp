@@ -102,23 +102,23 @@
 							</c:if>
 							<c:if test="${!empty posts}">
 								<c:forEach var="post" items="${posts}">
-									<div class="col-md-6">
+									<div class="col">
 										<div class="panel-group" id="accordion" role="tablist"
 											aria-multiselectable="true">
 											<div class="panel panel-default">
 												<div class="panel-heading" role="tab" id="headingThree">
 													<h4 class="panel-title">
 														<a class="collapsed" role="button" data-toggle="collapse"
-															data-parent="#accordion" href="#collapseThree"
-															aria-expanded="false" aria-controls="collapseThree">
+															data-parent="#accordion" href="#collapse${post.BOARD_NUM}"
+															aria-expanded="false" aria-controls="collapse${post.BOARD_NUM}">
 															<i class="mdi mdi-chevron-up nino-icon arrow"></i> <i
-															class="mdi mdi-laptop-mac nino-icon"></i> web design
+															class="mdi mdi-laptop-mac nino-icon"></i> ${post.BOARD_TITLE} <span class="small">by ${post.BOARD_ID}</span>
 														</a>
 													</h4>
 												</div>
-												<div id="collapseThree" class="panel-collapse collapse"
-													role="tabpanel" aria-labelledby="headingThree">
-													<div class="panel-body">context.</div>
+												<div id="collapse${post.BOARD_NUM}" class="panel-collapse collapse cursor"
+													role="tabpanel" aria-labelledby="headingThree" onclick="return board_popup('${post.BOARD_ID}');">
+													<div class="panel-body">${post.BOARD_CONTENT}</div>
 												</div>
 											</div>
 										</div>
