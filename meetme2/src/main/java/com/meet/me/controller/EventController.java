@@ -46,18 +46,19 @@ public class EventController {
 
 	@RequestMapping(value = "/event.main", method = RequestMethod.GET)
 	public ModelAndView DetailPage(Event ev, Attendee att, ModelAndView mv, HttpServletResponse response, HttpServletRequest request, @RequestParam int event, HttpSession session)throws Exception{		
-		/*
-		 * try { int user_num =
-		 * Integer.parseInt(session.getAttribute("user_num1").toString()); } catch
-		 * (Exception e) { response.setContentType("text/html;charset=utf-8");
-		 * PrintWriter out = response.getWriter(); out.println("<script>");
-		 * out.println("alert('로그인 해주세요');");
-		 * out.println("location.href='main.index';"); out.println("</script>"); return
-		 * null; }
-		 */
-			
-		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
-		
+		try {
+			int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());	
+		} catch (Exception e) {
+			response.setContentType("text/html;charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인 해주세요');");
+			out.println("location.href='main.index';");
+			out.println("</script>");	
+			return null;			
+		}			
+		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());		
+
 		Event e = eventService.getDetail(event);	
 		int count = eventService.getAttend(event);
 		List<User> u = eventService.getUser(event);
@@ -223,17 +224,33 @@ public class EventController {
 	}
 	
 	// 댓글 등록
+	@ResponseBody
 	@RequestMapping(value = "/writeComment.event", method = RequestMethod.POST)
-	public String writeComment(EventComment co, ModelAndView mv, @RequestParam String content, @RequestParam int event_num, HttpServletRequest request, HttpSession session) {		
+	public int writeComment(Attendee att, EventComment co, ModelAndView mv, @RequestParam String content, @RequestParam int event_num, HttpServletResponse response, HttpServletRequest request, HttpSession session)throws IOException {		
 		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
-
-		co.setEvent_num(event_num);
-		co.setUser_num(user_num);
-		co.setEvent_comm_content(content);
+		System.out.println("댓글 내용 = " + content);
 		
-		int comm = eventService.writeComment(co);
-		
-		return "redirect:event.main?event="+event_num;		
+		if(content=="") {
+			System.out.println("내용 필요");
+			return 2;
+		}else {
+			att.setUser_num(user_num);
+			att.setEvent_num(event_num);		
+			int attend = eventService.isAttend(att);
+			System.out.println("얘 참석해? = "+attend);
+			if(attend==0) {		
+				return 0;
+			}else{
+				co.setEvent_num(event_num);
+				co.setUser_num(user_num);
+				co.setEvent_comm_content(content);
+				
+				int comm = eventService.writeComment(co);
+				System.out.println("등록했어");
+				//return "redirect:event.main?event="+event_num;
+				return 1;
+			}
+		}
 	}
 	
 	// 댓글 삭제
@@ -266,8 +283,6 @@ public class EventController {
 		re.setReporter_id(user_id);
 		re.setEvent_num(event_num);
 		re.setReport_content(content);
-		
-		System.out.println("뭐야 id = "+user_id);
 		
 		int report =reportservice.eventReport(re);
 		

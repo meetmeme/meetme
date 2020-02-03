@@ -9,7 +9,30 @@ public class EventComment {
 	private int user_num;
 	private String event_comm_content;
 	private Date event_comm_date;
+
+	// ------DB에 없는 것
+	private String profile;
+	private String writer_name;
+	private String writer_id;
 	
+	public String getWriter_id() {
+		return writer_id;
+	}
+	public void setWriter_id(String writer_id) {
+		this.writer_id = writer_id;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getWriter_name() {
+		return writer_name;
+	}
+	public void setWriter_name(String writer_name) {
+		this.writer_name = writer_name;
+	}
 	
 	public int getEvent_comm_num() {
 		return event_comm_num;

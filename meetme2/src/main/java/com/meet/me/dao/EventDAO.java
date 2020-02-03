@@ -139,4 +139,5 @@ public class EventDAO {
 		return sqlSession.update("Events.comUpdate", co);
 	}
 
+
 }

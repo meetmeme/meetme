@@ -1,5 +1,5 @@
 
-
+select c.*, u.USER_SAVE profile, u.USER_NAME writer from MM_EVENT_COMMENT c inner join MM_USER u on c.user_num = u.user_num where EVENT_NUM	= 51 order by EVENT_COMM_NUM
 
 insert into MM_EVENT values(1, 1,'[Pub Party Friday]', '▶️상세내용
 강남 인터내셔널펍파티에 오신것을 환영합니다. 매주 금요일 토요일 강남의 GSM테라스에서는 200~300여명의 멤버들이 모여 인터내셔널 펍 파티를 즐기고 있습니다.'
