@@ -39,6 +39,5 @@ public interface EventService {
 	public List<EventComment> getComment(int event);
 	public int comDelete(int num);
 	public int comUpdate(EventComment co);
-	public List<User> getAllU(int event);
 }
  

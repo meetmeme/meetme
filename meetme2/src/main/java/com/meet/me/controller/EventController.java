@@ -56,10 +56,8 @@ public class EventController {
 			out.println("location.href='main.index';");
 			out.println("</script>");	
 			return null;			
-		}
-			
-		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
-		
+		}			
+		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());		
 		Event e = eventService.getDetail(event);	
 		int count = eventService.getAttend(event);
 		List<User> u = eventService.getUser(event);
@@ -67,7 +65,6 @@ public class EventController {
 		List<Hashtag> tag = eventService.getHashtag(event);
 		int remain = e.getEVENT_MAX() - eventService.getRemain(event);
 		List<EventComment> com = eventService.getComment(event);
-		List<User> allU = eventService.getAllU(event);
 		
 		att.setUser_num(user_num);
 		att.setEvent_num(event);		
@@ -83,7 +80,6 @@ public class EventController {
 		mv.addObject("att", attend);	
 		mv.addObject("com",com);
 		mv.addObject("user_num",user_num);
-		mv.addObject("allU",allU);
 		
 		return mv;		
 	}

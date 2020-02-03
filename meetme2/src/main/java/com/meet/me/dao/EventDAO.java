@@ -139,8 +139,5 @@ public class EventDAO {
 		return sqlSession.update("Events.comUpdate", co);
 	}
 
-	public List<User> getAllU(int event) {
-		return sqlSession.selectList("Events.getAllU", event);
-	}
 
 }

@@ -4,8 +4,8 @@
 <jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
     <head>       
+       <jsp:include page="/WEB-INF/views/event/event_report_modal.jsp" />       
        <jsp:include page="/WEB-INF/views/event/head.jsp" />
-       <jsp:include page="/WEB-INF/views/event/event_report_modal.jsp" />
  	</head>
     <body>
 <jsp:include page="../main/header.jsp" />
@@ -157,15 +157,26 @@
 		                    		</div>
 								</c:if>
 								<c:if test="${com.user_num != user_num }">
-									<div class="pro">																		
-										<c:forEach var="user" items="${user}">    
-										 	<c:if test="${com.user_num eq user.user_num }">
-										 		<img src="resources/upload${user.user_save}" alt="">
-										 	</c:if>
-										 	<c:if test="${com.user_num ne user.user_num }">
-										 		<img src="resources/images/profile.png" alt="">
-										 	</c:if>
-							           </c:forEach>
+									<div class="pro">	
+										<div class="team-member col-md-3 col-sm-6">
+						                   <div class="member-thumb">
+						                    <img src="resources/upload${com.profile}" alt="">
+						                       <div class="team-overlay">
+						                           <h4>${com.writer_name  }</h4>
+						                           <ul class="social">
+						                           	<li><a href="#" onclick="mh_popup('${com.writer_id}')" class="fa fa-user"></a></li>
+						                           </ul>
+						                       </div> <!-- /.team-overlay -->
+						                   </div> <!-- /.member-thumb -->
+						               </div> <!-- /.team-member -->
+														   
+									 	<%-- <img src="resources/upload${com.profile}" alt="">
+									 	<div class="team-overlay2">
+				                           <h3>${com.writer_name }</h3>
+				                           <ul class="social">
+				                           	<li><a href="#" onclick="mh_popup('${com.writer_id}')" class="fa fa-user"></a></li>
+				                           </ul>
+				                       </div> <!-- /.team-overlay --> --%>
 									</div>
 									<div class="com box3">${com.event_comm_content}</div>
 								</c:if>								
