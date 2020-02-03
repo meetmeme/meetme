@@ -75,7 +75,7 @@
 												</div>
 											</div>
 											<h3 class="articleTitle">
-												<a href=""><strong>${event.EVENT_TITLE}</strong></a>
+												<a href="event.main?event=${event.EVENT_NUM}"><strong>${event.EVENT_TITLE}</strong></a>
 											</h3>
 											<p class="articleDesc">${event.EVENT_CONTENT}</p>
 											<!-- <div class="articleMeta">

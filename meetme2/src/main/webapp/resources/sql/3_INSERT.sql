@@ -408,7 +408,7 @@ into MM_EVENT values(37,7,4,'healthyTemplestay at Bongsunsa','"A chartered bus w
 
 At Bongsunsa Templestay, you can enjoy the privilege of walking in the UNESCO Biosphere Reserve area of Gwangneung Forest (the Secret Garden) opened exclusively to Templestay participants."',to_date('2020-02-21 09:30:00','yyyy-mm-dd hh24:mi:ss'),'"AM 9:30
 "','"서울시 종로구
-"','37.49795','127.027637',30,0,'/init/event/37_1.jpg','/init/event/37_1.jpg')
+"','37.49795','127.027637',30,0,'/init/event/37_1.png','/init/event/37_1.jpg')
 into MM_EVENT values(38,7,4,'healthyTemplestay at Bongsunsa','"A chartered bus will guide international participants from Seoul straight to Bongsunsa.
 
 At Bongsunsa Templestay, you can enjoy the privilege of walking in the UNESCO Biosphere Reserve area of Gwangneung Forest (the Secret Garden) opened exclusively to Templestay participants."',to_date('2020-02-28 09:30:00','yyyy-mm-dd hh24:mi:ss'),'"AM 9:30
@@ -435,7 +435,7 @@ Thank you"',to_date('2020-02-24 20:00:00','yyyy-mm-dd hh24:mi:ss'),'"PM 8:00
 into MM_EVENT values(42,9,5,'sportsWomens Self-Defense 여성호신술','"Women`s self-defense class adapts Krav Maga techniques to meet the needs of women in terms of dealing with bigger and stronger opponents, women-specific attacks, and building the mental strength necessary to confront abusers verbally, physically, and culturally. Our curriculum covers different levels and escalations of confrontation, maintaining awareness of potential threats and situational obstacles, and both preventing and combating physical attacks.
 우먼스 셀프 디펜스는 크라브 마가 테크닉을 통해 여성들이 더 크고 강한 상대를 대하고, 여성을 향한 특수한 공격들에 맞설 수 있게 하며 언어적, 신체적, 문화적으로 필요한 정신적 강인함을 형성해 줍니다. 저희 커리큘럼은 다양한 수준의 대처방법, 잠재적 위협과 상황에 따른 장애물에 대한 자각, 그리고 물리적 공격에 대한 방어법과 대응법에 대해 강의합니다. 여기에는 잡기, 조르기, 차기, 강도, 무기위협, 강간 방지, 감금, 지상 방위 등이 포함됩니다. 우리 강사들은 수강생들의 특별한 관심사나 요구 사항을 다루기 위해 항상 오픈되어 있습니다.
 "',to_date('2020-02-25 12:00:00','yyyy-mm-dd hh24:mi:ss'),'"PM 12:00
-"','서울시 서초동','37.49795','127.027637',20,15000,'/init/event/42_1.jpg','/init/event/42_1.jpg')
+"','서울시 서초동','37.49795','127.027637',20,15000,'/init/event/42_1.png','/init/event/42_1.jpg')
 into MM_EVENT values(43,7,5,'sportsKrav Maga/Self-Defense','"Authentic Israeli Krav Maga self-defense class: all levels, all ages, all genders, all backgrounds. Get fit, get healthy, get home safe.
 
 Tuesday 7:00-9:00PM
