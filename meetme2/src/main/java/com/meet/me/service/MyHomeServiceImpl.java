@@ -100,4 +100,8 @@ public class MyHomeServiceImpl  implements MyHomeService{
 	public List<BGM> getbgm() {
 		return mhdao.getbgm();
 	}
+	@Override
+	public List<Board> searchBoard(Map<String, String> keywords) {
+		return mhdao.searchBoard(keywords);
+	}
 }

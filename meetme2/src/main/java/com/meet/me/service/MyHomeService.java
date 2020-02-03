@@ -33,4 +33,5 @@ public interface MyHomeService {
 	public List<Message> receivemessage(int u_num);
 	public int boardDelete(int num);
 	public List<BGM> getbgm();
+	public List<Board> searchBoard(Map<String, String> keywords);
 }

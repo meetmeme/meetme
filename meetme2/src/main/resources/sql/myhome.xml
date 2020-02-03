@@ -48,6 +48,27 @@
 		</where>
 	</select>
 
+	<select id="searchBoard" parameterType="map" resultType="board">
+		select * from (select * from MM_BOARD) 
+		<where>
+			<if test="keyword!='%null%'">
+				AND (upper(BOARD_TITLE) like upper(#{keyword})
+				OR
+				upper(BOARD_ID) like upper(#{keyword})
+				OR upper(BOARD_CONTENT) like upper(#{keyword}))
+			</if>
+			<if test="searchUser!='%null%'">
+				AND upper(BOARD_ID) like upper(#{searchUser})
+			</if>
+			<![CDATA[ AND rownum  < 7]]>
+		</where>
+	</select>
+	
+		<select id="getRandomUser" parameterType="String" resultType="user">
+		<![CDATA[select * from (select * from MM_USER where USER_ID != 'admin' order by dbms_random.value) where rownum < 4]]>
+			AND USER_ID != #{user_num}
+	</select>
+
 	<select id="searchHash" parameterType="String" resultType="user">
 		select u.* from MM_USER u
 		left join MM_MYHOME m
@@ -111,7 +132,7 @@
 	</update>
 
 	<delete id="board_delete" parameterType="int">
-		delete mm_board 
+		delete mm_board
 		where
 		BOARD_NUM=#{num}
 	</delete>
@@ -149,7 +170,8 @@
 		select m.*, u.user_name receiver_name
 		from mm_message m,
 		mm_user u where m.receiver_id=u.user_num and
-		sender_id=#{u_num} order by sent_date desc
+		sender_id=#{u_num} order
+		by sent_date desc
 	</select>
 
 	<select id="receivemessage" parameterType="int"
@@ -157,11 +179,11 @@
 		select m.*, u.user_name sender_name
 		from mm_message m,
 		mm_user u where m.sender_id=u.user_num and
-		receiver_id=#{u_num} order by sent_date desc
+		receiver_id=#{u_num} order
+		by sent_date desc
 	</select>
 
-	<select id="getbgm"
-		resultType="bgm">
+	<select id="getbgm" resultType="bgm">
 		select * from mm_bgm
 	</select>
 

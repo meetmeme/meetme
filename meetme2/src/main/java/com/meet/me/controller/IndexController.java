@@ -53,8 +53,8 @@ public class IndexController {
 		for (Event e : event) {
 			String title = e.getEVENT_TITLE();
 			String context = e.getEVENT_CONTENT();
-			if (context.length() > 250)
-				e.setEVENT_CONTENT(context.substring(0, 250) + " ...");
+			if (context.length() > 100)
+				e.setEVENT_CONTENT(context.substring(0, 100) + " ...");
 			if (title.length() > 25)
 				e.setEVENT_TITLE(title.substring(0, 25) + " ...");
 		}
