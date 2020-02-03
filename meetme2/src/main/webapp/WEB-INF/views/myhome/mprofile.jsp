@@ -65,7 +65,7 @@ input, textarea {
 		user_gender = rs.getString("user_gender");
 	%>
 	<div id="colorlib-page">
-		<div id="colorlib-main" style="font:10px;">
+		<div id="colorlib-main" style="font: 10px;">
 			<div class="hero-wrap hero-wrap-2 js-fullheight"
 				style="background-image: url(resources/images2/whitespace.jpg);"
 				data-stellar-background-ratio="0.5">
@@ -94,7 +94,8 @@ input, textarea {
 									</a></label>
 								</div>
 								<div class="col-md-1 order-md-last pr-md-4"></div>
-								<div class="col-md-6 order-md-last pr-md-4" style="height: 400px;">
+								<div class="col-md-6 order-md-last pr-md-4"
+									style="height: 300px;">
 
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-4"></div>
@@ -138,34 +139,34 @@ input, textarea {
 
 								</div>
 
-								<div class="col-md-8 order-md-last pr-md-5">
+								<div class="col-md-4 order-md-last pr-md-4">
 									<h2 class="h4 font-weight-bold">미니홈피 프로필</h2>
 									<br>
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-3">
-											BGM: 
-												<select name=myhome_bgm id=myhome_bgm">
-													<c:forEach items="${bgm}" var="bgm">
-														<option value="${bgm.BGM_NAME}">${bgm.BGM_NAME}</option>
-													</c:forEach>
-												</select>
+											BGM: <select name=myhome_bgm id=myhome_bgm>
+												<c:forEach items="${bgm}" var="bgm">
+													<option value="${bgm.BGM_NAME}">${bgm.BGM_NAME}</option>
+												</c:forEach>
+											</select>
 										</div>
 										<div class="col-md-12 mb-3">
 											Introduce:
-											<textarea name="myhome_intro" rows="2" class="form-control">${mhinfo.myhome_intro}</textarea>
+											<textarea name="myhome_intro" rows="6" class="form-control">${mhinfo.myhome_intro}</textarea>
 										</div>
 									</div>
 								</div>
-								<div class="col-md-4 order-md-last pr-md-8" style="top: 120px;">
+								<div class="col-md-4 order-md-last pr-md-8" style="top: 220px; left:200px;">
 									<div class="form-group" style="text-align: center;">
 										<button type=submit class="btn btn-info">수정</button>
 										<button type=reset class="btn" style="background: #f8e77f">취소</button>
-										<button type=button id="leave" class="btn btn-primary" 
-										data-target="#layerpop3" data-toggle="modal">탈퇴</button>
+										<button type=button id="leave" class="btn btn-primary"
+											data-target="#layerpop3" data-toggle="modal">탈퇴</button>
 									</div>
 								</div>
 
 							</div>
+						</div>
 					</form>
 				</section>
 			</div>
@@ -187,7 +188,6 @@ input, textarea {
 				}
 			}
 		})
-
 	</script>
 </body>
 </html>
