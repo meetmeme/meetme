@@ -22,7 +22,7 @@
 
 		String sql = "select * from mm_user where user_id='" + id + "'";
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		dbconn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "TIGER");
+		dbconn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "tiger");
 		stmt = dbconn.createStatement();
 		rs = stmt.executeQuery(sql);
 
@@ -119,12 +119,6 @@
 												<li><a href="mboard.mh?id=<%=id%>&page=${page-1 }">&lt;</a></li>
 											</c:if>
 
-
-											<!-- <li class="active"><span>1</span></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#">5</a></li> -->
 											<c:forEach var="a" begin="${startpage }" end="${endpage }">
 												<c:if test="${a == page }">
 													<li class="page-item"><a class="page-link" href="#">${a}</a>
