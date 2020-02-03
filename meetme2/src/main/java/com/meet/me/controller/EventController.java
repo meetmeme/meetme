@@ -98,10 +98,7 @@ public class EventController {
 	// 이벤트 등록
 	@RequestMapping(value = "/createEvent.event", method = RequestMethod.POST)
 	public String createEvent(Attendee att, Event event, Gallery gall, HttpServletRequest request, HttpServletResponse response, HttpSession session)throws Exception {
-		System.out.println("등록시작");
-		
-		System.out.println("날짜"+event.getEVENT_DATE());
-		
+			
 		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
 		event.setUSER_NUM(user_num);
 		// 엔터 구별
@@ -120,7 +117,6 @@ public class EventController {
 			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/event/";
 						
 			String homedir = saveFolder + year + "-" + month + "-" + date;
-			System.out.println(homedir);
 			  
 			File path1 = new File(homedir);
 			if(!(path1.exists())) { // 이 파일 경로가 존재 안하면
@@ -141,17 +137,13 @@ public class EventController {
 				int random = r.nextInt(100000000);
 				
 				// 확장자 구하기
-				int index = fileName.lastIndexOf(".");
-				System.out.println("index = " + index);				 
-				String fileExtension = fileName.substring(index + 1);
-				System.out.println("fileExtension = " + fileExtension);				  
+				int index = fileName.lastIndexOf(".");			 
+				String fileExtension = fileName.substring(index + 1);			  
 				  
 				//새로운 파일명
 				String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-				System.out.println("refileName = " + refileName);				 
 				//오라클 DB에 저장될 파일명
 				String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-				System.out.println("fileDBName = " + fileDBName);				  
 				//transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
 				mf.transferTo(new File(saveFolder + fileDBName));	
 
@@ -172,14 +164,12 @@ public class EventController {
 		
 		// 방금 넣은 event_num
 		event_num = eventService.getEventnum();	
-		System.out.println("등록한 이벤트 번호 = " + event_num);
 		
 		String row = event.getRow_hashtag();
 		if(!row.isEmpty()) {
 			String[] hashtag = row.split("#");
 			for(int i=1; i<hashtag.length; i++) {
 					String thistag = hashtag[i].trim();
-					System.out.println("지금 해시태그 = "+thistag);
 					int tagnum = eventService.has(thistag); // has = HASHTAG_NUM
 					if(tagnum!=0) { // 해시태그가 있는 경우
 						eventService.insertTagUse(tagnum, event_num);
@@ -207,7 +197,6 @@ public class EventController {
 		att.setEvent_num(event);
 		
 		int attend = eventService.insertAttend(att);
-		System.out.println("참석됨? "+attend);
 		return "redirect:event.main?event="+event;		
 	}
 	
@@ -219,7 +208,6 @@ public class EventController {
 		att.setEvent_num(event);
 		
 		int attend = eventService.deleteAttend(att);
-		System.out.println("참석취소됨? "+attend);
 		return "redirect:event.main?event="+event;		
 	}
 	
@@ -228,16 +216,13 @@ public class EventController {
 	@RequestMapping(value = "/writeComment.event", method = RequestMethod.POST)
 	public int writeComment(Attendee att, EventComment co, ModelAndView mv, @RequestParam String content, @RequestParam int event_num, HttpServletResponse response, HttpServletRequest request, HttpSession session)throws IOException {		
 		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
-		System.out.println("댓글 내용 = " + content);
-		
+				
 		if(content=="") {
-			System.out.println("내용 필요");
 			return 2;
 		}else {
 			att.setUser_num(user_num);
 			att.setEvent_num(event_num);		
 			int attend = eventService.isAttend(att);
-			System.out.println("얘 참석해? = "+attend);
 			if(attend==0) {		
 				return 0;
 			}else{
@@ -246,8 +231,6 @@ public class EventController {
 				co.setEvent_comm_content(content);
 				
 				int comm = eventService.writeComment(co);
-				System.out.println("등록했어");
-				//return "redirect:event.main?event="+event_num;
 				return 1;
 			}
 		}
@@ -302,9 +285,6 @@ public class EventController {
 		}
 		
 	}
-	
-	
-	
 	
 	
 	
