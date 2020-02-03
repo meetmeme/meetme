@@ -154,6 +154,10 @@
 	<delete id="leave" parameterType="String">
 		delete from mm_user where user_id=#{user_id}
 	</delete>
+	
+	<select id="getProfilePic" parameterType="String" resultType="String">
+		select user_save from MM_USER where user_num = #{user_num}
+	</select>
 </mapper>
 
 

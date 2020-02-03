@@ -183,7 +183,7 @@ public class UserController {
 				session.setAttribute("user_id1", user_id);
 				session.setAttribute("user_num1", user_num);
 				session.setAttribute("user_name1", user.getUser_name());
-				session.setAttribute("user_original", user.getUser_original());
+				session.setAttribute("user_save", user.getUser_save());
 				// "saveid"라는 이름의 쿠키에 id의 값을 저장한 쿠키를 생성합니다.
 				Cookie savecookie = new Cookie("saveid", user_id);
 				if (!u.equals("")) {
@@ -249,6 +249,7 @@ public class UserController {
 			return 0;
 		if (follow <= 0)
 			follow = userService.follow(userKey);
+		
 		return follow;
 	}
 
@@ -318,4 +319,17 @@ public class UserController {
 		out.println("</script>");
 		out.close();
 	}
+	
+
+	@PostMapping(value = "getUserprofilePic.cm")	//사용자 프로필 사진 가져오기
+	@ResponseBody
+	public String getProfilePic(HttpServletRequest request) throws IOException {
+		String user_num = request.getParameter("userNum").toString();
+
+		String result = userService.getProfilePic(user_num);
+
+		return result;
+
+	}
+
 }

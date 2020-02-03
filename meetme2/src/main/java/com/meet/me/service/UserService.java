@@ -31,5 +31,6 @@ public interface UserService {
 	public int setPassword(User u);
 	public User isId2(String user_id);
 	public int leave(String user_id);
+	public String getProfilePic(String user_num);
 }
  

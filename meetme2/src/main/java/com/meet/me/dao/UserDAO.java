@@ -108,4 +108,8 @@ public class UserDAO {
 	public int leave(String user_id) {
 		return sqlSession.delete("Users.leave", user_id);
 	}
+
+	public String getProfilePic(String user_num) {
+		return sqlSession.selectOne("Users.getProfilePic", user_num);
+	}
 }

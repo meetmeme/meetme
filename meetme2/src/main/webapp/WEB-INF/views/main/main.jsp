@@ -26,8 +26,8 @@
 											src="https://source.unsplash.com/random/300x300" alt="">
 									</div>
 									<div>
-										<p class="quote">
-											<strong>"</strong>관심 카테고리의 이벤트가 없습니다. 😥<strong>"</strong>
+										<p class="quote center">
+											<strong>"</strong>관심 카테고리의 이벤트가 없습니다. 😥 <strong>"</strong><br><br><span>🔍 검색하기 🔍</span>
 										</p>
 									</div>
 								</div>
@@ -40,7 +40,7 @@
 									onclick="location.href='event.main?event=${event.EVENT_NUM}'">
 									<div class="nino-avatar fsr">
 										<img class="img-circle img-thumbnail square"
-											src="resources${event.EVENT_ORIGINAL}" alt="">
+											src="resources/upload/event${event.EVENT_ORIGINAL}" alt="">
 									</div>
 									<div>
 										<p class="quote">
@@ -116,12 +116,12 @@
 										title="go to ${user.user_name}'s minihome">
 										<div class="content">
 											<a class="nino-icon"
-												onclick="minihome('0','${user.user_num}','${user.user_name}','follow')"
+												onclick="minihome('${user.user_id}','${user.user_num}','${user.user_name}','follow')"
 												title="follow ${user.user_name}!"><i
 												class="mdi mdi-bookmark-plus-outline"></i></a>
 										</div>
 										<img class="Rectangle"
-											src="resources/upload${user.user_original}">
+											src="resources/upload${user.user_save}">
 									</div>
 								</div>
 								<div class="info">

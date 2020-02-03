@@ -201,4 +201,9 @@ public class UserServiceImpl implements UserService {
 	public int leave(String user_id) {
 		return dao.leave(user_id);
 	}
+
+	@Override
+	public String getProfilePic(String user_num) {//사용자 프로필 사진 가져오기
+		return dao.getProfilePic(user_num);
+	}
 }
