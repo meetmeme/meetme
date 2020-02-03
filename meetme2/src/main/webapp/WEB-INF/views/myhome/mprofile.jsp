@@ -188,6 +188,20 @@ input, textarea {
 				}
 			}
 		})
+		var list2 = new Array();
+		<c:forEach items="${bgm}" var="item2">
+		list2.push("${item2.BGM_NAME}");
+		</c:forEach>
+		var bgm='${mhinfo.myhome_bgm}';
+		$('select[name="myhome_bgm"]').each(function() {
+			for (var i = 0; i < list2.length; i++) {
+				 if (bgm == list2[i]) { //값 비교
+					 $("#myhome_bgm").val(list2[i]).prop("selected", true);
+				} 
+			}
+		})
+		
+		
 	</script>
 </body>
 </html>
