@@ -15,7 +15,6 @@ $(function(){
 		buttonText = $(this).text(); //버튼의 라벨로 add할지 update할지
 		content = $(this).parent().find("textarea").val();
 		board_num = $(this).next().val();
-		comment_num = $(this).
 		board_user_num = $(this).next().next().val();
 		user_id = $(this).next().next().next().val();
 		$(".float-left").text('총 50자까지 가능합니다.');
