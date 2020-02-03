@@ -17,3 +17,4 @@ SELECT * FROM MM_MESSAGE;
 SELECT * FROM MM_REPORT;
 
 select user_id, CryptString.decrypt(user_pass, 'encrypt') user_pass from MM_USER;
+--비밀번호 복호화
