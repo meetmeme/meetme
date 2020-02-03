@@ -67,6 +67,7 @@ public class EventController {
 		List<Hashtag> tag = eventService.getHashtag(event);
 		int remain = e.getEVENT_MAX() - eventService.getRemain(event);
 		List<EventComment> com = eventService.getComment(event);
+		List<User> allU = eventService.getAllU(event);
 		
 		att.setUser_num(user_num);
 		att.setEvent_num(event);		
@@ -82,6 +83,7 @@ public class EventController {
 		mv.addObject("att", attend);	
 		mv.addObject("com",com);
 		mv.addObject("user_num",user_num);
+		mv.addObject("allU",allU);
 		
 		return mv;		
 	}
@@ -225,17 +227,33 @@ public class EventController {
 	}
 	
 	// 댓글 등록
+	@ResponseBody
 	@RequestMapping(value = "/writeComment.event", method = RequestMethod.POST)
-	public String writeComment(EventComment co, ModelAndView mv, @RequestParam String content, @RequestParam int event_num, HttpServletRequest request, HttpSession session) {		
+	public int writeComment(Attendee att, EventComment co, ModelAndView mv, @RequestParam String content, @RequestParam int event_num, HttpServletResponse response, HttpServletRequest request, HttpSession session)throws IOException {		
 		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
-
-		co.setEvent_num(event_num);
-		co.setUser_num(user_num);
-		co.setEvent_comm_content(content);
+		System.out.println("댓글 내용 = " + content);
 		
-		int comm = eventService.writeComment(co);
-		
-		return "redirect:event.main?event="+event_num;		
+		if(content=="") {
+			System.out.println("내용 필요");
+			return 2;
+		}else {
+			att.setUser_num(user_num);
+			att.setEvent_num(event_num);		
+			int attend = eventService.isAttend(att);
+			System.out.println("얘 참석해? = "+attend);
+			if(attend==0) {		
+				return 0;
+			}else{
+				co.setEvent_num(event_num);
+				co.setUser_num(user_num);
+				co.setEvent_comm_content(content);
+				
+				int comm = eventService.writeComment(co);
+				System.out.println("등록했어");
+				//return "redirect:event.main?event="+event_num;
+				return 1;
+			}
+		}
 	}
 	
 	// 댓글 삭제
@@ -268,8 +286,6 @@ public class EventController {
 		re.setReporter_id(user_id);
 		re.setEvent_num(event_num);
 		re.setReport_content(content);
-		
-		System.out.println("뭐야 id = "+user_id);
 		
 		int report =reportservice.eventReport(re);
 		

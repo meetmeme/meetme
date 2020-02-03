@@ -166,5 +166,10 @@ public class EventServiceImpl implements EventService{
 		return dao.comUpdate(co);
 	}
 
+	@Override
+	public List<User> getAllU(int event) {
+		return dao.getAllU(event);
+	}
+
 
 }

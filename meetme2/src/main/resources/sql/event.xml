@@ -208,7 +208,7 @@
 	</insert>
 	
 	<select id="getComment" resultType="EventComment">
-		select * from MM_EVENT_COMMENT where EVENT_NUM = #{event}
+		select * from MM_EVENT_COMMENT where EVENT_NUM = #{event} order by EVENT_COMM_NUM
 	</select>
 	
 	<delete id="comDelete" parameterType="int">
@@ -222,4 +222,7 @@
 		where EVENT_COMM_NUM=#{event_comm_num}
 	</update>
 	
+	<select id="getAllU" resultType="User">
+		select * from MM_USER
+	</select>
 </mapper>

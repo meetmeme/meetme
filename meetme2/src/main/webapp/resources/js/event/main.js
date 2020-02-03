@@ -85,24 +85,6 @@ jQuery(document).ready(function($) {
     $('.menu-first li a').click(function(){
       $('.menu-first').removeClass('show');
     });
-
-//    $('#writeBtn').click(function(){
-//    	$.ajax({
-//			type : "post",
-//			url : "writeComment.event",
-//			data : {"content" : $('#writeChat').val(),
-//					"event_num" : $('#event_num').val()
-//				},
-//			success : function(result){
-//				$('#content').val('');
-////				if(result == 1){
-////					getList();
-////				}
-//				alert('등록되었습니다.');
-//				window.location.reload();
-//			}
-//		});
-//    });
     
     $('.chat').scrollTop($('.chat')[0].scrollHeight);
     
@@ -154,7 +136,6 @@ jQuery(document).ready(function($) {
 			data = {"content" : $('#writeChat').val(),
 					"event_num" : $('#event_num').val()
 					};
-			mess = "등록되었습니다.";
 		} else {				//댓글 수정하는 경우
 			url = "comUpdate.event";
 			data = {"num" : num,
@@ -169,6 +150,13 @@ jQuery(document).ready(function($) {
 			url : url,
 			data : data,
 			success : function(result){
+				if(result==2){
+					mess = "내용을 입력해주세요.";
+				}else if(result==0){
+					mess = "참석 후에 댓글을 입력하실 수 있습니다.";
+				}else{
+					mess = "등록되었습니다.";
+				}
 				$('#content').val('');
 				alert(mess);
 				window.location.reload();

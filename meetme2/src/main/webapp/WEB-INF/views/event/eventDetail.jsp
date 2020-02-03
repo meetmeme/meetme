@@ -14,13 +14,13 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <ul class="social-icons">
-                               <!--  <li><a href="" 
-                               		onclick="window.open(url_combine_fb, '', 'scrollbars=no, width=600, height=600'); return false;"
+                            <ul class="social-icons">                              
+                               <li><a href="" 
+                               		onclick="window.open('https://twitter.com/intent/tweet?url=http://localhost:8089/me/event.main?event=${event.EVENT_NUM}','','width=700, height=400'); return false;"
 									class="fa fa-facebook"></a></li>
                                 <li><a href="" 
-                               	 	onclick="window.open(url_combine_tw, '', 'scrollbars=no, width=600, height=600'); return false;"
-									class="fa fa-twitter"></a></li> -->
+                               	 	 onclick="window.open('http://www.facebook.com/sharer/sharer.php?u=http://localhost:8089/me/event.main?event=${event.EVENT_NUM}','','width=700, height=400'); return false;"
+									class="fa fa-twitter"></a></li>                            
                                 <li><a title="신고하기" data-target="#layerpop3" data-toggle="modal" class="fa fa-warning"></a></li>
                             </ul>
                         </div> <!-- /.col-md-12 -->
@@ -157,9 +157,7 @@
 		                    		</div>
 								</c:if>
 								<c:if test="${com.user_num != user_num }">
-									<div class="pro">	
-										<!-- <img src="resources/images/profile.png" alt=""> -->
-																	
+									<div class="pro">																		
 										<c:forEach var="user" items="${user}">    
 										 	<c:if test="${com.user_num eq user.user_num }">
 										 		<img src="resources/upload${user.user_save}" alt="">
