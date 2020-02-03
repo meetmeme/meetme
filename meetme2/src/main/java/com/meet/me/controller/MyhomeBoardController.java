@@ -51,14 +51,14 @@ public class MyhomeBoardController {
 		String user_id = (String) session.getAttribute("user_id1");
 		int user_num = (int) session.getAttribute("user_num1");
 		MyHome mh_info = mhservice.getinfo(m_id);
-		System.out.println("m_id>>"+m_id);
 		User userinfo = userservice.user_info(user_id);
 		
 		if (userinfo == null) {
-			System.out.println("정보 수집 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "정보수집 실패");
+			return mv;
 		} else {
-			System.out.println("정보 수집 성공");
-			
 			mv.setViewName("myhome/mboard_write");
 			mv.addObject("userinfo", userinfo);
 			mv.addObject("mh_info", mh_info);
@@ -89,8 +89,6 @@ public class MyhomeBoardController {
 			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 
-			System.out.println(homedir);
-
 			File path1 = new File(homedir);
 			if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
 				path1.mkdir(); // 없을 경우 경로 만들기
@@ -100,13 +98,9 @@ public class MyhomeBoardController {
 			int random = r.nextInt(100000000);
 
 			int index = fileName.lastIndexOf(".");
-			System.out.println("index = " + index);
 			String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
-			System.out.println("fileExtension = " + fileExtension);
 			String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-			System.out.println("refileName = " + refileName);
 			String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-			System.out.println("fileDbName = " + fileDBName);
 			uploadfile.transferTo(new File(saveFolder + fileDBName));
 
 			// 바뀐 파일명으로 저장
@@ -129,13 +123,8 @@ public class MyhomeBoardController {
 		int listcount = mhservice.getListCount(u_id); // 총 리스트 수
 
 		int maxpage = (listcount + limit - 1) / limit;
-		System.out.println("총 페이지수 : " + maxpage);
-
 		int startpage = ((page - 1) / 10) * 10 + 1;
-		System.out.println("현재 페이지에 보여줄 시작 페이지 수 = " + startpage);
-
 		int endpage = startpage + 10 - 1;
-		System.out.println("현재 페이지에 보여줄 마지막 페이지 수 =" + endpage);
 
 		if (endpage > maxpage)
 			endpage = maxpage;
@@ -143,12 +132,8 @@ public class MyhomeBoardController {
 		model.setViewName("myhome/mboard");
 		
 		int board_user_num = userservice.user_info(u_id).getUser_num();
-		System.out.println("text>>>user_num>>>"+board_user_num);
 		List<Board> boardlist = mhservice.boardlist(page, limit, u_id);
-		System.out.println("board>>"+board_user_num);
 		List<Comment> commentlist = mhservice.getCommentList(board_user_num);
-		System.out.println("page =" + page);
-		System.out.println("limit =" + limit);
 		
 		model.addObject("page", page);
 		model.addObject("maxpage", maxpage);
@@ -166,13 +151,11 @@ public class MyhomeBoardController {
 		Board board = mhservice.getDetail(num);
 		// 글 내용 불러오기 실패한 경우입니다.
 		if (board == null) {
-			System.out.println("(수정)상세보기 실패");
 			mv.setViewName("error/error");
 			mv.addObject("url", request.getRequestURL());
 			mv.addObject("message", "(수정)상세보기 실패");
 			return mv;
 		}
-		System.out.println("(수정)상세보기 성공");
 
 		// 수정 폼 페이지로 이동할 때 원문 글 내용을 보여주기 때문에 board 객체를
 		// ModelAndView 객체에 저장합니다.
@@ -189,7 +172,6 @@ public class MyhomeBoardController {
 		String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
 
 		if (uploadfile != null && !uploadfile.isEmpty()) { // 파일 변경한 경우
-			System.out.println("파일 변경한 경우");
 			String fileName = uploadfile.getOriginalFilename(); // 원래 파일
 			board.setBOARD_ORIGINAL(fileName);
 			String fileDBName = fileDBName(fileName, saveFolder);
@@ -203,18 +185,10 @@ public class MyhomeBoardController {
 
 		int result = mhservice.boardModify(board);
 		if (result == 0) {
-			System.out.println("게시판 수정 실패");
 			mv.setViewName("error/error");
 			mv.addObject("url", request.getRequestURL());
 			mv.addObject("message", "게시판 수정실패");
 		} else {// 수정 성공의 경우
-			System.out.println("게시판 수정 완료");
-			
-//			//추가
-//			//수정 전에 파일이 있고 새로운 파일을 선택한 경우는 삭제할 목록을 테이블에 추가합니다.
-//			if(!before_file.equals("")&&!before_file.contentEquals(board.getBOARD_PHOTO())) {
-//				mhservice.insert_deleteFile(before_file);
-//			}
 			String url = "redirect:mboard.mh?id=" + m_id;
 
 			// 수정한 글 내용을 보여주기 위해 글 내용 보기 페이지로 이동하기 위해 경로를 설정합니다.
@@ -229,12 +203,7 @@ public class MyhomeBoardController {
 		// 비밀번호 일치하는 경우 삭제 처리 합니다.
 		int result = mhservice.boardDelete(num);
 		String user_id = (String) session.getAttribute("user_id1");
-		// 삭제 처리 실패한 경우
-		if (result == 0) {
-			System.out.println("게시판 삭제 실패");
-		}
 		// 삭제 처리 성공한 경우 - 글 목록 보기 요청을 전송하는 부분입니다.
-		System.out.println("게시판 삭제 성공");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.println("<script>");
@@ -254,7 +223,6 @@ public class MyhomeBoardController {
 		int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
 
 		String homedir = saveFolder + year + "-" + month + "-" + date;
-		System.out.println(homedir);
 		File path1 = new File(homedir);
 		if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
 			path1.mkdir(); // 없을 경우 새로운 폴더를 생성
@@ -272,20 +240,13 @@ public class MyhomeBoardController {
 		 * 문자열의 위치를 리턴합니다.)
 		 */
 
-		System.out.println("index = " + index);
 
 		String fileExtension = fileName.substring(index + 1); // 확장자만 따로 뻄
-		System.out.println("fileExtension = " + fileExtension);
 		/* 확장자 구하기 끝 */
-
 		// 새로운 파일명을 저장
 		String refileName = "bbs" + year + month + date + random + "." + fileExtension;
-		System.out.println("refileName = " + refileName);
-
 		// 오라클 디비에 저장될 파일명
 		String fileDBName = "/" + year + "-" + month + "-" + date + "/" + refileName;
-		System.out.println("fileDbName = " + fileDBName);
-
 		return fileDBName;
 	}
 
@@ -308,7 +269,6 @@ public class MyhomeBoardController {
 	public void CommentAdd(@RequestParam(value="board_num", required=false) int board_num,
 			@RequestParam(value="board_user_num", required=false) int board_user_num,
 			HttpSession session, String content, HttpServletResponse response) throws Exception {
-		System.out.println("comment 글num = " + board_num);
 		int user_num = (int) session.getAttribute("user_num1");
 		Comment c = new Comment();
 		c.setUSER_NUM(user_num);
@@ -316,7 +276,6 @@ public class MyhomeBoardController {
 		c.setCOMMENT_CONTENT(content);
 		c.setBOARD_NUM(board_num);
 		int result = mhservice.commentsInsert(c);
-		System.out.println("result = " + result);
 		response.getWriter().print(result);
 	}
 

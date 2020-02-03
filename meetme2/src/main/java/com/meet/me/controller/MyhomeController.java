@@ -64,7 +64,10 @@ public class MyhomeController {
 		User m_info = userservice.user_info(m_id);
 		
 		if (mh_info == null || m_info == null) {
-			System.out.println("정보 수집 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "정보 수집 실패");
+			return mv;
 		} else {
 			mv.setViewName("myhome/mmain");
 			mv.addObject("mh_info", mh_info);
@@ -93,13 +96,12 @@ public class MyhomeController {
 		
 		List<User_interests> user_interests = userservice.getInterestsNums(user_num);
 
-		for (User_interests u : user_interests)
-			System.out.println(u);
-		for (BGM b : bgm)
-			System.out.println(b);
 
 		if (mhinfo == null || userinfo == null) {
-			System.out.println("정보 수집 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url", request.getRequestURL());
+			mv.addObject("message", "정보수집 실패");
+			return mv;
 		} else {
 			mv.setViewName("myhome/mprofile");
 			mv.addObject("mhinfo", mhinfo);
@@ -186,7 +188,6 @@ public class MyhomeController {
 		if (result1 == 1) {
 			out.println("location.href='mprofile.mh?id=" + user_id + "'");
 		} else {
-			System.out.println("업데이트 실패");
 			out.println("history.back();");
 		}
 		out.println("</script>");
@@ -278,9 +279,6 @@ public class MyhomeController {
 
 		User user = userservice.isId2(user_id);
 		String ori_pass=user.getUser_pass();
-		
-		System.out.println("check_pass"+check_pass);
-		System.out.println("user_pass"+ori_pass);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
