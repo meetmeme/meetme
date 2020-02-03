@@ -118,10 +118,7 @@ public class EventController {
 			int year = c.get(Calendar.YEAR); //오늘 년도 구합니다.
 			int month = c.get(Calendar.MONTH) + 1; // 오늘 월 구합니다.
 			int date = c.get(Calendar.DATE); //오늘 일 구합니다.
-			//String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/uploadevent/";
-			//String saveFolder = "D:\\mm\\0128\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\event\\";
-			
-			String saveFolder = "C:\\spring\\0202mm\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\event\\";
+			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/event/";
 						
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 			System.out.println(homedir);
