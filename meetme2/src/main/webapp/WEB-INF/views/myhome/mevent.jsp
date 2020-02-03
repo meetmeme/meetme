@@ -35,6 +35,7 @@
 											aria-disabled="true">과거</a>
 									</nav>
 								</div>
+								<c:if test="${!empty eventlist}">
 								<c:forEach var="e" items="${eventlist}">
 									<div class="col-md-6">
 										<div class="blog-entry ftco-animate">
@@ -68,6 +69,11 @@
 										</div>
 									</div>
 								</c:forEach>
+								</c:if>
+								<c:if test="${empty eventlist}">
+								<br><br><br><br><br><br><br><br><br><br><br><br><br>
+								<div style="text-align: center;margin:0 auto"><h2>참여 이벤트 정보가 없습니다.</h2></div>
+								</c:if>
 							</div>
 							<!-- END-->
 						</div>

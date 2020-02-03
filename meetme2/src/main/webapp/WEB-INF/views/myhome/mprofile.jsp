@@ -57,7 +57,7 @@ input, textarea {
 
 		String sql = "select * from mm_user where user_id='" + id + "'";
 		Class.forName("oracle.jdbc.driver.OracleDriver");
-		dbconn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "TIGER");
+		dbconn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "tiger");
 		stmt = dbconn.createStatement();
 		rs = stmt.executeQuery(sql);
 

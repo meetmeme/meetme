@@ -126,7 +126,7 @@
 		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		String sql = "select * from mm_user where user_id='" + id + "'";
-		dbconn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "TIGER");
+		dbconn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "tiger");
 		stmt = dbconn.createStatement();
 		rs = stmt.executeQuery(sql);
 		rs.next();
@@ -134,7 +134,7 @@
 
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		String sql2 = "select * from mm_myhome where user_num='" + user_num + "'";
-		dbconn2 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "TIGER");
+		dbconn2 = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "SCOTT", "tiger");
 		stmt2 = dbconn2.createStatement();
 		rs2 = stmt2.executeQuery(sql2);
 
