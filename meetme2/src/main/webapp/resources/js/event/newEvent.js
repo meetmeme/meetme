@@ -4,6 +4,7 @@ jQuery(document).ready(function($) {
 	var picker = new Pikaday({ 
 		 field: document.getElementById('event_date'),
 		 format: 'yyyy-MM-dd',
+		 minDate : new Date(),
 		 toString(date, format) {
 		   let day = ("0" + date.getDate()).slice(-2);
 		   let month = ("0" + (date.getMonth() + 1)).slice(-2);
@@ -11,13 +12,33 @@ jQuery(document).ready(function($) {
 		   return `${year}-${month}-${day}`;
 		 }
 		});
+	
+	var now = new Date();
+	var h = now.getHours();
+	var ap;
+	if(h>11){
+		ap = "PM";
+		h = h - 12;
+	}else{
+		ap = "AM";
+	}
+	var m = now.getMinutes();
+	if(m>0){
+		m = 30;
+	}else{
+		m = 0;
+	}
+	now = ap + " " + h + " : " + m;
+	console.log("현재 = "+now);
+	console.log("현재시 = "+h);
+	console.log("현재분 = "+m);
 
 	$("#event_time").timepicker({
 		step: 30,           			//시간간격 : 30분
 		timeFormat: "A h:i" ,   		// AM 시간:분 으로표시
 		closeOnWindowScroll : true, 	// 스크롤 내리면 선택기 닫기
-		minTime : "12:00 am",			// 기본 시간
-		
+		minTime : now,			// 기본 시간
+		maxTime : "PM 11:50",
 
 	});
 	
