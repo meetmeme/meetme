@@ -112,7 +112,7 @@
 							<div class="col-md-4 col-sm-4">
 								<div class="item">
 									<div class="overlay"
-										onClick="minihome('${user.user_id}','0','0','mh_popup')"
+										onClick="minihome('${user.user_id}','${user.user_num}','0','mh_popup')"
 										title="go to ${user.user_name}'s minihome">
 										<div class="content">
 											<a class="nino-icon"

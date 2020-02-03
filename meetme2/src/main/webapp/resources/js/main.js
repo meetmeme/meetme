@@ -28,23 +28,24 @@ function follow(user_num, user_name) {
 
 var minihome_check;
 function minihome(user_id, user_num, user_name, check) {
-	if (user_id <= 0) {
-		$('#header_nav').children(1).children(1)[0].click();
-	}
-	if (check == 'mh_popup') {
-		if (minihome_check == 1) {
-			minihome_check = 0;
-			return false;
-		} else {
-			mh_popup(user_id);
+	
+		if (check == 'mh_popup') {
+			if (minihome_check == 1) {
+				minihome_check = 0;
+				return false;
+			} else {
+				mh_popup(user_id);
+			}
+		} else if (check == 'follow') {
+			follow(user_num, user_name);
+			minihome_check = 1;
+			if (!$('#userIdCache').val()) {
+				$('#header_nav').children(1).children(1)[0].click();
+				return false;
+			}
 		}
-	} else if (check == 'follow') {
-		follow(user_num, user_name);
-		minihome_check = 1;
-	}
-
 }
 
-function searchEvent_main(){
+function searchEvent_main() {
 	$('.nino-search')[0].click();
 }

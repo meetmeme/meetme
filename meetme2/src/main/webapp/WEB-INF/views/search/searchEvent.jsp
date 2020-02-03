@@ -61,10 +61,9 @@
 								<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
 								<fmt:formatDate value="${event.EVENT_DATE}" pattern="yyyyMMddHHmm" var="Date"/>
 									<div class="col-md-4 col-sm-4">
-										<article class="square_article">
+										<article class="square_article" onclick="return searchEvent('${event.EVENT_NUM}');">
 											<div class="articleThumb square_search">
-												<a href="event.main?event=${event.EVENT_NUM}">
-												<img src="resources/upload/event${event.EVENT_ORIGINAL}" alt=""></a>
+												<img src="resources/upload/event${event.EVENT_ORIGINAL}" alt="">
 												<div class="date">
 													<c:if test="${Date > nowDate}">
 													<span class="number">${event.EVENT_DATE}</span> 
@@ -75,7 +74,7 @@
 												</div>
 											</div>
 											<h3 class="articleTitle">
-												<a href="event.main?event=${event.EVENT_NUM}"><strong>${event.EVENT_TITLE}</strong></a>
+												<strong>${event.EVENT_TITLE}</strong>
 											</h3>
 											<p class="articleDesc">${event.EVENT_CONTENT}</p>
 											<!-- <div class="articleMeta">
