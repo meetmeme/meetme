@@ -52,7 +52,7 @@
 				OR
 				upper(e.EVENT_LOCATION) like upper(#{keyword}))
 			</if>
-			<if test="category!='0'">
+			<if test="category>0">
 				AND e.CATEGORY_NUM= #{category}
 			</if>
 			<if test="hashtag!='null'">

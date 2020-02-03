@@ -68,7 +68,7 @@
 												class="content"> <i class="mdi mdi-airplay nino-icon"></i>
 													${home.user_name} <br>
 												<span>(${home.user_id})</span>
-											</span> <img src="resources/upload${home.user_original}" alt="">
+											</span> <img src="resources/upload${home.user_save}" alt="">
 											</a>
 										</div>
 										<p>${home.user_name}</p>
@@ -151,16 +151,16 @@
 						<c:if test="${!empty events}">
 							<ul>
 								<c:forEach var="event" items="${events}">
-									<li href="event.main?event=${event.EVENT_NUM}">
+									<li onclick="return searchEventLoginCheck('${event.EVENT_NUM}');">
 										<div layout="row">
-											<div class="nino-symbol fsr">
+											<div class="nino-symbol fsr cursor">
 												<img
-													src="resources/upload/event${event.EVENT_ORIGINAL}" alt="" class="square">
+													src="resources/upload/event${event.EVENT_SAVE}" alt="" class="square">
 											</div>
 											<div>
-												<p class="quote">${event.EVENT_CONTENT}</p>
-												<span class="number">${event.EVENT_DATE}</span><br> <span
-													class="name">${event.EVENT_TITLE}</span>
+												<p class="quote cursor">${event.EVENT_CONTENT}</p>
+												<span class="number cursor">${event.EVENT_DATE}</span><br> <span
+													class="quote cursor"><strong>${event.EVENT_TITLE}</strong></span>
 											</div>
 										</div>
 									</li>

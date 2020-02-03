@@ -28,9 +28,6 @@ function follow(user_num, user_name) {
 
 var minihome_check;
 function minihome(user_id, user_num, user_name, check) {
-	if (user_id <= 0) {
-		$('#header_nav').children(1).children(1)[0].click();
-	}
 	if (check == 'mh_popup') {
 		if (minihome_check == 1) {
 			minihome_check = 0;
@@ -41,6 +38,10 @@ function minihome(user_id, user_num, user_name, check) {
 	} else if (check == 'follow') {
 		follow(user_num, user_name);
 		minihome_check = 1;
+		if ($('#user_num1').val()<=0) {
+			$('#header_nav').children(1).children(1)[0].click();
+		}
+
 	}
 
 }

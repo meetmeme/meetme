@@ -46,17 +46,15 @@ public class EventController {
 
 	@RequestMapping(value = "/event.main", method = RequestMethod.GET)
 	public ModelAndView DetailPage(Event ev, Attendee att, ModelAndView mv, HttpServletResponse response, HttpServletRequest request, @RequestParam int event, HttpSession session)throws Exception{		
-		try {
-			int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());	
-		} catch (Exception e) {
-			response.setContentType("text/html;charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('로그인 해주세요');");
-			out.println("location.href='main.index';");
-			out.println("</script>");	
-			return null;			
-		}
+		/*
+		 * try { int user_num =
+		 * Integer.parseInt(session.getAttribute("user_num1").toString()); } catch
+		 * (Exception e) { response.setContentType("text/html;charset=utf-8");
+		 * PrintWriter out = response.getWriter(); out.println("<script>");
+		 * out.println("alert('로그인 해주세요');");
+		 * out.println("location.href='main.index';"); out.println("</script>"); return
+		 * null; }
+		 */
 			
 		int user_num = Integer.parseInt(session.getAttribute("user_num1").toString());
 		

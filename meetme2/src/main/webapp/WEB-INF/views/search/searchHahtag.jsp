@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:useBean id="now" class="java.util.Date" />
 
 <!DOCTYPE html>
@@ -10,8 +10,18 @@
 	<jsp:include page="../main/header.jsp" />
 	<div class=bodyMin>
 		<hr>
+		<!-- search keyword
+    ================================================== -->
+		<section id=searchKeywordShow>
+			<div class="container center">
+					<div class="text"><strong>HASHTAG</strong></div>
+					<div class="number">${hashtag}</div>
+			</div>
+		</section>
+		<!--/#search keyword-->
+		<hr>
 		<!-- event result -->
-				<div class=bodySubMinMain>
+		<div class=bodySubMinMain>
 			<!-- Latest Blog   ================================================== -->
 			<section id="nino-latestBlog">
 				<div class="container">
@@ -22,19 +32,23 @@
 						<div class="row">
 							<c:if test="${!empty events}">
 								<c:forEach var="event" items="${events}">
-								<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
-								<fmt:formatDate value="${event.EVENT_DATE}" pattern="yyyyMMddHHmm" var="Date"/>
+									<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm"
+										var="nowDate" />
+									<fmt:formatDate value="${event.EVENT_DATE}"
+										pattern="yyyyMMddHHmm" var="Date" />
 									<div class="col-md-4 col-sm-4">
 										<article class="square_article">
 											<div class="articleThumb square_search">
-												<a href="event.main?event=${event.EVENT_NUM}">
-												<img src="resources/upload/event${event.EVENT_ORIGINAL}" alt=""></a>
+												<a href="event.main?event=${event.EVENT_NUM}"> <img
+													src="resources/upload/event${event.EVENT_SAVE}" alt=""></a>
 												<div class="date">
 													<c:if test="${Date > nowDate}">
-													<span class="number">${event.EVENT_DATE}</span> 
+														<span class="number">${event.EVENT_DATE}</span>
 													</c:if>
 													<c:if test="${Date <= nowDate}">
-														<span class="number"><del class="gray"><i>${event.EVENT_DATE}</i></del></span> 
+														<span class="number"><del class="gray">
+																<i>${event.EVENT_DATE}</i>
+															</del></span>
 													</c:if>
 												</div>
 											</div>
@@ -61,7 +75,7 @@
 			<!--/#nino-latestBlog-->
 		</div>
 
-		<hr>
+		<%-- 		<hr>
 		<!-- minihome result -->
 		<c:if test="${empty categorysearch}">
 			<div class=bodySubMinMain>
@@ -87,7 +101,7 @@
 													class="content"> <i
 														class="mdi mdi-airplay nino-icon"></i> ${home.user_name} <br>
 														<span>(${home.user_id})</span>
-												</span> <img src="resources/upload${home.user_original}" alt="">
+												</span> <img src="resources/upload${home.user_save}" alt="">
 												</a>
 											</div>
 										</div>
@@ -99,7 +113,7 @@
 				</section>
 				<!--/#nino-story-->
 			</div>
-		</c:if>
+		</c:if> --%>
 
 		<%-- 		<!-- post result -->
 		<div class=bodySubMin>

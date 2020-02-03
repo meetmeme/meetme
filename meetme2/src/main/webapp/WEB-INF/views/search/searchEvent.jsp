@@ -60,11 +60,10 @@
 								<c:forEach var="event" items="${events}">
 								<fmt:formatDate value="${now}" pattern="yyyyMMddhhmm" var="nowDate" />
 								<fmt:formatDate value="${event.EVENT_DATE}" pattern="yyyyMMddHHmm" var="Date"/>
-									<div class="col-md-4 col-sm-4">
+									<div class="col-md-4 col-sm-4" onclick="return searchEventLoginCheck('${event.EVENT_NUM}');">
 										<article class="square_article">
-											<div class="articleThumb square_search">
-												<a href="event.main?event=${event.EVENT_NUM}">
-												<img src="resources/upload/event${event.EVENT_ORIGINAL}" alt=""></a>
+											<div class="articleThumb square_search cursor">
+												<img src="resources/upload/event${event.EVENT_SAVE}" alt="">
 												<div class="date">
 													<c:if test="${Date > nowDate}">
 													<span class="number">${event.EVENT_DATE}</span> 
@@ -74,10 +73,10 @@
 													</c:if>
 												</div>
 											</div>
-											<h3 class="articleTitle">
-												<a href="event.main?event=${event.EVENT_NUM}"><strong>${event.EVENT_TITLE}</strong></a>
+											<h3 class="articleTitle cursor">
+											<strong>${event.EVENT_TITLE}</strong>
 											</h3>
-											<p class="articleDesc">${event.EVENT_CONTENT}</p>
+											<p class="articleDesc cursor">${event.EVENT_CONTENT}</p>
 											<!-- <div class="articleMeta">
 											<a href="#"><i class="mdi mdi-eye nino-icon"></i> 543</a> <a
 												href="#"><i

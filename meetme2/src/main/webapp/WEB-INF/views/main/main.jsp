@@ -37,10 +37,10 @@
 						<c:forEach var="event" items="${event}">
 							<li>
 								<div layout="row" class="verticalCenter cursor"
-									onclick="location.href='event.main?event=${event.EVENT_NUM}'">
+									 onclick="return searchEventLoginCheck('${event.EVENT_NUM}');">
 									<div class="nino-avatar fsr">
 										<img class="img-circle img-thumbnail square"
-											src="resources/upload/event${event.EVENT_ORIGINAL}" alt="">
+											src="resources/upload/event${event.EVENT_SAVE}" alt="">
 									</div>
 									<div>
 										<p class="quote">
