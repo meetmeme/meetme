@@ -22,7 +22,7 @@
 		insert into mm_user
 		values((select nvl(max(user_num),0)+1 from mm_user),
 		#{user_id},CryptString.encrypt(#{user_pass}, 'encrypt'),#{user_name},#{user_email},#{user_gender},#{user_age},#{user_city},
-		#{user_save}, #{user_original}, 0)
+		#{user_original}, #{user_save}, 0)
 	</insert>
 
 	<select id="selectNum" parameterType="String" resultType="User">
