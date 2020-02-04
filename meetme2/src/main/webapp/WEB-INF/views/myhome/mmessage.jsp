@@ -43,7 +43,7 @@
 												<span>to : </span><span>${m.receiver_name }</span> <a href="#"
 													data-target="#layerpop3"
 													data-toggle="modal">message</a>
-													<input type="hidden" value="${m.RECEIVER_ID}">
+													<input type="hidden" value="${m.RECEIVER_NUM}">
 												<p class="mb-4">${m.CONTENT}</span>
 												<p>
 													<span>${m.SENT_DATE}</span>
@@ -62,7 +62,7 @@
 												</p>
 												<span>from : </span><span>${m.sender_name }</span> <a href="#"
 													data-target="#layerpop3" data-toggle="modal">message</a>
-													<input type="hidden" value="${m.SENDER_ID}">
+													<input type="hidden" value="${m.SENDER_NUM}">
 											</div>
 										</div>
 									</c:if>

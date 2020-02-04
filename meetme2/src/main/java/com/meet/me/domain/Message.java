@@ -3,8 +3,8 @@ package com.meet.me.domain;
 import java.sql.Date;
 
 public class Message {
-	private int SENDER_ID;
-	private int RECEIVER_ID;
+	private int SENDER_NUM;
+	private int RECEIVER_NUM;
 	private String CONTENT;
 	private Date SENT_DATE;
 	private int MSG_CHECK;
@@ -25,17 +25,17 @@ public class Message {
 	public void setReceiver_name(String receiver_name) {
 		this.receiver_name = receiver_name;
 	}
-	public int getSENDER_ID() {
-		return SENDER_ID;
+	public int getSENDER_NUM() {
+		return SENDER_NUM;
 	}
-	public void setSENDER_ID(int sENDER_ID) {
-		SENDER_ID = sENDER_ID;
+	public void setSENDER_NUM(int sENDER_NUM) {
+		SENDER_NUM = sENDER_NUM;
 	}
-	public int getRECEIVER_ID() {
-		return RECEIVER_ID;
+	public int getRECEIVER_NUM() {
+		return RECEIVER_NUM;
 	}
-	public void setRECEIVER_ID(int rECEIVER_ID) {
-		RECEIVER_ID = rECEIVER_ID;
+	public void setRECEIVER_NUM(int rECEIVER_NUM) {
+		RECEIVER_NUM = rECEIVER_NUM;
 	}
 	public String getCONTENT() {
 		return CONTENT;

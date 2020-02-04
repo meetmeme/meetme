@@ -63,7 +63,7 @@ public class UserController {
 
 	// 회원가입 처리
 	@RequestMapping(value = "/joinProcess.net", method = RequestMethod.POST)
-	public String joinProcess(User user, HttpServletResponse response, HttpServletRequest request,
+	public void joinProcess(User user, HttpServletResponse response, HttpServletRequest request,
 			@RequestParam("sel_category") String sel_category, RedirectAttributes rttr) throws Exception {
 
 		String user_id = user.getUser_id();
@@ -77,20 +77,19 @@ public class UserController {
 
 		MultipartFile uploadfile = user.getUploadfile();
 		if (!uploadfile.isEmpty()) {
-			String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
-			user.setUser_original(fileName); // 원래 파일명 저장
+			String fileName = uploadfile.getOriginalFilename(); 
+			user.setUser_original(fileName); 
 
-			// 새로운 폴더 이름 : 오늘 년+월+일
 			Calendar c = Calendar.getInstance();
-			int year = c.get(Calendar.YEAR); // 오늘 년 구합니다.
-			int month = c.get(Calendar.MONTH) + 1;// 오늘 월 구합니다.
-			int date = c.get(Calendar.DATE); // 오늘 일 구합니다.
+			int year = c.get(Calendar.YEAR); 
+			int month = c.get(Calendar.MONTH) + 1;
+			int date = c.get(Calendar.DATE);
 			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/";
 //			String saveFolder = "C:\\Users\\user1\\git\\meetme\\meetme2\\src\\main\\webapp\\resources\\upload\\";
 			String homedir = saveFolder + year + "-" + month + "-" + date;
 			File path1 = new File(homedir);
-			if (!(path1.exists())) { // 이 파일의 경로가 존재하는지 확인
-				path1.mkdir(); // 없을 경우 경로 만들기
+			if (!(path1.exists())) { 
+				path1.mkdir(); 
 			}
 
 			Random r = new Random();
@@ -133,7 +132,6 @@ public class UserController {
 		out.println("</script>");
 		out.close();
 
-		return "redirect:main.index";
 
 	}// joinProcess
 

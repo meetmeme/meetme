@@ -112,7 +112,7 @@
 								<li><a href="new.event">Create New Event</a></li>
 								<li><a id="userMenuBox"><img
 										class="header_profilePic img-circle" alt=""
-										src="resources/upload${user_save}"></a> <!-- 사용자 팝업 메뉴 -->
+										src="resources/upload${user_original}"></a> <!-- 사용자 팝업 메뉴 -->
 									<div id=userPopupmenu>
 										<ul>
 											<c:if test="${user_id1=='admin'}">

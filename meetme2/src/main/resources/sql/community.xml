@@ -5,7 +5,7 @@
 
 	<insert id="sendMsg" parameterType="Message">
 		insert into MM_MESSAGE
-		VALUES(#{SENDER_ID}, #{RECEIVER_ID}, #{CONTENT}, SYSDATE, 0)
+		VALUES(#{SENDER_NUM}, #{RECEIVER_NUM}, #{CONTENT}, SYSDATE, 0)
 	</insert>
 
 	<select id="getNotification" parameterType="String"

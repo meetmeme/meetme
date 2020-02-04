@@ -115,9 +115,7 @@ public class EventController {
 			int month = c.get(Calendar.MONTH) + 1; // 오늘 월 구합니다.
 			int date = c.get(Calendar.DATE); //오늘 일 구합니다.
 			String saveFolder = request.getSession().getServletContext().getRealPath("resources") + "/upload/event/";
-						
 			String homedir = saveFolder + year + "-" + month + "-" + date;
-			  
 			File path1 = new File(homedir);
 			if(!(path1.exists())) { // 이 파일 경로가 존재 안하면
 				path1.mkdir(); //새로운 폴더를 생성

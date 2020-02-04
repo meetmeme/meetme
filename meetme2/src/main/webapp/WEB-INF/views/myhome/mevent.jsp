@@ -40,7 +40,7 @@
 									<div class="col-md-6">
 										<div class="blog-entry ftco-animate">
 											<a href="#" class="img img-2"
-												style="background-image: url(resources${e.EVENT_SAVE});"></a>
+												style="background-image: url(resources/upload/event${e.EVENT_SAVE});"></a>
 											<div class="text text-2 pt-2 mt-3">
 												<span class="category mb-3 d-block"><a href="#">Event</a></span>
 												<h3 class="mb-4">

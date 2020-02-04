@@ -76,8 +76,8 @@ public class CommunityController {
 		String content = request.getParameter("msgContent").toString();
 
 		Message msg = new Message();
-		msg.setSENDER_ID(sender);
-		msg.setRECEIVER_ID(recever);
+		msg.setSENDER_NUM(sender);
+		msg.setRECEIVER_NUM(recever);
 		msg.setCONTENT(content);
 
 		int result = communityService.sendMsg(msg);
