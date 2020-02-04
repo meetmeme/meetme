@@ -74,7 +74,7 @@ public class EventServiceImpl implements EventService{
 		int result = 0;
 		if(hashtag != null) 
 			result = hashtag.getHASHTAG_NUM();
-		System.out.println("태그 결과"+result);
+		//System.out.println("태그 결과"+result);
 		return result;
 	}
 

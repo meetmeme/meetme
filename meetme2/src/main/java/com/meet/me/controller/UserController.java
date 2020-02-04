@@ -187,7 +187,7 @@ public class UserController {
 				if (!u.equals("")) {
 					savecookie.setMaxAge(60 * 60);
 				} else {
-					System.out.println("쿠키저장 : 0");
+					//System.out.println("쿠키저장 : 0");
 					savecookie.setMaxAge(0);
 				}
 				response.addCookie(savecookie);
@@ -275,8 +275,8 @@ public class UserController {
 
 	@GetMapping(value = "setPasswordFromUser.net") // 비밀번호 변경 from User email
 	public String setPassword(String user_num, String user_email, String key, Model m, HttpServletResponse response) throws Exception {
-		System.out.println("비밀번호 메일 확인");
-		System.out.println(user_num + " / " + user_email + " / " + key);
+		//System.out.println("비밀번호 메일 확인");
+		//System.out.println(user_num + " / " + user_email + " / " + key);
 
 		if (key.length() <= 0) {
 			response.setContentType("text/html;charset=utf-8");

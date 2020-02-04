@@ -69,7 +69,7 @@ public class SearchControlloer {
 			keywords.put("hashtag", searchHashtag);
 			keywords.put("dateStart", search_dateStart);
 			keywords.put("dateEnd", search_dateEnd);
-			System.out.println("event : " + keywords);
+			//System.out.println("event : " + keywords);
 
 			searchResult = eventService.search(keywords);
 		}
@@ -78,7 +78,7 @@ public class SearchControlloer {
 			Map<String, String> keywords = new HashMap<String, String>();
 			keywords.put("dateStart", search_dateStart);
 			keywords.put("dateEnd", search_dateEnd);
-			System.out.println("dates : " + keywords);
+			//System.out.println("dates : " + keywords);
 
 			searchResult = eventService.searchDate(keywords);
 		}
@@ -93,11 +93,11 @@ public class SearchControlloer {
 				e.setEVENT_TITLE(title.substring(0, 20)+" ...");
 		}
 		
-		System.out.println("----");
+		//System.out.println("----");
 		for (Event e : searchResult) {
-			System.out.print(e.getEVENT_TITLE() + "\t");
+			//System.out.print(e.getEVENT_TITLE() + "\t");
 		}
-		System.out.println("\n----");
+		//System.out.println("\n----");
 
 		mv.setViewName("search/searchEvent");
 		mv.addObject("events", searchResult);
@@ -132,7 +132,7 @@ public class SearchControlloer {
 		keywords.put("hashtag", searchHashtag);
 		keywords.put("dateStart", "0000-00-00 00:00:00");
 		keywords.put("searchUser", "%" + searchUser + "%");
-		System.out.println("event : " + keywords);
+		//System.out.println("event : " + keywords);
 
 		// minihome 검색
 		searchResultMinihome = mimihomeService.search(keywords);
@@ -143,11 +143,11 @@ public class SearchControlloer {
 		// event 검색
 		searchResultMiniEvent = eventService.search(keywords);
 
-		System.out.println("----");
+		//System.out.println("----");
 		for (User e : searchResultMinihome) {
-			System.out.print(e.getUser_name() + "\t");
+			//System.out.print(e.getUser_name() + "\t");
 		}
-		System.out.println("\n----");
+		//System.out.println("\n----");
 
 		for (Event e : searchResultMiniEvent) {
 			String title = e.getEVENT_TITLE();
@@ -185,11 +185,11 @@ public class SearchControlloer {
 		// event 검색
 		searchResultMiniEvent = eventService.searchHash("%" + hashtag + "%");
 
-		System.out.println("----");
+		//System.out.println("----");
 		for (User e : searchResultMinihome) {
-			System.out.print(e.getUser_name() + "\t");
+			//System.out.print(e.getUser_name() + "\t");
 		}
-		System.out.println("\n----");
+		//System.out.println("\n----");
 
 		for(Event e : searchResultMiniEvent) {
 			String title = e.getEVENT_TITLE();
