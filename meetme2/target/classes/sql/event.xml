@@ -16,7 +16,7 @@
 		select * from MM_EVENT
 		<where>
 			<if test="!InterestingCats.isEmpty()">
-			EVENT_NUM IN 
+			CATEGORY_NUM IN 
 			<foreach collection="InterestingCats" item="item" open="(" close=")" separator=",">
 			#{item}
 			</foreach>
