@@ -5,8 +5,9 @@
 <jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
 <html lang="en">
+<jsp:include page="../main/header.jsp" />
 <body data-target="#nino-navbar" data-spy="scroll">
-	<jsp:include page="../main/header.jsp" />
+	
 	<div class=bodyMin>
 		<hr>
 		<!-- search keyword
