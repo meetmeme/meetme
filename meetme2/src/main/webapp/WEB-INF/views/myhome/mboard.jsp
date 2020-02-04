@@ -89,7 +89,7 @@
 												<c:forEach var="c" items="${commentlist}">
 													<c:if test="${b.BOARD_NUM==c.BOARD_NUM}">
 														<tr>
-															<td>${c.USER_NUM }</td>
+															<td>${c.commenter_id }</td>
 															<td>${c.COMMENT_CONTENT }</td>
 															<td>${c.COMMENT_DATE }
 															<c:if test="${c.USER_NUM==user_num1}">

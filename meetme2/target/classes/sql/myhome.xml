@@ -139,14 +139,11 @@
 
 	<select id="comment_list" parameterType="int"
 		resultType="comment">
-		select * from mm_comment where BOARD_USER_NUM =
-		#{board_user_num}
+		select c.*, u.user_id commenter_id
+		from mm_comment c, mm_user u 
+		where c.user_num=u.user_num and BOARD_USER_NUM =#{board_user_num}
 	</select>
 
-	<!-- <insert id="comment_insert" parameterType="comment"> <selectKey resultType="int" 
-		order="BEFORE" keyProperty="COMMENT_NUM"> select nvl(max(COMMENT_NUM),0)+1 
-		from MM_COMMENT </selectKey> insert into mm_comment values(#{COMMENT_NUM},#{USER_NUM},#{BOARD_USER_NUM},#{COMMENT_CONTENT},sysdate,#{BOARD_NUM}) 
-		</insert> -->
 	<insert id="comment_insert" parameterType="comment">
 		insert into mm_comment
 		values( (select nvl(max(COMMENT_NUM),0)+1 from
