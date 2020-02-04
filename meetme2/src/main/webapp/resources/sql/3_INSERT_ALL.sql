@@ -122,7 +122,7 @@ into MM_MYHOME values(19,19,'관리자 마이홈에 오신것을 환영합니다
 into MM_MYHOME values(20,20,'관리자 마이홈에 오신것을 환영합니다.<br>많이 구경하시고 팔로우해주세요<br>오늘도 좋은하루 보내세요<br>','지코-아무노래.mp3')
 SELECT * FROM DUAL;
 
-INSERT ALL
+INSERT ALL 
 into MM_BOARD values(1,1,'admin','안녕하세요~','관리자입니다~ 새해복 많이 받으세요~^^','/image/welcome.jpg','/image/welcome.jpg',to_date('2020-01-01','yyyy-mm-dd'))
 into MM_BOARD values(1,2,'admin','오늘의 기분','난...ㄱㅏ끔...<br> 눈물을 흘린ㄷㅏ....<br> ㄱㅏ끔은 눈물을 참을 수 없는 ㄴㅐ가 별루ㄷㅏ...<br> 맘이 ㅇㅏㅍㅏ서....<br> 소ㄹㅣ치며... 울 수 있ㄷㅏ는건....<br> 좋은ㄱㅓㅇㅑ.....<br> ㅁㅓ... 꼭 슬ㅍㅓㅇㅑ만 우는 건ㅇㅏ니잖ㅇㅏ...^^<br> 난...눈물ㅇㅣ 좋다....<br> ㅇㅏ니...<br> ㅁㅓ리가 ㅇㅏ닌.....<br> 맘으로....우는 ㄴㅐㄱㅏ 좋ㄷㅏ.....<br>','','',to_date('2020-01-01','yyyy-mm-dd'))
 into MM_BOARD values(1,3,'admin','관리자의 하루','오늘 아침 버그를 발견하였다.<br>버그버그버그<br>내일은 보지 않았으면 좋겠다.<br>','','',to_date('2020-01-02','yyyy-mm-dd'))
