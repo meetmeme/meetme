@@ -8,6 +8,16 @@ public class Comment {
 	private String COMMENT_CONTENT;
 	private String COMMENT_DATE;
 	private int BOARD_NUM;
+	
+	private String commenter_id;
+	
+	
+	public String getCommenter_id() {
+		return commenter_id;
+	}
+	public void setCommenter_id(String commenter_id) {
+		this.commenter_id = commenter_id;
+	}
 	public int getCOMMENT_NUM() {
 		return COMMENT_NUM;
 	}
