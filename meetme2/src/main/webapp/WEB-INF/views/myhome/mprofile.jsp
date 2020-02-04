@@ -140,7 +140,7 @@ input, textarea {
 								</div>
 
 								<div class="col-md-4 order-md-last pr-md-4">
-									<h2 class="h4 font-weight-bold">미니홈피 프로필</h2>
+									<h2 class="h4 font-weight-bold">마이홈 프로필</h2>
 									<br>
 									<div class="row d-flex mb-5 contact-info">
 										<div class="col-md-12 mb-3">
