@@ -4,8 +4,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <script src="resources/js/main.js"></script>
+<jsp:include page="header.jsp" />
 <body data-target="#nino-navbar" data-spy="scroll">
-	<jsp:include page="header.jsp" />
 
 	<input type="hidden" id=userIdCache value="${user_id1}">
 	<!-- Testimonial

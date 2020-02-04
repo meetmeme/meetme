@@ -14,7 +14,7 @@
 <title>Meet Me | Find your event And Record your memory</title>
 
 <!-- favicon -->
-<link rel="shortcut icon" href="resources/images/ico/favicon.jpg">
+<link rel="shortcut icon" href="resources/images/favicon.png">
 <link rel="apple-touch-icon-precomposed" sizes="144x144"
 	href="resources/images/ico/apple-touch-icon-144-precomposed.png">
 <link rel="apple-touch-icon-precomposed" sizes="114x114"
