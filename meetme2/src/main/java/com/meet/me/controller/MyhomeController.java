@@ -180,7 +180,7 @@ public class MyhomeController {
 			userservice.category(user_interests);
 		}
 
-		/***미니홈피 프로필 수정***/
+		/***마이홈 프로필 수정***/
 		mhservice.update(myhome);
 
 		PrintWriter out = response.getWriter();
