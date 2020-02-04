@@ -438,3 +438,7 @@ text-align : left;
 #comments > div > div > div > div.chat > div:nth-child(1) > div > div{
 	margin-top : 28px;
 }
+
+#layerpop3{
+	display: none;
+}
