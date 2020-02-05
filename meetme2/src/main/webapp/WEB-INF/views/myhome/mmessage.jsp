@@ -71,7 +71,7 @@
 								</c:if>
 								<c:if test="${empty messagelist}">
 								<br><br><br><br><br><br><br><br><br><br><br><br><br>
-								<div style="text-align: center;margin:0 auto"><h2>참여 이벤트 정보가 없습니다.</h2></div>
+								<div style="text-align: center;margin:0 auto"><h2>메시지가 없습니다.</h2></div>
 								</c:if>
 							</div>
 							<!-- END-->
