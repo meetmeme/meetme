@@ -78,9 +78,9 @@ public class UserServiceImpl implements UserService {
 				+ "<span>🤩Let's M&M! <br>Thanks for joining us!😍</span><br><br>" 
 				+ "<h2>💃🏻환영합니다, <strong>"+user.getUser_name()+"님!</strong>🕺🏻</h2><br><br>" 
 				+ "<span>직접 만나 함께하는 즐거움!! <br>로컬 이벤트에 참여하고 사람들과 좋아하는 일을 함께하며 <br>새로운 경험을 즐겨보세요👏👏</span><br><br><hr>" 
-				+ "<a href='192.168.40.4:8088/me/emailConfirm.net?user_id="
+				+ "<a href='http://192.168.40.4:8088/me/emailConfirm.net?user_id="
 				+ user.getUser_id() + "&key=" + key + "' target='_blank'>👉🏻이메일 인증하기👈🏻</a>"
-				+ "<br><a href='192.168.40.4:8088/me/main.index'>👉🏻Meet Me! 바로가기👈🏻</a>"
+				+ "<br><a href='http://192.168.40.4:8088/me/main.index'>👉🏻Meet Me! 바로가기👈🏻</a>"
 				+ "<hr></div>");
 		sendMail.setFrom("account@meetme.com", "MeetMe"); // 보낸이
 		sendMail.setTo(user.getUser_email()); // 받는이
@@ -178,9 +178,9 @@ public class UserServiceImpl implements UserService {
 				"<div style='text-align: center;'>"
 				+ "<h2>안녕하세요, <strong>"+u.getUser_name()+"님</strong></h2><br><br>" 
 				+ "<span>아래의 링크를 클릭하여 비밀번호를 재설정해주세요!! <br></span><br><br><hr>" 
-				+ "<a href='192.168.40.4:8088/me/setPasswordFromUser.net?key=" + u.getAUTHKEY() + "&user_num="+u.getUser_num()+"&user_email="
+				+ "<a href='http://192.168.40.4:8088/me/setPasswordFromUser.net?key=" + u.getAUTHKEY() + "&user_num="+u.getUser_num()+"&user_email="
 				+ u.getUser_email() + "' target='_blank'>👉🏻비밀번호 재설정하기👈🏻</a>"
-				+ "<br><a href='192.168.40.4:8088/me/main.index'>👉🏻Meet Me! 바로가기👈🏻</a>"
+				+ "<br><a href='http://192.168.40.4:8088/me/main.index'>👉🏻Meet Me! 바로가기👈🏻</a>"
 				+ "<hr></div>");
 		sendMail.setFrom("account@meetme.com", "MeetMe"); // 보낸이
 		sendMail.setTo(u.getUser_email()); // 받는이
