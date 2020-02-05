@@ -84,7 +84,12 @@
 }
 
 .full-width {
-	width: 100%;
+	width: 60%;
+	margin:auto; 
+}
+
+.padding_bottom_20{
+	padding-bottom: 20px;
 }
 
 #searchKeywordShow {

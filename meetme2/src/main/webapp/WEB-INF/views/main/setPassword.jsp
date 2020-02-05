@@ -15,16 +15,17 @@
 				<span class="nino-subHeading">M&M</span>
 			</h2>
 		</div>
-		<div class="sectionContent">
+		<div class="sectionContent padding_bottom_20">
 			<form action="setPassword.net" class="nino-sbscribeForm center"
 				onsubmit="return checkPw()" method="post">
 				<h2 class="nino-sectionHeading">새로운 비밀번호</h2>
-				<div class="input-group input-group-lg center full-width">
+				<div class="input-group input-group-lg full-width">
 					<input type="password" class="form-control full-width" name="user_pass"
 						placeholder="Enter Password" id="setpassword">
 				</div>
+				<br>
 				<h2 class="nino-sectionHeading">비밀번호 확인</h2>
-				<div class="input-group input-group-lg center full-width">
+				<div class="input-group input-group-lg full-width">
 					<input type="password" class="form-control full-width"
 						placeholder="Check Password" id="setpasswordch">
 				</div>
