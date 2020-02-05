@@ -189,7 +189,7 @@ text-align : left;
 
 #attendant > div > div > div > div > div > h3{
 	font-size : 14px;
-	margin-top : 5px;
+	margin-top : 20px;
 }
  
 .flexslider .slides img {
@@ -423,7 +423,7 @@ text-align : left;
 	height : 100%;
 }
 .pro .member-thumb h4{
-	margin-top : 10px;
+	margin-top : 20px;
 	font-size : 13px;	
 	color : white;
 }
@@ -441,4 +441,8 @@ text-align : left;
 
 #layerpop3{
 	display: none;
+}
+
+.team-member .member-thumb .team-overlay ul.social{
+	margin-top : 0;
 }
