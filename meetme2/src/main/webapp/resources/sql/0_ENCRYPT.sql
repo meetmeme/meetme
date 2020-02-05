@@ -32,7 +32,7 @@ END CryptString;
 
 CREATE TABLE TEST_USER(
 	ID		VARCHAR2(20),
-	PASS	VARCHAR2(20)
+	PASS	VARCHAR2(20) 
 );
 
 --암호화
