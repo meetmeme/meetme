@@ -165,7 +165,7 @@
 				for="searchType-event" class=btn><span></span>Event</label> <input
 				type="radio" id="searchType-minihome" name="searchType"
 				value="minihome" class="searchCheck"> <label
-				for="searchType-minihome" class=btn><span></span>Mini Home</label>
+				for="searchType-minihome" class=btn><span></span>My Home</label>
 		</div>
 		<br> <br> <br>
 		<div id="search-event" class="search-Div">

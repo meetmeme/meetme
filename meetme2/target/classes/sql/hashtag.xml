@@ -4,7 +4,7 @@
 <mapper namespace="Hashtags">
 
 <select id="getHashtag" parameterType="String" resultType="hashtag">
-select * from MM_HASHTAG WHERE HASHTAG_TITLE like #{title}
+select * from MM_HASHTAG WHERE upper(HASHTAG_TITLE) like upper(#{title})
 </select>
 
 <select id="searchHashtag" parameterType="String" resultType="String">

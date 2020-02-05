@@ -3,7 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <jsp:useBean id="now" class="java.util.Date" />
 <!DOCTYPE html>
-    <head>       
+    <head>      
+    <link rel="shortcut icon" href="resources/images/favicon.png"> 
        <jsp:include page="/WEB-INF/views/event/head.jsp" />       
        <jsp:include page="/WEB-INF/views/event/event_report_modal.jsp" />       
  	</head>
