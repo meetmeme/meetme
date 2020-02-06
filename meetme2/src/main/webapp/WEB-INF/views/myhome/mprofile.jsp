@@ -112,9 +112,9 @@ input, textarea {
 												value="${userinfo.user_email}">
 										</div>
 										<div class="col-md-12 mb-4">
-											Gender: <span id="gender"><input type="radio"
-												name="user_gender" value="남 "
-												<%if (user_gender.equals("남")) {%> checked="checked" <%}%>><span>남자</span>
+											Gender: <span id="gender">
+												<input type="radio"	name="user_gender" value="남 "
+												<%if (user_gender.equals("남 ")) {%> checked="checked" <%}%>><span>남자</span>
 												<input type="radio" name="user_gender" value="여"
 												<%if (user_gender.equals("여")) {%> checked="checked" <%}%>><span>여자</span>
 											</span>

@@ -167,7 +167,7 @@ public class SearchControlloer {
 		mv.addObject("posts", searchResultMiniPost);
 		mv.addObject("events", searchResultMiniEvent);
 		mv.addObject("searchKey", searchKey);
-		mv.addObject("HeaderComment", "Minihome Search Results");
+		mv.addObject("HeaderComment", "Myhome Search Results");
 
 		return mv;
 	}

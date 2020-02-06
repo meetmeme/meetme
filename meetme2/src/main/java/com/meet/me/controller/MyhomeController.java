@@ -85,6 +85,7 @@ public class MyhomeController {
 		List<BGM> bgm = mhservice.getbgm();
 		/***암호화된 비밀번호값 DB 입력 방지***/
 		User user = userservice.isId2(user_id);
+		System.out.println("성별"+user.getUser_gender());
 		String ori_pass=user.getUser_pass();
 		userinfo.setUser_pass(ori_pass);
 

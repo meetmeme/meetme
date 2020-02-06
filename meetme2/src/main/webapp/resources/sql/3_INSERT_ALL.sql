@@ -1,6 +1,6 @@
 INSERT ALL
 into MM_USER values(1,'admin',CryptString.encrypt('1234','encrypt'),'관리자','admin@meetme.com','여',25,'서울시','/init/user/1.jpg','/init/user/1.jpg',1)
-into MM_USER values(2,'TooColdWinter',CryptString.encrypt('!important', 'encrypt'),'브리트니 점례','britntney@google.com','여',10,'서울시','/init/user/2.jpg','/init/user/2.jpg',1)
+into MM_USER values(2,'TooColdWinter',CryptString.encrypt('1234', 'encrypt'),'브리트니 점례','britntney@google.com','여',10,'서울시','/init/user/2.jpg','/init/user/2.jpg',1)
 into MM_USER values(3,'SantaCross',CryptString.encrypt('toggledata', 'encrypt'),'별빛로긔','starlight@naver.com','남',20,'서울시','/init/user/3.jpg','/init/user/3.jpg',1)
 into MM_USER values(4,'ModalHater',CryptString.encrypt('lime&&33', 'encrypt'),'곽두팔','modalmodal@hanmail.net','남',30,'서울시','/init/user/4.jpg','/init/user/4.jpg',1)
 into MM_USER values(5,'BBangBBang',CryptString.encrypt('808@@@', 'encrypt'),'이재용','samsunglover@hotmail.net','남',40,'서울시','/init/user/5.jpg','/init/user/5.jpg',1)

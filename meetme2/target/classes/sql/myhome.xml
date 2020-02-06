@@ -95,7 +95,7 @@
 			select nvl(max(BOARD_NUM),0)+1 from MM_BOARD
 		</selectKey>
 		insert into MM_BOARD values(#{MYHOME_NUM},#{BOARD_NUM},
-		#{BOARD_ID},'',#{BOARD_TITLE},#{BOARD_CONTENT},#{BOARD_PHOTO,
+		#{BOARD_ID},#{BOARD_TITLE},#{BOARD_CONTENT},#{BOARD_PHOTO,
 		jdbcType=VARCHAR},
 		#{BOARD_ORIGINAL, jdbcType=VARCHAR},sysdate)
 	</insert>
